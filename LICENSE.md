@@ -1,7 +1,7 @@
 Software License Agreement
 ==========================
 
-**{{AppName}}** – https://github.com/ckeditor/ckeditor5 <br>
+**CKEditor 5 Default UI Library** – https://github.com/ckeditor/ckeditor5 <br>
 Copyright (c) 2003-2016, [CKSource](http://cksource.com) Frederico Knabben. All rights reserved.
 
 Licensed under the terms of any of the following licenses at your choice:

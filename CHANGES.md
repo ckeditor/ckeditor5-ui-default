@@ -1,7 +1,7 @@
-{{AppName}} Changelog
+CKEditor 5 Default UI Library Changelog
 ========================================
 
-## {{AppName}} 0.0.2
+## CKEditor 5 Default UI Library 0.0.2
 
 **Major|Minor|Patch Release** - Build Date: yyyy-mm-dd
 
@@ -20,6 +20,6 @@ Other Changes:
 * Item 1
 * Item 2
 
-## {{AppName}} 0.0.1
+## CKEditor 5 Default UI Library 0.0.1
 
 ...
