@@ -10,7 +10,7 @@ import CoreButton from '../../core/ui/button/button.js';
 /**
  * The editor button controller class.
  *
- * @class ui-default.button.Button
+ * @memberOf ui-default.button
  * @extends core.ui.button.Button
  */
 
@@ -18,7 +18,9 @@ export default class Button extends CoreButton {
 	/**
 	 * Creates a new button instance.
 	 *
-	 * @method constructor
+	 * @param {core.Editor} editor
+	 * @param {core.ui.Model} model
+	 * @param {core.ui.View} view
 	 */
 	constructor( editor, model, view ) {
 		super( model, view );

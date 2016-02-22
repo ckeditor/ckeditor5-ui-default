@@ -8,20 +8,10 @@
 import CoreButtonView from '../../core/ui/button/buttonview.js';
 
 /**
- * The basic button view class.
+ * The editor button view class.
  *
- * @class ui-default.button.ButtonView
+ * @memberOf ui-default.button
  * @extends core.ui.button.ButtonView
  */
 
-export default class ButtonView extends CoreButtonView {
-	/**
-	 * Creates a new button view instance.
-	 *
-	 * @method constructor
-	 * @param {Model} model
-	 */
-	constructor( model ) {
-		super( model );
-	}
-}
+export default class ButtonView extends CoreButtonView {}

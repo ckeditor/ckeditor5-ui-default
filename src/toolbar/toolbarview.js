@@ -8,9 +8,9 @@
 import CoreToolbarView from '../../core/ui/toolbar/toolbarview.js';
 
 /**
- * The basic toolbar view class.
+ * The editor toolbar view class.
  *
- * @class ui-default.toolbar.ToolbarView
+ * @memberOf ui-default.toolbar
  * @extends core.ui.toolbar.ToolbarView
  */
 
