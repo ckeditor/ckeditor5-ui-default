@@ -36,7 +36,7 @@ export default class Toolbar extends CoreToolbar {
 	 */
 	addButtons( buttons ) {
 		for ( let button of buttons ) {
-			this.collections.get( 'buttons' ).add( this.editor.ui.featureComponents.create( button ) );
+			this.add( 'buttons', this.editor.ui.featureComponents.create( button ) );
 		}
 	}
 }
