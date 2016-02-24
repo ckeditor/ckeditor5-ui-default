@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "description": "The default UI library of CKEditor 5.",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    "ckeditor5-core": "ckeditor/ckeditor5-core"
+  },
   "devDependencies": {
     "git-guppy": "^1.1.0",
     "gulp": "^3.9.0",
