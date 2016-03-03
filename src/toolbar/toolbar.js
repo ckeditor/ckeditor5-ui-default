@@ -5,38 +5,20 @@
 
 'use strict';
 
-import CoreToolbar from '../../core/ui/toolbar/toolbar.js';
+import Controller from '../../core/ui/controller.js';
+import ControllerCollection from '../../core/ui/controllercollection.js';
 
 /**
- * The editor toolbar controller class.
+ * The basic toolbar controller class.
  *
- * @memberOf ui-default.toolbar
- * @extends core.ui.toolbar.Toolbar
+ * @memberOf ui.toolbar
+ * @extends core.ui.Controller
  */
 
-export default class Toolbar extends CoreToolbar {
-	/**
-	 * Creates a new toolbar instance.
-	 *
-	 * @param {core.Editor} editor
-	 * @param {core.ui.Model} model
-	 * @param {core.ui.View} view
-	 */
-	constructor( editor, model, view ) {
+export default class Toolbar extends Controller {
+	constructor( model, view ) {
 		super( model, view );
 
-		this.editor = editor;
-	}
-
-	/**
-	 * Adds buttons to the toolbar. Buttons are taken from the {@link core.editorUI.EditorUI#featureComponents}
-	 * factory.
-	 *
-	 * @param {String[]} buttons The name of the buttons to add to the toolbar.
-	 */
-	addButtons( buttons ) {
-		for ( let button of buttons ) {
-			this.add( 'buttons', this.editor.ui.featureComponents.create( button ) );
-		}
+		this.collections.add( new ControllerCollection( 'buttons' ) );
 	}
 }
