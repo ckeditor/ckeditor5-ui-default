@@ -8,9 +8,27 @@
 'use strict';
 
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
+import Model from '/ckeditor5/core/ui/model.js';
 
 describe( 'ToolbarView', () => {
-	it( 'exists', () => {
-		expect( ToolbarView ).to.be.a( 'function' );
+	let model, view;
+
+	beforeEach( () => {
+		model = new Model();
+		view = new ToolbarView( model );
+
+		return view.init();
+	} );
+
+	describe( 'the main element bindings', () => {
+		it( 'is fine', () => {
+			expect( view.element.classList.contains( 'ck-toolbar' ) );
+		} );
+	} );
+
+	describe( 'buttons region', () => {
+		it( 'is bound to the main element', () => {
+			expect( view.regions.get( 'buttons' ).element ).to.equal( view.element );
+		} );
 	} );
 } );

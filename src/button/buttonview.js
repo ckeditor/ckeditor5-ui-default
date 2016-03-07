@@ -5,13 +5,57 @@
 
 'use strict';
 
-import CoreButtonView from '../../core/ui/button/buttonview.js';
+import View from '../../core/ui/view.js';
 
 /**
- * The editor button view class.
+ * The basic button view class.
  *
- * @memberOf ui-default.button
- * @extends core.ui.button.ButtonView
+ * @memberOf ui.button
+ * @extends core.ui.View
  */
 
-export default class ButtonView extends CoreButtonView {}
+export default class ButtonView extends View {
+	constructor( model ) {
+		super( model );
+
+		const bind = this.attributeBinder;
+
+		this.template = {
+			tag: 'button',
+
+			attributes: {
+				class: [
+					'ck-button',
+					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
+					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' )
+				]
+			},
+
+			children: [
+				{
+					text: bind.to( 'label' )
+				}
+			],
+
+			on: {
+				mousedown: ( evt ) => {
+					evt.preventDefault();
+				},
+
+				click: () => {
+					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
+					// Though, shouldn't this condition be moved to the button controller?
+					if ( model.isEnabled ) {
+						this.fire( 'click' );
+					}
+				}
+			}
+		};
+	}
+}
+
+/**
+ * Fired when the button is being clicked. It won't be fired when the button is disabled.
+ *
+ * @event core.ui.button.ButtonView#click
+ */

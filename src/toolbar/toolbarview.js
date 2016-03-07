@@ -5,13 +5,26 @@
 
 'use strict';
 
-import CoreToolbarView from '../../core/ui/toolbar/toolbarview.js';
+import View from '../../core/ui/view.js';
 
 /**
- * The editor toolbar view class.
+ * The basic toolbar view class.
  *
- * @memberOf ui-default.toolbar
- * @extends core.ui.toolbar.ToolbarView
+ * @memberOf ui.toolbar
+ * @extends core.ui.View
  */
 
-export default class ToolbarView extends CoreToolbarView {}
+export default class ToolbarView extends View {
+	constructor( model ) {
+		super( model );
+
+		this.template = {
+			tag: 'div',
+			attributes: {
+				class: [ 'ck-toolbar' ]
+			}
+		};
+
+		this.register( 'buttons', el => el );
+	}
+}

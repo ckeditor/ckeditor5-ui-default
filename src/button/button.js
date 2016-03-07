@@ -5,24 +5,50 @@
 
 'use strict';
 
-import CoreButton from '../../core/ui/button/button.js';
+import Controller from '../../core/ui/controller.js';
 
 /**
- * The editor button controller class.
+ * The basic button controller class.
  *
- * @memberOf ui-default.button
- * @extends core.ui.button.Button
+ * @memberOf ui.button
+ * @extends core.ui.Controller
  */
 
-export default class Button extends CoreButton {
-	/**
-	 * Creates a new button instance.
-	 *
-	 * @param {core.Editor} editor
-	 * @param {core.ui.Model} model
-	 * @param {core.ui.View} view
-	 */
-	constructor( editor, model, view ) {
+export default class Button extends Controller {
+	constructor( model, view ) {
 		super( model, view );
+
+		view.on( 'click', () => model.fire( 'execute' ) );
 	}
 }
+
+/**
+ * The basic button model interface.
+ *
+ * @memberOf ui.button
+ * @interface ButtonModel
+ */
+
+/**
+ * The label of the button.
+ *
+ * @member {String} ui.button.ButtonModel#label
+ */
+
+/**
+ * Whether the button is "on" (e.g. some feature which this button represents is currently enabled).
+ *
+ * @member {Boolean} ui.button.ButtonModel#isOn
+ */
+
+/**
+ * Whether the button is enabled (can be clicked).
+ *
+ * @member {Boolean} ui.button.ButtonModel#isEnabled
+ */
+
+/**
+ * Fired when the button action should be executed.
+ *
+ * @event ui.button.ButtonModel#execute
+ */
