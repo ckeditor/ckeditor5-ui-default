@@ -4,7 +4,7 @@
   "description": "The default library of UI components for CKEditor 5.",
   "keywords": [],
   "dependencies": {
-    "ckeditor5-core": "ckeditor/ckeditor5-core"
+    "ckeditor5-ui": "ckeditor/ckeditor5-ui"
   },
   "devDependencies": {
     "git-guppy": "^1.1.0",
