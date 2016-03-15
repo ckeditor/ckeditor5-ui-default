@@ -11,7 +11,7 @@ import View from '../view.js';
  * The basic button view class.
  *
  * @memberOf ui.button
- * @extends core.ui.View
+ * @extends ui.View
  */
 
 export default class ButtonView extends View {
@@ -57,5 +57,5 @@ export default class ButtonView extends View {
 /**
  * Fired when the button is being clicked. It won't be fired when the button is disabled.
  *
- * @event core.ui.button.ButtonView#click
+ * @event ui.button.ButtonView#click
  */

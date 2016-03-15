@@ -12,7 +12,7 @@ import ControllerCollection from '../controllercollection.js';
  * The basic toolbar controller class.
  *
  * @memberOf ui.toolbar
- * @extends core.ui.Controller
+ * @extends ui.Controller
  */
 
 export default class Toolbar extends Controller {

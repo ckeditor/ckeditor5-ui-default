@@ -11,7 +11,7 @@ import Controller from '../controller.js';
  * The basic button controller class.
  *
  * @memberOf ui.button
- * @extends core.ui.Controller
+ * @extends ui.Controller
  */
 
 export default class Button extends Controller {

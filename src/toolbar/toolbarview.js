@@ -11,7 +11,7 @@ import View from '../view.js';
  * The basic toolbar view class.
  *
  * @memberOf ui.toolbar
- * @extends core.ui.View
+ * @extends ui.View
  */
 
 export default class ToolbarView extends View {
