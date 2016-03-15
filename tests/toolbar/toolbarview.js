@@ -8,7 +8,7 @@
 'use strict';
 
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
-import Model from '/ckeditor5/core/ui/model.js';
+import Model from '/ckeditor5/ui/model.js';
 
 describe( 'ToolbarView', () => {
 	let model, view;

@@ -8,7 +8,7 @@
 'use strict';
 
 import ButtonView from '/ckeditor5/ui/button/buttonview.js';
-import Model from '/ckeditor5/core/ui/model.js';
+import Model from '/ckeditor5/ui/model.js';
 
 describe( 'ButtonView', () => {
 	let model, view;

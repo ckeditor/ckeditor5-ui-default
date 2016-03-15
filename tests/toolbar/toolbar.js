@@ -8,7 +8,7 @@
 'use strict';
 
 import Toolbar from '/ckeditor5/ui/toolbar/toolbar.js';
-import ControllerCollection from '/ckeditor5/core/ui/controllercollection.js';
+import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
 
 describe( 'Toolbar', () => {
 	let toolbar;

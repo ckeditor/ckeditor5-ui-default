@@ -5,7 +5,7 @@
 
 'use strict';
 
-import View from '../../core/ui/view.js';
+import View from '../view.js';
 
 /**
  * The basic toolbar view class.

@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Controller from '../../core/ui/controller.js';
+import Controller from '../controller.js';
 
 /**
  * The basic button controller class.

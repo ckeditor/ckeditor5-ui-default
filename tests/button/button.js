@@ -8,8 +8,8 @@
 'use strict';
 
 import Button from '/ckeditor5/ui/button/button.js';
-import View from '/ckeditor5/core/ui/view.js';
-import Model from '/ckeditor5/core/ui/model.js';
+import View from '/ckeditor5/ui/view.js';
+import Model from '/ckeditor5/ui/model.js';
 
 describe( 'Button', () => {
 	let model, button, view;

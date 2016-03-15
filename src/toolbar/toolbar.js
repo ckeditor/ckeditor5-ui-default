@@ -5,8 +5,8 @@
 
 'use strict';
 
-import Controller from '../../core/ui/controller.js';
-import ControllerCollection from '../../core/ui/controllercollection.js';
+import Controller from '../controller.js';
+import ControllerCollection from '../controllercollection.js';
 
 /**
  * The basic toolbar controller class.
