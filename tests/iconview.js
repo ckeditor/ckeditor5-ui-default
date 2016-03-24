@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
-/* bender-tags: ui, button */
+/* bender-tags: ui, icon */
 
 'use strict';
 
