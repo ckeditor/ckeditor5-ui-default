@@ -5,7 +5,10 @@
 
 'use strict';
 
+import Model from '../model.js';
 import Controller from '../controller.js';
+import ControllerCollection from '../controllercollection.js';
+import IconView from '../icon/iconview.js';
 
 /**
  * The basic button controller class.
@@ -17,6 +20,17 @@ import Controller from '../controller.js';
 export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
+
+		if ( model.icon ) {
+			const children = new ControllerCollection( 'children' );
+			const iconModel = new Model();
+
+			iconModel.bind( 'icon' ).to( model );
+
+			children.add( new Controller( null, new IconView( iconModel ) ) );
+
+			this.collections.add( children );
+		}
 
 		view.on( 'click', () => model.fire( 'execute' ) );
 	}

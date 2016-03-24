@@ -51,6 +51,8 @@ export default class ButtonView extends View {
 				}
 			}
 		};
+
+		this.register( 'children', el => el );
 	}
 }
 
