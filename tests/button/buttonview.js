@@ -24,6 +24,12 @@ describe( 'ButtonView', () => {
 		return view.init();
 	} );
 
+	describe( 'constructor', () => {
+		it( 'registers "children" region', () => {
+			expect( view.regions.get( 0 ).name ).to.be.equal( 'children' );
+		} );
+	} );
+
 	describe( '<button> bindings', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {

@@ -22,17 +22,22 @@ export default class Button extends Controller {
 		super( model, view );
 
 		if ( model.icon ) {
-			const children = new ControllerCollection( 'children' );
-			const iconModel = new Model();
-
-			iconModel.bind( 'icon' ).to( model );
-
-			children.add( new Controller( null, new IconView( iconModel ) ) );
-
-			this.collections.add( children );
+			this._setupIcon();
 		}
 
 		view.on( 'click', () => model.fire( 'execute' ) );
+	}
+
+	_setupIcon() {
+		const childrenCollection = new ControllerCollection( 'children' );
+		const iconViewModel = new Model();
+		const icon = new Controller( null, new IconView( iconViewModel ) );
+
+		iconViewModel.bind( 'icon' ).to( this.model );
+
+		childrenCollection.add( icon );
+
+		this.collections.add( childrenCollection );
 	}
 }
 
