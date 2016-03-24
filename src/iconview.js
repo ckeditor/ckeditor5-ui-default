@@ -5,7 +5,7 @@
 
 'use strict';
 
-import View from '../view.js';
+import View from '/ckeditor5/ui/view.js';
 
 /**
  * The basic icon view class.
@@ -19,10 +19,6 @@ export default class IconView extends View {
 		super( model );
 
 		this._createViewElement();
-
-		model.on( 'change:icon', ( evt, value ) => {
-			this.use.setAttribute( 'xlink:href', `#ck-icon-${ value }` );
-		} );
 	}
 
 	_createViewElement() {
@@ -42,5 +38,9 @@ export default class IconView extends View {
 		 * @member {HTMLElement} ui.IconView#use
 		 */
 		this.use = this.element.firstElementChild;
+
+		this.model.on( 'change:icon', ( evt, value ) => {
+			this.use.setAttribute( 'xlink:href', `#ck-icon-${ value }` );
+		} );
 	}
 }

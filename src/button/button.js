@@ -8,7 +8,7 @@
 import Model from '../model.js';
 import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
-import IconView from '../icon/iconview.js';
+import IconView from '../iconview.js';
 
 /**
  * The basic button controller class.
