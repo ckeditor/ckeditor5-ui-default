@@ -5,10 +5,7 @@
 
 'use strict';
 
-import Model from '../model.js';
 import Controller from '../controller.js';
-import ControllerCollection from '../controllercollection.js';
-import IconView from '../iconview.js';
 
 /**
  * The basic button controller class.
@@ -21,23 +18,7 @@ export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		if ( model.icon ) {
-			this._setupIcon();
-		}
-
 		view.on( 'click', () => model.fire( 'execute' ) );
-	}
-
-	_setupIcon() {
-		const childrenCollection = new ControllerCollection( 'children' );
-		const iconViewModel = new Model();
-		const icon = new Controller( null, new IconView( iconViewModel ) );
-
-		iconViewModel.bind( 'icon' ).to( this.model );
-
-		childrenCollection.add( icon );
-
-		this.collections.add( childrenCollection );
 	}
 }
 

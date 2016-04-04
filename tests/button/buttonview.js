@@ -7,8 +7,11 @@
 
 'use strict';
 
+import testUtils from '/tests/ckeditor5/_utils/utils.js';
 import ButtonView from '/ckeditor5/ui/button/buttonview.js';
 import Model from '/ckeditor5/ui/model.js';
+
+testUtils.createSinonSandbox();
 
 describe( 'ButtonView', () => {
 	let model, view;
@@ -27,6 +30,18 @@ describe( 'ButtonView', () => {
 	describe( 'constructor', () => {
 		it( 'registers "children" region', () => {
 			expect( view.regions.get( 0 ).name ).to.be.equal( 'children' );
+		} );
+
+		it( 'calls _setupIcon when "icon" in model', () => {
+			const spy = testUtils.sinon.spy( ButtonView.prototype, '_setupIcon' );
+
+			new ButtonView( model ).init();
+			expect( spy.calledOnce ).to.be.false;
+
+			model.set( 'icon', 'foo' );
+			new ButtonView( model ).init();
+
+			expect( spy.calledOnce ).to.be.true;
 		} );
 	} );
 
@@ -85,6 +100,16 @@ describe( 'ButtonView', () => {
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.callCount ).to.equal( 1 );
 			} );
+		} );
+	} );
+
+	describe( '_setupIcon', () => {
+		it( 'appends child icon view when "icon" in model', () => {
+			model.set( 'icon', 'foo' );
+			view = new ButtonView( model );
+			view.init();
+
+			expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
 		} );
 	} );
 } );
