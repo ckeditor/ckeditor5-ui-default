@@ -37,10 +37,10 @@ export default class IconView extends View {
 		 *
 		 * @member {HTMLElement} ui.IconView#use
 		 */
-		this.use = this.element.firstElementChild;
+		this.svgUseElement = this.element.firstElementChild;
 
-		this.model.on( 'change:icon', ( evt, value ) => {
-			this.use.setAttribute( 'xlink:href', `#ck-icon-${ value }` );
+		this.model.on( 'change:icon', ( evt, name, value ) => {
+			this.svgUseElement.setAttribute( 'xlink:href', `#ck-icon-${ value }` );
 		} );
 	}
 }

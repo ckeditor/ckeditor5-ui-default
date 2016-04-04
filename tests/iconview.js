@@ -41,19 +41,19 @@ describe( 'IconView', () => {
 			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon ck-icon-left' );
 		} );
 
-		it( 'creates view.use', () => {
+		it( 'creates view.svgUseElement', () => {
 			view._createViewElement();
 
-			expect( view.use.tagName ).to.be.equal( 'use' );
-			expect( view.use.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
+			expect( view.svgUseElement.tagName ).to.be.equal( 'use' );
+			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
 		} );
 
 		it( 'creates model#change:icon binding', () => {
 			view._createViewElement();
 
-			expect( view.use.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
+			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
 			model.icon = 'abc';
-			expect( view.use.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-abc' );
+			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-abc' );
 		} );
 	} );
 } );
