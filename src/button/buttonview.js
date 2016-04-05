@@ -6,6 +6,8 @@
 'use strict';
 
 import View from '../view.js';
+import IconView from '../icon/iconview.js';
+import Model from '../model.js';
 
 /**
  * The basic button view class.
@@ -51,6 +53,25 @@ export default class ButtonView extends View {
 				}
 			}
 		};
+
+		this.register( 'children', el => el );
+	}
+
+	init() {
+		if ( this.model.icon ) {
+			this._setupIcon();
+		}
+
+		return super.init();
+	}
+
+	_setupIcon() {
+		const iconViewModel = new Model();
+		const iconView = new IconView( iconViewModel );
+
+		iconViewModel.bind( 'icon' ).to( this.model );
+
+		this.element.insertBefore( iconView.element, this.element.firstChild );
 	}
 }
 
