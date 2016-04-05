@@ -8,7 +8,7 @@
 'use strict';
 
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
-import IconView from '/ckeditor5/ui/iconview.js';
+import IconView from '/ckeditor5/ui/icon/iconview.js';
 import Model from '/ckeditor5/ui/model.js';
 
 testUtils.createSinonSandbox();

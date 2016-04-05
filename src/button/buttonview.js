@@ -6,7 +6,7 @@
 'use strict';
 
 import View from '../view.js';
-import IconView from '../iconview.js';
+import IconView from '../icon/iconview.js';
 import Model from '../model.js';
 
 /**
