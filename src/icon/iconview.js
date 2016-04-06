@@ -18,30 +18,26 @@ export default class IconView extends View {
 	constructor( model ) {
 		super( model );
 
-		this._createViewElement();
-	}
+		const bind = this.attributeBinder;
 
-	_createViewElement() {
-		// Note: Creating SVG icons with with Template class is not possible
-		// because of CSS limitations of document.createEleentNS–created elements.
-		const tmp = document.createElement( 'div' );
-
-		tmp.innerHTML =
-			`<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="ck-icon ck-icon-left">
-				<use xlink:href="#ck-icon-${ this.model.icon }"></use>
-			</svg>`;
-
-		this.element = tmp.firstChild;
-
-		/**
-		 * An element which is responsible for displaying the right icon.
-		 *
-		 * @member {HTMLElement} ui.icon.IconView#svgUseElement
-		 */
-		this.svgUseElement = this.element.firstElementChild;
-
-		this.model.on( 'change:icon', ( evt, name, value ) => {
-			this.svgUseElement.setAttribute( 'xlink:href', `#ck-icon-${ value }` );
-		} );
+		this.template = {
+			tag: 'svg',
+			ns: 'http://www.w3.org/2000/svg',
+			attributes: {
+				class: 'ck-icon ck-icon-left'
+			},
+			children: [
+				{
+					tag: 'use',
+					ns: 'http://www.w3.org/2000/svg',
+					attributes: {
+						href: {
+							ns: 'http://www.w3.org/1999/xlink',
+							value: bind.to( 'icon', i => `#ck-icon-${ i }` )
+						}
+					}
+				}
+			]
+		};
 	}
 }
