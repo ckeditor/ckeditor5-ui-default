@@ -7,11 +7,8 @@
 
 'use strict';
 
-import testUtils from '/tests/ckeditor5/_utils/utils.js';
 import IconView from '/ckeditor5/ui/icon/iconview.js';
 import Model from '/ckeditor5/ui/model.js';
-
-testUtils.createSinonSandbox();
 
 describe( 'IconView', () => {
 	let model, view;
@@ -24,36 +21,24 @@ describe( 'IconView', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'calls _createViewElement', () => {
-			const spy = testUtils.sinon.spy( IconView.prototype, '_createViewElement' );
-
-			view = new IconView( model );
-
-			expect( spy.calledOnce ).to.be.true;
-		} );
-	} );
-
-	describe( '_createViewElement', () => {
-		it( 'creates view.element', () => {
-			view._createViewElement();
-
+		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.be.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon ck-icon-left' );
 		} );
+	} );
 
-		it( 'creates view.svgUseElement', () => {
-			view._createViewElement();
+	describe( '<svg> bindings', () => {
+		describe( 'xlink:href', () => {
+			it( 'reacts to model.icon', () => {
+				const svgUseElement = view.element.firstChild;
+				const svgHrefNs = 'http://www.w3.org/1999/xlink';
 
-			expect( view.svgUseElement.tagName ).to.be.equal( 'use' );
-			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
-		} );
+				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-foo' );
 
-		it( 'creates model#change:icon binding', () => {
-			view._createViewElement();
+				model.icon = 'abc';
 
-			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-foo' );
-			model.icon = 'abc';
-			expect( view.svgUseElement.getAttribute( 'xlink:href' ) ).to.be.equal( '#ck-icon-abc' );
+				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-abc' );
+			} );
 		} );
 	} );
 } );
