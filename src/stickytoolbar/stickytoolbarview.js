@@ -94,9 +94,6 @@ export default class StickyToolbarView extends ToolbarView {
 
 		// Stick the top region.
 		Object.assign( this.element.style, {
-			position: 'fixed',
-			top: 0,
-			background: 'rgba(0,0,255,.2)',
 			width: regionRect.width + 'px',
 			marginLeft: -window.scrollX + 'px'
 		} );
@@ -117,9 +114,6 @@ export default class StickyToolbarView extends ToolbarView {
 
 		// "Peel off" the top region.
 		Object.assign( this.element.style, {
-			position: 'static',
-			top: 'auto',
-			background: 'none',
 			width: 'auto',
 			marginLeft: 'auto'
 		} );
