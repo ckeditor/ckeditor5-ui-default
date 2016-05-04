@@ -8,20 +8,29 @@
 import ToolbarView from '../toolbar/toolbarview.js';
 
 /**
- * The stocky toolbar view class.
+ * The sticky toolbar view class.
  *
  * @memberOf ui.toolbar
- * @extends ui.toolbar
+ * @extends ui.toolbarView
  */
 
 export default class StickyToolbarView extends ToolbarView {
 	constructor( model ) {
 		super( model );
 
+		const bind = this.attributeBinder;
+
+		/**
+		 * Indicates whether the toolbar is in the "sticky" state.
+		 *
+		 * @readonly
+		 * @observable
+		 * @member {Boolean} ui.button.StickyToolbarModel#isSticky
+		 */
 		this.model.set( 'isSticky', false );
 
-		const bind = this.attributeBinder;
-		this.template.attributes.class.push( bind.if( 'isSticky', 'ck-toolbar-sticky' ) );
+		// Toggle class of the toolbar when "sticky" state changes in the model.
+		this.template.attributes.class.push( bind.if( 'isSticky', 'ck-toolbar_sticky' ) );
 	}
 
 	init() {
@@ -36,7 +45,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 * @property _elementPlaceholder
 		 */
 		this._elementPlaceholder = document.createElement( 'div' );
-		this._elementPlaceholder.classList.add( 'ck-toolbar-sticky-placeholder' );
+		this._elementPlaceholder.classList.add( 'ck-toolbar__placeholder' );
 		this.element.parentNode.insertBefore( this._elementPlaceholder, this.element );
 
 		// Update sticky state of the toolbar as the window is being scrolled.
@@ -77,19 +86,20 @@ export default class StickyToolbarView extends ToolbarView {
 	 * @protected
 	 */
 	_stick( regionRect ) {
-		const elementStyle = this.element.style;
-		const placeholderStyle = this._elementPlaceholder.style;
-
 		// Setup placeholder.
-		placeholderStyle.display = 'block';
-		placeholderStyle.height = regionRect.height + 'px';
+		Object.assign( this._elementPlaceholder.style, {
+			display: 'block',
+			height: regionRect.height + 'px'
+		} );
 
 		// Stick the top region.
-		elementStyle.position = 'fixed';
-		elementStyle.top = 0;
-		elementStyle.background = 'rgba(0,0,255,.2)';
-		elementStyle.width = regionRect.width + 'px';
-		elementStyle.marginLeft = -window.scrollX + 'px';
+		Object.assign( this.element.style, {
+			position: 'fixed',
+			top: 0,
+			background: 'rgba(0,0,255,.2)',
+			width: regionRect.width + 'px',
+			marginLeft: -window.scrollX + 'px'
+		} );
 
 		this.model.isSticky = true;
 	}
@@ -100,18 +110,19 @@ export default class StickyToolbarView extends ToolbarView {
 	 * @protected
 	 */
 	_detach() {
-		const elementStyle = this.element.style;
-		const placeholderStyle = this._elementPlaceholder.style;
-
 		// Release the placeholder.
-		placeholderStyle.display = 'none';
+		Object.assign( this._elementPlaceholder.style, {
+			display: 'none'
+		} );
 
 		// "Peel off" the top region.
-		elementStyle.position = 'static';
-		elementStyle.top = 'auto';
-		elementStyle.background = 'none';
-		elementStyle.width = 'auto';
-		elementStyle.marginLeft = 'auto';
+		Object.assign( this.element.style, {
+			position: 'static',
+			top: 'auto',
+			background: 'none',
+			width: 'auto',
+			marginLeft: 'auto'
+		} );
 
 		this.model.isSticky = false;
 	}
