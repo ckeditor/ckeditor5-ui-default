@@ -21,7 +21,7 @@ export default class ToolbarView extends View {
 		this.template = {
 			tag: 'div',
 			attributes: {
-				class: [ 'ck-toolbar' ]
+				class: [ 'ck-reset ck-toolbar' ]
 			}
 		};
 

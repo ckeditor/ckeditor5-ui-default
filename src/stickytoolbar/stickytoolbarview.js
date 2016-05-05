@@ -95,7 +95,8 @@ export default class StickyToolbarView extends ToolbarView {
 		// Stick the top region.
 		Object.assign( this.element.style, {
 			width: regionRect.width + 'px',
-			marginLeft: -window.scrollX + 'px'
+			// Compensate 1px border which is added when becoming "sticky".
+			marginLeft: -window.scrollX - 1 + 'px'
 		} );
 
 		this.model.isSticky = true;

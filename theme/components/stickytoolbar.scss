@@ -1,8 +1,11 @@
 // Copyright (c) 2003-2016, CKSource - Frederico Knabben. All rights reserved.
 // For licensing, see LICENSE.md or http://ckeditor.com/license
 
-.ck-toolbar_sticky {
-	position: fixed;
-	top: 0;
-	background: rgba(0,0,255,.2);
+@include ck-editor {
+	.ck-toolbar.ck-toolbar_sticky {
+		position: fixed;
+		top: 0;
+		border: 1px solid ck-border-color();
+		background: ck-color( 'foreground' );
+	}
 }
