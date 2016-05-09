@@ -37,8 +37,8 @@ export default class StickyToolbarView extends ToolbarView {
 		super.init();
 
 		/**
-		 * Toolbar placeholder is a dummy element which replaces the actual toolbar as
-		 * long as the actual toolbar is sticky. It prevents flickering of the UI.
+		 * A dummy element which visually fills the space as long as the
+		 * actual toolbar is sticky. It prevents flickering of the UI.
 		 *
 		 * @private
 		 * @type {HTMLElement}
@@ -64,7 +64,9 @@ export default class StickyToolbarView extends ToolbarView {
 	}
 
 	/**
-	 * TODO
+	 * Analyzes the environment to decide whether the toolbar should
+	 * be sticky or not. Then, it uses {@link _stick} and {@link _detach}
+	 * methods to manage the state of the toolbar.
 	 *
 	 * @protected
 	 */
@@ -81,8 +83,13 @@ export default class StickyToolbarView extends ToolbarView {
 	}
 
 	/**
-	 * TODO
+	 * Sticks the toolbar to the top edge of the viewport simulating
+	 * CSS position:sticky. Also see {@link _detach}.
 	 *
+	 * TODO: Possibly replaced by CSS in the future
+	 * http://caniuse.com/#feat=css-sticky
+	 *
+	 * @param {Object} regionRect An output of getBoundingClientRect native DOM method.
 	 * @protected
 	 */
 	_stick( regionRect ) {
@@ -103,7 +110,8 @@ export default class StickyToolbarView extends ToolbarView {
 	}
 
 	/**
-	 * TODO
+	 * Detaches the toolbar from the top edge of the viewport.
+	 * See {@link _stick}.
 	 *
 	 * @protected
 	 */
@@ -113,7 +121,7 @@ export default class StickyToolbarView extends ToolbarView {
 			display: 'none'
 		} );
 
-		// "Peel off" the top region.
+		// Detach the top region.
 		Object.assign( this.element.style, {
 			width: 'auto',
 			marginLeft: 'auto'
