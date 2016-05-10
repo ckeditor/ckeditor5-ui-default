@@ -89,8 +89,8 @@ export default class StickyToolbarView extends ToolbarView {
 	 * TODO: Possibly replaced by CSS in the future
 	 * http://caniuse.com/#feat=css-sticky
 	 *
-	 * @param {Object} regionRect An output of getBoundingClientRect native DOM method.
 	 * @protected
+	 * @param {Object} regionRect An output of getBoundingClientRect native DOM method.
 	 */
 	_stick( regionRect ) {
 		// Setup placeholder.
