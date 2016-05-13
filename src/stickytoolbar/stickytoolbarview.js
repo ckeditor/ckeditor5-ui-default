@@ -10,23 +10,15 @@ import ToolbarView from '../toolbar/toolbarview.js';
 /**
  * The sticky toolbar view class.
  *
- * @memberOf ui.toolbar
- * @extends ui.toolbarView
+ * @memberOf ui.stickyToolbar
+ * @extends ui.toolbar.ToolbarView
  */
-
 export default class StickyToolbarView extends ToolbarView {
 	constructor( model ) {
 		super( model );
 
 		const bind = this.attributeBinder;
 
-		/**
-		 * Indicates whether the toolbar is in the "sticky" state.
-		 *
-		 * @readonly
-		 * @observable
-		 * @member {Boolean} ui.button.StickyToolbarModel#isSticky
-		 */
 		this.model.set( 'isSticky', false );
 
 		// Toggle class of the toolbar when "sticky" state changes in the model.
@@ -41,8 +33,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 * actual toolbar is sticky. It prevents flickering of the UI.
 		 *
 		 * @private
-		 * @type {HTMLElement}
-		 * @property _elementPlaceholder
+		 * @property {HTMLElement} ui.stickyToobar.StickyToolbarView#_elementPlaceholder
 		 */
 		this._elementPlaceholder = document.createElement( 'div' );
 		this._elementPlaceholder.classList.add( 'ck-toolbar__placeholder' );
@@ -54,7 +45,7 @@ export default class StickyToolbarView extends ToolbarView {
 		} );
 
 		// Synchronize with `model.isActive` because sticking an inactive toolbar is pointless.
-		this.model.on( 'change:isActive', ( evt, name, value ) => {
+		this.listenTo( this.model, 'change:isActive', ( evt, name, value ) => {
 			if ( value ) {
 				this._checkIfShouldBeSticky();
 			} else {
@@ -84,7 +75,7 @@ export default class StickyToolbarView extends ToolbarView {
 
 	/**
 	 * Sticks the toolbar to the top edge of the viewport simulating
-	 * CSS position:sticky. Also see {@link _detach}.
+	 * CSS position:sticky. Also see {@link #_detach}.
 	 *
 	 * TODO: Possibly replaced by CSS in the future
 	 * http://caniuse.com/#feat=css-sticky
@@ -111,7 +102,7 @@ export default class StickyToolbarView extends ToolbarView {
 
 	/**
 	 * Detaches the toolbar from the top edge of the viewport.
-	 * See {@link _stick}.
+	 * See {@link #_stick}.
 	 *
 	 * @protected
 	 */
@@ -130,3 +121,27 @@ export default class StickyToolbarView extends ToolbarView {
 		this.model.isSticky = false;
 	}
 }
+
+/**
+ * The basic sticky toolbar model interface.
+ *
+ * @memberOf ui.stickyToolbar
+ * @interface StickyToolbarModel
+ */
+
+/**
+ * Indicates whether the toolbar should be active. When any editable
+ * is focused in the editor, toolbar becomes active.
+ *
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.button.StickyToolbarModel#isActive
+ */
+
+/**
+ * Indicates whether the toolbar is in the "sticky" state.
+ *
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.button.StickyToolbarModel#isSticky
+ */
