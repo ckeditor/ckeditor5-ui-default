@@ -23,17 +23,13 @@ export default class IframeView extends View {
 	constructor( model, locale ) {
 		super( model, locale );
 
-		const bind = this.attributeBinder;
-
 		this.template = {
 			tag: 'iframe',
 			attributes: {
 				class: [ 'ck-reset-all' ],
 				// It seems that we need to allow scripts in order to be able to listen to events.
 				// TODO: Research that. Perhaps the src must be set?
-				sandbox: 'allow-same-origin allow-scripts',
-				width: bind.to( 'width' ),
-				height: bind.to( 'height' )
+				sandbox: 'allow-same-origin allow-scripts'
 			},
 			on: {
 				load: 'loaded'
@@ -85,24 +81,4 @@ export default class IframeView extends View {
  * Fired when the iframe `contentDocument` finished loading.
  *
  * @event ui.iframe.IframeView#loaded
- */
-
-/**
- * The basic iframe model interface.
- *
- * @memberOf ui.iframe
- * @interface IframeModel
- * @mixes utils.ObservableMixin
- */
-
-/**
- * The width of the iframe.
- *
- * @member {Number} ui.iframe.IframeModel#width
- */
-
-/**
- * The height of the iframe.
- *
- * @member {Number} ui.iframe.IframeModel#height
  */

@@ -66,34 +66,4 @@ describe( 'IframeView', () => {
 			document.body.appendChild( view.element );
 		} );
 	} );
-
-	describe( '<iframe> bindings', () => {
-		describe( 'width', () => {
-			it( 'is set initially', () => {
-				expect( view.element.attributes.getNamedItem( 'width' ).value ).to.equal( '100' );
-			} );
-
-			it( 'reacts to change in the model', () => {
-				model.width = 123;
-				expect( view.element.attributes.getNamedItem( 'width' ).value ).to.equal( '123' );
-
-				model.width = 321;
-				expect( view.element.attributes.getNamedItem( 'width' ).value ).to.equal( '321' );
-			} );
-		} );
-
-		describe( 'height', () => {
-			it( 'is set initially', () => {
-				expect( view.element.attributes.getNamedItem( 'height' ).value ).to.equal( '200' );
-			} );
-
-			it( 'reacts to change in the model', () => {
-				model.height = 123;
-				expect( view.element.attributes.getNamedItem( 'height' ).value ).to.equal( '123' );
-
-				model.height = 321;
-				expect( view.element.attributes.getNamedItem( 'height' ).value ).to.equal( '321' );
-			} );
-		} );
-	} );
 } );
