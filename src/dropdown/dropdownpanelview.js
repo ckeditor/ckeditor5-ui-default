@@ -8,13 +8,13 @@
 import View from '../view.js';
 
 /**
- * The basic dropdown box view class.
+ * The basic dropdown panel view class.
  *
  * @memberOf ui.dropdown
  * @extends ui.View
  */
 
-export default class DropdownBoxView extends View {
+export default class DropdownPanelView extends View {
 	constructor( model ) {
 		super( model );
 
@@ -26,8 +26,8 @@ export default class DropdownBoxView extends View {
 			attributes: {
 				class: [
 					'ck-reset',
-					'ck-dropdown__box',
-					bind.if( 'isOn', 'ck-dropdown__box-active' )
+					'ck-dropdown__panel',
+					bind.if( 'isOn', 'ck-dropdown__panel-active' )
 				]
 			},
 

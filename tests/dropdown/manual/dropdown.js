@@ -9,18 +9,18 @@ import Model from '/ckeditor5/ui/model.js';
 import Dropdown from '/ckeditor5/ui/dropdown/dropdown.js';
 import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
 
-const model = new Model( {
+const model = window.model = new Model( {
 	label: 'Show dropdown',
 	isEnabled: true,
 	isOn: false
 } );
 
 const view = new DropdownView( model );
-const ctrl = new Dropdown( model, view );
+const dropdown = window.dropdown = new Dropdown( model, view );
 
-ctrl.init();
+dropdown.init();
 
-document.body.appendChild( ctrl.view.element );
+document.body.appendChild( dropdown.view.element );
 
 // view.regions.get( 'container' ).element.innerHTML = 'Container content';
 

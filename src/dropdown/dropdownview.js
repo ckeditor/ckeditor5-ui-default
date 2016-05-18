@@ -6,7 +6,6 @@
 'use strict';
 
 import View from '../view.js';
-import DropdownBoxView from './dropdownboxview.js';
 
 /**
  * The basic dropdown view class.
@@ -19,9 +18,6 @@ export default class DropdownView extends View {
 	constructor( model ) {
 		super( model );
 
-		this._boxView = new DropdownBoxView( this.model );
-		// const bind = this.attributeBinder;
-
 		this.template = {
 			tag: 'div',
 
@@ -32,7 +28,7 @@ export default class DropdownView extends View {
 			},
 
 			on: {
-				click: () => {
+				'click@.ck-dropdown__button': () => {
 					if ( model.isEnabled ) {
 						this.fire( 'click' );
 					}
@@ -41,36 +37,40 @@ export default class DropdownView extends View {
 		};
 
 		this.register( 'dropdown', el => el );
-		this.register( 'box', () => this._boxView.element );
+	}
+
+	init() {
+		const dropdownRegion = this.regions.get( 'dropdown' );
 
 		this.on( 'click', () => {
 			this.model.isOn = !this.model.isOn;
 
 			if ( this.model.isOn ) {
-				this.listenTo( document, 'mousedown', ( evtInfo, domEvt ) => {
-					if ( !isEqualOrChild( this.element, domEvt.target ) ) {
-						this.model.isOn = false;
-					}
-				} );
-
-				this._boxView.setPosition( this.regions.get( 'dropdown' ).views.get( 0 ).element );
-			} else {
-				this.stopListening( document );
+				dropdownRegion.views.get( 1 ).setPosition( this.element.firstChild );
 			}
 		} );
-	}
 
-	init() {
-		this._boxView.init();
+		// this.model.on( 'change:isOn', ( evt, name, value ) => {
+		// 	if ( value ) {
+		// 		this.listenTo( document, 'mousedown', ( evtInfo, domEvt ) => {
+		// 			if ( !isEqualOrChild( this.element, domEvt.target ) ) {
+		// 				this.model.isOn = false;
+		// 			}
+		// 		} );
+
+		// 	} else {
+		// 		this.stopListening( document );
+		// 	}
+		// } );
 
 		return super.init();
 	}
 
-	appendBox( whereTo ) {
-		whereTo.appendChild( this._boxView.element );
-	}
+	// appendBox( whereTo ) {
+	// 	whereTo.appendChild( this._boxView.element );
+	// }
 }
 
-function isEqualOrChild( ref, node ) {
-	return ref === node || ref.contains( node );
-}
+// function isEqualOrChild( ref, node ) {
+// 	return ref === node || ref.contains( node );
+// }
