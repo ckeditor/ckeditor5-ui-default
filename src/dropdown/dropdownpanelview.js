@@ -11,7 +11,7 @@ import View from '../view.js';
  * The basic dropdown panel view class.
  *
  * @memberOf ui.dropdown
- * @extends ui.View
+ * @extends ui.Viewa
  */
 
 export default class DropdownPanelView extends View {
@@ -29,15 +29,13 @@ export default class DropdownPanelView extends View {
 					'ck-dropdown__panel',
 					bind.if( 'isOn', 'ck-dropdown__panel-active' )
 				]
-			},
-
-			children: [
-				'Dropdown box content'
-			],
+			}
 		};
+
+		this.register( 'panel', el => el );
 	}
 
-	setPosition( relativeElement ) {
+	positionRelativeTo( relativeElement ) {
 		const relRect = relativeElement.getBoundingClientRect();
 		const bodyRect = this.element.ownerDocument.body.getBoundingClientRect();
 

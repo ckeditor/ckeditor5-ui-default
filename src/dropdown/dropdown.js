@@ -7,9 +7,12 @@
 
 import Controller from '../controller.js';
 import Button from '../button/button.js';
-import DropdownButtonView from './dropdownbuttonview.js';
-import DropdownPanelView from './dropdownpanelview.js';
 import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
+
+import DropdownPanel from './dropdownpanel.js';
+import DropdownPanelView from './dropdownpanelview.js';
+
+import DropdownButtonView from './dropdownbuttonview.js';
 
 /**
  * The basic dropdown controller class.
@@ -26,8 +29,8 @@ export default class Dropdown extends Controller {
 
 		this.collections.add( dropdownCollection );
 
-		dropdownCollection.add( new Button( model, new DropdownButtonView( model ) ) );
-		dropdownCollection.add( new Controller( model, new DropdownPanelView( model ) ) );
+		this.add( 'dropdown', new Button( model, new DropdownButtonView( model ) ) );
+		this.add( 'dropdown', new DropdownPanel( model, new DropdownPanelView( model ) ) );
 	}
 
 	open() {

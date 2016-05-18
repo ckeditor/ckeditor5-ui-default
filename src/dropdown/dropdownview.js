@@ -43,34 +43,17 @@ export default class DropdownView extends View {
 		const dropdownRegion = this.regions.get( 'dropdown' );
 
 		this.on( 'click', () => {
+			if ( !this.model.isEnabled ) {
+				return;
+			}
+
 			this.model.isOn = !this.model.isOn;
 
 			if ( this.model.isOn ) {
-				dropdownRegion.views.get( 1 ).setPosition( this.element.firstChild );
+				dropdownRegion.views.get( 1 ).positionRelativeTo( this.element.firstChild );
 			}
 		} );
 
-		// this.model.on( 'change:isOn', ( evt, name, value ) => {
-		// 	if ( value ) {
-		// 		this.listenTo( document, 'mousedown', ( evtInfo, domEvt ) => {
-		// 			if ( !isEqualOrChild( this.element, domEvt.target ) ) {
-		// 				this.model.isOn = false;
-		// 			}
-		// 		} );
-
-		// 	} else {
-		// 		this.stopListening( document );
-		// 	}
-		// } );
-
 		return super.init();
 	}
-
-	// appendBox( whereTo ) {
-	// 	whereTo.appendChild( this._boxView.element );
-	// }
 }
-
-// function isEqualOrChild( ref, node ) {
-// 	return ref === node || ref.contains( node );
-// }
