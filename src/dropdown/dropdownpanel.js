@@ -19,9 +19,9 @@ export default class DropdownPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.collections.add( new ControllerCollection( 'panel' ) );
+		this.collections.add( new ControllerCollection( 'content' ) );
 
 		// debugger;
-		this.add( 'panel', model.content );
+		this.add( 'content', model.content );
 	}
 }

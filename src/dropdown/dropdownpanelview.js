@@ -32,7 +32,7 @@ export default class DropdownPanelView extends View {
 			}
 		};
 
-		this.register( 'panel', el => el );
+		this.register( 'content', el => el );
 	}
 
 	positionRelativeTo( relativeElement ) {
