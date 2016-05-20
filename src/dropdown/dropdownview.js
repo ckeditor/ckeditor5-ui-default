@@ -28,11 +28,7 @@ export default class DropdownView extends View {
 			},
 
 			on: {
-				'click@.ck-dropdown__button': () => {
-					if ( model.isEnabled ) {
-						this.fire( 'click' );
-					}
-				}
+				'click@.ck-dropdown__button': 'click'
 			}
 		};
 
