@@ -37,11 +37,9 @@ export default class DropdownPanelView extends View {
 
 	positionRelativeTo( relativeElement ) {
 		const relRect = relativeElement.getBoundingClientRect();
-		const bodyRect = this.element.ownerDocument.body.getBoundingClientRect();
 
 		Object.assign( this.element.style, {
-			left: relRect.left - bodyRect.left + 'px',
-			top: relRect.bottom - bodyRect.top + 'px',
+			top: relRect.height + 'px'
 		} );
 	}
 }
