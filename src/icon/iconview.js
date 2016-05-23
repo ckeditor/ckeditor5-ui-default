@@ -24,7 +24,10 @@ export default class IconView extends View {
 			tag: 'svg',
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
-				class: 'ck-icon ck-icon-left'
+				class: [
+					'ck-icon',
+					bind.to( 'align', value => value ? `ck-icon-${ value }` : '' )
+				]
 			},
 			children: [
 				{
