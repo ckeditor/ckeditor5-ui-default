@@ -44,8 +44,10 @@ export default class DropdownView extends View {
 			}
 
 			this.model.isOn = !this.model.isOn;
+		} );
 
-			if ( this.model.isOn ) {
+		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
+			if ( value ) {
 				dropdownRegion.views.get( 1 ).positionRelativeTo( this.element.firstChild );
 			}
 		} );
