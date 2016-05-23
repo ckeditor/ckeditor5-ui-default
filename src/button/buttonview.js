@@ -67,9 +67,11 @@ export default class ButtonView extends View {
 
 	_setupIcon() {
 		const iconViewModel = new Model();
+
 		const iconView = new IconView( iconViewModel );
 
 		iconViewModel.bind( 'icon' ).to( this.model );
+		iconViewModel.bind( 'align' ).to( this.model, 'iconAlign' );
 
 		this.element.insertBefore( iconView.element, this.element.firstChild );
 	}

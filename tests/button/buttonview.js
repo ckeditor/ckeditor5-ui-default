@@ -38,7 +38,11 @@ describe( 'ButtonView', () => {
 			new ButtonView( model ).init();
 			expect( spy.calledOnce ).to.be.false;
 
-			model.set( 'icon', 'foo' );
+			model.set( {
+				icon: 'foo',
+				iconAlign: 'left'
+			} );
+
 			new ButtonView( model ).init();
 
 			expect( spy.calledOnce ).to.be.true;
@@ -105,7 +109,11 @@ describe( 'ButtonView', () => {
 
 	describe( '_setupIcon', () => {
 		it( 'appends child icon view when "icon" in model', () => {
-			model.set( 'icon', 'foo' );
+			model.set( {
+				icon: 'foo',
+				iconAlign: 'left'
+			} );
+
 			view = new ButtonView( model );
 			view.init();
 

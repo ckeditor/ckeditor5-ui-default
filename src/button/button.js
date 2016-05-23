@@ -48,6 +48,18 @@ export default class Button extends Controller {
  */
 
 /**
+ * The icon of the button.
+ *
+ * @member {String} ui.button.ButtonModel#icon
+ */
+
+/**
+ * The alignment of the button icon.
+ *
+ * @member {String} ui.button.ButtonModel#iconAlign
+ */
+
+/**
  * Fired when the button action should be executed.
  *
  * @event ui.button.ButtonModel#execute
