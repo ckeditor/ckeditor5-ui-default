@@ -20,7 +20,10 @@ describe( 'Dropdown', () => {
 	let model, dropdown;
 
 	beforeEach( () => {
-		model = new Model();
+		model = new Model( {
+			isEnabled: true,
+			isOn: false
+		} );
 		dropdown = new Dropdown( model );
 	} );
 
@@ -39,6 +42,19 @@ describe( 'Dropdown', () => {
 			expect( dropdown.collections.get( 'dropdown' ) ).to.have.length( 2 );
 			expect( dropdown.collections.get( 'dropdown' ).get( 0 ) ).to.equal( dropdown.button );
 			expect( dropdown.collections.get( 'dropdown' ).get( 1 ) ).to.equal( dropdown.panel );
+		} );
+
+		it( 'listens on model#execute and changes model#isOn', () => {
+			model.fire( 'execute' );
+			expect( model.isOn ).to.be.true;
+
+			model.fire( 'execute' );
+			expect( model.isOn ).to.be.false;
+
+			model.isEnabled = false;
+
+			model.fire( 'execute' );
+			expect( model.isOn ).to.be.false;
 		} );
 	} );
 } );
