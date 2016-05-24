@@ -18,8 +18,6 @@ export default class DropdownButtonView extends ButtonView {
 	constructor( model ) {
 		super( model );
 
-		// const bind = this.attributeBinder;
-
 		this.template.attributes.class.push( 'ck-dropdown__button' );
 	}
 }

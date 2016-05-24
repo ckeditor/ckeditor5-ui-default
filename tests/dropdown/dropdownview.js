@@ -7,11 +7,8 @@
 
 'use strict';
 
-import testUtils from '/tests/ckeditor5/_utils/utils.js';
 import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
 import Model from '/ckeditor5/ui/model.js';
-
-testUtils.createSinonSandbox();
 
 describe( 'DropdownView', () => {
 	let model, view;
