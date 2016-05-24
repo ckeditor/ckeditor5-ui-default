@@ -10,13 +10,16 @@ import View from '../view.js';
 /**
  * The basic list view class.
  *
- * @memberOf ui.dropdown
+ * @memberOf ui.list
  * @extends ui.View
  */
 
 export default class ListView extends View {
-	constructor( model ) {
-		super( model );
+	/**
+	 * Creates a ListView instance.
+	 */
+	constructor() {
+		super();
 
 		this.template = {
 			tag: 'ul',
