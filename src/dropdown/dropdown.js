@@ -50,7 +50,7 @@ export default class Dropdown extends Controller {
 		this.panel = new DropdownPanel( model, new DropdownPanelView( model ) );
 
 		// Execute event comes from the button.
-		this.model.on( 'execute', () => {
+		this.listenTo( model, 'execute', () => {
 			if ( this.model.isEnabled ) {
 				this.model.isOn = !this.model.isOn;
 			}
