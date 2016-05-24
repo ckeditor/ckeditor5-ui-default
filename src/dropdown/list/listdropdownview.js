@@ -20,14 +20,15 @@ export default class ListDropdownView extends DropdownView {
 
 		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
 			if ( value ) {
-				// TODO: It will probably be focus/blur-based rather than click.
+				// TODO: It will probably be focus/blur-based rather than click. It should be bound
+				// to focusmanager of some sort.
 				this.listenTo( document, 'click', ( evtInfo, domEvt ) => {
 					if ( this.element != domEvt.target && !this.element.contains( domEvt.target ) ) {
 						this.model.isOn = false;
 					}
 				} );
 			} else {
-				this.stopListening( document, 'click' );
+				this.stopListening( document );
 			}
 		} );
 	}
