@@ -24,7 +24,11 @@ describe( 'DropdownPanelView', () => {
 	describe( 'constructor', () => {
 		it( 'registers "content" region', () => {
 			expect( view.regions ).to.have.length( 1 );
-			expect( view.regions.get( 0 ).name ).to.be.equal( 'content' );
+			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
+
+			view.init();
+
+			expect( view.regions.get( 0 ).element ).to.equal( view.element );
 		} );
 
 		it( 'creates element from template', () => {

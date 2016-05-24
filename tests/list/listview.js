@@ -20,6 +20,10 @@ describe( 'ListView', () => {
 		it( 'registers "list" region', () => {
 			expect( view.regions ).to.have.length( 1 );
 			expect( view.regions.get( 0 ).name ).to.be.equal( 'list' );
+
+			view.init();
+
+			expect( view.regions.get( 0 ).element ).to.equal( view.element );
 		} );
 
 		it( 'creates element from template', () => {
