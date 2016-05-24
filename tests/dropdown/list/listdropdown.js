@@ -38,7 +38,7 @@ describe( 'ListDropdown', () => {
 			expect( contentCollection.get( 0 ).view ).to.be.instanceof( ListView );
 
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
-			expect( contentCollection.get( 0 ).view.model ).to.equal( content );
+			expect( contentCollection.get( 0 ).view.model ).to.be.undefined;
 		} );
 
 		it( 'attaches listener on model.content#execute and changes model#isOn', () => {
