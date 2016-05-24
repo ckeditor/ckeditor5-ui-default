@@ -13,8 +13,8 @@ import ListView from '/ckeditor5/ui/list/listview.js';
 /**
  * The basic list dropdown controller class.
  *
- * @memberOf ui.dropdown
- * @extends ui.Controller
+ * @memberOf ui.dropdown.list
+ * @extends ui.dropdown.Dropdown
  */
 
 export default class ListDropdown extends Dropdown {
@@ -23,8 +23,24 @@ export default class ListDropdown extends Dropdown {
 
 		const content = this.model.content;
 
-		content.on( 'execute', () => this.close() );
+		// Collapse the dropdown when an item in the panel is clicked.
+		content.on( 'execute', () => {
+			this.model.isOn = false;
+		} );
 
 		this.panel.add( 'content', new List( content, new ListView( content ) ) );
 	}
 }
+
+/**
+ * The ListDropdown model interface.
+ *
+ * @memberOf ui.dropdown.list
+ * @interface ListDropdownModel
+ */
+
+/**
+ * Content of the dropdown used to create the List instance.
+ *
+ * @member {Boolean} ui.dropdown.list.ListDropdownModel#content
+ */
