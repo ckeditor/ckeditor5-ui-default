@@ -11,10 +11,15 @@ import View from '../view.js';
  * The basic dropdown panel view class.
  *
  * @memberOf ui.dropdown
- * @extends ui.Viewa
+ * @extends ui.View
  */
 
 export default class DropdownPanelView extends View {
+	/**
+	 * Creates a DropdownPanelView instance.
+	 *
+	 * @param {utils.Observable} model
+	 */
 	constructor( model ) {
 		super( model );
 
