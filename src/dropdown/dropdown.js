@@ -30,6 +30,7 @@ export default class Dropdown extends Controller {
 		/**
 		 * Button of this Dropdown.
 		 *
+		 * @readonly
 		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
 		 */
 		this.button = new Button( model, new DropdownButtonView( model ) );
@@ -37,6 +38,7 @@ export default class Dropdown extends Controller {
 		/**
 		 * Panel of this Dropdown.
 		 *
+		 * @readonly
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
 		 */
 		this.panel = new DropdownPanel( model, new DropdownPanelView( model ) );
