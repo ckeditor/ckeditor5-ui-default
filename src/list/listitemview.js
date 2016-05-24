@@ -10,11 +10,16 @@ import View from '../view.js';
 /**
  * The basic list item view class.
  *
- * @memberOf ui.dropdown
+ * @memberOf ui.list
  * @extends ui.View
  */
 
 export default class ListItemView extends View {
+	/**
+	 * Creates a ListItemView instance.
+	 *
+	 * @param {utils.Observable} model
+	 */
 	constructor( model ) {
 		super( model );
 
