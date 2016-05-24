@@ -27,19 +27,22 @@ export default class Dropdown extends Controller {
 
 		this.collections.add( new ControllerCollection( 'dropdown' ) );
 
+		/**
+		 * Button of this Dropdown.
+		 *
+		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
+		 */
 		this.button = new Button( model, new DropdownButtonView( model ) );
+
+		/**
+		 * Panel of this Dropdown.
+		 *
+		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
+		 */
 		this.panel = new DropdownPanel( model, new DropdownPanelView( model ) );
 
 		this.add( 'dropdown', this.button );
 		this.add( 'dropdown', this.panel );
-	}
-
-	open() {
-		this.model.isOn = true;
-	}
-
-	close() {
-		this.model.isOn = false;
 	}
 }
 
