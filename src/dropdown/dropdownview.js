@@ -36,20 +36,12 @@ export default class DropdownView extends View {
 	}
 
 	init() {
-		const dropdownRegion = this.regions.get( 'dropdown' );
-
 		this.on( 'click', () => {
 			if ( !this.model.isEnabled ) {
 				return;
 			}
 
 			this.model.isOn = !this.model.isOn;
-		} );
-
-		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
-			if ( value ) {
-				dropdownRegion.views.get( 1 ).positionRelativeTo( this.element.firstChild );
-			}
 		} );
 
 		return super.init();
