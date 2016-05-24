@@ -15,6 +15,11 @@ import View from '../view.js';
  */
 
 export default class DropdownView extends View {
+	/**
+	 * Creates a DropdownView instance.
+	 *
+	 * @param {utils.Observable} model
+	 */
 	constructor( model ) {
 		super( model );
 
@@ -25,25 +30,9 @@ export default class DropdownView extends View {
 				class: [
 					'ck-dropdown'
 				]
-			},
-
-			on: {
-				'click@.ck-dropdown__button': 'click'
 			}
 		};
 
 		this.register( 'dropdown', el => el );
-	}
-
-	init() {
-		this.on( 'click', () => {
-			if ( !this.model.isEnabled ) {
-				return;
-			}
-
-			this.model.isOn = !this.model.isOn;
-		} );
-
-		return super.init();
 	}
 }

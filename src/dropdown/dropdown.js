@@ -22,6 +22,12 @@ import DropdownPanelView from './dropdownpanelview.js';
  */
 
 export default class Dropdown extends Controller {
+	/**
+	 * Creates a Dropdown instance.
+	 *
+	 * @param {utils.Observable} model
+	 * @param {ui.View} view
+	 */
 	constructor( model, view ) {
 		super( model, view );
 
@@ -42,6 +48,13 @@ export default class Dropdown extends Controller {
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
 		 */
 		this.panel = new DropdownPanel( model, new DropdownPanelView( model ) );
+
+		// Execute event comes from the button.
+		this.model.on( 'execute', () => {
+			if ( this.model.isEnabled ) {
+				this.model.isOn = !this.model.isOn;
+			}
+		} );
 
 		this.add( 'dropdown', this.button );
 		this.add( 'dropdown', this.panel );
@@ -71,4 +84,11 @@ export default class Dropdown extends Controller {
  * Whether the dropdown is enabled (can be clicked).
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isEnabled
+ */
+
+/**
+ * Fired when the {@link ui.dropdown.Dropdown#button} is clicked.
+ * See {@link ui.button.ButtonModel#execute].
+ *
+ * @event ui.dropdown.DropdownModel#execute
  */
