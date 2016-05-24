@@ -23,9 +23,7 @@ export default class ListDropdown extends Dropdown {
 
 		const content = this.model.content;
 
-		content.on( 'execute', () => {
-			this.close();
-		} );
+		content.on( 'execute', () => this.close() );
 
 		this.panel.add( 'content', new List( content, new ListView( content ) ) );
 	}
