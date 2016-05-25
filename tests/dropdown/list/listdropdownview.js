@@ -19,6 +19,9 @@ describe( 'ListDropdownView', () => {
 		} );
 
 		view = new ListDropdownView( model );
+		view.init();
+
+		document.body.appendChild( view.element );
 	} );
 
 	describe( 'constructor', () => {
