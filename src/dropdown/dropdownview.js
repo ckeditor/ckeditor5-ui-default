@@ -32,6 +32,6 @@ export default class DropdownView extends View {
 			}
 		};
 
-		this.register( 'dropdown', el => el );
+		this.register( 'main', el => el );
 	}
 }

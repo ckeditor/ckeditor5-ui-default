@@ -30,7 +30,7 @@ export default class Dropdown extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.collections.add( new ControllerCollection( 'dropdown' ) );
+		this.collections.add( new ControllerCollection( 'main' ) );
 
 		/**
 		 * Button of this Dropdown.
@@ -55,8 +55,8 @@ export default class Dropdown extends Controller {
 			}
 		} );
 
-		this.add( 'dropdown', this.button );
-		this.add( 'dropdown', this.panel );
+		this.add( 'main', this.button );
+		this.add( 'main', this.panel );
 	}
 }
 

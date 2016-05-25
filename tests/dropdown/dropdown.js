@@ -39,9 +39,9 @@ describe( 'Dropdown', () => {
 		} );
 
 		it( 'appends button and panel to dropdown collection', () => {
-			expect( dropdown.collections.get( 'dropdown' ) ).to.have.length( 2 );
-			expect( dropdown.collections.get( 'dropdown' ).get( 0 ) ).to.equal( dropdown.button );
-			expect( dropdown.collections.get( 'dropdown' ).get( 1 ) ).to.equal( dropdown.panel );
+			expect( dropdown.collections.get( 'main' ) ).to.have.length( 2 );
+			expect( dropdown.collections.get( 'main' ).get( 0 ) ).to.equal( dropdown.button );
+			expect( dropdown.collections.get( 'main' ).get( 1 ) ).to.equal( dropdown.panel );
 		} );
 
 		it( 'listens on model#execute and changes model#isOn', () => {
