@@ -44,9 +44,15 @@ describe( 'IconView', () => {
 			it( 'reacts to model.align', () => {
 				expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
 
-				model.align = 'right';
+				model.align = 'RIGHT';
 
 				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.false;
+
+				model.align = 'LEFT';
+
+				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.false;
+				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.true;
 			} );
 		} );
 	} );

@@ -40,7 +40,7 @@ describe( 'ButtonView', () => {
 
 			model.set( {
 				icon: 'foo',
-				iconAlign: 'left'
+				iconAlign: 'LEFT'
 			} );
 
 			new ButtonView( model ).init();
@@ -111,7 +111,7 @@ describe( 'ButtonView', () => {
 		it( 'appends child icon view when "icon" in model', () => {
 			model.set( {
 				icon: 'foo',
-				iconAlign: 'left'
+				iconAlign: 'LEFT'
 			} );
 
 			view = new ButtonView( model );

@@ -26,7 +26,7 @@ export default class IconView extends View {
 			attributes: {
 				class: [
 					'ck-icon',
-					bind.to( 'align', value => value ? `ck-icon-${ value }` : '' )
+					bind.to( 'align', a => a ? `ck-icon-${ a.toLowerCase() }` : '' )
 				]
 			},
 			children: [
