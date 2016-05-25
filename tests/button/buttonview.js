@@ -118,6 +118,7 @@ describe( 'ButtonView', () => {
 			view.init();
 
 			expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
+			expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
 		} );
 	} );
 } );
