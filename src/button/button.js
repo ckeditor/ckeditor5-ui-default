@@ -25,7 +25,7 @@ export default class Button extends Controller {
  * The basic button model interface.
  *
  * @memberOf ui.button
- * @interface ButtonModel
+ * @interface ui.button.ButtonModel
  */
 
 /**

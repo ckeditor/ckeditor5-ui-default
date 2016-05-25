@@ -35,7 +35,7 @@ export default class ListDropdown extends Dropdown {
  * The ListDropdown model interface.
  *
  * @memberOf ui.dropdown.list
- * @interface ListDropdownModel
+ * @interface ui.dropdown.list.ListDropdownModel
  */
 
 /**
