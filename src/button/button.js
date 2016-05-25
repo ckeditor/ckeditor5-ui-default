@@ -56,7 +56,7 @@ export default class Button extends Controller {
 /**
  * The alignment of the button icon.
  *
- * @member {String} ui.button.ButtonModel#iconAlign
+ * @member {'LEFT'|'RIGHT'} ui.button.ButtonModel#iconAlign
  */
 
 /**
