@@ -15,7 +15,8 @@ describe( 'IconView', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			icon: 'foo'
+			icon: 'foo',
+			align: undefined
 		} );
 		view = new IconView( model );
 	} );
@@ -23,7 +24,7 @@ describe( 'IconView', () => {
 	describe( 'constructor', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.be.equal( 'svg' );
-			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon ck-icon-left' );
+			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
 		} );
 	} );
 
@@ -38,6 +39,20 @@ describe( 'IconView', () => {
 				model.icon = 'abc';
 
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-abc' );
+			} );
+
+			it( 'reacts to model.align', () => {
+				expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
+
+				model.align = 'RIGHT';
+
+				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.false;
+
+				model.align = 'LEFT';
+
+				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.false;
+				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.true;
 			} );
 		} );
 	} );

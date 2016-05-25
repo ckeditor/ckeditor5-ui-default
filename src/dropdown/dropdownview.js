@@ -8,22 +8,30 @@
 import View from '../view.js';
 
 /**
- * The basic toolbar view class.
+ * The basic dropdown view class.
  *
- * @memberOf ui.toolbar
+ * @memberOf ui.dropdown
  * @extends ui.View
  */
-export default class ToolbarView extends View {
+export default class DropdownView extends View {
+	/**
+	 * Creates a DropdownView instance.
+	 *
+	 * @param {utils.Observable} model
+	 */
 	constructor( model ) {
 		super( model );
 
 		this.template = {
 			tag: 'div',
+
 			attributes: {
-				class: [ 'ck-reset ck-toolbar' ]
+				class: [
+					'ck-dropdown'
+				]
 			}
 		};
 
-		this.register( 'buttons', el => el );
+		this.register( 'main', el => el );
 	}
 }

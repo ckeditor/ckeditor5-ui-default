@@ -15,7 +15,6 @@ import Model from '../model.js';
  * @memberOf ui.button
  * @extends ui.View
  */
-
 export default class ButtonView extends View {
 	constructor( model ) {
 		super( model );
@@ -70,6 +69,7 @@ export default class ButtonView extends View {
 		const iconView = new IconView( iconViewModel );
 
 		iconViewModel.bind( 'icon' ).to( this.model );
+		iconViewModel.bind( 'align' ).to( this.model, 'iconAlign' );
 
 		this.element.insertBefore( iconView.element, this.element.firstChild );
 	}

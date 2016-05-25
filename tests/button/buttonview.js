@@ -38,7 +38,11 @@ describe( 'ButtonView', () => {
 			new ButtonView( model ).init();
 			expect( spy.calledOnce ).to.be.false;
 
-			model.set( 'icon', 'foo' );
+			model.set( {
+				icon: 'foo',
+				iconAlign: 'LEFT'
+			} );
+
 			new ButtonView( model ).init();
 
 			expect( spy.calledOnce ).to.be.true;
@@ -105,11 +109,16 @@ describe( 'ButtonView', () => {
 
 	describe( '_setupIcon', () => {
 		it( 'appends child icon view when "icon" in model', () => {
-			model.set( 'icon', 'foo' );
+			model.set( {
+				icon: 'foo',
+				iconAlign: 'LEFT'
+			} );
+
 			view = new ButtonView( model );
 			view.init();
 
 			expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
+			expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
 		} );
 	} );
 } );

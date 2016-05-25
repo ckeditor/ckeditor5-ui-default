@@ -13,7 +13,6 @@ import View from '/ckeditor5/ui/view.js';
  * @memberOf ui.icon
  * @extends ui.View
  */
-
 export default class IconView extends View {
 	constructor( model ) {
 		super( model );
@@ -24,7 +23,10 @@ export default class IconView extends View {
 			tag: 'svg',
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
-				class: 'ck-icon ck-icon-left'
+				class: [
+					'ck-icon',
+					bind.to( 'align', a => a ? `ck-icon-${ a.toLowerCase() }` : '' )
+				]
 			},
 			children: [
 				{

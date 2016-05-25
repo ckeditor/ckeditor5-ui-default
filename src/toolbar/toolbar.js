@@ -14,7 +14,6 @@ import ControllerCollection from '../controllercollection.js';
  * @memberOf ui.toolbar
  * @extends ui.Controller
  */
-
 export default class Toolbar extends Controller {
 	constructor( model, view ) {
 		super( model, view );

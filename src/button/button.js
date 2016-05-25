@@ -13,7 +13,6 @@ import Controller from '../controller.js';
  * @memberOf ui.button
  * @extends ui.Controller
  */
-
 export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
@@ -26,7 +25,7 @@ export default class Button extends Controller {
  * The basic button model interface.
  *
  * @memberOf ui.button
- * @interface ButtonModel
+ * @interface ui.button.ButtonModel
  */
 
 /**
@@ -45,6 +44,18 @@ export default class Button extends Controller {
  * Whether the button is enabled (can be clicked).
  *
  * @member {Boolean} ui.button.ButtonModel#isEnabled
+ */
+
+/**
+ * The icon of the button.
+ *
+ * @member {String} ui.button.ButtonModel#icon
+ */
+
+/**
+ * The alignment of the button icon.
+ *
+ * @member {'LEFT'|'RIGHT'} ui.button.ButtonModel#iconAlign
  */
 
 /**
