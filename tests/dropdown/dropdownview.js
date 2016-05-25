@@ -24,7 +24,11 @@ describe( 'DropdownView', () => {
 
 	describe( 'constructor', () => {
 		it( 'registers "dropdown" region', () => {
-			expect( view.regions.get( 0 ).name ).to.be.equal( 'main' );
+			expect( view.regions.get( 0 ).name ).to.equal( 'main' );
+
+			view.init();
+
+			expect( view.regions.get( 0 ).element ).to.equal( view.element );
 		} );
 
 		it( 'creates element from template', () => {
