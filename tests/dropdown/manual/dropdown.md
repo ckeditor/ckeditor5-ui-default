@@ -1,7 +1,7 @@
 @bender-ui: collapsed
 @bender-tags: ui dropdown
 
-1. Welcome make sure each dropdown opens when clicked.
+1. Make sure each dropdown opens when clicked.
 2. The panel that shows up should be positioned precisely below and to the left edge of the parent dropdown.
 4. The panel that shows up should float **over** the rest of the page.
 
