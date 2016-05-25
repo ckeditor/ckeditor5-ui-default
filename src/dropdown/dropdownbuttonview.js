@@ -13,7 +13,6 @@ import ButtonView from '/ckeditor5/ui/button/buttonview.js';
  * @memberOf ui.dropdown
  * @extends ui.button.ButtonView
  */
-
 export default class DropdownButtonView extends ButtonView {
 	/**
 	 * Creates a DropdownButtonView instance.

@@ -13,7 +13,6 @@ import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
  * @memberOf ui.dropdown
  * @extends ui.View
  */
-
 export default class ListDropdownView extends DropdownView {
 	constructor( model ) {
 		super( model );

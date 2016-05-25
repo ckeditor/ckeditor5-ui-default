@@ -13,7 +13,6 @@ import View from '../view.js';
  * @memberOf ui.dropdown
  * @extends ui.View
  */
-
 export default class DropdownView extends View {
 	/**
 	 * Creates a DropdownView instance.

@@ -13,7 +13,6 @@ import View from '../view.js';
  * @memberOf ui.toolbar
  * @extends ui.View
  */
-
 export default class ToolbarView extends View {
 	constructor( model ) {
 		super( model );

@@ -20,7 +20,6 @@ import DropdownPanelView from './dropdownpanelview.js';
  * @memberOf ui.dropdown
  * @extends ui.Controller
  */
-
 export default class Dropdown extends Controller {
 	/**
 	 * Creates a Dropdown instance.

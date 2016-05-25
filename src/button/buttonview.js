@@ -15,7 +15,6 @@ import Model from '../model.js';
  * @memberOf ui.button
  * @extends ui.View
  */
-
 export default class ButtonView extends View {
 	constructor( model ) {
 		super( model );

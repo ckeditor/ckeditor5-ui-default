@@ -14,7 +14,6 @@ import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
  * @memberOf ui.dropdown
  * @extends ui.Controller
  */
-
 export default class DropdownPanel extends Controller {
 	/**
 	 * Creates a DropdownPanel instance.

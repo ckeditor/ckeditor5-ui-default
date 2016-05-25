@@ -13,7 +13,6 @@ import View from '../view.js';
  * @memberOf ui.list
  * @extends ui.View
  */
-
 export default class ListItemView extends View {
 	/**
 	 * Creates a ListItemView instance.

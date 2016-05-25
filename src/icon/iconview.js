@@ -13,7 +13,6 @@ import View from '/ckeditor5/ui/view.js';
  * @memberOf ui.icon
  * @extends ui.View
  */
-
 export default class IconView extends View {
 	constructor( model ) {
 		super( model );

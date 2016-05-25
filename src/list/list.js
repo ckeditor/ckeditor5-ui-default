@@ -16,7 +16,6 @@ import ListItemView from './listitemview.js';
  * @memberOf ui.list
  * @extends ui.Controller
  */
-
 export default class List extends Controller {
 	/**
 	 * Creates a List instance.

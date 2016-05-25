@@ -16,7 +16,6 @@ import ListView from '/ckeditor5/ui/list/listview.js';
  * @memberOf ui.dropdown.list
  * @extends ui.dropdown.Dropdown
  */
-
 export default class ListDropdown extends Dropdown {
 	constructor( model, view ) {
 		super( model, view );

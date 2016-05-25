@@ -13,7 +13,6 @@ import Controller from '../controller.js';
  * @memberOf ui.button
  * @extends ui.Controller
  */
-
 export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
