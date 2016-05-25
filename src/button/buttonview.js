@@ -67,7 +67,6 @@ export default class ButtonView extends View {
 
 	_setupIcon() {
 		const iconViewModel = new Model();
-
 		const iconView = new IconView( iconViewModel );
 
 		iconViewModel.bind( 'icon' ).to( this.model );
