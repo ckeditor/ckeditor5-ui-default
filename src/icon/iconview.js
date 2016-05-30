@@ -5,7 +5,7 @@
 
 'use strict';
 
-import View from '/ckeditor5/ui/view.js';
+import View from '../../ui/view.js';
 
 /**
  * The basic icon view class.

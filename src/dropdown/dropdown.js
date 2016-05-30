@@ -7,7 +7,7 @@
 
 import Controller from '../controller.js';
 import Button from '../button/button.js';
-import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
+import ControllerCollection from '../controllercollection.js';
 
 import DropdownButtonView from './dropdownbuttonview.js';
 
