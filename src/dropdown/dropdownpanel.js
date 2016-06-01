@@ -6,7 +6,7 @@
 'use strict';
 
 import Controller from '../controller.js';
-import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
+import ControllerCollection from '../controllercollection.js';
 
 /**
  * The basic dropdown panel controller class.

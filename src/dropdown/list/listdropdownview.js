@@ -5,7 +5,7 @@
 
 'use strict';
 
-import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
+import DropdownView from '../dropdownview.js';
 
 /**
  * The basic list dropdown view class.

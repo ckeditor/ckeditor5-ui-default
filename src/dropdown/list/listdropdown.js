@@ -7,8 +7,8 @@
 
 import Dropdown from '../dropdown.js';
 
-import List from '/ckeditor5/ui/list/list.js';
-import ListView from '/ckeditor5/ui/list/listview.js';
+import List from '../../list/list.js';
+import ListView from '../../list/listview.js';
 
 /**
  * The basic list dropdown controller class.
