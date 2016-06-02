@@ -8,6 +8,7 @@
 import View from '../view.js';
 import IconView from '../icon/iconview.js';
 import Model from '../model.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic button view class.
@@ -21,7 +22,7 @@ export default class ButtonView extends View {
 
 		const bind = this.attributeBinder;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'button',
 
 			attributes: {
@@ -51,7 +52,7 @@ export default class ButtonView extends View {
 					}
 				}
 			}
-		};
+		} );
 
 		this.register( 'children', el => el );
 	}

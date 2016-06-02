@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../../ui/view.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic icon view class.
@@ -19,7 +20,7 @@ export default class IconView extends View {
 
 		const bind = this.attributeBinder;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'svg',
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
@@ -40,6 +41,6 @@ export default class IconView extends View {
 					}
 				}
 			]
-		};
+		} );
 	}
 }

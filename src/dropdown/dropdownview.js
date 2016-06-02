@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic dropdown view class.
@@ -22,7 +23,7 @@ export default class DropdownView extends View {
 	constructor( model ) {
 		super( model );
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'div',
 
 			attributes: {
@@ -30,7 +31,7 @@ export default class DropdownView extends View {
 					'ck-dropdown'
 				]
 			}
-		};
+		} );
 
 		this.register( 'main', el => el );
 	}

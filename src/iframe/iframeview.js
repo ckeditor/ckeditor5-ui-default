@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic iframe view class.
@@ -23,7 +24,7 @@ export default class IframeView extends View {
 	constructor( model, locale ) {
 		super( model, locale );
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'iframe',
 			attributes: {
 				class: [ 'ck-reset-all' ],
@@ -34,7 +35,7 @@ export default class IframeView extends View {
 			on: {
 				load: 'loaded'
 			}
-		};
+		} );
 
 		/**
 		 * A promise returned by {@link init} since iframe loading may be asynchronous.

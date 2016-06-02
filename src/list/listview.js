@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic list view class.
@@ -20,7 +21,7 @@ export default class ListView extends View {
 	constructor() {
 		super();
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'ul',
 
 			attributes: {
@@ -29,7 +30,7 @@ export default class ListView extends View {
 					'ck-list'
 				]
 			}
-		};
+		} );
 
 		this.register( 'list', el => el );
 	}

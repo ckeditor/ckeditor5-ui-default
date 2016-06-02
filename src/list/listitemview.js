@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic list item view class.
@@ -24,7 +25,7 @@ export default class ListItemView extends View {
 
 		const bind = this.attributeBinder;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'li',
 
 			attributes: {
@@ -44,6 +45,6 @@ export default class ListItemView extends View {
 			on: {
 				click: 'click'
 			}
-		};
+		} );
 	}
 }
