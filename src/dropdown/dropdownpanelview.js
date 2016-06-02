@@ -23,8 +23,6 @@ export default class DropdownPanelView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
-
 		this.template = new Template( {
 			tag: 'div',
 
@@ -32,7 +30,7 @@ export default class DropdownPanelView extends View {
 				class: [
 					'ck-reset',
 					'ck-dropdown__panel',
-					bind.if( 'isOn', 'ck-dropdown__panel-active' )
+					this.bind.if( 'isOn', 'ck-dropdown__panel-active' )
 				]
 			}
 		} );

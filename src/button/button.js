@@ -17,7 +17,7 @@ export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.on( 'click', () => model.fire( 'execute' ) );
+		view.model.on( 'click', () => model.fire( 'execute' ) );
 	}
 }
 

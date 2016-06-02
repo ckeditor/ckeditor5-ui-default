@@ -16,7 +16,7 @@ describe( 'Button', () => {
 
 	beforeEach( () => {
 		model = new Model();
-		view = new View();
+		view = new View( new Model() );
 		button = new Button( model, view );
 	} );
 
@@ -26,7 +26,7 @@ describe( 'Button', () => {
 
 			model.on( 'execute', spy );
 
-			view.fire( 'click' );
+			view.model.fire( 'click' );
 
 			expect( spy.calledOnce ).to.be.true;
 		} );

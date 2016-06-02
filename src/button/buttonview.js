@@ -20,7 +20,7 @@ export default class ButtonView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
+		const bind = this.bind;
 
 		this.template = new Template( {
 			tag: 'button',
@@ -40,17 +40,17 @@ export default class ButtonView extends View {
 			],
 
 			on: {
-				mousedown: ( evt ) => {
+				mousedown: bind.to( evt => {
 					evt.preventDefault();
-				},
+				} ),
 
-				click: () => {
+				click: bind.to( () => {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
 					if ( model.isEnabled ) {
-						this.fire( 'click' );
+						this.model.fire( 'click' );
 					}
-				}
+				} )
 			}
 		} );
 

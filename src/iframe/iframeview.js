@@ -33,7 +33,7 @@ export default class IframeView extends View {
 				sandbox: 'allow-same-origin allow-scripts'
 			},
 			on: {
-				load: 'loaded'
+				load: this.bind.to( 'loaded' )
 			}
 		} );
 
@@ -59,7 +59,7 @@ export default class IframeView extends View {
 			this._iframeDeferred = { resolve, reject };
 		} );
 
-		this.on( 'loaded', () => {
+		this.model.on( 'loaded', () => {
 			this._iframeDeferred.resolve();
 		} );
 	}

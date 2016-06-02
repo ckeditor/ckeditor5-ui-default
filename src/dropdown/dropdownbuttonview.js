@@ -6,6 +6,7 @@
 'use strict';
 
 import ButtonView from '../button/buttonview.js';
+import Template from '/ckeditor5/ui/template.js';
 
 /**
  * The basic dropdown button view class.
@@ -22,6 +23,10 @@ export default class DropdownButtonView extends ButtonView {
 	constructor( model ) {
 		super( model );
 
-		this.template.attributes.class.push( 'ck-dropdown__button' );
+		Template.extend( this.template, {
+			attributes: {
+				class: 'ck-dropdown__button'
+			}
+		} );
 	}
 }

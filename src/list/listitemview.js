@@ -23,7 +23,7 @@ export default class ListItemView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
+		const bind = this.bind;
 
 		this.template = new Template( {
 			tag: 'li',
@@ -43,7 +43,7 @@ export default class ListItemView extends View {
 			],
 
 			on: {
-				click: 'click'
+				click: bind.to( 'click' )
 			}
 		} );
 	}
