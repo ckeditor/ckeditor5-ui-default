@@ -42,6 +42,10 @@ export default class ListItemView extends View {
 			],
 
 			on: {
+				mousedown: ( evt ) => {
+					evt.preventDefault();
+				},
+
 				click: 'click'
 			}
 		};
