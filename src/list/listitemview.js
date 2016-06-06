@@ -30,7 +30,8 @@ export default class ListItemView extends View {
 			attributes: {
 				class: [
 					'ck-reset',
-					'ck-list__item'
+					'ck-list__item',
+					bind.if( 'selected', 'ck-list__item_selected' )
 				],
 				style: bind.to( 'style' )
 			},

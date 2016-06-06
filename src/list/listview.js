@@ -17,8 +17,8 @@ export default class ListView extends View {
 	/**
 	 * Creates a ListView instance.
 	 */
-	constructor() {
-		super();
+	constructor( model ) {
+		super( model );
 
 		this.template = {
 			tag: 'ul',

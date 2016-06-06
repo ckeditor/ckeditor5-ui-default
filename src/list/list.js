@@ -43,9 +43,71 @@ export default class List extends Controller {
 		// Synchronize removal from model#items collection with "list" controller collection.
 		this.model.items.on( 'remove', ( evt, itemModel ) => {
 			this._removeListItem( itemModel );
+
+			if ( !this.model.items.length ) {
+				this.model.current = null;
+			}
+		} );
+
+		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
+			if ( value ) {
+				this.select( 0 );
+			}
 		} );
 
 		return super.init();
+	}
+
+	/**
+	 * TODO
+	 */
+	select( index ) {
+		if ( this.model.current !== null ) {
+			this.current.selected = false;
+		}
+
+		this.model.current = index;
+		this.model.items.get( index ).selected = true;
+	}
+
+	/**
+	 * TODO
+	 */
+	selectNext() {
+		if ( this.model.current === null ) {
+			this.select( 0 );
+		} else {
+			let nextIndex = this.model.current + 1;
+
+			// Cycle.
+			if ( nextIndex > this.model.items.length - 1 ) {
+				nextIndex = 0;
+			}
+
+			this.select( nextIndex );
+		}
+	}
+
+	/**
+	 * TODO
+	 */
+	selectPrevious() {
+		if ( this.model.current === null ) {
+			this.select( this.model.items.length - 1 );
+		} else {
+			let nextIndex = this.model.current - 1;
+
+			// Cycle.
+			if ( nextIndex == -1 ) {
+				nextIndex = this.model.items.length - 1;
+			}
+
+			this.select( nextIndex );
+		}
+	}
+
+	get current() {
+		return this.model.items.get( this.model.current );
 	}
 
 	/**
