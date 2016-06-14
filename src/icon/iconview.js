@@ -6,7 +6,7 @@
 'use strict';
 
 import View from '../../ui/view.js';
-import Template from '/ckeditor5/ui/template.js';
+import Template from '../template.js';
 
 /**
  * The basic icon view class.

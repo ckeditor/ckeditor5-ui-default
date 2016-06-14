@@ -6,7 +6,7 @@
 'use strict';
 
 import ButtonView from '../button/buttonview.js';
-import Template from '/ckeditor5/ui/template.js';
+import Template from '../template.js';
 
 /**
  * The basic dropdown button view class.

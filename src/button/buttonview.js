@@ -8,7 +8,7 @@
 import View from '../view.js';
 import IconView from '../icon/iconview.js';
 import Model from '../model.js';
-import Template from '/ckeditor5/ui/template.js';
+import Template from '../template.js';
 
 /**
  * The basic button view class.
