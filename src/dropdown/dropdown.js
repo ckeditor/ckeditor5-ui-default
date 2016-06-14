@@ -87,7 +87,7 @@ export default class Dropdown extends Controller {
 
 /**
  * Fired when the {@link ui.dropdown.Dropdown#button} is clicked.
- * See {@link ui.button.ButtonModel#execute].
+ * See {@link ui.button.ButtonModel#execute}.
  *
  * @event ui.dropdown.DropdownModel#execute
  */
