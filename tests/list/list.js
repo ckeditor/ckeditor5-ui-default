@@ -47,8 +47,8 @@ describe( 'List', () => {
 		it( 'fills the "list" collection with model#items', () => {
 			const listCollection = list.collections.get( 'list' );
 
-			list.init();
 			items.add( itemFoo );
+			list.init();
 			items.add( itemBar );
 
 			expect( listCollection ).to.have.length( 2 );
@@ -59,8 +59,8 @@ describe( 'List', () => {
 		it( 'binds the "list" collection to model#items', () => {
 			const listCollection = list.collections.get( 'list' );
 
-			list.init();
 			items.add( itemFoo );
+			list.init();
 			items.add( itemBar );
 
 			const removed = items.remove( 1 );
