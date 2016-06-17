@@ -18,13 +18,15 @@ export default class IconView extends View {
 	constructor( model ) {
 		super( model );
 
+		const bind = this.bind;
+
 		this.template = new Template( {
 			tag: 'svg',
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
 				class: [
 					'ck-icon',
-					this.bind.to( 'align', a => a ? `ck-icon-${ a.toLowerCase() }` : '' )
+					bind.to( 'align', a => a ? `ck-icon-${ a.toLowerCase() }` : '' )
 				]
 			},
 			children: [
@@ -34,7 +36,7 @@ export default class IconView extends View {
 					attributes: {
 						href: {
 							ns: 'http://www.w3.org/1999/xlink',
-							value: this.bind.to( 'icon', i => `#ck-icon-${ i }` )
+							value: bind.to( 'icon', i => `#ck-icon-${ i }` )
 						}
 					}
 				}

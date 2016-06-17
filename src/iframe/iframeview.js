@@ -24,6 +24,8 @@ export default class IframeView extends View {
 	constructor( model, locale ) {
 		super( model, locale );
 
+		const bind = this.bind;
+
 		this.template = new Template( {
 			tag: 'iframe',
 			attributes: {
@@ -33,7 +35,7 @@ export default class IframeView extends View {
 				sandbox: 'allow-same-origin allow-scripts'
 			},
 			on: {
-				load: this.bind.to( 'loaded' )
+				load: bind.to( 'loaded' )
 			}
 		} );
 

@@ -18,12 +18,14 @@ export default class StickyToolbarView extends ToolbarView {
 	constructor( model ) {
 		super( model );
 
+		const bind = this.bind;
+
 		this.model.set( 'isSticky', false );
 
 		Template.extend( this.template, {
 			attributes: {
 				// Toggle class of the toolbar when "sticky" state changes in the model.
-				class: this.bind.if( 'isSticky', 'ck-toolbar_sticky' )
+				class: bind.if( 'isSticky', 'ck-toolbar_sticky' )
 			}
 		} );
 	}
