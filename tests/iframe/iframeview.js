@@ -56,7 +56,7 @@ describe( 'IframeView', () => {
 		it( 'is fired when frame finished loading', ( done ) => {
 			view = new IframeView( model );
 
-			view.on( 'loaded', () => {
+			view.model.on( 'loaded', () => {
 				done();
 			} );
 

@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '../template.js';
 
 /**
  * The basic toolbar view class.
@@ -17,12 +18,12 @@ export default class ToolbarView extends View {
 	constructor( model ) {
 		super( model );
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'div',
 			attributes: {
 				class: [ 'ck-reset ck-toolbar' ]
 			}
-		};
+		} );
 
 		this.register( 'buttons', el => el );
 	}

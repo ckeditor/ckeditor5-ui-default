@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '../template.js';
 
 /**
  * The basic dropdown panel view class.
@@ -22,9 +23,9 @@ export default class DropdownPanelView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
+		const bind = this.bind;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'div',
 
 			attributes: {
@@ -34,7 +35,7 @@ export default class DropdownPanelView extends View {
 					bind.if( 'isOn', 'ck-dropdown__panel-active' )
 				]
 			}
-		};
+		} );
 
 		this.register( 'content', el => el );
 	}

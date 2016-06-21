@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../../ui/view.js';
+import Template from '../template.js';
 
 /**
  * The basic icon view class.
@@ -17,9 +18,9 @@ export default class IconView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
+		const bind = this.bind;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'svg',
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
@@ -40,6 +41,6 @@ export default class IconView extends View {
 					}
 				}
 			]
-		};
+		} );
 	}
 }

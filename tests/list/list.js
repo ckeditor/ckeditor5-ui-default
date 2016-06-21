@@ -10,6 +10,7 @@
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
 
 import List from '/ckeditor5/ui/list/list.js';
+import ListView from '/ckeditor5/ui/list/listview.js';
 import ListItemView from '/ckeditor5/ui/list/listitemview.js';
 
 import Collection from '/ckeditor5/utils/collection.js';
@@ -27,14 +28,12 @@ describe( 'List', () => {
 		itemBar = new Model( { label: 'bar' } );
 
 		items = new Collection( { idProperty: 'label' } );
-		items.add( itemFoo );
-		items.add( itemBar );
 
 		model = new Model( {
 			items: items
 		} );
 
-		list = new List( model );
+		list = new List( model, new ListView() );
 	} );
 
 	describe( 'constructor', () => {
@@ -48,7 +47,9 @@ describe( 'List', () => {
 		it( 'fills the "list" collection with model#items', () => {
 			const listCollection = list.collections.get( 'list' );
 
+			items.add( itemFoo );
 			list.init();
+			items.add( itemBar );
 
 			expect( listCollection ).to.have.length( 2 );
 			expect( listCollection.get( 0 ).model ).to.equal( itemFoo );
@@ -58,7 +59,9 @@ describe( 'List', () => {
 		it( 'binds the "list" collection to model#items', () => {
 			const listCollection = list.collections.get( 'list' );
 
+			items.add( itemFoo );
 			list.init();
+			items.add( itemBar );
 
 			const removed = items.remove( 1 );
 
@@ -91,16 +94,19 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).view ).to.be.instanceof( ListItemView );
 		} );
 
-		it( 'creates a bridge between "click" on item view and model#execute', ( done ) => {
-			list.init();
-
+		it( 'creates a bridge between "click" on item model and model#execute', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
 				expect( itemModel.label ).to.equal( 'foo' );
 
 				done();
 			} );
 
-			list.collections.get( 'list' ).get( 0 ).view.fire( 'click' );
+			return list.init().then( () => {
+				items.add( itemFoo );
+				items.add( itemBar );
+
+				itemFoo.fire( 'click' );
+			} );
 		} );
 	} );
 
@@ -121,24 +127,31 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
 		} );
 
-		it( 'deactivates a bridge between "click" on item view and model#execute', ( done ) => {
-			const listCollection = list.collections.get( 'list' );
-
-			list.init();
+		it( 'deactivates a bridge between "click" on item model and model#execute', () => {
+			const clicked = {
+				foo: 0,
+				bar: 0
+			};
 
 			model.on( 'execute', ( evt, itemModel ) => {
-				expect( itemModel.label ).to.equal( 'bar' );
-
-				done();
+				clicked[ itemModel.label ]++;
 			} );
 
-			const itemFooView = listCollection.get( 'foo' ).view;
-			const itemBarView = listCollection.get( 'bar' ).view;
+			return list.init().then( () => {
+				items.add( itemFoo );
+				items.add( itemBar );
 
-			items.remove( itemFoo );
+				itemFoo.fire( 'click' );
+				itemBar.fire( 'click' );
 
-			itemFooView.fire( 'click' );
-			itemBarView.fire( 'click' );
+				items.remove( itemFoo );
+
+				itemFoo.fire( 'click' );
+				itemBar.fire( 'click' );
+
+				expect( clicked.foo ).to.equal( 1 );
+				expect( clicked.bar ).to.equal( 2 );
+			} );
 		} );
 	} );
 } );

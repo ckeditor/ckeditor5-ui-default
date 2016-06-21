@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '../template.js';
 
 /**
  * The basic list item view class.
@@ -22,9 +23,9 @@ export default class ListItemView extends View {
 	constructor( model ) {
 		super( model );
 
-		const bind = this.attributeBinder;
+		const bind = this.bind;
 
-		this.template = {
+		this.template = new Template( {
 			tag: 'li',
 
 			attributes: {
@@ -42,8 +43,8 @@ export default class ListItemView extends View {
 			],
 
 			on: {
-				click: 'click'
+				click: bind.to( 'click' )
 			}
-		};
+		} );
 	}
 }

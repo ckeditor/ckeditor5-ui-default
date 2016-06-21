@@ -6,6 +6,7 @@
 'use strict';
 
 import View from '../view.js';
+import Template from '../template.js';
 
 /**
  * The basic iframe view class.
@@ -23,7 +24,9 @@ export default class IframeView extends View {
 	constructor( model, locale ) {
 		super( model, locale );
 
-		this.template = {
+		const bind = this.bind;
+
+		this.template = new Template( {
 			tag: 'iframe',
 			attributes: {
 				class: [ 'ck-reset-all' ],
@@ -32,9 +35,9 @@ export default class IframeView extends View {
 				sandbox: 'allow-same-origin allow-scripts'
 			},
 			on: {
-				load: 'loaded'
+				load: bind.to( 'loaded' )
 			}
-		};
+		} );
 
 		/**
 		 * A promise returned by {@link init} since iframe loading may be asynchronous.
@@ -58,7 +61,7 @@ export default class IframeView extends View {
 			this._iframeDeferred = { resolve, reject };
 		} );
 
-		this.on( 'loaded', () => {
+		this.model.on( 'loaded', () => {
 			this._iframeDeferred.resolve();
 		} );
 	}
