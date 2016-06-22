@@ -24,8 +24,8 @@ describe( 'List', () => {
 	let model, list, items, itemFoo, itemBar;
 
 	beforeEach( () => {
-		itemFoo = new Model( { label: 'foo' } );
-		itemBar = new Model( { label: 'bar' } );
+		itemFoo = new Model( { label: 'foo', style: 'foostyle' } );
+		itemBar = new Model( { label: 'bar', style: 'barstyle' } );
 
 		items = new Collection( { idProperty: 'label' } );
 
@@ -84,8 +84,8 @@ describe( 'List', () => {
 		it( 'adds a new controller to "list" collection', () => {
 			const listCollection = list.collections.get( 'list' );
 
-			list._addListItem( new Model( { label: 'baz' } ) );
-			list._addListItem( new Model( { label: 'qux' } ), 0 );
+			list._addListItem( new Model( { label: 'baz', style: 'bazstyle' } ) );
+			list._addListItem( new Model( { label: 'qux', style: 'quxstyle' } ), 0 );
 
 			expect( listCollection ).to.have.length( 2 );
 			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
@@ -113,8 +113,8 @@ describe( 'List', () => {
 	describe( '_removeListItem', () => {
 		it( 'removes a controller from "list" collection', () => {
 			const listCollection = list.collections.get( 'list' );
-			const itemBaz = new Model( { label: 'baz' } );
-			const itemQux = new Model( { label: 'qux' } );
+			const itemBaz = new Model( { label: 'baz', style: 'bazstyle' } );
+			const itemQux = new Model( { label: 'qux', style: 'quxstyle' } );
 
 			list._addListItem( itemBaz );
 			list._addListItem( itemQux );

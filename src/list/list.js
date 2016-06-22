@@ -8,6 +8,7 @@
 import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
+import ListItem from './listitem.js';
 import ListItemView from './listitemview.js';
 
 /**
@@ -57,8 +58,7 @@ export default class List extends Controller {
 	 * @param {Number} index
 	 */
 	_addListItem( itemModel, index ) {
-		const itemView = new ListItemView( itemModel );
-		const listItemController = new Controller( itemModel, itemView );
+		const listItemController = new ListItem( itemModel, new ListItemView() );
 
 		// Save model#label in controller instance so it can be later
 		// retrieved from "list" collection easily by that model.
