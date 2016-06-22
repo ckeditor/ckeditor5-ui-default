@@ -36,7 +36,7 @@ export default class IconView extends View {
 					attributes: {
 						href: {
 							ns: 'http://www.w3.org/1999/xlink',
-							value: bind.to( 'icon', i => `#ck-icon-${ i }` )
+							value: bind.to( 'name', i => `#ck-icon-${ i }` )
 						}
 					}
 				}

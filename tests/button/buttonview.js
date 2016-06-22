@@ -8,6 +8,7 @@
 'use strict';
 
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
+import Button from '/ckeditor5/ui/button/button.js';
 import ButtonView from '/ckeditor5/ui/button/buttonview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -23,30 +24,14 @@ describe( 'ButtonView', () => {
 			isOn: false
 		} );
 
-		view = new ButtonView( model );
+		view = new ButtonView();
 
-		return view.init();
+		return new Button( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
 		it( 'registers "children" region', () => {
 			expect( view.regions.get( 0 ).name ).to.be.equal( 'children' );
-		} );
-
-		it( 'calls _setupIcon when "icon" in model', () => {
-			const spy = testUtils.sinon.spy( ButtonView.prototype, '_setupIcon' );
-
-			new ButtonView( model ).init();
-			expect( spy.calledOnce ).to.be.false;
-
-			model.set( {
-				icon: 'foo',
-				iconAlign: 'LEFT'
-			} );
-
-			new ButtonView( model ).init();
-
-			expect( spy.calledOnce ).to.be.true;
 		} );
 	} );
 
@@ -95,7 +80,7 @@ describe( 'ButtonView', () => {
 			it( 'triggers click event if button is not disabled', () => {
 				const spy = sinon.spy();
 
-				model.on( 'click', spy );
+				view.model.on( 'click', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.callCount ).to.equal( 1 );
@@ -115,11 +100,12 @@ describe( 'ButtonView', () => {
 				iconAlign: 'LEFT'
 			} );
 
-			view = new ButtonView( model );
-			view.init();
+			view = new ButtonView();
 
-			expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
-			expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
+			return new Button( model, view ).init().then( () => {
+				expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
+				expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
+			} );
 		} );
 	} );
 } );

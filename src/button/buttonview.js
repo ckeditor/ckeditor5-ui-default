@@ -6,8 +6,6 @@
 'use strict';
 
 import View from '../view.js';
-import IconView from '../icon/iconview.js';
-import Model from '../model.js';
 import Template from '../template.js';
 
 /**
@@ -17,8 +15,8 @@ import Template from '../template.js';
  * @extends ui.View
  */
 export default class ButtonView extends View {
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
@@ -47,7 +45,7 @@ export default class ButtonView extends View {
 				click: bind.to( () => {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
-					if ( model.isEnabled ) {
+					if ( this.model.isEnabled ) {
 						this.model.fire( 'click' );
 					}
 				} )
@@ -55,24 +53,6 @@ export default class ButtonView extends View {
 		} );
 
 		this.register( 'children', el => el );
-	}
-
-	init() {
-		if ( this.model.icon ) {
-			this._setupIcon();
-		}
-
-		return super.init();
-	}
-
-	_setupIcon() {
-		const iconViewModel = new Model();
-		const iconView = new IconView( iconViewModel );
-
-		iconViewModel.bind( 'icon' ).to( this.model );
-		iconViewModel.bind( 'align' ).to( this.model, 'iconAlign' );
-
-		this.element.insertBefore( iconView.element, this.element.firstChild );
 	}
 }
 
