@@ -14,8 +14,10 @@ import DropdownView from '../dropdownview.js';
  * @extends ui.View
  */
 export default class ListDropdownView extends DropdownView {
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
+
+		let isDomListenerActive = false;
 
 		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
 			if ( value ) {
@@ -23,12 +25,31 @@ export default class ListDropdownView extends DropdownView {
 				// to focusmanager of some sort.
 				this.listenTo( document, 'click', ( evtInfo, { target: domEvtTarget } ) => {
 					if ( this.element != domEvtTarget && !this.element.contains( domEvtTarget ) ) {
-						this.model.isOn = false;
+						this.model.fire( 'close' );
 					}
 				} );
+
+				isDomListenerActive = true;
 			} else {
-				this.stopListening( document );
+				if ( isDomListenerActive ) {
+					this.stopListening( document );
+
+					isDomListenerActive = false;
+				}
 			}
 		} );
 	}
 }
+
+/**
+ * The ListDropdownView model interface.
+ *
+ * @memberOf ui.dropdown.list
+ * @interface ui.dropdown.list.ListDropdownViewModel
+ */
+
+/**
+ * Fired when component is to be closed because of user action in DOM.
+ *
+ * @event ui.dropdown.ListDropdownViewModel#close
+ */

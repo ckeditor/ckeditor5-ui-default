@@ -21,6 +21,8 @@ export default class DropdownPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
+		view.model.bind( 'isOn' ).to( model );
+
 		this.collections.add( new ControllerCollection( 'content' ) );
 	}
 }

@@ -38,7 +38,7 @@ export default class Dropdown extends Controller {
 		 * @readonly
 		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
 		 */
-		this.button = new Button( model, new DropdownButtonView( model ) );
+		this.button = new Button( model, new DropdownButtonView() );
 
 		/**
 		 * Panel of this Dropdown.
@@ -46,7 +46,7 @@ export default class Dropdown extends Controller {
 		 * @readonly
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
 		 */
-		this.panel = new DropdownPanel( model, new DropdownPanelView( model ) );
+		this.panel = new DropdownPanel( model, new DropdownPanelView() );
 
 		// Execute event comes from the button.
 		this.listenTo( model, 'execute', () => {

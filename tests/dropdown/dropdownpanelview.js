@@ -7,6 +7,7 @@
 
 'use strict';
 
+import DropdownPanel from '/ckeditor5/ui/dropdown/dropdownpanel.js';
 import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -18,7 +19,9 @@ describe( 'DropdownPanelView', () => {
 			isOn: false
 		} );
 
-		view = new DropdownPanelView( model );
+		view = new DropdownPanelView();
+
+		return new DropdownPanel( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {

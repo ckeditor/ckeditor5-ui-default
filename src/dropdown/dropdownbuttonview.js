@@ -17,11 +17,9 @@ import Template from '../template.js';
 export default class DropdownButtonView extends ButtonView {
 	/**
 	 * Creates a DropdownButtonView instance.
-	 *
-	 * @param {utils.Observable} model
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		Template.extend( this.template, {
 			attributes: {

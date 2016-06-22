@@ -20,6 +20,8 @@ export default class ListDropdown extends Dropdown {
 	constructor( model, view ) {
 		super( model, view );
 
+		view.model.bind( 'isOn' ).to( model );
+
 		const content = this.model.content;
 
 		// Collapse the dropdown when an item in the panel is clicked.
@@ -27,7 +29,12 @@ export default class ListDropdown extends Dropdown {
 			this.model.isOn = false;
 		} );
 
-		this.panel.add( 'content', new List( content, new ListView( content ) ) );
+		// Collapse the dropdown when the webpage outside of the component is clicked.
+		this.listenTo( view.model, 'close', () => {
+			this.model.isOn = false;
+		} );
+
+		this.panel.add( 'content', new List( content, new ListView() ) );
 	}
 }
 

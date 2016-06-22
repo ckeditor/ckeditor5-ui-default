@@ -9,12 +9,13 @@
 
 import Model from '/ckeditor5/ui/model.js';
 import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
+import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
 
 import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
 
 describe( 'ListDropdown', () => {
-	let model, content, dropdown;
+	let model, content, view, dropdown;
 
 	beforeEach( () => {
 		content = new Model();
@@ -22,13 +23,19 @@ describe( 'ListDropdown', () => {
 		model = new Model( {
 			isEnabled: true,
 			isOn: false,
-			content: content
+			content: content,
+			label: 'foo'
 		} );
 
-		dropdown = new ListDropdown( model );
+		view = new ListDropdownView();
+		dropdown = new ListDropdown( model, view );
 	} );
 
 	describe( 'constructor', () => {
+		it( 'binds view#model attributes to the Button#model', () => {
+			expect( view.model.isOn ).to.equal( model.isOn );
+		} );
+
 		it( 'adds a list to the panel', () => {
 			const contentCollection = dropdown.panel.collections.get( 'content' );
 
@@ -36,9 +43,7 @@ describe( 'ListDropdown', () => {
 
 			expect( contentCollection.get( 0 ) ).to.be.instanceof( List );
 			expect( contentCollection.get( 0 ).view ).to.be.instanceof( ListView );
-
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
-			expect( contentCollection.get( 0 ).view.model ).to.be.undefined;
 		} );
 
 		it( 'attaches listener on model.content#execute and changes model#isOn', () => {

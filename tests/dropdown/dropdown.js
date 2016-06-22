@@ -22,7 +22,8 @@ describe( 'Dropdown', () => {
 	beforeEach( () => {
 		model = new Model( {
 			isEnabled: true,
-			isOn: false
+			isOn: false,
+			label: 'foo'
 		} );
 		dropdown = new Dropdown( model );
 	} );

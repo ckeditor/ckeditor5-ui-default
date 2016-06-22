@@ -7,21 +7,29 @@
 
 'use strict';
 
+import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
 import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
 import Model from '/ckeditor5/ui/model.js';
+import Collection from '/ckeditor5/utils/collection.js';
 
 describe( 'ListDropdownView', () => {
 	let model, view;
 
 	beforeEach( () => {
 		model = new Model( {
-			isOn: false
+			isEnabled: true,
+			isOn: false,
+			content: new Model( {
+				items: new Collection()
+			} ),
+			label: 'foo'
 		} );
 
-		view = new ListDropdownView( model );
-		view.init();
+		view = new ListDropdownView();
 
-		document.body.appendChild( view.element );
+		return new ListDropdown( model, view ).init().then( () => {
+			document.body.appendChild( view.element );
+		} );
 	} );
 
 	describe( 'constructor', () => {

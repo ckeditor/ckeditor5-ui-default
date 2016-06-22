@@ -17,11 +17,9 @@ import Template from '../template.js';
 export default class DropdownPanelView extends View {
 	/**
 	 * Creates a DropdownPanelView instance.
-	 *
-	 * @param {utils.Observable} model
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
