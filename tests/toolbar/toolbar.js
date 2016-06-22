@@ -7,19 +7,31 @@
 
 'use strict';
 
+import Model from '/ckeditor5/ui/model.js';
 import Toolbar from '/ckeditor5/ui/toolbar/toolbar.js';
+import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
 import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
 
 describe( 'Toolbar', () => {
-	let toolbar;
+	let toolbar, view, model;
 
 	beforeEach( () => {
-		toolbar = new Toolbar();
+		model = new Model( {
+			isActive: false
+		} );
+
+		view = new ToolbarView();
+
+		toolbar = new Toolbar( model, view );
 	} );
 
 	describe( 'constructor', () => {
 		it( 'creates buttons collection', () => {
 			expect( toolbar.collections.get( 'buttons' ) ).to.be.instanceof( ControllerCollection );
+		} );
+
+		it( 'binds view#model attributes to the Toolbar#model', () => {
+			expect( view.model.isActive ).to.equal( model.isActive );
 		} );
 	} );
 } );

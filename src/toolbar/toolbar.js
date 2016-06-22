@@ -18,6 +18,8 @@ export default class Toolbar extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
+		view.model.bind( 'isActive' ).to( model );
+
 		this.collections.add( new ControllerCollection( 'buttons' ) );
 	}
 }

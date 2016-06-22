@@ -15,8 +15,8 @@ import ToolbarView from '../toolbar/toolbarview.js';
  * @extends ui.toolbar.ToolbarView
  */
 export default class StickyToolbarView extends ToolbarView {
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
