@@ -17,7 +17,11 @@ export default class ListItem extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'style', 'label' ).to( model );
+		view.model.bind( 'label' ).to( model );
+
+		if ( model.style ) {
+			view.model.bind( 'style' ).to( model );
+		}
 	}
 }
 
@@ -35,7 +39,7 @@ export default class ListItem extends Controller {
  */
 
 /**
- * The DOM style attribute of the item.
+ * The optional DOM style attribute of the item.
  *
  * @member {String} ui.list.ListItemModel#style
  */
