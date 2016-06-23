@@ -56,6 +56,7 @@ describe( 'ButtonView', () => {
 				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true( 'ck-button' );
 				expect( view.element.classList.contains( 'ck-enabled' ) ).to.be.true( 'ck-enabled' );
 				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true( 'ck-off' );
+				expect( view.element.classList.contains( 'ck-button-notext' ) ).to.be.false;
 			} );
 
 			it( 'reacts on model.isEnabled', () => {
@@ -68,6 +69,12 @@ describe( 'ButtonView', () => {
 				model.isOn = true;
 
 				expect( view.element.classList.contains( 'ck-on' ) ).to.be.true( 'ck-on' );
+			} );
+
+			it( 'reacts on model.noText', () => {
+				model.noText = true;
+
+				expect( view.element.classList.contains( 'ck-button-notext' ) ).to.be.true;
 			} );
 		} );
 

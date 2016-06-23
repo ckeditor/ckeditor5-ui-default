@@ -22,6 +22,9 @@ export default class ButtonView extends View {
 
 		const bind = this.bind;
 
+		// Set default value for `noText` property.
+		model.set( 'noText', !!model.noText );
+
 		this.template = new Template( {
 			tag: 'button',
 
@@ -29,13 +32,24 @@ export default class ButtonView extends View {
 				class: [
 					'ck-button',
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
-					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' )
+					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
+					bind.if( 'noText', 'ck-button-notext' )
 				]
 			},
 
 			children: [
 				{
-					text: bind.to( 'label' )
+					tag: 'span',
+
+					attributes: {
+						class: [ 'ck-button__label' ]
+					},
+
+					children: [
+						{
+							text: bind.to( 'label' )
+						}
+					]
 				}
 			],
 
