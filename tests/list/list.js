@@ -94,7 +94,7 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).view ).to.be.instanceof( ListItemView );
 		} );
 
-		it( 'creates a bridge between "click" on item model and model#execute', ( done ) => {
+		it( 'creates a bridge between itemModel#execute and model#execute events', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
 				expect( itemModel.label ).to.equal( 'foo' );
 
@@ -105,7 +105,7 @@ describe( 'List', () => {
 				items.add( itemFoo );
 				items.add( itemBar );
 
-				itemFoo.fire( 'click' );
+				itemFoo.fire( 'execute' );
 			} );
 		} );
 	} );
@@ -127,7 +127,7 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
 		} );
 
-		it( 'deactivates a bridge between "click" on item model and model#execute', () => {
+		it( 'deactivates a bridge between itemModel#execute and model#execute events', () => {
 			const clicked = {
 				foo: 0,
 				bar: 0
@@ -141,13 +141,13 @@ describe( 'List', () => {
 				items.add( itemFoo );
 				items.add( itemBar );
 
-				itemFoo.fire( 'click' );
-				itemBar.fire( 'click' );
+				itemFoo.fire( 'execute' );
+				itemBar.fire( 'execute' );
 
 				items.remove( itemFoo );
 
-				itemFoo.fire( 'click' );
-				itemBar.fire( 'click' );
+				itemFoo.fire( 'execute' );
+				itemBar.fire( 'execute' );
 
 				expect( clicked.foo ).to.equal( 1 );
 				expect( clicked.bar ).to.equal( 2 );

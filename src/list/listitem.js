@@ -22,6 +22,8 @@ export default class ListItem extends Controller {
 		if ( model.style ) {
 			view.model.bind( 'style' ).to( model );
 		}
+
+		view.model.on( 'click', () => model.fire( 'execute' ) );
 	}
 }
 

@@ -64,7 +64,8 @@ export default class List extends Controller {
 		// retrieved from "list" collection easily by that model.
 		listItemController.id = itemModel.label;
 
-		this.listenTo( itemModel, 'click', () => {
+		// TODO: Some event delegation?
+		this.listenTo( itemModel, 'execute', () => {
 			this.model.fire( 'execute', itemModel );
 		} );
 
@@ -79,7 +80,7 @@ export default class List extends Controller {
 	 * @param {utils.Observable} itemModel
 	 */
 	_removeListItem( itemModel ) {
-		this.stopListening( itemModel, 'click' );
+		this.stopListening( itemModel, 'execute' );
 
 		this.remove( 'list', itemModel.label );
 	}
