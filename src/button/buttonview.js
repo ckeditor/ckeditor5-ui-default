@@ -68,7 +68,7 @@ export default class ButtonView extends View {
 }
 
 /**
- * The basic ButtonView {@link ui.Model} interface.
+ * The ButtonView {@link ui.Model} interface.
  *
  * @memberOf ui.button
  * @interface ui.button.ButtonViewModel
@@ -81,14 +81,14 @@ export default class ButtonView extends View {
  */
 
 /**
- * Determines whether the ButtonView is "on", e.g. some feature which it represents
+ * Controls whether the ButtonView is "on", e.g. some feature which it represents
  * is currently enabled.
  *
  * @member {Boolean} ui.button.ButtonViewModel#isOn
  */
 
 /**
- * Determines whether the ButtonView is enabled (can be clicked).
+ * Controls whether the ButtonView is enabled (can be clicked).
  *
  * @member {Boolean} ui.button.ButtonViewModel#isEnabled
  */

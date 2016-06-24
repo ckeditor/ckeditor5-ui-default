@@ -12,7 +12,7 @@ import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
 
 /**
- * The basic Button controller class.
+ * The Button controller class.
  *
  *		const model = new Model( {
  *			label: 'Bold',
@@ -67,7 +67,7 @@ export default class Button extends Controller {
 }
 
 /**
- * The basic Button component {@link ui.Model} interface.
+ * The Button component {@link ui.Model} interface.
  *
  * @memberOf ui.button
  * @interface ui.button.ButtonModel
