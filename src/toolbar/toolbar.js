@@ -9,16 +9,24 @@ import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
 /**
- * The basic toolbar controller class.
+ * The Toolbar controller class.
+ *
+ *		// An instance of Toolbar.
+ *		new Toolbar( new ToolbarView() );
+ *
+ * See {@link ui.toolbar.ToolbarView}.
  *
  * @memberOf ui.toolbar
  * @extends ui.Controller
  */
 export default class Toolbar extends Controller {
-	constructor( model, view ) {
-		super( model, view );
-
-		view.model.bind( 'isActive' ).to( model );
+	/**
+	 * Creates an instance of {@link ui.toolbar.Toolbar} class.
+	 *
+	 * @param {ui.View} view View of this Toolbar.
+	 */
+	constructor( view ) {
+		super( null, view );
 
 		this.collections.add( new ControllerCollection( 'buttons' ) );
 	}
