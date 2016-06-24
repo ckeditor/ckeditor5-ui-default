@@ -8,8 +8,8 @@
 'use strict';
 
 import Model from '/ckeditor5/ui/model.js';
-import StickyToolbar from '/ckeditor5/ui/toolbar/toolbar.js';
-import StickyToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
+import StickyToolbar from '/ckeditor5/ui/stickytoolbar/stickytoolbar.js';
+import StickyToolbarView from '/ckeditor5/ui/stickytoolbar/stickytoolbarview.js';
 
 describe( 'StickyToolbar', () => {
 	let toolbar, view, model;

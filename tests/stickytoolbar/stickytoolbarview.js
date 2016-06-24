@@ -8,7 +8,7 @@
 'use strict';
 
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
-import Toolbar from '/ckeditor5/ui/toolbar/toolbar.js';
+import StickyToolbar from '/ckeditor5/ui/stickytoolbar/stickytoolbar.js';
 import StickyToolbarView from '/ckeditor5/ui/stickytoolbar/stickytoolbarview.js';
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
 import Model from '/ckeditor5/ui/model.js';
@@ -26,7 +26,7 @@ describe( 'StickyToolbarView', () => {
 		view = new StickyToolbarView();
 		document.body.appendChild( view.element );
 
-		return new Toolbar( model, view ).init();
+		return new StickyToolbar( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
