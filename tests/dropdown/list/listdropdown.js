@@ -32,7 +32,7 @@ describe( 'ListDropdown', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the Button#model', () => {
+		it( 'binds view#model attributes to the ListDropdown#model', () => {
 			expect( view.model.isOn ).to.equal( model.isOn );
 		} );
 

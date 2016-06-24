@@ -13,7 +13,7 @@ describe( 'DropdownButtonView', () => {
 	let view;
 
 	beforeEach( () => {
-		view = new DropdownButtonView( null );
+		view = new DropdownButtonView();
 	} );
 
 	describe( 'constructor', () => {

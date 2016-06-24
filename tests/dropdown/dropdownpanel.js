@@ -28,7 +28,7 @@ describe( 'DropdownPanel', () => {
 			expect( panel.collections.get( 'content' ) ).to.be.instanceof( ControllerCollection );
 		} );
 
-		it( 'binds view#model attributes to the Button#model', () => {
+		it( 'binds view#model attributes to the DropdownPanel#model', () => {
 			expect( view.model.isOn ).to.equal( model.isOn );
 		} );
 	} );
