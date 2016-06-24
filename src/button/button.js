@@ -12,12 +12,31 @@ import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
 
 /**
- * The basic button controller class.
+ * The basic Button controller class.
+ *
+ *		const model = new Model( {
+ *			label: 'Bold',
+ *			isEnabled: true,
+ *			isOn: false,
+ *			icon: 'bold',
+ *			iconAlign: 'LEFT'
+ *		} );
+ *
+ *		// An instance of Button with a label and an icon.
+ *		new Button( model, new ButtonView() );
+ *
+ * See {@link ui.button.ButtonView}.
  *
  * @memberOf ui.button
  * @extends ui.Controller
  */
 export default class Button extends Controller {
+	/**
+	 * Creates an instance of {@link ui.button.Button} class.
+	 *
+	 * @param {ui.button.ButtonModel} model Model of this Button.
+	 * @param {ui.View} view View of this Button.
+	 */
 	constructor( model, view ) {
 		super( model, view );
 
@@ -30,6 +49,9 @@ export default class Button extends Controller {
 		view.model.on( 'click', () => model.fire( 'execute' ) );
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	init() {
 		if ( this.model.icon ) {
 			this.collections.add( new ControllerCollection( 'children' ) );
@@ -45,44 +67,47 @@ export default class Button extends Controller {
 }
 
 /**
- * The basic button model interface.
+ * The basic Button component {@link ui.Model} interface.
  *
  * @memberOf ui.button
  * @interface ui.button.ButtonModel
  */
 
 /**
- * The label of the button.
+ * The label of the Button visible to the user.
  *
  * @member {String} ui.button.ButtonModel#label
  */
 
 /**
- * Whether the button is "on" (e.g. some feature which this button represents is currently enabled).
+ * Determines whether the Button is "on", e.g. some feature which it represents
+ * is currently enabled.
  *
  * @member {Boolean} ui.button.ButtonModel#isOn
  */
 
 /**
- * Whether the button is enabled (can be clicked).
+ * Determines whether the Button is enabled (can be clicked).
  *
  * @member {Boolean} ui.button.ButtonModel#isEnabled
  */
 
 /**
- * The icon of the button.
+ * (Optional) The name of the icon of the Button.
+ * See {@link ui.icon.Icon} and {@link ui.iconManager.IconManager}.
  *
  * @member {String} ui.button.ButtonModel#icon
  */
 
 /**
- * The alignment of the button icon.
+ * (Optional) The alignment of the Button icon.
  *
  * @member {'LEFT'|'RIGHT'} ui.button.ButtonModel#iconAlign
  */
 
 /**
- * Fired when the button action should be executed.
+ * Fired when the Button action should be executed, usually when
+ * the view has been clicked.
  *
  * @event ui.button.ButtonModel#execute
  */
