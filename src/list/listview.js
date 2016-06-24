@@ -9,14 +9,16 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic list view class.
+ * The ListView class.
+ *
+ * See {@link ui.list.List}.
  *
  * @memberOf ui.list
  * @extends ui.View
  */
 export default class ListView extends View {
 	/**
-	 * Creates a ListView instance.
+	 * @inheritDoc
 	 */
 	constructor() {
 		super();

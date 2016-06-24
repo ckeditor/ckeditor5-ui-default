@@ -8,12 +8,18 @@
 import Controller from '../controller.js';
 
 /**
- * The basic list item controller class.
+ * The ListItem controller class.
  *
  * @memberOf ui.list
  * @extends ui.Controller
  */
 export default class ListItem extends Controller {
+	/**
+	 * Creates an instance of {@link ui.list.ListItem} class.
+	 *
+	 * @param {ui.list.ListItemModel} model Model of this ListItem.
+	 * @param {ui.View} view View of this ListItem.
+	 */
 	constructor( model, view ) {
 		super( model, view );
 
@@ -28,7 +34,7 @@ export default class ListItem extends Controller {
 }
 
 /**
- * The basic list item model interface.
+ * The ListItem component {@link ui.Model} interface.
  *
  * @memberOf ui.list
  * @interface ui.list.ListItemModel
@@ -41,7 +47,7 @@ export default class ListItem extends Controller {
  */
 
 /**
- * The optional DOM style attribute of the item.
+ * (Optional) The DOM style attribute of the item.
  *
  * @member {String} ui.list.ListItemModel#style
  */

@@ -12,17 +12,32 @@ import ListItem from './listitem.js';
 import ListItemView from './listitemview.js';
 
 /**
- * The basic list controller class.
+ * The List controller class.
+ *
+ *		const itemsCollection = new Collection();
+ *
+ *		itemsCollection.add( new Model( { label: 'foo' } ) );
+ *		itemsCollection.add( new Model( { label: 'bar' } ) );
+ *
+ *		const model = new Model( {
+ *			items: itemsCollection
+ *		} );
+ *
+ *		// An instance of List filled up with the `itemsCollection`.
+ *		// Any change to `itemsCollection` will be reflected in DOM.
+ *		new List( model, new ListView() );
+ *
+ * See {@link ui.list.ListView}, {@link ui.list.ListItem}.
  *
  * @memberOf ui.list
  * @extends ui.Controller
  */
 export default class List extends Controller {
 	/**
-	 * Creates a List instance.
+	 * Creates an instance of {@link ui.list.List} class.
 	 *
-	 * @param {utils.Observable} model
-	 * @param {ui.View} view
+	 * @param {ui.list.ListModel} model Model of this List.
+	 * @param {ui.View} view View of this List.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -85,3 +100,18 @@ export default class List extends Controller {
 		this.remove( 'list', itemModel.label );
 	}
 }
+
+/**
+ * The List component {@link ui.Model} interface.
+ *
+ * @memberOf ui.list
+ * @interface ui.list.ListModel
+ */
+
+/**
+ * The collection of {@link ui.list.ListItemModel} instances to be rendered.
+ * Any change in the collection (add, remove) is reflected in the DOM associated
+ * with this component.
+ *
+ * @member {String} ui.list.ListModel#items
+ */
