@@ -12,7 +12,8 @@ import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
 
 /**
- * The Button controller class.
+ * The Button controller class. It uses {@link ui.icon.Icon} component
+ * to display an icon.
  *
  *		const model = new Model( {
  *			label: 'Bold',
