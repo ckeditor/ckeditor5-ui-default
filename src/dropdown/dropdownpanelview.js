@@ -51,7 +51,7 @@ export default class DropdownPanelView extends View {
  * The DropdownPanelView model interface.
  *
  * @memberOf ui.dropdown
- * @interface DropdownPanelViewModel
+ * @interface ui.dropdown.DropdownPanelViewModel
  */
 
 /**

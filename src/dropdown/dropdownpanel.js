@@ -43,7 +43,7 @@ export default class DropdownPanel extends Controller {
  * The DropdownPanel model interface.
  *
  * @memberOf ui.dropdown
- * @interface DropdownPanelModel
+ * @interface ui.dropdown.DropdownPanelModel
  */
 
 /**
