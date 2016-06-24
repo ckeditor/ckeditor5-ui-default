@@ -15,17 +15,28 @@ import DropdownPanel from './dropdownpanel.js';
 import DropdownPanelView from './dropdownpanelview.js';
 
 /**
- * The basic dropdown controller class.
+ * The Dropdown controller class.
+ *
+ *		const model = new Model( {
+ *			label: 'Dropdown',
+ *			isEnabled: true,
+ *			isOn: false,
+ *		} );
+ *
+ *		// An instance of Dropdown.
+ *		new Dropdown( model, new DropdownView() );
+ *
+ * See {@link ui.dropdown.DropdownView}.
  *
  * @memberOf ui.dropdown
  * @extends ui.Controller
  */
 export default class Dropdown extends Controller {
 	/**
-	 * Creates a Dropdown instance.
+	 * Creates an instance of {@link ui.dropdown.Dropdown} class.
 	 *
-	 * @param {utils.Observable} model
-	 * @param {ui.View} view
+	 * @param {ui.dropdown.DropdownModel} model Model of this Dropdown.
+	 * @param {ui.View} view View of this Dropdown.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -48,9 +59,11 @@ export default class Dropdown extends Controller {
 		 */
 		this.panel = new DropdownPanel( model, new DropdownPanelView() );
 
-		// Execute event comes from the button.
+		// Execute event comes from ui.dropdown.Dropdown#button (see ui.button.ButtonModel#execute).
 		this.listenTo( model, 'execute', () => {
+			// There's no point of reacting to user actions when the component is disabled.
 			if ( this.model.isEnabled ) {
+				// Switch the state of the Dropdown when the Button is clicked.
 				this.model.isOn = !this.model.isOn;
 			}
 		} );
@@ -61,32 +74,33 @@ export default class Dropdown extends Controller {
 }
 
 /**
- * The basic dropdown model interface.
+ * The basic Dropdown model interface.
  *
  * @memberOf ui.dropdown
  * @interface DropdownModel
  */
 
 /**
- * The label of the dropdown.
+ * The label of the Dropdown.
  *
  * @member {String} ui.dropdown.DropdownModel#label
  */
 
 /**
- * Indicated whether the dropdown is "active", which means that the box with options is visible.
+ * Controls whether the Dropdown is "active", which means that the box with options is visible.
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isOn
  */
 
 /**
- * Whether the dropdown is enabled (can be clicked).
+ * Controls whether the Dropdown is enabled (can be clicked).
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isEnabled
  */
 
 /**
  * Fired when the {@link ui.dropdown.Dropdown#button} is clicked.
+ *
  * See {@link ui.button.ButtonModel#execute}.
  *
  * @event ui.dropdown.DropdownModel#execute

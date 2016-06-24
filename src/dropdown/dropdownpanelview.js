@@ -9,14 +9,16 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic dropdown panel view class.
+ * The DropdownPanelView class.
+ *
+ * See {@link ui.dropdown.DropdownPanel}.
  *
  * @memberOf ui.dropdown
  * @extends ui.View
  */
 export default class DropdownPanelView extends View {
 	/**
-	 * Creates a DropdownPanelView instance.
+	 * @inheritDoc
 	 */
 	constructor() {
 		super();
@@ -36,5 +38,24 @@ export default class DropdownPanelView extends View {
 		} );
 
 		this.register( 'content', el => el );
+
+		/**
+		 * Model of this DropdownPanelView.
+		 *
+		 * @member {ui.dropdown.DropdownPanelViewModel} ui.dropdown.DropdownPanelView#model
+		 */
 	}
 }
+
+/**
+ * The DropdownPanelView model interface.
+ *
+ * @memberOf ui.dropdown
+ * @interface DropdownPanelViewModel
+ */
+
+/**
+ * Controls whether the DropdownPanelView is "active", which means that the box is visible.
+ *
+ * @member {Boolean} ui.dropdown.DropdownPanelViewModel#isOn
+ */

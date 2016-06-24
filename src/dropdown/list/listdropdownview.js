@@ -8,12 +8,17 @@
 import DropdownView from '../dropdownview.js';
 
 /**
- * The basic list dropdown view class.
+ * The ListDropdownView class.
  *
- * @memberOf ui.dropdown
- * @extends ui.View
+ * See {@link ui.dropdown.list.ListDropdown}.
+ *
+ * @memberOf ui.dropdown.list
+ * @extends ui.dropdown.DropdownView
  */
 export default class ListDropdownView extends DropdownView {
+	/**
+	 * @inheritDoc
+	 */
 	constructor() {
 		super();
 
@@ -38,6 +43,12 @@ export default class ListDropdownView extends DropdownView {
 				}
 			}
 		} );
+
+		/**
+		 * Model of this ListDropdownView.
+		 *
+		 * @member {ui.dropdown.list.ListDropdownViewModel} ui.dropdown.list.ListDropdownView#model
+		 */
 	}
 }
 
@@ -49,7 +60,14 @@ export default class ListDropdownView extends DropdownView {
  */
 
 /**
- * Fired when component is to be closed because of user action in DOM.
+ * Controls whether the ListDropdownView is "active", which means that the box is visible.
+ *
+ * @member {Boolean} ui.dropdown.list.ListDropdownViewModel#isOn
+ */
+
+/**
+ * Fired when component is to be closed because of user action in DOM like clicking
+ * or using the keyboard.
  *
  * @event ui.dropdown.ListDropdownViewModel#close
  */

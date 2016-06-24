@@ -11,7 +11,20 @@ import List from '../../list/list.js';
 import ListView from '../../list/listview.js';
 
 /**
- * The basic list dropdown controller class.
+ * The ListDropdown controller class. It represents a dropdown
+ * with a {@link ui.list.List} component.
+ *
+ *		const model = new Model( {
+ *			label: 'List Dropdown',
+ *			isEnabled: true,
+ *			isOn: false,
+ *			content: {ui.dropdown.list.ListDropdownModel#content}
+ *		} );
+ *
+ *		// An instance of Dropdown.
+ *		new ListDropdown( model, new ListDropdownView() );
+ *
+ * See {@link ui.dropdown.list.ListDropdownView}.
  *
  * @memberOf ui.dropdown.list
  * @extends ui.dropdown.Dropdown
@@ -22,10 +35,10 @@ export default class ListDropdown extends Dropdown {
 
 		view.model.bind( 'isOn' ).to( model );
 
-		const content = this.model.content;
+		const listModel = this.model.content;
 
 		// Collapse the dropdown when an item in the panel is clicked.
-		this.listenTo( content, 'execute', () => {
+		this.listenTo( listModel, 'execute', () => {
 			this.model.isOn = false;
 		} );
 
@@ -34,7 +47,15 @@ export default class ListDropdown extends Dropdown {
 			this.model.isOn = false;
 		} );
 
-		this.panel.add( 'content', new List( content, new ListView() ) );
+		/**
+		 * List of this ListDropdown.
+		 *
+		 * @readonly
+		 * @member {ui.list.List} ui.dropdown.list.ListDropdown#list
+		 */
+		this.list = new List( listModel, new ListView() );
+
+		this.panel.add( 'content', this.list );
 	}
 }
 
@@ -42,11 +63,13 @@ export default class ListDropdown extends Dropdown {
  * The ListDropdown model interface.
  *
  * @memberOf ui.dropdown.list
+ * @extends {ui.dropdown.DropdownModel}
  * @interface ui.dropdown.list.ListDropdownModel
  */
 
 /**
- * Content of the dropdown used to create the List instance.
+ * Content of the ListDropdown used to create the List instance.
+ * Usually {@link ui.list.ListModel}.
  *
  * @member {Boolean} ui.dropdown.list.ListDropdownModel#content
  */

@@ -9,19 +9,19 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic dropdown view class.
+ * The DropdownView class.
+ *
+ * See {@link ui.dropdown.Dropdown}.
  *
  * @memberOf ui.dropdown
  * @extends ui.View
  */
 export default class DropdownView extends View {
 	/**
-	 * Creates a DropdownView instance.
-	 *
-	 * @param {utils.Observable} model
+	 * @inheritDoc
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		this.template = new Template( {
 			tag: 'div',
