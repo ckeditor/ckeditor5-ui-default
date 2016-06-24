@@ -30,6 +30,12 @@ import ListView from '../../list/listview.js';
  * @extends ui.dropdown.Dropdown
  */
 export default class ListDropdown extends Dropdown {
+	/**
+	 * Creates an instance of {@link ui.dropdown.list.ListDropdown} class.
+	 *
+	 * @param {ui.dropdown.list.ListDropdownModel} model Model of this ListDropdown.
+	 * @param {ui.View} view View of this ListDropdown.
+	 */
 	constructor( model, view ) {
 		super( model, view );
 
