@@ -9,12 +9,17 @@ import View from '../../ui/view.js';
 import Template from '../template.js';
 
 /**
- * The basic icon view class.
+ * The IconView class.
+ *
+ * See {@link ui.icon.Icon}.
  *
  * @memberOf ui.icon
  * @extends ui.View
  */
 export default class IconView extends View {
+	/**
+	 * @inheritDoc
+	 */
 	constructor( model ) {
 		super( model );
 

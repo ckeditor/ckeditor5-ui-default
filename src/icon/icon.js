@@ -8,7 +8,17 @@
 import Controller from '../controller.js';
 
 /**
- * The basic icon controller class.
+ * The Icon controller class.
+ *
+ *		const model = new Model( {
+ *			name: 'bold',
+ *			align: 'LEFT'
+ *		} );
+ *
+ *		// An instance of "bold" Icon, aligned to the left.
+ *		new Icon( model, new IconView() );
+ *
+ * See {@link ui.icon.IconView}, {@link ui.iconManager.IconManager}.
  *
  * @memberOf ui.icon
  * @extends ui.Controller
@@ -22,14 +32,15 @@ export default class Icon extends Controller {
 }
 
 /**
- * The basic icon model interface.
+ * The Icon component {@link ui.Model} interface.
  *
  * @memberOf ui.icon
  * @interface ui.icon.IconModel
  */
 
 /**
- * The name of the icon.
+ * The name of the icon. It corresponds with the name of the
+ * file in the {@link ui.iconManager.IconManager}.
  *
  * @member {String} ui.icon.IconModel#name
  */
