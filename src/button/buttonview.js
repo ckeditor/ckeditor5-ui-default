@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic ButtonView class.
+ * The ButtonView class.
  *
  * See {@link ui.button.Button}.
  *
