@@ -11,6 +11,11 @@ import Button from '/ckeditor5/ui/button/button.js';
 import ButtonView from '/ckeditor5/ui/button/buttonview.js';
 import Model from '/ckeditor5/ui/model.js';
 
+import testUtils from '/tests/ckeditor5/_utils/utils.js';
+import Controller from '/ckeditor5/ui/controller.js';
+
+testUtils.createSinonSandbox();
+
 describe( 'Button', () => {
 	let model, button, view;
 
@@ -78,6 +83,14 @@ describe( 'Button', () => {
 				expect( view.element.childNodes ).to.have.length( 2 );
 				expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
 				expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
+			} );
+		} );
+
+		it( 'calls Controller#init()', () => {
+			const spy = testUtils.sinon.spy( Controller.prototype, 'init' );
+
+			return button.init().then( () => {
+				expect( spy.calledOnce ).to.be.true;
 			} );
 		} );
 	} );
