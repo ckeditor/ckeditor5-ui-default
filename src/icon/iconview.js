@@ -47,5 +47,31 @@ export default class IconView extends View {
 				}
 			]
 		} );
+
+		/**
+		 * Model of this IconView.
+		 *
+		 * @member {ui.icon.IconViewModel} ui.icon.IconView#model
+		 */
 	}
 }
+
+/**
+ * The IconView {@link ui.Model} interface.
+ *
+ * @memberOf ui.icon
+ * @interface ui.icon.IconViewModel
+ */
+
+/**
+ * The name of the icon. It corresponds with the name of the
+ * file in the {@link ui.iconManager.IconManager}.
+ *
+ * @member {String} ui.icon.IconViewModel#name
+ */
+
+/**
+ * The alignment of the icon.
+ *
+ * @member {'LEFT'|'RIGHT'} ui.icon.IconViewModel#align
+ */
