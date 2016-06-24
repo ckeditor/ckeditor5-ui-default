@@ -24,6 +24,12 @@ import Controller from '../controller.js';
  * @extends ui.Controller
  */
 export default class Icon extends Controller {
+	/**
+	 * Creates an instance of {@link ui.icon.Icon} class.
+	 *
+	 * @param {ui.icon.IconModel} model Model of this Icon.
+	 * @param {ui.View} view View of this Icon.
+	 */
 	constructor( model, view ) {
 		super( model, view );
 
