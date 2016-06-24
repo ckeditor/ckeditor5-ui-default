@@ -9,12 +9,17 @@ import Template from '../template.js';
 import ToolbarView from '../toolbar/toolbarview.js';
 
 /**
- * The sticky toolbar view class.
+ * The StickyToolbarView class.
+ *
+ * See {@link ui.stickyToolbar.StickyToolbar}, {@link ui.toolbar.ToolbarView}.
  *
  * @memberOf ui.stickyToolbar
  * @extends ui.toolbar.ToolbarView
  */
 export default class StickyToolbarView extends ToolbarView {
+	/**
+	 * @inheritDoc
+	 */
 	constructor() {
 		super();
 
@@ -28,6 +33,12 @@ export default class StickyToolbarView extends ToolbarView {
 				class: bind.if( 'isSticky', 'ck-toolbar_sticky' )
 			}
 		} );
+
+		/**
+		 * Model of this StickyToolbarView.
+		 *
+		 * @member {ui.stickyToobar.StickyToolbarViewModel} ui.stickyToolbar.StickyToolbarView#model
+		 */
 	}
 
 	init() {
@@ -137,25 +148,25 @@ export default class StickyToolbarView extends ToolbarView {
 }
 
 /**
- * The basic sticky toolbar model interface.
+ * The StickyToolbarView {@link ui.Model} interface.
  *
  * @memberOf ui.stickyToolbar
- * @interface StickyToolbarModel
+ * @interface ui.stickyToobar.StickyToolbarViewModel
  */
 
 /**
- * Indicates whether the toolbar should be active. When any editable
+ * Controls whether the toolbar should be active. When any editable
  * is focused in the editor, toolbar becomes active.
  *
  * @readonly
  * @observable
- * @member {Boolean} ui.button.StickyToolbarModel#isActive
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#isActive
  */
 
 /**
- * Indicates whether the toolbar is in the "sticky" state.
+ * Controls whether the toolbar is in the "sticky" state.
  *
  * @readonly
  * @observable
- * @member {Boolean} ui.button.StickyToolbarModel#isSticky
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#isSticky
  */
