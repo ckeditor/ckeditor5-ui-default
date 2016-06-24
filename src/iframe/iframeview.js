@@ -18,7 +18,6 @@ export default class IframeView extends View {
 	/**
 	 * Creates a new instance of the IframeView.
 	 *
-	 * @param {ui.iframe.IframeModel} [model] (View)Model of this IframeView.
 	 * @param {utils.Locale} [locale] The {@link ckeditor5.Editor#locale editor's locale} instance.
 	 */
 	constructor( locale ) {
