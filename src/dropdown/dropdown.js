@@ -5,6 +5,7 @@
 
 'use strict';
 
+import Model from '../model.js';
 import Controller from '../controller.js';
 import Button from '../button/button.js';
 import ControllerCollection from '../controllercollection.js';
@@ -19,8 +20,7 @@ import DropdownPanelView from './dropdownpanelview.js';
  *
  *		const model = new Model( {
  *			label: 'Dropdown',
- *			isEnabled: true,
- *			isOn: false,
+ *			isEnabled: true
  *		} );
  *
  *		// An instance of Dropdown.
@@ -44,12 +44,23 @@ export default class Dropdown extends Controller {
 		this.collections.add( new ControllerCollection( 'main' ) );
 
 		/**
+		 * An internal Model interface shared between sub–components of the Dropdown.
+		 *
+		 * @member {ui.dropdown.DropdownSharedModel} ui.dropdown.Dropdown#sharedModel
+		 */
+		this.sharedModel = new Model( {
+			isOn: false
+		} );
+
+		this.sharedModel.bind( 'isEnabled', 'label' ).to( model );
+
+		/**
 		 * Button of this Dropdown.
 		 *
 		 * @readonly
 		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
 		 */
-		this.button = new Button( model, new DropdownButtonView() );
+		this.button = new Button( this.sharedModel, new DropdownButtonView() );
 
 		/**
 		 * Panel of this Dropdown.
@@ -57,14 +68,17 @@ export default class Dropdown extends Controller {
 		 * @readonly
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
 		 */
-		this.panel = new DropdownPanel( model, new DropdownPanelView() );
+		this.panel = new DropdownPanel( this.sharedModel, new DropdownPanelView() );
 
 		// Execute event comes from ui.dropdown.Dropdown#button (see ui.button.ButtonModel#execute).
-		this.listenTo( model, 'execute', () => {
+		this.listenTo( this.sharedModel, 'execute', ( evt, ...args ) => {
 			// There's no point of reacting to user actions when the component is disabled.
-			if ( this.model.isEnabled ) {
+			if ( this.sharedModel.isEnabled ) {
 				// Switch the state of the Dropdown when the Button is clicked.
-				this.model.isOn = !this.model.isOn;
+				this.sharedModel.isOn = !this.sharedModel.isOn;
+
+				// Pass #execute event to the external Model interface.
+				model.fire( 'execute', ...args );
 			}
 		} );
 
@@ -87,12 +101,6 @@ export default class Dropdown extends Controller {
  */
 
 /**
- * Controls whether the Dropdown is "active", which means that the box with options is visible.
- *
- * @member {Boolean} ui.dropdown.DropdownModel#isOn
- */
-
-/**
  * Controls whether the Dropdown is enabled (can be clicked).
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isEnabled
@@ -104,4 +112,18 @@ export default class Dropdown extends Controller {
  * See {@link ui.button.ButtonModel#execute}.
  *
  * @event ui.dropdown.DropdownModel#execute
+ */
+
+/**
+ * The shared Dropdown model interface.
+ *
+ * @memberOf ui.dropdown
+ * @interface ui.dropdown.DropdownSharedModel
+ */
+
+/**
+ * Controls whether the Dropdown is "active", which means that the {@link ui.dropdown.Dropdown#panel}
+ * is visible and the {@link ui.dropdown.Dropdown#button} is "pushed".
+ *
+ * @member {Boolean} ui.dropdown.DropdownSharedModel#isOn
  */

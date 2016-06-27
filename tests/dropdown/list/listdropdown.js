@@ -15,25 +15,25 @@ import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
 
 describe( 'ListDropdown', () => {
-	let model, content, view, dropdown;
+	let model, sharedModel, content, view, dropdown;
 
 	beforeEach( () => {
 		content = new Model();
 
 		model = new Model( {
 			isEnabled: true,
-			isOn: false,
 			content: content,
 			label: 'foo'
 		} );
 
 		view = new ListDropdownView();
 		dropdown = new ListDropdown( model, view );
+		sharedModel = dropdown.sharedModel;
 	} );
 
 	describe( 'constructor', () => {
 		it( 'binds view#model attributes to the ListDropdown#model', () => {
-			expect( view.model.isOn ).to.equal( model.isOn );
+			expect( view.model.isOn ).to.equal( sharedModel.isOn );
 		} );
 
 		it( 'adds a list to the panel', () => {
@@ -46,14 +46,14 @@ describe( 'ListDropdown', () => {
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
 		} );
 
-		it( 'attaches listener on model.content#execute and changes model#isOn', () => {
-			model.isOn = true;
+		it( 'attaches listener on model.content#execute and changes sharedModel#isOn', () => {
+			sharedModel.isOn = true;
 
 			content.fire( 'execute' );
-			expect( model.isOn ).to.be.false;
+			expect( sharedModel.isOn ).to.be.false;
 
 			content.fire( 'execute' );
-			expect( model.isOn ).to.be.false;
+			expect( sharedModel.isOn ).to.be.false;
 		} );
 	} );
 } );

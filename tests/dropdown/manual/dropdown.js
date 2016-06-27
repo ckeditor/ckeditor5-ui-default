@@ -27,11 +27,10 @@ testUtils.createTestUIController( {
 function createEmptyDropdown( ui ) {
 	const model = new Model( {
 		label: 'Dropdown',
-		isEnabled: true,
-		isOn: false,
+		isEnabled: true
 	} );
 
-	const dropdown = new Dropdown( model, new DropdownView( model ) );
+	const dropdown = new Dropdown( model, new DropdownView() );
 
 	ui.add( 'dropdown', dropdown );
 
@@ -60,11 +59,10 @@ function createListDropdown( ui ) {
 	const model = new Model( {
 		label: 'ListDropdown',
 		isEnabled: true,
-		isOn: false,
 		content: itemListModel
 	} );
 
-	const dropdown = new ListDropdown( model, new ListDropdownView( model ) );
+	const dropdown = new ListDropdown( model, new ListDropdownView() );
 
 	ui.add( 'listDropdown', dropdown );
 

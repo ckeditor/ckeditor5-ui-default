@@ -16,16 +16,20 @@ import DropdownButtonView from '/ckeditor5/ui/dropdown/dropdownbuttonview.js';
 import DropdownPanel from '/ckeditor5/ui/dropdown/dropdownpanel.js';
 import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
 
+import utilsTestUtils from '/tests/utils/_utils/utils.js';
+
+const assertBinding = utilsTestUtils.assertBinding;
+
 describe( 'Dropdown', () => {
-	let model, dropdown;
+	let model, sharedModel, dropdown;
 
 	beforeEach( () => {
 		model = new Model( {
 			isEnabled: true,
-			isOn: false,
 			label: 'foo'
 		} );
 		dropdown = new Dropdown( model );
+		sharedModel = dropdown.sharedModel;
 	} );
 
 	describe( 'constructor', () => {
@@ -45,17 +49,42 @@ describe( 'Dropdown', () => {
 			expect( dropdown.collections.get( 'main' ).get( 1 ) ).to.equal( dropdown.panel );
 		} );
 
-		it( 'listens on model#execute and changes model#isOn', () => {
-			model.fire( 'execute' );
-			expect( model.isOn ).to.be.true;
+		it( 'creates sharedModel for child components', () => {
+			assertBinding( sharedModel,
+				{ isEnabled: true, label: 'foo', isOn: false },
+				[
+					[ model, { isEnabled: false, label: 'bar', isOn: true } ]
+				],
+				{ isEnabled: false, label: 'bar', isOn: false }
+			);
+		} );
+	} );
 
-			model.fire( 'execute' );
-			expect( model.isOn ).to.be.false;
+	describe( 'sharedModel', () => {
+		describe( '#execute event', () => {
+			it( 'updates #isOn', () => {
+				sharedModel.fire( 'execute' );
+				expect( sharedModel.isOn ).to.be.true;
 
-			model.isEnabled = false;
+				sharedModel.fire( 'execute' );
+				expect( sharedModel.isOn ).to.be.false;
 
-			model.fire( 'execute' );
-			expect( model.isOn ).to.be.false;
+				model.isEnabled = false;
+
+				sharedModel.fire( 'execute' );
+				expect( sharedModel.isOn ).to.be.false;
+			} );
+
+			it( 'is passed to the main model', ( done ) => {
+				model.on( 'execute', ( evt, foo, bar ) => {
+					expect( foo ).to.equal( 'foo' );
+					expect( bar ).to.equal( 'bar' );
+
+					done();
+				} );
+
+				sharedModel.fire( 'execute', 'foo', 'bar' );
+			} );
 		} );
 	} );
 } );
