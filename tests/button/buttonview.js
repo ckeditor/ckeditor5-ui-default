@@ -72,7 +72,7 @@ describe( 'ButtonView', () => {
 			} );
 
 			it( 'reacts on model.noText', () => {
-				model.noText = true;
+				model.set( 'noText', true );
 
 				expect( view.element.classList.contains( 'ck-button-notext' ) ).to.be.true;
 			} );

@@ -22,9 +22,6 @@ export default class ButtonView extends View {
 
 		const bind = this.bind;
 
-		// Set default value for `noText` property.
-		model.set( 'noText', !!model.noText );
-
 		this.template = new Template( {
 			tag: 'button',
 
