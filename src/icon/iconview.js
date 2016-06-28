@@ -20,8 +20,8 @@ export default class IconView extends View {
 	/**
 	 * @inheritDoc
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
