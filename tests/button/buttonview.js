@@ -30,7 +30,7 @@ describe( 'ButtonView', () => {
 
 	describe( 'constructor', () => {
 		it( 'registers "children" region', () => {
-			expect( view.regions.get( 0 ).name ).to.be.equal( 'children' );
+			expect( view.regions.get( 0 ).name ).to.equal( 'children' );
 		} );
 
 		it( 'calls _setupIcon when "icon" in model', () => {
@@ -53,21 +53,28 @@ describe( 'ButtonView', () => {
 	describe( '<button> bindings', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {
-				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true( 'ck-button' );
-				expect( view.element.classList.contains( 'ck-enabled' ) ).to.be.true( 'ck-enabled' );
-				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true( 'ck-off' );
+				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-enabled' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-button-notext' ) ).to.be.false;
 			} );
 
 			it( 'reacts on model.isEnabled', () => {
 				model.isEnabled = false;
 
-				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.true( 'ck-disabled' );
+				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.true;
 			} );
 
 			it( 'reacts on model.isOn', () => {
 				model.isOn = true;
 
-				expect( view.element.classList.contains( 'ck-on' ) ).to.be.true( 'ck-on' );
+				expect( view.element.classList.contains( 'ck-on' ) ).to.be.true;
+			} );
+
+			it( 'reacts on model.noText', () => {
+				model.set( 'noText', true );
+
+				expect( view.element.classList.contains( 'ck-button-notext' ) ).to.be.true;
 			} );
 		} );
 
