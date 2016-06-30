@@ -32,7 +32,7 @@ export default class DropdownPanelView extends View {
 				class: [
 					'ck-reset',
 					'ck-dropdown__panel',
-					bind.if( 'isOn', 'ck-dropdown__panel-active' )
+					bind.if( 'isVisible', 'ck-dropdown__panel-visible' )
 				]
 			}
 		} );
@@ -55,7 +55,7 @@ export default class DropdownPanelView extends View {
  */
 
 /**
- * Controls whether the DropdownPanelView is "active", which means that the box is visible.
+ * Controls whether the panel is visible.
  *
- * @member {Boolean} ui.dropdown.DropdownPanelViewModel#isOn
+ * @member {Boolean} ui.dropdown.DropdownPanelViewModel#isVisible
  */

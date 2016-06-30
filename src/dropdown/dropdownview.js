@@ -23,6 +23,8 @@ export default class DropdownView extends View {
 	constructor() {
 		super();
 
+		this.model.set( 'isOpen', false );
+
 		this.template = new Template( {
 			tag: 'div',
 
@@ -34,5 +36,25 @@ export default class DropdownView extends View {
 		} );
 
 		this.register( 'main', el => el );
+
+		/**
+		 * Model of this DropdownView.
+		 *
+		 * @member {ui.dropdown.DropdownViewModel} ui.dropdown.DropdownView#model
+		 */
 	}
 }
+
+/**
+ * The DropdownView {@link ui.Model} interface.
+ *
+ * @memberOf ui.dropdown
+ * @interface ui.dropdown.DropdownViewModel
+ */
+
+/**
+ * Controls whether the dropdown is open, which also means its
+ * {@link ui.dropdown.Dropdown#panel} is visible.
+ *
+ * @member {String} ui.dropdown.DropdownViewModel#isOpen
+ */

@@ -12,7 +12,7 @@ import ControllerCollection from '../controllercollection.js';
  * The DropdownPanel controller class.
  *
  *		const model = new Model( {
- *			isOn: false,
+ *			isVisible: false,
  *		} );
  *
  *		// An instance of DropdownPanelView.
@@ -33,7 +33,7 @@ export default class DropdownPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'isOn' ).to( model );
+		view.model.bind( 'isVisible' ).to( model );
 
 		this.collections.add( new ControllerCollection( 'content' ) );
 	}
@@ -47,7 +47,7 @@ export default class DropdownPanel extends Controller {
  */
 
 /**
- * Controls whether the DropdownPanel is "active", which means that the box is visible.
+ * Controls whether the panel is visible.
  *
- * @member {Boolean} ui.dropdown.DropdownPanelModel#isOn
+ * @member {Boolean} ui.dropdown.DropdownPanelModel#isVisible
  */

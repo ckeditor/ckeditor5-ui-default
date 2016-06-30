@@ -8,21 +8,19 @@
 'use strict';
 
 import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'DropdownView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
-			isOn: false,
-			isEnabled: true
-		} );
-
-		view = new DropdownView( model );
+		view = new DropdownView();
 	} );
 
 	describe( 'constructor', () => {
+		it( 'sets model#isOpen false', () => {
+			expect( view.model.isOpen ).to.be.false;
+		} );
+
 		it( 'registers "dropdown" region', () => {
 			expect( view.regions.get( 0 ).name ).to.equal( 'main' );
 

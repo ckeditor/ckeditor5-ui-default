@@ -39,18 +39,11 @@ export default class ListDropdown extends Dropdown {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'isOn' ).to( this.sharedModel );
-
 		const listModel = this.model.content;
 
 		// Collapse the dropdown when an item in the panel is clicked.
 		this.listenTo( listModel, 'execute', () => {
-			this.sharedModel.isOn = false;
-		} );
-
-		// Collapse the dropdown when the webpage outside of the component is clicked.
-		this.listenTo( view.model, 'close', () => {
-			this.sharedModel.isOn = false;
+			view.model.isOpen = false;
 		} );
 
 		/**

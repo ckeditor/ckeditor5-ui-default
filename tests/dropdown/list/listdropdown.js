@@ -15,7 +15,7 @@ import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
 
 describe( 'ListDropdown', () => {
-	let model, sharedModel, content, view, dropdown;
+	let model, content, view, dropdown;
 
 	beforeEach( () => {
 		content = new Model();
@@ -23,19 +23,15 @@ describe( 'ListDropdown', () => {
 		model = new Model( {
 			isEnabled: true,
 			content: content,
+			isOn: false,
 			label: 'foo'
 		} );
 
 		view = new ListDropdownView();
 		dropdown = new ListDropdown( model, view );
-		sharedModel = dropdown.sharedModel;
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the ListDropdown#model', () => {
-			expect( view.model.isOn ).to.equal( sharedModel.isOn );
-		} );
-
 		it( 'adds a list to the panel', () => {
 			const contentCollection = dropdown.panel.collections.get( 'content' );
 
@@ -46,14 +42,14 @@ describe( 'ListDropdown', () => {
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
 		} );
 
-		it( 'attaches listener on model.content#execute and changes sharedModel#isOn', () => {
-			sharedModel.isOn = true;
+		it( 'attaches listener on model.content#execute and changes view.model#isOpen', () => {
+			view.model.isOpen = true;
 
 			content.fire( 'execute' );
-			expect( sharedModel.isOn ).to.be.false;
+			expect( view.model.isOpen ).to.be.false;
 
 			content.fire( 'execute' );
-			expect( sharedModel.isOn ).to.be.false;
+			expect( view.model.isOpen ).to.be.false;
 		} );
 	} );
 } );

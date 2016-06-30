@@ -13,14 +13,13 @@ import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
 import Model from '/ckeditor5/ui/model.js';
 
 describe( 'DropdownPanel', () => {
-	let panel, view, model;
+	let panel, model;
 
 	beforeEach( () => {
 		model = new Model( {
-			isOn: true
+			isVisible: true
 		} );
-		view = new DropdownPanelView();
-		panel = new DropdownPanel( model, view );
+		panel = new DropdownPanel( model, new DropdownPanelView() );
 	} );
 
 	describe( 'constructor', () => {
@@ -29,7 +28,7 @@ describe( 'DropdownPanel', () => {
 		} );
 
 		it( 'binds view#model attributes to the DropdownPanel#model', () => {
-			expect( view.model.isOn ).to.equal( model.isOn );
+			expect( panel.view.model.isVisble ).to.equal( model.isVisble );
 		} );
 	} );
 } );

@@ -20,7 +20,8 @@ import DropdownPanelView from './dropdownpanelview.js';
  *
  *		const model = new Model( {
  *			label: 'Dropdown',
- *			isEnabled: true
+ *			isEnabled: true,
+ *			inOn: false
  *		} );
  *
  *		// An instance of Dropdown.
@@ -43,16 +44,23 @@ export default class Dropdown extends Controller {
 
 		this.collections.add( new ControllerCollection( 'main' ) );
 
-		/**
-		 * An internal Model interface shared between sub–components of the Dropdown.
-		 *
-		 * @member {ui.dropdown.DropdownSharedModel} ui.dropdown.Dropdown#sharedModel
-		 */
-		this.sharedModel = new Model( {
-			isOn: false
-		} );
+		this._createButton();
+		this._createPanel();
+	}
 
-		this.sharedModel.bind( 'isEnabled', 'label' ).to( model );
+	/**
+	 * Creates {@link ui.dropdown.Dropdown#button} of this dropdown.
+	 *
+	 * @protected
+	 */
+	_createButton() {
+		const model = this.model;
+		const viewModel = this.view.model;
+		const buttonModel = new Model();
+
+		// Button needs a separate Model because otherwise it would fire #execute event
+		// on the model shared between multiple Dropdowns (they would all open at the same time).
+		buttonModel.bind( 'label', 'isOn', 'isEnabled' ).to( model );
 
 		/**
 		 * Button of this Dropdown.
@@ -60,7 +68,21 @@ export default class Dropdown extends Controller {
 		 * @readonly
 		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
 		 */
-		this.button = new Button( this.sharedModel, new DropdownButtonView() );
+		this.add( 'main', this.button = new Button( buttonModel, new DropdownButtonView() ) );
+
+		// When ui.dropdown.Dropdown#button is clicked switch the open/closed state of the Dropdown.
+		this.listenTo( buttonModel, 'execute', () => viewModel.isOpen = !viewModel.isOpen );
+	}
+
+	/**
+	 * Creates {@link ui.dropdown.Dropdown#panel} of this dropdown.
+	 *
+	 * @protected
+	 */
+	_createPanel() {
+		const panelModel = new Model();
+
+		panelModel.bind( 'isVisible' ).to( this.view.model, 'isOpen' );
 
 		/**
 		 * Panel of this Dropdown.
@@ -68,22 +90,7 @@ export default class Dropdown extends Controller {
 		 * @readonly
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
 		 */
-		this.panel = new DropdownPanel( this.sharedModel, new DropdownPanelView() );
-
-		// Execute event comes from ui.dropdown.Dropdown#button (see ui.button.ButtonModel#execute).
-		this.listenTo( this.sharedModel, 'execute', ( evt, ...args ) => {
-			// There's no point of reacting to user actions when the component is disabled.
-			if ( this.sharedModel.isEnabled ) {
-				// Switch the state of the Dropdown when the Button is clicked.
-				this.sharedModel.isOn = !this.sharedModel.isOn;
-
-				// Pass #execute event to the external Model interface.
-				model.fire( 'execute', ...args );
-			}
-		} );
-
-		this.add( 'main', this.button );
-		this.add( 'main', this.panel );
+		this.add( 'main', this.panel = new DropdownPanel( panelModel, new DropdownPanelView() ) );
 	}
 }
 
@@ -107,23 +114,16 @@ export default class Dropdown extends Controller {
  */
 
 /**
- * Fired when the {@link ui.dropdown.Dropdown#button} is clicked.
+ * Controls whether the {@link ui.dropdown.Dropdown#button} is "pushed".
+ *
+ * @member {Boolean} ui.dropdown.DropdownModel#isOn
+ */
+
+/**
+ * Fired when the {@link ui.dropdown.Dropdown#button} is executed.
  *
  * See {@link ui.button.ButtonModel#execute}.
  *
  * @event ui.dropdown.DropdownModel#execute
  */
 
-/**
- * The shared Dropdown model interface.
- *
- * @memberOf ui.dropdown
- * @interface ui.dropdown.DropdownSharedModel
- */
-
-/**
- * Controls whether the Dropdown is "active", which means that the {@link ui.dropdown.Dropdown#panel}
- * is visible and the {@link ui.dropdown.Dropdown#button} is "pushed".
- *
- * @member {Boolean} ui.dropdown.DropdownSharedModel#isOn
- */

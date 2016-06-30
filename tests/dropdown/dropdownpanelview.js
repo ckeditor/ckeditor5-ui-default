@@ -16,7 +16,7 @@ describe( 'DropdownPanelView', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			isOn: false
+			isVisible: false
 		} );
 
 		view = new DropdownPanelView();
@@ -42,14 +42,14 @@ describe( 'DropdownPanelView', () => {
 
 	describe( 'panel bindings', () => {
 		describe( 'class', () => {
-			it( 'reacts on model.isOn', () => {
-				expect( view.element.classList.contains( 'ck-dropdown__panel-active' ) ).to.be.false;
+			it( 'reacts on model#isVisible', () => {
+				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
 
-				model.isOn = true;
-				expect( view.element.classList.contains( 'ck-dropdown__panel-active' ) ).to.be.true;
+				model.isVisible = true;
+				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.true;
 
-				model.isOn = false;
-				expect( view.element.classList.contains( 'ck-dropdown__panel-active' ) ).to.be.false;
+				model.isVisible = false;
+				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
 			} );
 		} );
 	} );
