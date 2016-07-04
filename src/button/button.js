@@ -80,8 +80,13 @@ export default class Button extends Controller {
  */
 
 /**
- * Controls whether the button is "on", e.g. some feature which it represents
- * is currently enabled.
+ * Whether the label of the button is hidden (e.g. button with icon only).
+ *
+ * @member {String} ui.button.ButtonModel#noText
+ */
+
+/**
+ * Whether the button is "on" (e.g. some feature which this button represents is currently enabled).
  *
  * @member {Boolean} ui.button.ButtonModel#isOn
  */
