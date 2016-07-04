@@ -11,6 +11,8 @@ import Template from '../template.js';
 /**
  * The IframeView class.
  *
+ * See {@link ui.iframe.Iframe}.
+ *
  * @memberOf ui.iframe
  * @extends ui.View
  */

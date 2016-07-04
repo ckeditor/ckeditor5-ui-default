@@ -7,6 +7,7 @@
 
 'use strict';
 
+import Iframe from '/ckeditor5/ui/iframe/iframe.js';
 import IframeView from '/ckeditor5/ui/iframe/iframeview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -14,14 +15,12 @@ describe( 'IframeView', () => {
 	let model, view;
 
 	beforeEach( () => {
-		model = new Model( {
-			width: 100,
-			height: 200
-		} );
+		model = new Model();
+		view = new IframeView();
 
-		view = new IframeView( model );
+		document.body.appendChild( view.element );
 
-		view.init();
+		return new Iframe( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
@@ -33,13 +32,13 @@ describe( 'IframeView', () => {
 
 	describe( 'init', () => {
 		it( 'returns promise', () => {
-			view = new IframeView( model );
+			view = new IframeView();
 
 			expect( view.init() ).to.be.an.instanceof( Promise );
 		} );
 
 		it( 'returns promise which is resolved when iframe finished loading', () => {
-			view = new IframeView( model );
+			view = new IframeView();
 
 			const promise = view.init().then( () => {
 				expect( view.element.contentDocument.readyState ).to.equal( 'complete' );
@@ -54,7 +53,7 @@ describe( 'IframeView', () => {
 
 	describe( 'loaded event', () => {
 		it( 'is fired when frame finished loading', ( done ) => {
-			view = new IframeView( model );
+			view = new IframeView();
 
 			view.model.on( 'loaded', () => {
 				done();
