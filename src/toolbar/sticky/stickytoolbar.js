@@ -39,7 +39,6 @@ export default class StickyToolbar extends Toolbar {
 /**
  * The sticky toolbar component {@link ui.Model} interface.
  *
- * @memberOf ui.stickyToolbar
  * @interface ui.stickyToobar.StickyToolbarModel
  */
 

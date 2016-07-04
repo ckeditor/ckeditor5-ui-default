@@ -150,7 +150,6 @@ export default class StickyToolbarView extends ToolbarView {
 /**
  * The sticky toolbar view {@link ui.Model} interface.
  *
- * @memberOf ui.stickyToolbar
  * @interface ui.stickyToobar.StickyToolbarViewModel
  */
 

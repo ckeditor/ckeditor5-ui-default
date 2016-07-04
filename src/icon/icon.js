@@ -40,7 +40,6 @@ export default class Icon extends Controller {
 /**
  * The icon component {@link ui.Model} interface.
  *
- * @memberOf ui.icon
  * @interface ui.icon.IconModel
  */
 

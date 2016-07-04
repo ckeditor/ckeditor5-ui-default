@@ -70,7 +70,6 @@ export default class ButtonView extends View {
 /**
  * The button view {@link ui.Model} interface.
  *
- * @memberOf ui.button
  * @interface ui.button.ButtonViewModel
  */
 

@@ -59,7 +59,6 @@ export default class IconView extends View {
 /**
  * The icon view {@link ui.Model} interface.
  *
- * @memberOf ui.icon
  * @interface ui.icon.IconViewModel
  */
 

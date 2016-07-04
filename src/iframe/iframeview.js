@@ -90,7 +90,6 @@ export default class IframeView extends View {
 /**
  * The iframe view model interface.
  *
- * @memberOf ui.iframe
  * @interface ui.iframe.IframeViewModel
  */
 

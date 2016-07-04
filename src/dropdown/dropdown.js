@@ -97,7 +97,6 @@ export default class Dropdown extends Controller {
 /**
  * The basic dropdown model interface.
  *
- * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownModel
  */
 

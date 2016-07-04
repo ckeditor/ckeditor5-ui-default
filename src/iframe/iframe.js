@@ -20,14 +20,4 @@ import Controller from '../controller.js';
  * @memberOf ui.iframe
  * @extends ui.Controller
  */
-export default class Iframe extends Controller {
-	/**
-	 * Creates an instance of {@link ui.iframe.Iframe} class.
-	 *
-	 * @param {ui.Model} model A model of this iframe.
-	 * @param {ui.View} view View of this iframe.
-	 */
-	constructor( model, view ) {
-		super( model, view );
-	}
-}
+export default class Iframe extends Controller {}

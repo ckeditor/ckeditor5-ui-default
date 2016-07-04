@@ -48,7 +48,6 @@ export default class DropdownView extends View {
 /**
  * The dropdown view {@link ui.Model} interface.
  *
- * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownViewModel
  */
 
@@ -56,5 +55,5 @@ export default class DropdownView extends View {
  * Controls whether the dropdown view is open, which also means its
  * {@link ui.dropdown.Dropdown#panel} is visible.
  *
- * @member {String} ui.dropdown.DropdownViewModel#isOpen
+ * @member {Boolean} ui.dropdown.DropdownViewModel#isOpen
  */

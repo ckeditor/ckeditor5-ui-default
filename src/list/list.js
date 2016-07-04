@@ -104,7 +104,6 @@ export default class List extends Controller {
 /**
  * The list component {@link ui.Model} interface.
  *
- * @memberOf ui.list
  * @interface ui.list.ListModel
  */
 
@@ -113,5 +112,5 @@ export default class List extends Controller {
  * Any change in the collection (add, remove) is reflected in the DOM associated
  * with this component.
  *
- * @member {String} ui.list.ListModel#items
+ * @member {utils.Collection.<ui.list.ListItemModel>} ui.list.ListModel#items
  */

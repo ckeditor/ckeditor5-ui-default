@@ -70,7 +70,6 @@ export default class Button extends Controller {
 /**
  * The button component {@link ui.Model} interface.
  *
- * @memberOf ui.button
  * @interface ui.button.ButtonModel
  */
 

@@ -58,7 +58,6 @@ export default class ListItemView extends View {
 /**
  * The list item view {@link ui.Model} interface.
  *
- * @memberOf ui.list
  * @interface ui.list.ListItemViewModel
  */
 

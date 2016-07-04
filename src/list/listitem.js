@@ -36,7 +36,6 @@ export default class ListItem extends Controller {
 /**
  * The list item component {@link ui.Model} interface.
  *
- * @memberOf ui.list
  * @interface ui.list.ListItemModel
  */
 
