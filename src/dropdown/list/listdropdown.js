@@ -18,7 +18,7 @@ import ListView from '../../list/listview.js';
  *			label: 'List Dropdown',
  *			isEnabled: true,
  *			isOn: false,
- *			content: {ui.dropdown.list.ListDropdownModel#content}
+ *			content: {@link ui.dropdown.list.ListDropdownModel#content}
  *		} );
  *
  *		// An instance of Dropdown.
