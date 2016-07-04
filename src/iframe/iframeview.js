@@ -9,20 +9,21 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic iframe view class.
+ * The iframe view class.
+ *
+ * See {@link ui.iframe.Iframe}.
  *
  * @memberOf ui.iframe
  * @extends ui.View
  */
 export default class IframeView extends View {
 	/**
-	 * Creates a new instance of the IframeView.
+	 * Creates a new instance of the iframe view.
 	 *
-	 * @param {ui.iframe.IframeModel} [model] (View)Model of this IframeView.
 	 * @param {utils.Locale} [locale] The {@link ckeditor5.Editor#locale editor's locale} instance.
 	 */
-	constructor( model, locale ) {
-		super( model, locale );
+	constructor( locale ) {
+		super( locale );
 
 		const bind = this.bind;
 
@@ -64,6 +65,12 @@ export default class IframeView extends View {
 		this.model.on( 'loaded', () => {
 			this._iframeDeferred.resolve();
 		} );
+
+		/**
+		 * Model of this iframe view.
+		 *
+		 * @member {ui.iframe.IframeViewModel} ui.iframe.IframeView#model
+		 */
 	}
 
 	/**
@@ -81,7 +88,13 @@ export default class IframeView extends View {
 }
 
 /**
- * Fired when the iframe `contentDocument` finished loading.
+ * The iframe view model interface.
  *
- * @event ui.iframe.IframeView#loaded
+ * @interface ui.iframe.IframeViewModel
+ */
+
+/**
+ * Fired when the DOM iframe's `contentDocument` finished loading.
+ *
+ * @event ui.iframe.IframeViewModel#loaded
  */

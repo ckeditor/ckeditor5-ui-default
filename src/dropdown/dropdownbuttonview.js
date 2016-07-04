@@ -9,19 +9,19 @@ import ButtonView from '../button/buttonview.js';
 import Template from '../template.js';
 
 /**
- * The basic dropdown button view class.
+ * The dropdown button view class.
+ *
+ * See {@link ui.dropdown.Dropdown}, {@link ui.button.Button}, {@link ui.button.ButtonView}.
  *
  * @memberOf ui.dropdown
  * @extends ui.button.ButtonView
  */
 export default class DropdownButtonView extends ButtonView {
 	/**
-	 * Creates a DropdownButtonView instance.
-	 *
-	 * @param {utils.Observable} model
+	 * @inheritDoc
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		Template.extend( this.template, {
 			attributes: {

@@ -8,20 +8,36 @@
 import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
+import ListItem from './listitem.js';
 import ListItemView from './listitemview.js';
 
 /**
- * The basic list controller class.
+ * The list controller class.
+ *
+ *		const itemsCollection = new Collection();
+ *
+ *		itemsCollection.add( new Model( { label: 'foo' } ) );
+ *		itemsCollection.add( new Model( { label: 'bar' } ) );
+ *
+ *		const model = new Model( {
+ *			items: itemsCollection
+ *		} );
+ *
+ *		// An instance of List filled up with the `itemsCollection`.
+ *		// Any change to `itemsCollection` will be reflected in DOM.
+ *		new List( model, new ListView() );
+ *
+ * See {@link ui.list.ListView}, {@link ui.list.ListItem}.
  *
  * @memberOf ui.list
  * @extends ui.Controller
  */
 export default class List extends Controller {
 	/**
-	 * Creates a List instance.
+	 * Creates an instance of {@link ui.list.List} class.
 	 *
-	 * @param {utils.Observable} model
-	 * @param {ui.View} view
+	 * @param {ui.list.ListModel} model Model of this list.
+	 * @param {ui.View} view View of this list.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -50,21 +66,21 @@ export default class List extends Controller {
 
 	/**
 	 * Adds an item to "list" collection and activates event bubbling
-	 * between item view and the List.
+	 * between item view and the list.
 	 *
 	 * @protected
 	 * @param {utils.Observable} itemModel
 	 * @param {Number} index
 	 */
 	_addListItem( itemModel, index ) {
-		const itemView = new ListItemView( itemModel );
-		const listItemController = new Controller( itemModel, itemView );
+		const listItemController = new ListItem( itemModel, new ListItemView() );
 
 		// Save model#label in controller instance so it can be later
 		// retrieved from "list" collection easily by that model.
 		listItemController.id = itemModel.label;
 
-		this.listenTo( itemModel, 'click', () => {
+		// TODO: Some event delegation?
+		this.listenTo( itemModel, 'execute', () => {
 			this.model.fire( 'execute', itemModel );
 		} );
 
@@ -73,14 +89,28 @@ export default class List extends Controller {
 
 	/**
 	 * Removes an item from "list" collection and deactivates event bubbling
-	 * between item view and the List.
+	 * between item view and the list.
 	 *
 	 * @protected
 	 * @param {utils.Observable} itemModel
 	 */
 	_removeListItem( itemModel ) {
-		this.stopListening( itemModel, 'click' );
+		this.stopListening( itemModel, 'execute' );
 
 		this.remove( 'list', itemModel.label );
 	}
 }
+
+/**
+ * The list component {@link ui.Model} interface.
+ *
+ * @interface ui.list.ListModel
+ */
+
+/**
+ * The collection of {@link ui.list.ListItemModel} instances to be rendered.
+ * Any change in the collection (add, remove) is reflected in the DOM associated
+ * with this component.
+ *
+ * @member {utils.Collection.<ui.list.ListItemModel>} ui.list.ListModel#items
+ */

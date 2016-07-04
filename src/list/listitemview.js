@@ -9,19 +9,19 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic list item view class.
+ * The list item view class.
+ *
+ * See {@link ui.list.ListItem}.
  *
  * @memberOf ui.list
  * @extends ui.View
  */
 export default class ListItemView extends View {
 	/**
-	 * Creates a ListItemView instance.
-	 *
-	 * @param {utils.Observable} model
+	 * @inheritDoc
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
@@ -46,5 +46,29 @@ export default class ListItemView extends View {
 				click: bind.to( 'click' )
 			}
 		} );
+
+		/**
+		 * Model of this list item view.
+		 *
+		 * @member {ui.list.ListItemViewModel} ui.list.ListItemView#model
+		 */
 	}
 }
+
+/**
+ * The list item view {@link ui.Model} interface.
+ *
+ * @interface ui.list.ListItemViewModel
+ */
+
+/**
+ * The label of the list item.
+ *
+ * @member {String} ui.list.ListItemViewModel#label
+ */
+
+/**
+ * (Optional) The DOM style attribute of the list item.
+ *
+ * @member {String} ui.list.ListItemViewModel#style
+ */

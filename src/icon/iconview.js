@@ -9,14 +9,19 @@ import View from '../../ui/view.js';
 import Template from '../template.js';
 
 /**
- * The basic icon view class.
+ * The icon view class.
+ *
+ * See {@link ui.icon.Icon}.
  *
  * @memberOf ui.icon
  * @extends ui.View
  */
 export default class IconView extends View {
-	constructor( model ) {
-		super( model );
+	/**
+	 * @inheritDoc
+	 */
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
@@ -36,11 +41,36 @@ export default class IconView extends View {
 					attributes: {
 						href: {
 							ns: 'http://www.w3.org/1999/xlink',
-							value: bind.to( 'icon', i => `#ck-icon-${ i }` )
+							value: bind.to( 'name', i => `#ck-icon-${ i }` )
 						}
 					}
 				}
 			]
 		} );
+
+		/**
+		 * Model of this icon view.
+		 *
+		 * @member {ui.icon.IconViewModel} ui.icon.IconView#model
+		 */
 	}
 }
+
+/**
+ * The icon view {@link ui.Model} interface.
+ *
+ * @interface ui.icon.IconViewModel
+ */
+
+/**
+ * The name of the icon. It corresponds with the name of the
+ * file in the {@link ui.iconManager.IconManager}.
+ *
+ * @member {String} ui.icon.IconViewModel#name
+ */
+
+/**
+ * The alignment of the icon.
+ *
+ * @member {'LEFT'|'RIGHT'} ui.icon.IconViewModel#align
+ */

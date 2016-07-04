@@ -7,6 +7,7 @@
 
 'use strict';
 
+import Icon from '/ckeditor5/ui/icon/icon.js';
 import IconView from '/ckeditor5/ui/icon/iconview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -15,10 +16,13 @@ describe( 'IconView', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			icon: 'foo',
-			align: undefined
+			name: 'foo',
+			align: null
 		} );
-		view = new IconView( model );
+
+		view = new IconView();
+
+		return new Icon( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
@@ -30,18 +34,18 @@ describe( 'IconView', () => {
 
 	describe( '<svg> bindings', () => {
 		describe( 'xlink:href', () => {
-			it( 'reacts to model.icon', () => {
+			it( 'reacts to changes in model#name', () => {
 				const svgUseElement = view.element.firstChild;
 				const svgHrefNs = 'http://www.w3.org/1999/xlink';
 
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-foo' );
 
-				model.icon = 'abc';
+				model.name = 'abc';
 
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-abc' );
 			} );
 
-			it( 'reacts to model.align', () => {
+			it( 'reacts to changes in model#align', () => {
 				expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
 
 				model.align = 'RIGHT';

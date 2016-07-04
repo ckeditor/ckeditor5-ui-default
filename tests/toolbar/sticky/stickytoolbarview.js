@@ -8,7 +8,8 @@
 'use strict';
 
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
-import StickyToolbarView from '/ckeditor5/ui/stickytoolbar/stickytoolbarview.js';
+import StickyToolbar from '/ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
+import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -18,15 +19,14 @@ describe( 'StickyToolbarView', () => {
 	let model, view;
 
 	beforeEach( () => {
-		model = new Model();
-		view = new StickyToolbarView( model );
+		model = new Model( {
+			isActive: false
+		} );
 
-		// In real life, it would be set by the Toollbar Controller (like editor binding).
-		model.set( 'isActive', false );
-
+		view = new StickyToolbarView();
 		document.body.appendChild( view.element );
 
-		return view.init();
+		return new StickyToolbar( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
@@ -34,16 +34,16 @@ describe( 'StickyToolbarView', () => {
 			expect( view ).to.be.instanceof( ToolbarView );
 		} );
 
-		it( 'sets model.isSticky false', () => {
-			expect( model.isSticky ).to.be.false;
+		it( 'sets view.model.isSticky false', () => {
+			expect( view.model.isSticky ).to.be.false;
 		} );
 	} );
 
 	describe( 'view.element bindings', () => {
-		it( 'work when model.isSticky changes', () => {
+		it( 'work when view.model.isSticky changes', () => {
 			expect( view.element.classList.contains( 'ck-toolbar_sticky' ) ).to.be.false;
 
-			model.isSticky = true;
+			view.model.isSticky = true;
 
 			expect( view.element.classList.contains( 'ck-toolbar_sticky' ) ).to.be.true;
 		} );
@@ -169,12 +169,12 @@ describe( 'StickyToolbarView', () => {
 			expect( view.element.style.marginLeft ).to.not.equal( '' );
 		} );
 
-		it( 'updates model.isSticky attribute', () => {
-			expect( model.isSticky ).to.be.false;
+		it( 'updates view.model.isSticky attribute', () => {
+			expect( view.model.isSticky ).to.be.false;
 
 			view._stick( { top: 10, width: 20, height: 30 } );
 
-			expect( model.isSticky ).to.be.true;
+			expect( view.model.isSticky ).to.be.true;
 		} );
 	} );
 
@@ -192,12 +192,12 @@ describe( 'StickyToolbarView', () => {
 			expect( view.element.style.marginLeft ).to.equal( 'auto' );
 		} );
 
-		it( 'updates model.isSticky attribute', () => {
-			model.isSticky = true;
+		it( 'updates view.model.isSticky attribute', () => {
+			view.model.isSticky = true;
 
 			view._detach();
 
-			expect( model.isSticky ).to.be.false;
+			expect( view.model.isSticky ).to.be.false;
 		} );
 	} );
 } );

@@ -7,6 +7,7 @@
 
 'use strict';
 
+import ListItem from '/ckeditor5/ui/list/listitem.js';
 import ListItemView from '/ckeditor5/ui/list/listitemview.js';
 import Model from '/ckeditor5/ui/model.js';
 
@@ -20,6 +21,8 @@ describe( 'ListItemView', () => {
 		} );
 
 		view = new ListItemView( model );
+
+		return new ListItem( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
@@ -54,7 +57,7 @@ describe( 'ListItemView', () => {
 			it( 'triggers click event when "click" is fired in DOM', () => {
 				const spy = sinon.spy();
 
-				model.on( 'click', spy );
+				view.model.on( 'click', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.calledOnce ).to.be.true;

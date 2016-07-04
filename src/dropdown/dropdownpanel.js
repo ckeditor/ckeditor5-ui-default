@@ -9,18 +9,44 @@ import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
 /**
- * The basic dropdown panel controller class.
+ * The dropdown panel controller class.
+ *
+ *		const model = new Model( {
+ *			isVisible: false,
+ *		} );
+ *
+ *		// An instance of DropdownPanelView.
+ *		new DropdownPanel( model, new DropdownPanelView() );
+ *
+ * See {@link ui.dropdown.DropdownPanelView}.
  *
  * @memberOf ui.dropdown
  * @extends ui.Controller
  */
 export default class DropdownPanel extends Controller {
 	/**
-	 * @inheritDoc
+	 * Creates an instance of {@link ui.dropdown.DropdownPanel} class.
+	 *
+	 * @param {ui.dropdown.DropdownPanel} model Model of this dropdown panel.
+	 * @param {ui.View} view View of this dropdown panel.
 	 */
 	constructor( model, view ) {
 		super( model, view );
 
+		view.model.bind( 'isVisible' ).to( model );
+
 		this.collections.add( new ControllerCollection( 'content' ) );
 	}
 }
+
+/**
+ * The dropdown panel model interface.
+ *
+ * @interface ui.dropdown.DropdownPanelModel
+ */
+
+/**
+ * Controls whether the panel is visible.
+ *
+ * @member {Boolean} ui.dropdown.DropdownPanelModel#isVisible
+ */

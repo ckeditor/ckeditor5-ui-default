@@ -9,14 +9,19 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic toolbar view class.
+ * The toolbar view class.
+ *
+ * See {@link ui.toolbar.Toolbar}.
  *
  * @memberOf ui.toolbar
  * @extends ui.View
  */
 export default class ToolbarView extends View {
-	constructor( model ) {
-		super( model );
+	/**
+	 * @inheritDoc
+	 */
+	constructor() {
+		super();
 
 		this.template = new Template( {
 			tag: 'div',

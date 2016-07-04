@@ -8,22 +8,28 @@
 import DropdownView from '../dropdownview.js';
 
 /**
- * The basic list dropdown view class.
+ * The list dropdown view class.
  *
- * @memberOf ui.dropdown
- * @extends ui.View
+ * See {@link ui.dropdown.list.ListDropdown}.
+ *
+ * @memberOf ui.dropdown.list
+ * @extends ui.dropdown.DropdownView
  */
 export default class ListDropdownView extends DropdownView {
-	constructor( model ) {
-		super( model );
+	/**
+	 * @inheritDoc
+	 */
+	constructor() {
+		super();
 
-		this.listenTo( this.model, 'change:isOn', ( evt, name, value ) => {
+		this.listenTo( this.model, 'change:isOpen', ( evt, name, value ) => {
 			if ( value ) {
 				// TODO: It will probably be focus/blur-based rather than click. It should be bound
 				// to focusmanager of some sort.
 				this.listenTo( document, 'click', ( evtInfo, { target: domEvtTarget } ) => {
+					// Collapse the dropdown when the webpage outside of the component is clicked.
 					if ( this.element != domEvtTarget && !this.element.contains( domEvtTarget ) ) {
-						this.model.isOn = false;
+						this.model.isOpen = false;
 					}
 				} );
 			} else {

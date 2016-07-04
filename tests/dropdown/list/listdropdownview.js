@@ -7,27 +7,36 @@
 
 'use strict';
 
+import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
 import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
 import Model from '/ckeditor5/ui/model.js';
+import Collection from '/ckeditor5/utils/collection.js';
 
 describe( 'ListDropdownView', () => {
-	let model, view;
+	let model, dropdown, view;
 
 	beforeEach( () => {
 		model = new Model( {
-			isOn: false
+			isEnabled: true,
+			content: new Model( {
+				items: new Collection()
+			} ),
+			isOn: false,
+			label: 'foo'
 		} );
 
-		view = new ListDropdownView( model );
-		view.init();
+		view = new ListDropdownView();
+		dropdown = new ListDropdown( model, view );
 
-		document.body.appendChild( view.element );
+		return dropdown.init().then( () => {
+			document.body.appendChild( view.element );
+		} );
 	} );
 
 	describe( 'constructor', () => {
 		it( 'listens to model#isOn and reacts to DOM events (valid target)', () => {
 			// Open the dropdown.
-			model.isOn = true;
+			view.model.isOpen = true;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 2 );
 
 			// Fire event from outside of the dropdown.
@@ -36,7 +45,7 @@ describe( 'ListDropdownView', () => {
 			} ) );
 
 			// Closed the dropdown.
-			expect( model.isOn ).to.be.false;
+			expect( view.model.isOpen ).to.be.false;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 1 );
 
 			// Fire event from outside of the dropdown.
@@ -45,13 +54,13 @@ describe( 'ListDropdownView', () => {
 			} ) );
 
 			// Dropdown is still closed.
-			expect( model.isOn ).to.be.false;
+			expect( view.model.isOpen ).to.be.false;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 1 );
 		} );
 
 		it( 'listens to model#isOn and reacts to DOM events (invalid target)', () => {
 			// Open the dropdown.
-			model.isOn = true;
+			view.model.isOpen = true;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 2 );
 
 			// Event from view.element should be discarded.
@@ -60,7 +69,7 @@ describe( 'ListDropdownView', () => {
 			} ) );
 
 			// Dropdown is still open.
-			expect( model.isOn ).to.be.true;
+			expect( view.model.isOpen ).to.be.true;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 2 );
 
 			// Event from within view.element should be discarded.
@@ -72,7 +81,7 @@ describe( 'ListDropdownView', () => {
 			} ) );
 
 			// Dropdown is still open.
-			expect( model.isOn ).to.be.true;
+			expect( view.model.isOpen ).to.be.true;
 			expect( Object.keys( view._listeningTo ) ).to.have.length( 2 );
 		} );
 	} );

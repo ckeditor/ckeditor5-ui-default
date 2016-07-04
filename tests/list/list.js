@@ -24,8 +24,8 @@ describe( 'List', () => {
 	let model, list, items, itemFoo, itemBar;
 
 	beforeEach( () => {
-		itemFoo = new Model( { label: 'foo' } );
-		itemBar = new Model( { label: 'bar' } );
+		itemFoo = new Model( { label: 'foo', style: 'foostyle' } );
+		itemBar = new Model( { label: 'bar', style: 'barstyle' } );
 
 		items = new Collection( { idProperty: 'label' } );
 
@@ -84,8 +84,8 @@ describe( 'List', () => {
 		it( 'adds a new controller to "list" collection', () => {
 			const listCollection = list.collections.get( 'list' );
 
-			list._addListItem( new Model( { label: 'baz' } ) );
-			list._addListItem( new Model( { label: 'qux' } ), 0 );
+			list._addListItem( new Model( { label: 'baz', style: 'bazstyle' } ) );
+			list._addListItem( new Model( { label: 'qux', style: 'quxstyle' } ), 0 );
 
 			expect( listCollection ).to.have.length( 2 );
 			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
@@ -94,7 +94,7 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).view ).to.be.instanceof( ListItemView );
 		} );
 
-		it( 'creates a bridge between "click" on item model and model#execute', ( done ) => {
+		it( 'creates a bridge between itemModel#execute and model#execute events', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
 				expect( itemModel.label ).to.equal( 'foo' );
 
@@ -105,7 +105,7 @@ describe( 'List', () => {
 				items.add( itemFoo );
 				items.add( itemBar );
 
-				itemFoo.fire( 'click' );
+				itemFoo.fire( 'execute' );
 			} );
 		} );
 	} );
@@ -113,8 +113,8 @@ describe( 'List', () => {
 	describe( '_removeListItem', () => {
 		it( 'removes a controller from "list" collection', () => {
 			const listCollection = list.collections.get( 'list' );
-			const itemBaz = new Model( { label: 'baz' } );
-			const itemQux = new Model( { label: 'qux' } );
+			const itemBaz = new Model( { label: 'baz', style: 'bazstyle' } );
+			const itemQux = new Model( { label: 'qux', style: 'quxstyle' } );
 
 			list._addListItem( itemBaz );
 			list._addListItem( itemQux );
@@ -127,7 +127,7 @@ describe( 'List', () => {
 			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
 		} );
 
-		it( 'deactivates a bridge between "click" on item model and model#execute', () => {
+		it( 'deactivates a bridge between itemModel#execute and model#execute events', () => {
 			const clicked = {
 				foo: 0,
 				bar: 0
@@ -141,13 +141,13 @@ describe( 'List', () => {
 				items.add( itemFoo );
 				items.add( itemBar );
 
-				itemFoo.fire( 'click' );
-				itemBar.fire( 'click' );
+				itemFoo.fire( 'execute' );
+				itemBar.fire( 'execute' );
 
 				items.remove( itemFoo );
 
-				itemFoo.fire( 'click' );
-				itemBar.fire( 'click' );
+				itemFoo.fire( 'execute' );
+				itemBar.fire( 'execute' );
 
 				expect( clicked.foo ).to.equal( 1 );
 				expect( clicked.bar ).to.equal( 2 );

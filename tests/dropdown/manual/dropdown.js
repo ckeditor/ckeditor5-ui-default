@@ -18,20 +18,22 @@ import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
 
 testUtils.createTestUIController( {
 	dropdown: 'div#dropdown',
-	listDropdown: 'div#list-dropdown'
+	listDropdown: 'div#list-dropdown',
+	dropdownShared: 'div#dropdown-shared'
 } ).then( ui => {
 	createEmptyDropdown( ui );
 	createListDropdown( ui );
+	createSharedModelDropdowns( ui );
 } );
 
 function createEmptyDropdown( ui ) {
 	const model = new Model( {
 		label: 'Dropdown',
 		isEnabled: true,
-		isOn: false,
+		isOn: false
 	} );
 
-	const dropdown = new Dropdown( model, new DropdownView( model ) );
+	const dropdown = new Dropdown( model, new DropdownView() );
 
 	ui.add( 'dropdown', dropdown );
 
@@ -64,11 +66,27 @@ function createListDropdown( ui ) {
 		content: itemListModel
 	} );
 
-	const dropdown = new ListDropdown( model, new ListDropdownView( model ) );
+	const dropdown = new ListDropdown( model, new ListDropdownView() );
 
 	ui.add( 'listDropdown', dropdown );
 
 	window.listDropdownModel = model;
 	window.listDropdownCollection = collection;
 	window.Model = Model;
+}
+
+function createSharedModelDropdowns( ui ) {
+	const model = new Model( {
+		label: 'Shared Model',
+		isEnabled: true,
+		isOn: false
+	} );
+
+	const dropdown1 = new Dropdown( model, new DropdownView() );
+	const dropdown2 = new Dropdown( model, new DropdownView() );
+
+	ui.add( 'dropdownShared', dropdown1 );
+	ui.add( 'dropdownShared', dropdown2 );
+
+	dropdown1.panel.view.element.innerHTML = dropdown2.panel.view.element.innerHTML = 'Empty panel.';
 }

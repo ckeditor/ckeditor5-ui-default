@@ -9,19 +9,19 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The basic dropdown panel view class.
+ * The dropdown panel view class.
+ *
+ * See {@link ui.dropdown.DropdownPanel}.
  *
  * @memberOf ui.dropdown
  * @extends ui.View
  */
 export default class DropdownPanelView extends View {
 	/**
-	 * Creates a DropdownPanelView instance.
-	 *
-	 * @param {utils.Observable} model
+	 * @inheritDoc
 	 */
-	constructor( model ) {
-		super( model );
+	constructor() {
+		super();
 
 		const bind = this.bind;
 
@@ -32,11 +32,29 @@ export default class DropdownPanelView extends View {
 				class: [
 					'ck-reset',
 					'ck-dropdown__panel',
-					bind.if( 'isOn', 'ck-dropdown__panel-active' )
+					bind.if( 'isVisible', 'ck-dropdown__panel-visible' )
 				]
 			}
 		} );
 
 		this.register( 'content', el => el );
+
+		/**
+		 * Model of this dropdown panel view.
+		 *
+		 * @member {ui.dropdown.DropdownPanelViewModel} ui.dropdown.DropdownPanelView#model
+		 */
 	}
 }
+
+/**
+ * The dropdown panel view model interface.
+ *
+ * @interface ui.dropdown.DropdownPanelViewModel
+ */
+
+/**
+ * Controls whether the panel is visible.
+ *
+ * @member {Boolean} ui.dropdown.DropdownPanelViewModel#isVisible
+ */
