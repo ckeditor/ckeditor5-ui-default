@@ -5,8 +5,8 @@
 
 'use strict';
 
-import Template from '../template.js';
-import ToolbarView from '../toolbar/toolbarview.js';
+import Template from '../../template.js';
+import ToolbarView from '../toolbarview.js';
 
 /**
  * The StickyToolbarView class.

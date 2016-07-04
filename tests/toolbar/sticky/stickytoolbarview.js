@@ -8,8 +8,8 @@
 'use strict';
 
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
-import StickyToolbar from '/ckeditor5/ui/stickytoolbar/stickytoolbar.js';
-import StickyToolbarView from '/ckeditor5/ui/stickytoolbar/stickytoolbarview.js';
+import StickyToolbar from '/ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
+import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
 import Model from '/ckeditor5/ui/model.js';
 

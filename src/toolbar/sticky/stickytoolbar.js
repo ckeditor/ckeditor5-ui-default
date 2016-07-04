@@ -5,7 +5,7 @@
 
 'use strict';
 
-import Toolbar from '../toolbar/toolbar.js';
+import Toolbar from '../toolbar.js';
 
 /**
  * The StickyToolbar controller class.
@@ -30,7 +30,7 @@ export default class StickyToolbar extends Toolbar {
 	 * @param {ui.View} view View of this StickyToolbar.
 	 */
 	constructor( model, view ) {
-		super( view );
+		super( model, view );
 
 		view.model.bind( 'isActive' ).to( model );
 	}
