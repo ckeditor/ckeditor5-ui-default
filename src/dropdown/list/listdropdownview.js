@@ -22,8 +22,6 @@ export default class ListDropdownView extends DropdownView {
 	constructor() {
 		super();
 
-		let isDomListenerActive = false;
-
 		this.listenTo( this.model, 'change:isOpen', ( evt, name, value ) => {
 			if ( value ) {
 				// TODO: It will probably be focus/blur-based rather than click. It should be bound
@@ -34,14 +32,8 @@ export default class ListDropdownView extends DropdownView {
 						this.model.isOpen = false;
 					}
 				} );
-
-				isDomListenerActive = true;
 			} else {
-				if ( isDomListenerActive ) {
-					this.stopListening( document );
-
-					isDomListenerActive = false;
-				}
+				this.stopListening( document );
 			}
 		} );
 	}
