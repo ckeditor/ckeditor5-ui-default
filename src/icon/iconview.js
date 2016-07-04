@@ -9,7 +9,7 @@ import View from '../../ui/view.js';
 import Template from '../template.js';
 
 /**
- * The IconView class.
+ * The icon view class.
  *
  * See {@link ui.icon.Icon}.
  *
@@ -49,7 +49,7 @@ export default class IconView extends View {
 		} );
 
 		/**
-		 * Model of this IconView.
+		 * Model of this icon view.
 		 *
 		 * @member {ui.icon.IconViewModel} ui.icon.IconView#model
 		 */
@@ -57,7 +57,7 @@ export default class IconView extends View {
 }
 
 /**
- * The IconView {@link ui.Model} interface.
+ * The icon view {@link ui.Model} interface.
  *
  * @memberOf ui.icon
  * @interface ui.icon.IconViewModel

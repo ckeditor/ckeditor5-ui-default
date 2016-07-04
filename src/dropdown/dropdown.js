@@ -16,7 +16,7 @@ import DropdownPanel from './dropdownpanel.js';
 import DropdownPanelView from './dropdownpanelview.js';
 
 /**
- * The Dropdown controller class.
+ * The dropdown controller class.
  *
  *		const model = new Model( {
  *			label: 'Dropdown',
@@ -36,8 +36,8 @@ export default class Dropdown extends Controller {
 	/**
 	 * Creates an instance of {@link ui.dropdown.Dropdown} class.
 	 *
-	 * @param {ui.dropdown.DropdownModel} model Model of this Dropdown.
-	 * @param {ui.View} view View of this Dropdown.
+	 * @param {ui.dropdown.DropdownModel} model Model of this dropdown.
+	 * @param {ui.View} view View of this dropdown.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -59,11 +59,11 @@ export default class Dropdown extends Controller {
 		const buttonModel = new Model();
 
 		// Button needs a separate Model because otherwise it would fire #execute event
-		// on the model shared between multiple Dropdowns (they would all open at the same time).
+		// on the model shared between multiple dropdowns (they would all open at the same time).
 		buttonModel.bind( 'label', 'isOn', 'isEnabled' ).to( model );
 
 		/**
-		 * Button of this Dropdown.
+		 * Button of this dropdown.
 		 *
 		 * @readonly
 		 * @member {ui.button.Button} ui.dropdown.Dropdown#button
@@ -85,7 +85,7 @@ export default class Dropdown extends Controller {
 		panelModel.bind( 'isVisible' ).to( this.view.model, 'isOpen' );
 
 		/**
-		 * Panel of this Dropdown.
+		 * Panel of this dropdown.
 		 *
 		 * @readonly
 		 * @member {ui.dropdown.DropdownPanel} ui.dropdown.Dropdown#panel
@@ -95,20 +95,20 @@ export default class Dropdown extends Controller {
 }
 
 /**
- * The basic Dropdown model interface.
+ * The basic dropdown model interface.
  *
  * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownModel
  */
 
 /**
- * The label of the Dropdown.
+ * The label of the dropdown.
  *
  * @member {String} ui.dropdown.DropdownModel#label
  */
 
 /**
- * Controls whether the Dropdown is enabled (can be clicked).
+ * Controls whether the dropdown is enabled (can be clicked).
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isEnabled
  */

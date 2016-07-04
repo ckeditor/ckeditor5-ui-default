@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The ToolbarView class.
+ * The toolbar view class.
  *
  * See {@link ui.toolbar.Toolbar}.
  *

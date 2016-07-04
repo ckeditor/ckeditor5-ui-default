@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The IframeView class.
+ * The iframe view class.
  *
  * See {@link ui.iframe.Iframe}.
  *
@@ -18,7 +18,7 @@ import Template from '../template.js';
  */
 export default class IframeView extends View {
 	/**
-	 * Creates a new instance of the IframeView.
+	 * Creates a new instance of the iframe view.
 	 *
 	 * @param {utils.Locale} [locale] The {@link ckeditor5.Editor#locale editor's locale} instance.
 	 */
@@ -67,7 +67,7 @@ export default class IframeView extends View {
 		} );
 
 		/**
-		 * Model of this IframeView.
+		 * Model of this iframe view.
 		 *
 		 * @member {ui.iframe.IframeViewModel} ui.iframe.IframeView#model
 		 */
@@ -88,7 +88,7 @@ export default class IframeView extends View {
 }
 
 /**
- * The IframeView model interface.
+ * The iframe view model interface.
  *
  * @memberOf ui.iframe
  * @interface ui.iframe.IframeViewModel

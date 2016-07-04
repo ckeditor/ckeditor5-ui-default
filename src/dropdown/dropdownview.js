@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The DropdownView class.
+ * The dropdown view class.
  *
  * See {@link ui.dropdown.Dropdown}.
  *
@@ -38,7 +38,7 @@ export default class DropdownView extends View {
 		this.register( 'main', el => el );
 
 		/**
-		 * Model of this DropdownView.
+		 * Model of this dropdown view.
 		 *
 		 * @member {ui.dropdown.DropdownViewModel} ui.dropdown.DropdownView#model
 		 */
@@ -46,14 +46,14 @@ export default class DropdownView extends View {
 }
 
 /**
- * The DropdownView {@link ui.Model} interface.
+ * The dropdown view {@link ui.Model} interface.
  *
  * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownViewModel
  */
 
 /**
- * Controls whether the dropdown is open, which also means its
+ * Controls whether the dropdown view is open, which also means its
  * {@link ui.dropdown.Dropdown#panel} is visible.
  *
  * @member {String} ui.dropdown.DropdownViewModel#isOpen

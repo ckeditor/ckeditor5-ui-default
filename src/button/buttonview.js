@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The ButtonView class.
+ * The button view class.
  *
  * See {@link ui.button.Button}.
  *
@@ -60,7 +60,7 @@ export default class ButtonView extends View {
 		this.register( 'children', el => el );
 
 		/**
-		 * Model of this ButtonView.
+		 * Model of this button view.
 		 *
 		 * @member {ui.button.ButtonViewModel} ui.button.ButtonView#model
 		 */
@@ -68,33 +68,33 @@ export default class ButtonView extends View {
 }
 
 /**
- * The ButtonView {@link ui.Model} interface.
+ * The button view {@link ui.Model} interface.
  *
  * @memberOf ui.button
  * @interface ui.button.ButtonViewModel
  */
 
 /**
- * The label of the ButtonView visible to the user.
+ * The label of the button view visible to the user.
  *
  * @member {String} ui.button.ButtonViewModel#label
  */
 
 /**
- * Controls whether the ButtonView is "on", e.g. some feature which it represents
+ * Controls whether the button view is "on", e.g. some feature which it represents
  * is currently enabled.
  *
  * @member {Boolean} ui.button.ButtonViewModel#isOn
  */
 
 /**
- * Controls whether the ButtonView is enabled (can be clicked).
+ * Controls whether the button view is enabled (can be clicked).
  *
  * @member {Boolean} ui.button.ButtonViewModel#isEnabled
  */
 
 /**
- * Fired when the button is being clicked. It won't be fired when the button is disabled.
+ * Fired when the button view is clicked. It won't be fired when the button is disabled.
  *
  * @event ui.button.ButtonView#click
  */

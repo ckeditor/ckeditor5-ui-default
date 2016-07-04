@@ -8,7 +8,7 @@
 import DropdownView from '../dropdownview.js';
 
 /**
- * The ListDropdownView class.
+ * The list dropdown view class.
  *
  * See {@link ui.dropdown.list.ListDropdown}.
  *

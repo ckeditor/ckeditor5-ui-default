@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The ListItemView class.
+ * The list item view class.
  *
  * See {@link ui.list.ListItem}.
  *
@@ -48,7 +48,7 @@ export default class ListItemView extends View {
 		} );
 
 		/**
-		 * Model of this ListItemView.
+		 * Model of this list item view.
 		 *
 		 * @member {ui.list.ListItemViewModel} ui.list.ListItemView#model
 		 */
@@ -56,20 +56,20 @@ export default class ListItemView extends View {
 }
 
 /**
- * The ListItemView {@link ui.Model} interface.
+ * The list item view {@link ui.Model} interface.
  *
  * @memberOf ui.list
  * @interface ui.list.ListItemViewModel
  */
 
 /**
- * The label of the item.
+ * The label of the list item.
  *
  * @member {String} ui.list.ListItemViewModel#label
  */
 
 /**
- * (Optional) The DOM style attribute of the item.
+ * (Optional) The DOM style attribute of the list item.
  *
  * @member {String} ui.list.ListItemViewModel#style
  */

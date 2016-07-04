@@ -11,7 +11,7 @@ import List from '../../list/list.js';
 import ListView from '../../list/listview.js';
 
 /**
- * The ListDropdown controller class. It represents a dropdown
+ * The list dropdown controller class. It represents a dropdown
  * with a {@link ui.list.List} component.
  *
  *		const model = new Model( {
@@ -33,8 +33,8 @@ export default class ListDropdown extends Dropdown {
 	/**
 	 * Creates an instance of {@link ui.dropdown.list.ListDropdown} class.
 	 *
-	 * @param {ui.dropdown.list.ListDropdownModel} model Model of this ListDropdown.
-	 * @param {ui.View} view View of this ListDropdown.
+	 * @param {ui.dropdown.list.ListDropdownModel} model Model of this list dropdown.
+	 * @param {ui.View} view View of this list dropdown.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -47,7 +47,7 @@ export default class ListDropdown extends Dropdown {
 		} );
 
 		/**
-		 * List of this ListDropdown.
+		 * List of this list dropdown.
 		 *
 		 * @readonly
 		 * @member {ui.list.List} ui.dropdown.list.ListDropdown#list
@@ -59,7 +59,7 @@ export default class ListDropdown extends Dropdown {
 }
 
 /**
- * The ListDropdown model interface.
+ * The list dropdown model interface.
  *
  * @memberOf ui.dropdown.list
  * @extends {ui.dropdown.DropdownModel}
@@ -67,7 +67,7 @@ export default class ListDropdown extends Dropdown {
  */
 
 /**
- * Content of the ListDropdown used to create the List instance.
+ * Content of the list dropdown used to create the {@link ui.list.List} instance.
  * Usually {@link ui.list.ListModel}.
  *
  * @member {Boolean} ui.dropdown.list.ListDropdownModel#content

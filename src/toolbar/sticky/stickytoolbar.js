@@ -8,7 +8,7 @@
 import Toolbar from '../toolbar.js';
 
 /**
- * The StickyToolbar controller class.
+ * The sticky toolbar controller class.
  *
  *		const model = new Model( {
  *			isActive: false
@@ -26,8 +26,8 @@ export default class StickyToolbar extends Toolbar {
 	/**
 	 * Creates an instance of {@link ui.stickyToolbar.StickyToolbar} class.
 	 *
-	 * @param {ui.stickyToolbar.StickyToolbarModel} model Model of this StickyToolbar.
-	 * @param {ui.View} view View of this StickyToolbar.
+	 * @param {ui.stickyToolbar.StickyToolbarModel} model Model of this sticky toolbar.
+	 * @param {ui.View} view View of this sticky toolbar.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -37,14 +37,14 @@ export default class StickyToolbar extends Toolbar {
 }
 
 /**
- * The StickyToolbar component {@link ui.Model} interface.
+ * The sticky toolbar component {@link ui.Model} interface.
  *
  * @memberOf ui.stickyToolbar
  * @interface ui.stickyToobar.StickyToolbarModel
  */
 
 /**
- * Controls whether the toolbar should be active. When any editable
+ * Controls whether the sticky toolbar should be active. When any editable
  * is focused in the editor, toolbar becomes active.
  *
  * @readonly

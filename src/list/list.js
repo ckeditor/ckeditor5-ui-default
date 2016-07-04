@@ -12,7 +12,7 @@ import ListItem from './listitem.js';
 import ListItemView from './listitemview.js';
 
 /**
- * The List controller class.
+ * The list controller class.
  *
  *		const itemsCollection = new Collection();
  *
@@ -36,8 +36,8 @@ export default class List extends Controller {
 	/**
 	 * Creates an instance of {@link ui.list.List} class.
 	 *
-	 * @param {ui.list.ListModel} model Model of this List.
-	 * @param {ui.View} view View of this List.
+	 * @param {ui.list.ListModel} model Model of this list.
+	 * @param {ui.View} view View of this list.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -66,7 +66,7 @@ export default class List extends Controller {
 
 	/**
 	 * Adds an item to "list" collection and activates event bubbling
-	 * between item view and the List.
+	 * between item view and the list.
 	 *
 	 * @protected
 	 * @param {utils.Observable} itemModel
@@ -89,7 +89,7 @@ export default class List extends Controller {
 
 	/**
 	 * Removes an item from "list" collection and deactivates event bubbling
-	 * between item view and the List.
+	 * between item view and the list.
 	 *
 	 * @protected
 	 * @param {utils.Observable} itemModel
@@ -102,7 +102,7 @@ export default class List extends Controller {
 }
 
 /**
- * The List component {@link ui.Model} interface.
+ * The list component {@link ui.Model} interface.
  *
  * @memberOf ui.list
  * @interface ui.list.ListModel

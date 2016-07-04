@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The DropdownPanelView class.
+ * The dropdown panel view class.
  *
  * See {@link ui.dropdown.DropdownPanel}.
  *
@@ -40,7 +40,7 @@ export default class DropdownPanelView extends View {
 		this.register( 'content', el => el );
 
 		/**
-		 * Model of this DropdownPanelView.
+		 * Model of this dropdown panel view.
 		 *
 		 * @member {ui.dropdown.DropdownPanelViewModel} ui.dropdown.DropdownPanelView#model
 		 */
@@ -48,7 +48,7 @@ export default class DropdownPanelView extends View {
 }
 
 /**
- * The DropdownPanelView model interface.
+ * The dropdown panel view model interface.
  *
  * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownPanelViewModel

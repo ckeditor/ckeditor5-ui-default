@@ -9,7 +9,7 @@ import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
 
 /**
- * The StickyToolbarView class.
+ * The sticky toolbar view class.
  *
  * See {@link ui.stickyToolbar.StickyToolbar}, {@link ui.toolbar.ToolbarView}.
  *
@@ -35,7 +35,7 @@ export default class StickyToolbarView extends ToolbarView {
 		} );
 
 		/**
-		 * Model of this StickyToolbarView.
+		 * Model of this sticky toolbar view.
 		 *
 		 * @member {ui.stickyToobar.StickyToolbarViewModel} ui.stickyToolbar.StickyToolbarView#model
 		 */
@@ -148,14 +148,14 @@ export default class StickyToolbarView extends ToolbarView {
 }
 
 /**
- * The StickyToolbarView {@link ui.Model} interface.
+ * The sticky toolbar view {@link ui.Model} interface.
  *
  * @memberOf ui.stickyToolbar
  * @interface ui.stickyToobar.StickyToolbarViewModel
  */
 
 /**
- * Controls whether the toolbar should be active. When any editable
+ * Controls whether the sticky toolbar should be active. When any editable
  * is focused in the editor, toolbar becomes active.
  *
  * @readonly
@@ -164,7 +164,7 @@ export default class StickyToolbarView extends ToolbarView {
  */
 
 /**
- * Controls whether the toolbar is in the "sticky" state.
+ * Controls whether the sticky toolbar is in the "sticky" state.
  *
  * @readonly
  * @observable

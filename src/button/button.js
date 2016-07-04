@@ -12,7 +12,7 @@ import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
 
 /**
- * The Button controller class. It uses {@link ui.icon.Icon} component
+ * The button controller class. It uses {@link ui.icon.Icon} component
  * to display an icon.
  *
  *		const model = new Model( {
@@ -68,33 +68,33 @@ export default class Button extends Controller {
 }
 
 /**
- * The Button component {@link ui.Model} interface.
+ * The button component {@link ui.Model} interface.
  *
  * @memberOf ui.button
  * @interface ui.button.ButtonModel
  */
 
 /**
- * The label of the Button visible to the user.
+ * The label of the button visible to the user.
  *
  * @member {String} ui.button.ButtonModel#label
  */
 
 /**
- * Controls whether the Button is "on", e.g. some feature which it represents
+ * Controls whether the button is "on", e.g. some feature which it represents
  * is currently enabled.
  *
  * @member {Boolean} ui.button.ButtonModel#isOn
  */
 
 /**
- * Controls whether the Button is enabled (can be clicked).
+ * Controls whether the button is enabled (can be clicked).
  *
  * @member {Boolean} ui.button.ButtonModel#isEnabled
  */
 
 /**
- * (Optional) The name of the icon of the Button.
+ * (Optional) The name of the icon of the button.
  * See {@link ui.icon.Icon} and {@link ui.iconManager.IconManager}.
  *
  * @member {String} ui.button.ButtonModel#icon

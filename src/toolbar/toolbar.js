@@ -9,7 +9,7 @@ import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
 /**
- * The Toolbar controller class.
+ * The toolbar controller class.
  *
  *		const model = new Model();
  *
@@ -25,8 +25,8 @@ export default class Toolbar extends Controller {
 	/**
 	 * Creates an instance of {@link ui.toolbar.Toolbar} class.
 	 *
-	 * @param {ui.Model} model Model of this Toolbar.
-	 * @param {ui.View} view View of this Toolbar.
+	 * @param {ui.Model} model Model of this toolbar.
+	 * @param {ui.View} view View of this toolbar.
 	 */
 	constructor( model, view ) {
 		super( model, view );

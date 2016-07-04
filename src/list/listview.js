@@ -9,7 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The ListView class.
+ * The list view class.
  *
  * See {@link ui.list.List}.
  *

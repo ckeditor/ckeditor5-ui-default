@@ -9,7 +9,7 @@ import ButtonView from '../button/buttonview.js';
 import Template from '../template.js';
 
 /**
- * The DropdownButtonView class.
+ * The dropdown button view class.
  *
  * See {@link ui.dropdown.Dropdown}, {@link ui.button.Button}, {@link ui.button.ButtonView}.
  *

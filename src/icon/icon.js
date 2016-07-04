@@ -8,7 +8,7 @@
 import Controller from '../controller.js';
 
 /**
- * The Icon controller class.
+ * The icon controller class.
  *
  *		const model = new Model( {
  *			name: 'bold',
@@ -27,8 +27,8 @@ export default class Icon extends Controller {
 	/**
 	 * Creates an instance of {@link ui.icon.Icon} class.
 	 *
-	 * @param {ui.icon.IconModel} model Model of this Icon.
-	 * @param {ui.View} view View of this Icon.
+	 * @param {ui.icon.IconModel} model Model of this icon.
+	 * @param {ui.View} view View of this icon.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -38,7 +38,7 @@ export default class Icon extends Controller {
 }
 
 /**
- * The Icon component {@link ui.Model} interface.
+ * The icon component {@link ui.Model} interface.
  *
  * @memberOf ui.icon
  * @interface ui.icon.IconModel

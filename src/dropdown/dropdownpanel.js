@@ -9,7 +9,7 @@ import Controller from '../controller.js';
 import ControllerCollection from '../controllercollection.js';
 
 /**
- * The DropdownPanel controller class.
+ * The dropdown panel controller class.
  *
  *		const model = new Model( {
  *			isVisible: false,
@@ -27,8 +27,8 @@ export default class DropdownPanel extends Controller {
 	/**
 	 * Creates an instance of {@link ui.dropdown.DropdownPanel} class.
 	 *
-	 * @param {ui.dropdown.DropdownPanel} model Model of this DropdownPanel.
-	 * @param {ui.View} view View of this DropdownPanel.
+	 * @param {ui.dropdown.DropdownPanel} model Model of this dropdown panel.
+	 * @param {ui.View} view View of this dropdown panel.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -40,7 +40,7 @@ export default class DropdownPanel extends Controller {
 }
 
 /**
- * The DropdownPanel model interface.
+ * The dropdown panel model interface.
  *
  * @memberOf ui.dropdown
  * @interface ui.dropdown.DropdownPanelModel
