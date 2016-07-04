@@ -11,8 +11,10 @@ import ControllerCollection from '../controllercollection.js';
 /**
  * The Toolbar controller class.
  *
+ *		const model = new Model();
+ *
  *		// An instance of Toolbar.
- *		new Toolbar( new ToolbarView() );
+ *		new Toolbar( model, new ToolbarView() );
  *
  * See {@link ui.toolbar.ToolbarView}.
  *
@@ -23,10 +25,11 @@ export default class Toolbar extends Controller {
 	/**
 	 * Creates an instance of {@link ui.toolbar.Toolbar} class.
 	 *
+	 * @param {ui.Model} model Model of this Toolbar.
 	 * @param {ui.View} view View of this Toolbar.
 	 */
-	constructor( view ) {
-		super( null, view );
+	constructor( model, view ) {
+		super( model, view );
 
 		this.collections.add( new ControllerCollection( 'buttons' ) );
 	}
