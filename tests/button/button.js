@@ -36,6 +36,7 @@ describe( 'Button', () => {
 			expect( view.model.isOn ).to.equal( model.isOn );
 			expect( view.model.isEnabled ).to.equal( model.isEnabled );
 
+			expect( view.model.noText ).to.be.undefined;
 			expect( view.model.icon ).to.be.undefined;
 			expect( view.model.iconAlign ).to.be.undefined;
 		} );

@@ -99,20 +99,4 @@ describe( 'ButtonView', () => {
 			} );
 		} );
 	} );
-
-	describe( '_setupIcon', () => {
-		it( 'appends child icon view when "icon" in model', () => {
-			model.set( {
-				icon: 'foo',
-				iconAlign: 'LEFT'
-			} );
-
-			view = new ButtonView();
-
-			return new Button( model, view ).init().then( () => {
-				expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
-				expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
-			} );
-		} );
-	} );
 } );
