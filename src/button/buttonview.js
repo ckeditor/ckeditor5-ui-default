@@ -104,6 +104,12 @@ export default class ButtonView extends View {
  */
 
 /**
+ * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
+ *
+ * @member {Boolean} ui.button.ButtonViewModel#noText
+ */
+
+/**
  * Fired when the button view is clicked. It won't be fired when the button is disabled.
  *
  * @event ui.button.ButtonView#click
