@@ -94,7 +94,7 @@ export default class Button extends Controller {
 /**
  * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
  *
- * @member {String} ui.button.ButtonModel#noText
+ * @member {Boolean} ui.button.ButtonModel#noText
  */
 
 /**
