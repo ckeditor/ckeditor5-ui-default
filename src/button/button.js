@@ -41,7 +41,7 @@ export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'label', 'isOn', 'isEnabled', 'noText' ).to( model );
+		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
 
 		if ( model.icon ) {
 			view.model.bind( 'icon', 'iconAlign' ).to( model );
@@ -92,9 +92,9 @@ export default class Button extends Controller {
  */
 
 /**
- * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
+ * (Optional) Whether the label of the button is visible. At default the label is hidden (e.g. button with icon only).
  *
- * @member {Boolean} ui.button.ButtonModel#noText
+ * @member {Boolean} ui.button.ButtonModel#withText
  */
 
 /**

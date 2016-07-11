@@ -60,7 +60,7 @@ export default class Dropdown extends Controller {
 
 		// Button needs a separate Model because otherwise it would fire #execute event
 		// on the model shared between multiple dropdowns (they would all open at the same time).
-		buttonModel.bind( 'label', 'isOn', 'isEnabled' ).to( model );
+		buttonModel.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
 
 		/**
 		 * Button of this dropdown.
