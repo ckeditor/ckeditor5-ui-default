@@ -44,7 +44,7 @@ describe( 'Button', () => {
 		it( 'binds view#model icon–related attributes to the Button#model', () => {
 			model.set( {
 				icon: 'abc',
-				iconAlign: 'LEFT'
+				iconAlign: 'left'
 			} );
 
 			view = new ButtonView();
@@ -75,7 +75,7 @@ describe( 'Button', () => {
 		it( 'appends child Icon instance when Button.model#icon is present', () => {
 			model.set( {
 				icon: 'foo',
-				iconAlign: 'LEFT'
+				iconAlign: 'left'
 			} );
 
 			view = new ButtonView();
