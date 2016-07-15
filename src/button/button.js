@@ -20,7 +20,7 @@ import IconView from '../icon/iconview.js';
  *			isEnabled: true,
  *			isOn: false,
  *			icon: 'bold',
- *			iconAlign: 'LEFT'
+ *			iconAlign: 'left'
  *		} );
  *
  *		// An instance of Button with a label and an icon.
@@ -107,7 +107,7 @@ export default class Button extends Controller {
 /**
  * (Optional) The alignment of the Button icon.
  *
- * @member {'LEFT'|'RIGHT'} ui.button.ButtonModel#iconAlign
+ * @member {'left'|'right'} ui.button.ButtonModel#iconAlign
  */
 
 /**

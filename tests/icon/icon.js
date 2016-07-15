@@ -17,7 +17,7 @@ describe( 'Icon', () => {
 	beforeEach( () => {
 		model = new Model( {
 			name: 'foo',
-			align: 'RIGHT'
+			align: 'right'
 		} );
 
 		view = new IconView();

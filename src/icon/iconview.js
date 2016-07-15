@@ -72,5 +72,5 @@ export default class IconView extends View {
 /**
  * The alignment of the icon.
  *
- * @member {'LEFT'|'RIGHT'} ui.icon.IconViewModel#align
+ * @member {'left'|'right'} ui.icon.IconViewModel#align
  */

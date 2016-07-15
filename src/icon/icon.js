@@ -12,7 +12,7 @@ import Controller from '../controller.js';
  *
  *		const model = new Model( {
  *			name: 'bold',
- *			align: 'LEFT'
+ *			align: 'left'
  *		} );
  *
  *		// An instance of "bold" Icon, aligned to the left.
@@ -53,5 +53,5 @@ export default class Icon extends Controller {
 /**
  * The alignment of the icon.
  *
- * @member {'LEFT'|'RIGHT'} ui.icon.IconModel#align
+ * @member {'left'|'right'} ui.icon.IconModel#align
  */
