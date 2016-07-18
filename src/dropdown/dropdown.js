@@ -119,6 +119,12 @@ export default class Dropdown extends Controller {
  */
 
 /**
+ * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
+ *
+ * @member {Boolean} ui.dropdown.DropdownModel#withText
+ */
+
+/**
  * Fired when the {@link ui.dropdown.Dropdown#button} is executed.
  *
  * See {@link ui.button.ButtonModel#execute}.
