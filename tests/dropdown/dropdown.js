@@ -29,7 +29,8 @@ describe( 'Dropdown', () => {
 		model = new Model( {
 			isEnabled: true,
 			label: 'foo',
-			isOn: false
+			isOn: false,
+			withText: true
 		} );
 		dropdown = new Dropdown( model, new DropdownView() );
 	} );
@@ -50,11 +51,11 @@ describe( 'Dropdown', () => {
 
 		it( 'binds Button#model to the #model', () => {
 			assertBinding( dropdown.button.model,
-				{ isEnabled: true, label: 'foo', isOn: false },
+				{ isEnabled: true, label: 'foo', isOn: false, withText: true },
 				[
-					[ model, { isEnabled: false, label: 'bar', isOn: true } ]
+					[ model, { isEnabled: false, label: 'bar', isOn: true, withText: false } ]
 				],
-				{ isEnabled: false, label: 'bar', isOn: true }
+				{ isEnabled: false, label: 'bar', isOn: true, withText: false }
 			);
 		} );
 
