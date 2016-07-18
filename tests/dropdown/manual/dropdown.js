@@ -30,7 +30,8 @@ function createEmptyDropdown( ui ) {
 	const model = new Model( {
 		label: 'Dropdown',
 		isEnabled: true,
-		isOn: false
+		isOn: false,
+		withText: true
 	} );
 
 	const dropdown = new Dropdown( model, new DropdownView() );
@@ -63,6 +64,7 @@ function createListDropdown( ui ) {
 		label: 'ListDropdown',
 		isEnabled: true,
 		isOn: false,
+		withText: true,
 		content: itemListModel
 	} );
 
@@ -79,7 +81,8 @@ function createSharedModelDropdowns( ui ) {
 	const model = new Model( {
 		label: 'Shared Model',
 		isEnabled: true,
-		isOn: false
+		isOn: false,
+		withText: true
 	} );
 
 	const dropdown1 = new Dropdown( model, new DropdownView() );
