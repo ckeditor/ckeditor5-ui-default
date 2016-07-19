@@ -33,7 +33,7 @@ export default class ButtonView extends View {
 					'ck-button',
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
-					bind.if( 'noText', 'ck-button-notext' )
+					bind.if( 'withText', 'ck-button-with-text' )
 				]
 			},
 
@@ -106,7 +106,7 @@ export default class ButtonView extends View {
 /**
  * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
  *
- * @member {Boolean} ui.button.ButtonViewModel#noText
+ * @member {Boolean} ui.button.ButtonViewModel#withText
  */
 
 /**

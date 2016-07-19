@@ -60,7 +60,7 @@ export default class Dropdown extends Controller {
 
 		// Button needs a separate Model because otherwise it would fire #execute event
 		// on the model shared between multiple dropdowns (they would all open at the same time).
-		buttonModel.bind( 'label', 'isOn', 'isEnabled' ).to( model );
+		buttonModel.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
 
 		/**
 		 * Button of this dropdown.
@@ -116,6 +116,12 @@ export default class Dropdown extends Controller {
  * Controls whether the {@link ui.dropdown.Dropdown#button} is "pushed".
  *
  * @member {Boolean} ui.dropdown.DropdownModel#isOn
+ */
+
+/**
+ * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
+ *
+ * @member {Boolean} ui.dropdown.DropdownModel#withText
  */
 
 /**
