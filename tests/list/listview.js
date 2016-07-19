@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, list */
 
-'use strict';
-
 import ListView from '/ckeditor5/ui/list/listview.js';
 
 describe( 'ListView', () => {

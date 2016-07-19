@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, dropdown */
 
-'use strict';
-
 import Model from '/ckeditor5/ui/model.js';
 
 import Dropdown from '/ckeditor5/ui/dropdown/dropdown.js';

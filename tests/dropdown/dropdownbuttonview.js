@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, dropdown */
 
-'use strict';
-
 import DropdownButtonView from '/ckeditor5/ui/dropdown/dropdownbuttonview.js';
 
 describe( 'DropdownButtonView', () => {

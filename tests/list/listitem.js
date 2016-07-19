@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, list */
 
-'use strict';
-
 import ListItem from '/ckeditor5/ui/list/listitem.js';
 import ListItemView from '/ckeditor5/ui/list/listitemview.js';
 import Model from '/ckeditor5/ui/model.js';

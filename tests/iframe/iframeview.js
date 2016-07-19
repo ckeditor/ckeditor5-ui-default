@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, iframe */
 
-'use strict';
-
 import Iframe from '/ckeditor5/ui/iframe/iframe.js';
 import IframeView from '/ckeditor5/ui/iframe/iframeview.js';
 import Model from '/ckeditor5/ui/model.js';

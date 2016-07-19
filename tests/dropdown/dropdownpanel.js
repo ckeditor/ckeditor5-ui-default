@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, dropdown */
 
-'use strict';
-
 import DropdownPanel from '/ckeditor5/ui/dropdown/dropdownpanel.js';
 import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
 import ControllerCollection from '/ckeditor5/ui/controllercollection.js';

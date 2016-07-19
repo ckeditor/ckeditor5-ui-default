@@ -3,8 +3,6 @@
  * For licensing, see LICENSE.md.
  */
 
-'use strict';
-
 import Model from '../model.js';
 import Controller from '../controller.js';
 import Button from '../button/button.js';

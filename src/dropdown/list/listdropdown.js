@@ -3,8 +3,6 @@
  * For licensing, see LICENSE.md.
  */
 
-'use strict';
-
 import Dropdown from '../dropdown.js';
 
 import List from '../../list/list.js';
