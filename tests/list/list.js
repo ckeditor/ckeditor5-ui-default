@@ -9,7 +9,6 @@ import testUtils from '/tests/ckeditor5/_utils/utils.js';
 
 import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
-import ListItemView from '/ckeditor5/ui/list/listitemview.js';
 
 import Collection from '/ckeditor5/utils/collection.js';
 import Controller from '/ckeditor5/ui/controller.js';
@@ -76,21 +75,6 @@ describe( 'List', () => {
 
 			expect( spy.calledOnce ).to.be.true;
 		} );
-	} );
-
-	describe( '_addListItem', () => {
-		it( 'adds a new controller to "list" collection', () => {
-			const listCollection = list.collections.get( 'list' );
-
-			list._addListItem( new Model( { label: 'baz', style: 'bazstyle' } ) );
-			list._addListItem( new Model( { label: 'qux', style: 'quxstyle' } ), 0 );
-
-			expect( listCollection ).to.have.length( 2 );
-			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
-			expect( listCollection.get( 1 ).model.label ).to.equal( 'baz' );
-
-			expect( listCollection.get( 0 ).view ).to.be.instanceof( ListItemView );
-		} );
 
 		it( 'creates a bridge between itemModel#execute and model#execute events', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
@@ -105,24 +89,6 @@ describe( 'List', () => {
 
 				itemFoo.fire( 'execute' );
 			} );
-		} );
-	} );
-
-	describe( '_removeListItem', () => {
-		it( 'removes a controller from "list" collection', () => {
-			const listCollection = list.collections.get( 'list' );
-			const itemBaz = new Model( { label: 'baz', style: 'bazstyle' } );
-			const itemQux = new Model( { label: 'qux', style: 'quxstyle' } );
-
-			list._addListItem( itemBaz );
-			list._addListItem( itemQux );
-
-			expect( listCollection ).to.have.length( 2 );
-
-			list._removeListItem( itemBaz );
-
-			expect( listCollection ).to.have.length( 1 );
-			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
 		} );
 
 		it( 'deactivates a bridge between itemModel#execute and model#execute events', () => {
