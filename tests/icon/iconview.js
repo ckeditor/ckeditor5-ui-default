@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, icon */
 
-'use strict';
-
 import Icon from '/ckeditor5/ui/icon/icon.js';
 import IconView from '/ckeditor5/ui/icon/iconview.js';
 import Model from '/ckeditor5/ui/model.js';

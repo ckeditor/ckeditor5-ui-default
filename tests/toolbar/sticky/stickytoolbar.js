@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, toolbar */
 
-'use strict';
-
 import Model from '/ckeditor5/ui/model.js';
 import StickyToolbar from '/ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
 import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';

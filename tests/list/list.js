@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, list */
 
-'use strict';
-
 import testUtils from '/tests/ckeditor5/_utils/utils.js';
 
 import List from '/ckeditor5/ui/list/list.js';

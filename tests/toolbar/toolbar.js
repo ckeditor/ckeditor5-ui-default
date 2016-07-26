@@ -5,8 +5,6 @@
 
 /* bender-tags: ui, toolbar */
 
-'use strict';
-
 import Toolbar from '/ckeditor5/ui/toolbar/toolbar.js';
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
 import ControllerCollection from '/ckeditor5/ui/controllercollection.js';

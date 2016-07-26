@@ -3,8 +3,6 @@
  * For licensing, see LICENSE.md.
  */
 
-'use strict';
-
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
 

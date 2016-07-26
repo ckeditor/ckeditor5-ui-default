@@ -3,8 +3,6 @@
  * For licensing, see LICENSE.md.
  */
 
-'use strict';
-
 import ButtonView from '../button/buttonview.js';
 import Template from '../template.js';
 
