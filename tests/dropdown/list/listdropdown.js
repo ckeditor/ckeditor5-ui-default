@@ -5,6 +5,7 @@
 
 /* bender-tags: ui, dropdown */
 
+import Collection from '/ckeditor5/utils/collection.js';
 import Model from '/ckeditor5/ui/model.js';
 import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
 import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
@@ -16,7 +17,9 @@ describe( 'ListDropdown', () => {
 	let model, content, view, dropdown;
 
 	beforeEach( () => {
-		content = new Model();
+		content = new Model( {
+			items: new Collection()
+		} );
 
 		model = new Model( {
 			isEnabled: true,
