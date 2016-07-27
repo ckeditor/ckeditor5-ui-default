@@ -5,7 +5,6 @@
 
 import Model from '../model.js';
 import Controller from '../controller.js';
-import ControllerCollection from '../controllercollection.js';
 import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
 
@@ -53,7 +52,7 @@ export default class Button extends Controller {
 	 */
 	init() {
 		if ( this.model.icon ) {
-			this.collections.add( new ControllerCollection( 'children' ) );
+			this.addCollection( 'children' );
 
 			const iconModel = new Model();
 			iconModel.bind( 'name', 'align' ).to( this.model, 'icon', 'iconAlign' );

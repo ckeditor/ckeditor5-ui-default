@@ -6,7 +6,6 @@
 import Model from '../model.js';
 import Controller from '../controller.js';
 import Button from '../button/button.js';
-import ControllerCollection from '../controllercollection.js';
 
 import DropdownButtonView from './dropdownbuttonview.js';
 
@@ -40,8 +39,7 @@ export default class Dropdown extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.collections.add( new ControllerCollection( 'main' ) );
-
+		this.addCollection( 'main' );
 		this._createButton();
 		this._createPanel();
 	}

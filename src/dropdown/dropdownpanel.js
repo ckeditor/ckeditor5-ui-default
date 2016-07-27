@@ -4,7 +4,6 @@
  */
 
 import Controller from '../controller.js';
-import ControllerCollection from '../controllercollection.js';
 
 /**
  * The dropdown panel controller class.
@@ -33,7 +32,7 @@ export default class DropdownPanel extends Controller {
 
 		view.model.bind( 'isVisible' ).to( model );
 
-		this.collections.add( new ControllerCollection( 'content' ) );
+		this.addCollection( 'content' );
 	}
 }
 
