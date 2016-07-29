@@ -17,22 +17,22 @@ import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
 testUtils.createTestUIController( {
 	dropdown: 'div#dropdown',
 	listDropdown: 'div#list-dropdown',
-	dropdownShared: 'div#dropdown-shared'
+	dropdownShared: 'div#dropdown-shared',
+	dropdownLabel: 'div#dropdown-label'
 } ).then( ui => {
 	createEmptyDropdown( ui );
 	createListDropdown( ui );
 	createSharedModelDropdowns( ui );
+	createLongLabelDropdown( ui );
 } );
 
 function createEmptyDropdown( ui ) {
-	const model = new Model( {
+	const dropdown = createDropdown( {
 		label: 'Dropdown',
 		isEnabled: true,
 		isOn: false,
 		withText: true
 	} );
-
-	const dropdown = new Dropdown( model, new DropdownView() );
 
 	ui.add( 'dropdown', dropdown );
 
@@ -76,18 +76,35 @@ function createListDropdown( ui ) {
 }
 
 function createSharedModelDropdowns( ui ) {
-	const model = new Model( {
+	const modelDef = {
 		label: 'Shared Model',
 		isEnabled: true,
 		isOn: false,
 		withText: true
-	} );
+	};
 
-	const dropdown1 = new Dropdown( model, new DropdownView() );
-	const dropdown2 = new Dropdown( model, new DropdownView() );
+	const dropdown1 = createDropdown( modelDef );
+	const dropdown2 = createDropdown( modelDef );
 
 	ui.add( 'dropdownShared', dropdown1 );
 	ui.add( 'dropdownShared', dropdown2 );
 
 	dropdown1.panel.view.element.innerHTML = dropdown2.panel.view.element.innerHTML = 'Empty panel.';
+}
+
+function createLongLabelDropdown( ui ) {
+	const dropdown = createDropdown( {
+		label: 'Dropdown with a very long label',
+		isEnabled: true,
+		isOn: false,
+		withText: true
+	} );
+
+	ui.add( 'dropdownLabel', dropdown );
+
+	dropdown.panel.view.element.innerHTML = 'Empty panel. There is no child view in this DropdownPanelView.';
+}
+
+function createDropdown( modelDef ) {
+	return new Dropdown( new Model( modelDef ), new DropdownView() );
 }
