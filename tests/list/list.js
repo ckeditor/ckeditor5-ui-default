@@ -18,13 +18,16 @@ import Model from '/ckeditor5/ui/model.js';
 testUtils.createSinonSandbox();
 
 describe( 'List', () => {
-	let model, list, items, itemFoo, itemBar;
+	let model, list, items, itemFoo, itemBar, itemBaz;
 
 	beforeEach( () => {
 		itemFoo = new Model( { label: 'foo', style: 'foostyle' } );
 		itemBar = new Model( { label: 'bar', style: 'barstyle' } );
+		itemBaz = new Model( { label: 'baz', style: 'barstyle' } );
 
 		items = new Collection( { idProperty: 'label' } );
+
+		items.add( itemBaz );
 
 		model = new Model( {
 			items: items
@@ -48,9 +51,10 @@ describe( 'List', () => {
 			list.init();
 			items.add( itemBar );
 
-			expect( listCollection ).to.have.length( 2 );
-			expect( listCollection.get( 0 ).model ).to.equal( itemFoo );
-			expect( listCollection.get( 1 ).model ).to.equal( itemBar );
+			expect( listCollection ).to.have.length( 3 );
+			expect( listCollection.get( 0 ).model ).to.equal( itemBaz );
+			expect( listCollection.get( 1 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 2 ).model ).to.equal( itemBar );
 		} );
 
 		it( 'binds the "list" collection to model#items', () => {
@@ -64,8 +68,9 @@ describe( 'List', () => {
 
 			items.add( removed, 0 );
 
-			expect( listCollection.get( 0 ).model ).to.equal( itemBar );
-			expect( listCollection.get( 1 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 0 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 1 ).model ).to.equal( itemBaz );
+			expect( listCollection.get( 2 ).model ).to.equal( itemBar );
 		} );
 
 		it( 'calls super.init()', () => {
@@ -76,10 +81,20 @@ describe( 'List', () => {
 			expect( spy.calledOnce ).to.be.true;
 		} );
 
-		it( 'creates a bridge between itemModel#execute and model#execute events', ( done ) => {
+		it( 'creates a bridge between itemModel#execute and model#execute events – existing items', ( done ) => {
+			model.on( 'execute', ( evt, itemModel ) => {
+				expect( itemModel.label ).to.equal( 'baz' );
+				done();
+			} );
+
+			return list.init().then( () => {
+				itemBaz.fire( 'execute' );
+			} );
+		} );
+
+		it( 'creates a bridge between itemModel#execute and model#execute events – new items', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
 				expect( itemModel.label ).to.equal( 'foo' );
-
 				done();
 			} );
 
