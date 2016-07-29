@@ -39,7 +39,7 @@ export default class List extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.addCollection( 'list', view.locale ).bind( model.items ).as( ListItem, ListItemView );
+		this.addCollection( 'list' ).bind( model.items ).as( ListItem, ListItemView );
 	}
 
 	init() {
