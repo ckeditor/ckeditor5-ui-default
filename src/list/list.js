@@ -40,62 +40,34 @@ export default class List extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.collections.add( new ControllerCollection( 'list' ) );
+		const listCollection = new ControllerCollection( 'list', view.locale );
+
+		listCollection.bind( model.items ).as( ListItem, ListItemView );
+
+		this.collections.add( listCollection );
 	}
 
 	init() {
 		// Initially populate "list" controller collection with children from model.items.
 		for ( let itemModel of this.model.items ) {
-			this._addListItem( itemModel );
+			// TODO: Some event delegation?
+			this.listenTo( itemModel, 'execute', () => {
+				this.model.fire( 'execute', itemModel );
+			} );
 		}
 
-		// Synchronize adding to model#items collection with "list" controller collection.
-		this.model.items.on( 'add', ( evt, itemModel, index ) => {
-			this._addListItem( itemModel, index );
+		this.model.items.on( 'add', ( evt, itemModel ) => {
+			// TODO: Some event delegation?
+			this.listenTo( itemModel, 'execute', () => {
+				this.model.fire( 'execute', itemModel );
+			} );
 		} );
 
-		// Synchronize removal from model#items collection with "list" controller collection.
 		this.model.items.on( 'remove', ( evt, itemModel ) => {
-			this._removeListItem( itemModel );
+			this.stopListening( itemModel, 'execute' );
 		} );
 
 		return super.init();
-	}
-
-	/**
-	 * Adds an item to "list" collection and activates event bubbling
-	 * between item view and the list.
-	 *
-	 * @protected
-	 * @param {utils.Observable} itemModel
-	 * @param {Number} index
-	 */
-	_addListItem( itemModel, index ) {
-		const listItemController = new ListItem( itemModel, new ListItemView() );
-
-		// Save model#label in controller instance so it can be later
-		// retrieved from "list" collection easily by that model.
-		listItemController.id = itemModel.label;
-
-		// TODO: Some event delegation?
-		this.listenTo( itemModel, 'execute', () => {
-			this.model.fire( 'execute', itemModel );
-		} );
-
-		this.add( 'list', listItemController, index );
-	}
-
-	/**
-	 * Removes an item from "list" collection and deactivates event bubbling
-	 * between item view and the list.
-	 *
-	 * @protected
-	 * @param {utils.Observable} itemModel
-	 */
-	_removeListItem( itemModel ) {
-		this.stopListening( itemModel, 'execute' );
-
-		this.remove( 'list', itemModel.label );
 	}
 }
 

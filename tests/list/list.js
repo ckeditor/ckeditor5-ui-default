@@ -9,7 +9,6 @@ import testUtils from '/tests/ckeditor5/_utils/utils.js';
 
 import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
-import ListItemView from '/ckeditor5/ui/list/listitemview.js';
 
 import Collection from '/ckeditor5/utils/collection.js';
 import Controller from '/ckeditor5/ui/controller.js';
@@ -19,13 +18,16 @@ import Model from '/ckeditor5/ui/model.js';
 testUtils.createSinonSandbox();
 
 describe( 'List', () => {
-	let model, list, items, itemFoo, itemBar;
+	let model, list, items, itemFoo, itemBar, itemBaz;
 
 	beforeEach( () => {
 		itemFoo = new Model( { label: 'foo', style: 'foostyle' } );
 		itemBar = new Model( { label: 'bar', style: 'barstyle' } );
+		itemBaz = new Model( { label: 'baz', style: 'barstyle' } );
 
 		items = new Collection( { idProperty: 'label' } );
+
+		items.add( itemBaz );
 
 		model = new Model( {
 			items: items
@@ -49,9 +51,10 @@ describe( 'List', () => {
 			list.init();
 			items.add( itemBar );
 
-			expect( listCollection ).to.have.length( 2 );
-			expect( listCollection.get( 0 ).model ).to.equal( itemFoo );
-			expect( listCollection.get( 1 ).model ).to.equal( itemBar );
+			expect( listCollection ).to.have.length( 3 );
+			expect( listCollection.get( 0 ).model ).to.equal( itemBaz );
+			expect( listCollection.get( 1 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 2 ).model ).to.equal( itemBar );
 		} );
 
 		it( 'binds the "list" collection to model#items', () => {
@@ -65,8 +68,9 @@ describe( 'List', () => {
 
 			items.add( removed, 0 );
 
-			expect( listCollection.get( 0 ).model ).to.equal( itemBar );
-			expect( listCollection.get( 1 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 0 ).model ).to.equal( itemFoo );
+			expect( listCollection.get( 1 ).model ).to.equal( itemBaz );
+			expect( listCollection.get( 2 ).model ).to.equal( itemBar );
 		} );
 
 		it( 'calls super.init()', () => {
@@ -76,26 +80,21 @@ describe( 'List', () => {
 
 			expect( spy.calledOnce ).to.be.true;
 		} );
-	} );
 
-	describe( '_addListItem', () => {
-		it( 'adds a new controller to "list" collection', () => {
-			const listCollection = list.collections.get( 'list' );
+		it( 'creates a bridge between itemModel#execute and model#execute events – existing items', ( done ) => {
+			model.on( 'execute', ( evt, itemModel ) => {
+				expect( itemModel.label ).to.equal( 'baz' );
+				done();
+			} );
 
-			list._addListItem( new Model( { label: 'baz', style: 'bazstyle' } ) );
-			list._addListItem( new Model( { label: 'qux', style: 'quxstyle' } ), 0 );
-
-			expect( listCollection ).to.have.length( 2 );
-			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
-			expect( listCollection.get( 1 ).model.label ).to.equal( 'baz' );
-
-			expect( listCollection.get( 0 ).view ).to.be.instanceof( ListItemView );
+			return list.init().then( () => {
+				itemBaz.fire( 'execute' );
+			} );
 		} );
 
-		it( 'creates a bridge between itemModel#execute and model#execute events', ( done ) => {
+		it( 'creates a bridge between itemModel#execute and model#execute events – new items', ( done ) => {
 			model.on( 'execute', ( evt, itemModel ) => {
 				expect( itemModel.label ).to.equal( 'foo' );
-
 				done();
 			} );
 
@@ -105,24 +104,6 @@ describe( 'List', () => {
 
 				itemFoo.fire( 'execute' );
 			} );
-		} );
-	} );
-
-	describe( '_removeListItem', () => {
-		it( 'removes a controller from "list" collection', () => {
-			const listCollection = list.collections.get( 'list' );
-			const itemBaz = new Model( { label: 'baz', style: 'bazstyle' } );
-			const itemQux = new Model( { label: 'qux', style: 'quxstyle' } );
-
-			list._addListItem( itemBaz );
-			list._addListItem( itemQux );
-
-			expect( listCollection ).to.have.length( 2 );
-
-			list._removeListItem( itemBaz );
-
-			expect( listCollection ).to.have.length( 1 );
-			expect( listCollection.get( 0 ).model.label ).to.equal( 'qux' );
 		} );
 
 		it( 'deactivates a bridge between itemModel#execute and model#execute events', () => {
