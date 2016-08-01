@@ -5,6 +5,7 @@
 
 /* bender-tags: ui, dropdown */
 
+import Collection from '/ckeditor5/utils/collection.js';
 import Model from '/ckeditor5/ui/model.js';
 import Collection from '/ckeditor5/utils/collection.js';
 import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';

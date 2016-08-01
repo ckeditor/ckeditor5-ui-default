@@ -4,7 +4,6 @@
  */
 
 import Controller from '../controller.js';
-import ControllerCollection from '../controllercollection.js';
 
 /**
  * The toolbar controller class.
@@ -29,6 +28,6 @@ export default class Toolbar extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.collections.add( new ControllerCollection( 'buttons' ) );
+		this.addCollection( 'buttons' );
 	}
 }

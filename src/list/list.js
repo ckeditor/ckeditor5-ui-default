@@ -4,7 +4,6 @@
  */
 
 import Controller from '../controller.js';
-import ControllerCollection from '../controllercollection.js';
 
 import ListItem from './listitem.js';
 import ListItemView from './listitemview.js';
@@ -40,11 +39,7 @@ export default class List extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		const listCollection = new ControllerCollection( 'list', view.locale );
-
-		listCollection.bind( model.items ).as( ListItem, ListItemView );
-
-		this.collections.add( listCollection );
+		this.addCollection( 'list' ).bind( model.items ).as( ListItem, ListItemView );
 	}
 
 	init() {
