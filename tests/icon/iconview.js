@@ -42,20 +42,6 @@ describe( 'IconView', () => {
 
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-abc' );
 			} );
-
-			it( 'reacts to changes in model#align', () => {
-				expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
-
-				model.align = 'right';
-
-				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.false;
-
-				model.align = 'left';
-
-				expect( view.element.classList.contains( 'ck-icon-right' ) ).to.be.false;
-				expect( view.element.classList.contains( 'ck-icon-left' ) ).to.be.true;
-			} );
 		} );
 	} );
 } );

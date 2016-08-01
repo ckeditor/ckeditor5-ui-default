@@ -9,11 +9,10 @@ import Controller from '../controller.js';
  * The icon controller class.
  *
  *		const model = new Model( {
- *			name: 'bold',
- *			align: 'left'
+ *			name: 'bold'
  *		} );
  *
- *		// An instance of "bold" Icon, aligned to the left.
+ *		// An instance of "bold" Icon.
  *		new Icon( model, new IconView() );
  *
  * See {@link ui.icon.IconView}, {@link ui.iconManager.IconManager}.
@@ -31,7 +30,7 @@ export default class Icon extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'name', 'align' ).to( model );
+		view.model.bind( 'name' ).to( model );
 	}
 }
 
@@ -46,10 +45,4 @@ export default class Icon extends Controller {
  * file in the {@link ui.iconManager.IconManager}.
  *
  * @member {String} ui.icon.IconModel#name
- */
-
-/**
- * The alignment of the icon.
- *
- * @member {'left'|'right'} ui.icon.IconModel#align
  */
