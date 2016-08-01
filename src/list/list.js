@@ -77,5 +77,6 @@ export default class List extends Controller {
  * Any change in the collection (add, remove) is reflected in the DOM associated
  * with this component.
  *
+ * @observable
  * @member {utils.Collection.<ui.list.ListItemModel>} ui.list.ListModel#items
  */

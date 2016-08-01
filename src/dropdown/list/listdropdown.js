@@ -67,5 +67,6 @@ export default class ListDropdown extends Dropdown {
  * Content of the list dropdown used to create the {@link ui.list.List} instance.
  * Usually {@link ui.list.ListModel}.
  *
+ * @observable
  * @member {Boolean} ui.dropdown.list.ListDropdownModel#content
  */

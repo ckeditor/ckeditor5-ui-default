@@ -85,6 +85,7 @@ export default class ButtonView extends View {
 /**
  * The label of the button view visible to the user.
  *
+ * @observable
  * @member {String} ui.button.ButtonViewModel#label
  */
 
@@ -92,18 +93,21 @@ export default class ButtonView extends View {
  * Controls whether the button view is "on", e.g. some feature which it represents
  * is currently enabled.
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonViewModel#isOn
  */
 
 /**
  * Controls whether the button view is enabled (can be clicked).
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonViewModel#isEnabled
  */
 
 /**
  * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonViewModel#withText
  */
 
