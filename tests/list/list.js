@@ -5,7 +5,7 @@
 
 /* bender-tags: ui, list */
 
-import testUtils from '/tests/ckeditor5/_utils/utils.js';
+import testUtils from '/tests/core/_utils/utils.js';
 
 import List from '/ckeditor5/ui/list/list.js';
 import ListView from '/ckeditor5/ui/list/listview.js';
