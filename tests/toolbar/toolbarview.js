@@ -24,9 +24,9 @@ describe( 'ToolbarView', () => {
 		} );
 	} );
 
-	describe( 'buttons region', () => {
+	describe( 'items region', () => {
 		it( 'is bound to the main element', () => {
-			expect( view.regions.get( 'buttons' ).element ).to.equal( view.element );
+			expect( view.regions.get( 'items' ).element ).to.equal( view.element );
 		} );
 	} );
 } );
