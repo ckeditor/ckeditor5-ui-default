@@ -73,24 +73,28 @@ export default class Button extends Controller {
 /**
  * The label of the button visible to the user.
  *
+ * @observable
  * @member {String} ui.button.ButtonModel#label
  */
 
 /**
  * Whether the button is "on" (e.g. some feature which this button represents is currently enabled).
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonModel#isOn
  */
 
 /**
  * Controls whether the button is enabled (can be clicked).
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonModel#isEnabled
  */
 
 /**
  * (Optional) Whether the label of the button is visible. At default the label is hidden (e.g. button with icon only).
  *
+ * @observable
  * @member {Boolean} ui.button.ButtonModel#withText
  */
 
@@ -98,12 +102,14 @@ export default class Button extends Controller {
  * (Optional) The name of the icon of the button.
  * See {@link ui.icon.Icon} and {@link ui.iconManager.IconManager}.
  *
+ * @observable
  * @member {String} ui.button.ButtonModel#icon
  */
 
 /**
  * (Optional) The alignment of the Button icon.
  *
+ * @observable
  * @member {'left'|'right'} ui.button.ButtonModel#iconAlign
  */
 

@@ -53,5 +53,6 @@ export default class DropdownView extends View {
  * Controls whether the dropdown view is open, which also means its
  * {@link ui.dropdown.Dropdown#panel} is visible.
  *
+ * @observable
  * @member {Boolean} ui.dropdown.DropdownViewModel#isOpen
  */

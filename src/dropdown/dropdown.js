@@ -99,24 +99,28 @@ export default class Dropdown extends Controller {
 /**
  * The label of the dropdown.
  *
+ * @observable
  * @member {String} ui.dropdown.DropdownModel#label
  */
 
 /**
  * Controls whether the dropdown is enabled (can be clicked).
  *
+ * @observable
  * @member {Boolean} ui.dropdown.DropdownModel#isEnabled
  */
 
 /**
  * Controls whether the {@link ui.dropdown.Dropdown#button} is "pushed".
  *
+ * @observable
  * @member {Boolean} ui.dropdown.DropdownModel#isOn
  */
 
 /**
  * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
  *
+ * @observable
  * @member {Boolean} ui.dropdown.DropdownModel#withText
  */
 

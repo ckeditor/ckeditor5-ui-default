@@ -45,11 +45,13 @@ export default class Icon extends Controller {
  * The name of the icon. It corresponds with the name of the
  * file in the {@link ui.iconManager.IconManager}.
  *
+ * @observable
  * @member {String} ui.icon.IconModel#name
  */
 
 /**
  * The alignment of the icon.
  *
+ * @observable
  * @member {'left'|'right'} ui.icon.IconModel#align
  */

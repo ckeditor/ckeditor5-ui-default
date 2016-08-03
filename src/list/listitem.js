@@ -40,11 +40,13 @@ export default class ListItem extends Controller {
 /**
  * The label of the list item.
  *
+ * @observable
  * @member {String} ui.list.ListItemModel#label
  */
 
 /**
  * (Optional) The DOM style attribute of the list item.
  *
+ * @observable
  * @member {String} ui.list.ListItemModel#style
  */
