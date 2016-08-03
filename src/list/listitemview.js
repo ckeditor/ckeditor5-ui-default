@@ -62,11 +62,13 @@ export default class ListItemView extends View {
 /**
  * The label of the list item.
  *
+ * @observable
  * @member {String} ui.list.ListItemViewModel#label
  */
 
 /**
  * (Optional) The DOM style attribute of the list item.
  *
+ * @observable
  * @member {String} ui.list.ListItemViewModel#style
  */

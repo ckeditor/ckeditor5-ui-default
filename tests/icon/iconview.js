@@ -14,8 +14,7 @@ describe( 'IconView', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			name: 'foo',
-			align: null
+			name: 'foo'
 		} );
 
 		view = new IconView();

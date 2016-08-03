@@ -63,5 +63,6 @@ export default class IconView extends View {
  * The name of the icon. It corresponds with the name of the
  * file in the {@link ui.iconManager.IconManager}.
  *
+ * @observable
  * @member {String} ui.icon.IconViewModel#name
  */

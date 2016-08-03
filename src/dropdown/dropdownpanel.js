@@ -45,5 +45,6 @@ export default class DropdownPanel extends Controller {
 /**
  * Controls whether the panel is visible.
  *
+ * @observable
  * @member {Boolean} ui.dropdown.DropdownPanelModel#isVisible
  */
