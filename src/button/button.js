@@ -16,8 +16,7 @@ import IconView from '../icon/iconview.js';
  *			label: 'Bold',
  *			isEnabled: true,
  *			isOn: false,
- *			icon: 'bold',
- *			iconAlign: 'left'
+ *			icon: 'bold'
  *		} );
  *
  *		// An instance of Button with a label and an icon.
@@ -41,7 +40,7 @@ export default class Button extends Controller {
 		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
 
 		if ( model.icon ) {
-			view.model.bind( 'icon', 'iconAlign' ).to( model );
+			view.model.bind( 'icon' ).to( model );
 		}
 
 		view.model.on( 'click', () => model.fire( 'execute' ) );
@@ -55,7 +54,7 @@ export default class Button extends Controller {
 			this.addCollection( 'children' );
 
 			const iconModel = new Model();
-			iconModel.bind( 'name', 'align' ).to( this.model, 'icon', 'iconAlign' );
+			iconModel.bind( 'name' ).to( this.model, 'icon' );
 
 			this.add( 'children', new Icon( iconModel, new IconView() ) );
 		}
@@ -104,13 +103,6 @@ export default class Button extends Controller {
  *
  * @observable
  * @member {String} ui.button.ButtonModel#icon
- */
-
-/**
- * (Optional) The alignment of the Button icon.
- *
- * @observable
- * @member {'left'|'right'} ui.button.ButtonModel#iconAlign
  */
 
 /**

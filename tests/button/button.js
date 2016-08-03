@@ -36,20 +36,17 @@ describe( 'Button', () => {
 
 			expect( view.model.withText ).to.be.undefined;
 			expect( view.model.icon ).to.be.undefined;
-			expect( view.model.iconAlign ).to.be.undefined;
 		} );
 
 		it( 'binds view#model icon–related attributes to the Button#model', () => {
 			model.set( {
-				icon: 'abc',
-				iconAlign: 'left'
+				icon: 'abc'
 			} );
 
 			view = new ButtonView();
 			button = new Button( model, view );
 
 			expect( view.model.icon ).to.equal( model.icon );
-			expect( view.model.iconAlign ).to.equal( model.iconAlign );
 		} );
 
 		it( 'creates view#click -> model#execute binding', () => {
@@ -72,8 +69,7 @@ describe( 'Button', () => {
 
 		it( 'appends child Icon instance when Button.model#icon is present', () => {
 			model.set( {
-				icon: 'foo',
-				iconAlign: 'left'
+				icon: 'foo'
 			} );
 
 			view = new ButtonView();
@@ -81,7 +77,6 @@ describe( 'Button', () => {
 			return new Button( model, view ).init().then( () => {
 				expect( view.element.childNodes ).to.have.length( 2 );
 				expect( view.element.firstChild.classList.contains( 'ck-icon' ) ).to.be.true;
-				expect( view.element.firstChild.classList.contains( 'ck-icon-left' ) ).to.be.true;
 			} );
 		} );
 

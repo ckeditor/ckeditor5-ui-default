@@ -14,8 +14,7 @@ describe( 'Icon', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			name: 'foo',
-			align: 'right'
+			name: 'foo'
 		} );
 
 		view = new IconView();
@@ -25,7 +24,6 @@ describe( 'Icon', () => {
 	describe( 'constructor', () => {
 		it( 'binds view#model attributes to the Icon#model', () => {
 			expect( view.model.name ).to.equal( model.name );
-			expect( view.model.align ).to.equal( model.align );
 		} );
 	} );
 } );

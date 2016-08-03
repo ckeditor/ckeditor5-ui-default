@@ -28,8 +28,7 @@ export default class IconView extends View {
 			ns: 'http://www.w3.org/2000/svg',
 			attributes: {
 				class: [
-					'ck-icon',
-					bind.to( 'align', a => a ? `ck-icon-${ a.toLowerCase() }` : '' )
+					'ck-icon'
 				]
 			},
 			children: [
@@ -66,11 +65,4 @@ export default class IconView extends View {
  *
  * @observable
  * @member {String} ui.icon.IconViewModel#name
- */
-
-/**
- * The alignment of the icon.
- *
- * @observable
- * @member {'left'|'right'} ui.icon.IconViewModel#align
  */
