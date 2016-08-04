@@ -50,3 +50,10 @@ export default class ListItem extends Controller {
  * @observable
  * @member {String} ui.list.ListItemModel#style
  */
+
+/**
+ * Fired when the list item should be executed, usually when
+ * the view has been clicked.
+ *
+ * @event ui.list.ListItemModel#execute
+ */
