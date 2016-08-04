@@ -41,6 +41,16 @@ describe( 'List', () => {
 			expect( list.collections ).to.have.length( 1 );
 			expect( list.collections.get( 'list' ) ).to.be.instanceof( ControllerCollection );
 		} );
+
+		it( 'pipes ListItemModel#execute event to the model', ( done ) => {
+			model.on( 'execute', ( modelEvt, itemEvt ) => {
+				expect( modelEvt.source ).to.equal( model );
+				expect( itemEvt.source ).to.equal( itemBaz );
+				done();
+			} );
+
+			itemBaz.fire( 'execute' );
+		} );
 	} );
 
 	describe( 'init', () => {
@@ -79,58 +89,6 @@ describe( 'List', () => {
 			list.init();
 
 			expect( spy.calledOnce ).to.be.true;
-		} );
-
-		it( 'creates a bridge between itemModel#execute and model#execute events – existing items', ( done ) => {
-			model.on( 'execute', ( evt, itemModel ) => {
-				expect( itemModel.label ).to.equal( 'baz' );
-				done();
-			} );
-
-			return list.init().then( () => {
-				itemBaz.fire( 'execute' );
-			} );
-		} );
-
-		it( 'creates a bridge between itemModel#execute and model#execute events – new items', ( done ) => {
-			model.on( 'execute', ( evt, itemModel ) => {
-				expect( itemModel.label ).to.equal( 'foo' );
-				done();
-			} );
-
-			return list.init().then( () => {
-				items.add( itemFoo );
-				items.add( itemBar );
-
-				itemFoo.fire( 'execute' );
-			} );
-		} );
-
-		it( 'deactivates a bridge between itemModel#execute and model#execute events', () => {
-			const clicked = {
-				foo: 0,
-				bar: 0
-			};
-
-			model.on( 'execute', ( evt, itemModel ) => {
-				clicked[ itemModel.label ]++;
-			} );
-
-			return list.init().then( () => {
-				items.add( itemFoo );
-				items.add( itemBar );
-
-				itemFoo.fire( 'execute' );
-				itemBar.fire( 'execute' );
-
-				items.remove( itemFoo );
-
-				itemFoo.fire( 'execute' );
-				itemBar.fire( 'execute' );
-
-				expect( clicked.foo ).to.equal( 1 );
-				expect( clicked.bar ).to.equal( 2 );
-			} );
 		} );
 	} );
 } );
