@@ -49,21 +49,19 @@ function createListDropdown( ui ) {
 		} ) );
 	} );
 
-	const itemListModel = new Model( {
-		items: collection
-	} );
-
-	itemListModel.on( 'execute', ( evtInfo, itemModel ) => {
-		/* global console */
-		console.log( 'ListItem#execute', itemModel );
-	} );
-
 	const model = new Model( {
 		label: 'ListDropdown',
 		isEnabled: true,
 		isOn: false,
 		withText: true,
-		content: itemListModel
+		content: new Model( {
+			items: collection
+		} )
+	} );
+
+	model.on( 'execute', ( dropdownEvt, listEvt, listItemEvt ) => {
+		/* global console */
+		console.log( 'List#execute:', listItemEvt.source.label );
 	} );
 
 	const dropdown = new ListDropdown( model, new ListDropdownView() );
