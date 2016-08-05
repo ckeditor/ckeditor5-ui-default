@@ -28,6 +28,6 @@ export default class ToolbarView extends View {
 			}
 		} );
 
-		this.register( 'buttons', el => el );
+		this.register( 'items', el => el );
 	}
 }

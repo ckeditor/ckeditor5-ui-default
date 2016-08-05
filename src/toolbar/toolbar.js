@@ -28,6 +28,6 @@ export default class Toolbar extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.addCollection( 'buttons' );
+		this.addCollection( 'items' );
 	}
 }

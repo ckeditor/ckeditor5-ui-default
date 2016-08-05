@@ -25,7 +25,7 @@ describe( 'Toolbar', () => {
 		} );
 
 		it( 'creates buttons collection', () => {
-			expect( toolbar.collections.get( 'buttons' ) ).to.be.instanceof( ControllerCollection );
+			expect( toolbar.collections.get( 'items' ) ).to.be.instanceof( ControllerCollection );
 		} );
 	} );
 } );
