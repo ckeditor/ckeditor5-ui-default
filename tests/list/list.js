@@ -42,10 +42,10 @@ describe( 'List', () => {
 			expect( list.collections.get( 'list' ) ).to.be.instanceof( ControllerCollection );
 		} );
 
-		it( 'pipes ListItemModel#execute event to the model', ( done ) => {
-			model.on( 'execute', ( modelEvt, itemEvt ) => {
-				expect( modelEvt.source ).to.equal( model );
-				expect( itemEvt.source ).to.equal( itemBaz );
+		it( 'delegates ListItemModel#execute event to the model', ( done ) => {
+			model.on( 'execute', ( evt ) => {
+				expect( evt.source ).to.equal( itemBaz );
+				expect( evt.path ).to.deep.equal( [ itemBaz, model ] );
 				done();
 			} );
 

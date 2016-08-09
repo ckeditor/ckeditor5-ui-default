@@ -45,8 +45,8 @@ export default class ListDropdown extends Dropdown {
 		 */
 		this.list = new List( this.model.content, new ListView() );
 
-		// Pipe ui.list.ListModel#execute to the model.
-		this.model.content.pipe( 'execute' ).to( model );
+		// Delegate ui.list.ListModel#execute to the model.
+		this.model.content.delegate( 'execute' ).to( model );
 
 		// Collapse the dropdown when an item in the panel is clicked.
 		this.listenTo( model, 'execute', () => {

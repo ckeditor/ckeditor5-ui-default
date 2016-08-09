@@ -42,7 +42,7 @@ export default class List extends Controller {
 		const list = this.addCollection( 'list' );
 
 		list.bind( model.items ).as( ListItem, ListItemView );
-		list.pipe( 'execute' ).to( model );
+		list.delegate( 'execute' ).to( model );
 	}
 }
 

@@ -43,10 +43,10 @@ describe( 'ListDropdown', () => {
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
 		} );
 
-		it( 'pipes model.content#execute to the model', ( done ) => {
-			model.on( 'execute', ( modelEvt, contentEvt ) => {
-				expect( modelEvt.source ).to.equal( model );
-				expect( contentEvt.source ).to.equal( content );
+		it( 'delegates model.content#execute to the model', ( done ) => {
+			model.on( 'execute', ( evt ) => {
+				expect( evt.source ).to.equal( content );
+				expect( evt.path ).to.deep.equal( [ content, model ] );
 				done();
 			} );
 
