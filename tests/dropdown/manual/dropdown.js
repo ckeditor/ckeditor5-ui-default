@@ -3,6 +3,8 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals window */
+
 import testUtils from '/tests/ui/_utils/utils.js';
 
 import Model from '/ckeditor5/ui/model.js';

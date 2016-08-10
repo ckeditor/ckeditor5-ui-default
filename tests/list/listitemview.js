@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals Event */
 /* bender-tags: ui, list */
 
 import ListItem from '/ckeditor5/ui/list/listitem.js';

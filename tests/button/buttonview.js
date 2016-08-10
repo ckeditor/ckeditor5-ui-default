@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals Event */
 /* bender-tags: ui, button */
 
 import testUtils from '/tests/core/_utils/utils.js';

@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document, window, Event, HTMLElement */
 /* bender-tags: ui, toolbar */
 
 import testUtils from '/tests/core/_utils/utils.js';

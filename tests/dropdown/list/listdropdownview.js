@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document, Event */
 /* bender-tags: ui, dropdown */
 
 import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
