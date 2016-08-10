@@ -61,9 +61,9 @@ function createListDropdown( ui ) {
 		} )
 	} );
 
-	model.on( 'execute', ( dropdownEvt, listEvt, listItemEvt ) => {
+	model.on( 'execute', ( evt ) => {
 		/* global console */
-		console.log( 'List#execute:', listItemEvt.source.label );
+		console.log( 'List#execute:', evt.source.label );
 	} );
 
 	const dropdown = new ListDropdown( model, new ListDropdownView() );
