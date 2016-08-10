@@ -43,13 +43,23 @@ describe( 'ListDropdown', () => {
 			expect( contentCollection.get( 0 ).model ).to.equal( content );
 		} );
 
-		it( 'attaches listener on model.content#execute and changes view.model#isOpen', () => {
+		it( 'delegates model.content#execute to the model', ( done ) => {
+			model.on( 'execute', ( evt ) => {
+				expect( evt.source ).to.equal( content );
+				expect( evt.path ).to.deep.equal( [ content, model ] );
+				done();
+			} );
+
+			content.fire( 'execute' );
+		} );
+
+		it( 'changes view.model#isOpen on model#execute', () => {
 			view.model.isOpen = true;
 
-			content.fire( 'execute' );
+			model.fire( 'execute' );
 			expect( view.model.isOpen ).to.be.false;
 
-			content.fire( 'execute' );
+			model.fire( 'execute' );
 			expect( view.model.isOpen ).to.be.false;
 		} );
 	} );

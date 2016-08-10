@@ -37,20 +37,21 @@ export default class ListDropdown extends Dropdown {
 	constructor( model, view ) {
 		super( model, view );
 
-		const listModel = this.model.content;
-
-		// Collapse the dropdown when an item in the panel is clicked.
-		this.listenTo( listModel, 'execute', () => {
-			view.model.isOpen = false;
-		} );
-
 		/**
 		 * List of this list dropdown.
 		 *
 		 * @readonly
 		 * @member {ui.list.List} ui.dropdown.list.ListDropdown#list
 		 */
-		this.list = new List( listModel, new ListView() );
+		this.list = new List( this.model.content, new ListView() );
+
+		// Delegate ui.list.ListModel#execute to the model.
+		this.model.content.delegate( 'execute' ).to( model );
+
+		// Collapse the dropdown when an item in the panel is clicked.
+		this.listenTo( model, 'execute', () => {
+			view.model.isOpen = false;
+		} );
 
 		this.panel.add( 'content', this.list );
 	}
@@ -69,4 +70,11 @@ export default class ListDropdown extends Dropdown {
  *
  * @observable
  * @member {Boolean} ui.dropdown.list.ListDropdownModel#content
+ */
+
+/**
+ * Fired when the list dropdown should be executed, usually when
+ * one of the list items in {@link ui.dropdown.list.ListDropdown#list} has been executed.
+ *
+ * @event ui.dropdown.list.ListDropdownModel#execute
  */

@@ -39,30 +39,10 @@ export default class List extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		this.addCollection( 'list' ).bind( model.items ).as( ListItem, ListItemView );
-	}
+		const list = this.addCollection( 'list' );
 
-	init() {
-		// Initially populate "list" controller collection with children from model.items.
-		for ( let itemModel of this.model.items ) {
-			// TODO: Some event delegation?
-			this.listenTo( itemModel, 'execute', () => {
-				this.model.fire( 'execute', itemModel );
-			} );
-		}
-
-		this.model.items.on( 'add', ( evt, itemModel ) => {
-			// TODO: Some event delegation?
-			this.listenTo( itemModel, 'execute', () => {
-				this.model.fire( 'execute', itemModel );
-			} );
-		} );
-
-		this.model.items.on( 'remove', ( evt, itemModel ) => {
-			this.stopListening( itemModel, 'execute' );
-		} );
-
-		return super.init();
+		list.bind( model.items ).as( ListItem, ListItemView );
+		list.delegate( 'execute' ).to( model );
 	}
 }
 
@@ -79,4 +59,11 @@ export default class List extends Controller {
  *
  * @observable
  * @member {utils.Collection.<ui.list.ListItemModel>} ui.list.ListModel#items
+ */
+
+/**
+ * Fired when the list should be executed, usually when
+ * one of the list items has been executed.
+ *
+ * @event ui.list.ListModel#execute
  */

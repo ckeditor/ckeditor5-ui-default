@@ -72,3 +72,9 @@ export default class ListItemView extends View {
  * @observable
  * @member {String} ui.list.ListItemViewModel#style
  */
+
+/**
+ * Fired when the list item has been clicked.
+ *
+ * @event ui.list.ListItemViewModel#click
+ */
