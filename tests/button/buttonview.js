@@ -40,7 +40,7 @@ describe( 'ButtonView', () => {
 				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true;
 				expect( view.element.classList.contains( 'ck-enabled' ) ).to.be.true;
 				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-button-with-text' ) ).to.be.false;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.false;
 			} );
 
 			it( 'reacts on model.isEnabled', () => {
@@ -58,7 +58,7 @@ describe( 'ButtonView', () => {
 			it( 'reacts on model.withText', () => {
 				model.set( 'withText', true );
 
-				expect( view.element.classList.contains( 'ck-button-with-text' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.true;
 			} );
 		} );
 

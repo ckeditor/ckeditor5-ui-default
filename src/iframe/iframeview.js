@@ -28,7 +28,7 @@ export default class IframeView extends View {
 		this.template = new Template( {
 			tag: 'iframe',
 			attributes: {
-				class: [ 'ck-reset-all' ],
+				class: [ 'ck-reset_all' ],
 				// It seems that we need to allow scripts in order to be able to listen to events.
 				// TODO: Research that. Perhaps the src must be set?
 				sandbox: 'allow-same-origin allow-scripts'

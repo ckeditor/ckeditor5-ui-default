@@ -26,7 +26,6 @@ describe( 'ListItemView', () => {
 
 	describe( 'constructor', () => {
 		it( 'creates element from template', () => {
-			expect( view.element.classList.contains( 'ck-reset' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-list__item' ) ).to.be.true;
 		} );
 	} );

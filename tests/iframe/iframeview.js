@@ -24,7 +24,7 @@ describe( 'IframeView', () => {
 
 	describe( 'constructor', () => {
 		it( 'creates view element from the template', () => {
-			expect( view.element.classList.contains( 'ck-reset-all' ) ).to.be.true;
+			expect( view.element.classList.contains( 'ck-reset_all' ) ).to.be.true;
 			expect( view.element.attributes.getNamedItem( 'sandbox' ).value ).to.equal( 'allow-same-origin allow-scripts' );
 		} );
 	} );

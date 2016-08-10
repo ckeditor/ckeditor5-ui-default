@@ -31,7 +31,7 @@ export default class ButtonView extends View {
 					'ck-button',
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
-					bind.if( 'withText', 'ck-button-with-text' )
+					bind.if( 'withText', 'ck-button_with-text' )
 				]
 			},
 
