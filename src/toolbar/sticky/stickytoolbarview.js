@@ -3,6 +3,8 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document, window */
+
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
 

@@ -3,6 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document */
 /* bender-tags: ui, iframe */
 
 import Iframe from '/ckeditor5/ui/iframe/iframe.js';

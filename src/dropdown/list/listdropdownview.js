@@ -3,6 +3,8 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document */
+
 import DropdownView from '../dropdownview.js';
 
 /**
