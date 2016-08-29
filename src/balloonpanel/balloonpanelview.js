@@ -50,6 +50,10 @@ export default class BalloonPanelView extends View {
 		this.register( 'content', el => el );
 	}
 
+	get isVisible() {
+		return this.model.isVisible;
+	}
+
 	show() {
 		this.model.isVisible = true;
 
