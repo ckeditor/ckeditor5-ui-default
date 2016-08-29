@@ -36,7 +36,7 @@ export default class InputTextView extends View {
 		} );
 
 		// `value` attribute can't be inline, because doesn't work on change.
-		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value );
+		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
 	}
 
 	focus() {
