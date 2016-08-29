@@ -53,4 +53,16 @@ describe( 'InputTextView', () => {
 			} );
 		} );
 	} );
+
+	describe( 'focus', () => {
+		it( 'should focus input element', () => {
+			const focusSpy = sinon.spy( view.element, 'focus' );
+
+			view.focus();
+
+			expect( focusSpy.calledOnce ).to.true;
+
+			focusSpy.restore();
+		} );
+	} );
 } );

@@ -54,7 +54,7 @@ export default class InputTextView extends View {
 }
 
 /**
- * The text input view {@link ui.Model} interface.
+ * The text input view {@link ui.Model model} interface.
  *
  * @interface ui.input.InputTextViewModel
  */

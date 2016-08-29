@@ -35,7 +35,7 @@ export default class InputLabel extends Controller {
 }
 
 /**
- * The InputLabel component {@link ui.Model} interface.
+ * The InputLabel component {@link ui.Model model} interface.
  *
  * @interface ui.input.InputLabelModel
  */

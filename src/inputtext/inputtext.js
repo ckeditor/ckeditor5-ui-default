@@ -44,7 +44,7 @@ export default class InputText extends Controller {
 }
 
 /**
- * The InputText component {@link ui.input.InputTextModel} interface.
+ * The InputText component {@link ui.Model model} interface.
  *
  * @interface ui.input.InputTextModel
  */

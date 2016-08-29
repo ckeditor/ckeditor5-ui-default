@@ -33,7 +33,10 @@ export default class LabeledInputView extends View {
 		this.register( 'content', el => el );
 	}
 
+	/**
+	 * Set focus to the input.
+	 */
 	focus() {
-		this.regions.get( 'content' ).views.get( 1 ).element.focus();
+		this.regions.get( 'content' ).views.get( 1 ).focus();
 	}
 }

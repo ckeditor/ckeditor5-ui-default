@@ -14,7 +14,7 @@ describe( 'InputText', () => {
 
 	beforeEach( () => {
 		model = new Model( {
-			foo: 'foo',
+			value: 'foo',
 			id: 'bar'
 		} );
 
@@ -26,6 +26,14 @@ describe( 'InputText', () => {
 		it( 'binds view#model attributes to the InputText#model', () => {
 			expect( view.model.value ).to.equal( model.value );
 			expect( view.model.id ).to.equal( model.id );
+		} );
+	} );
+
+	describe( 'value', () => {
+		it( 'should returns InputText value', () => {
+			inputText.model.value = 'baz';
+
+			expect( inputText.value ).to.equal( 'baz' );
 		} );
 	} );
 } );

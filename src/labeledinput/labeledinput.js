@@ -3,6 +3,8 @@
  * For licensing, see LICENSE.md.
  */
 
+import uid from '../../utils/uid.js';
+
 import Model from '../model.js';
 import Controller from '../controller.js';
 
@@ -13,7 +15,17 @@ import InputLabel from '../inputlabel/inputlabel.js';
 import InputLabelView from '../inputlabel/inputlabelview.js';
 
 /**
- * The labeled input controller class.
+ * The labeled input controller class. It contains two components {@link ui.input.InputLabel InputLabel} and
+ * {@link ui.input.InputText InputText} pair each other by {@link ui.input.LabeledInputModel#uid unique id}.
+ *
+ * 		const model = new Model( {
+ *			label: 'Label text'
+ *			value: 'init value',
+ *		} );
+ *
+ *		new LabeledInput( model, new LabeledInputView() );
+ *
+ * See {@link ui.input.LabeledInputView}.
  *
  * @memberOf ui.input.labeled
  * @extends ui.Controller
@@ -28,44 +40,93 @@ export default class LabeledInput extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		const contentCollection = this.addCollection( 'content' );
+		// Create unique id to pair input with label.
+		model.set( 'uid', uid() );
 
 		/**
-		 * TODO
+		 * Label Instance.
 		 *
-		 * @member {} todo
-		 */
-		this.input = this._createInput();
-
-		/**
-		 * TODO
-		 *
-		 * @member {} todo
+		 * @member {ui.input.InputLabel}
 		 */
 		this.label = this._createLabel();
 
+		/**
+		 * Input instance.
+		 *
+		 * @member {ui.input.InputText}
+		 */
+		this.input = this._createInput();
+
+		// Insert label and input to content collection.
+		const contentCollection = this.addCollection( 'content' );
+
+		contentCollection.add( this.label );
 		contentCollection.add( this.input );
-		contentCollection.add( this.label, 0 );
 	}
 
+	/**
+	 * Get input value.
+	 *
+	 * @returns {String} Input value.
+	 */
 	get value() {
 		return this.input.value;
 	}
 
-	_createInput() {
-		const model = new Model();
-
-		model.bind( 'value', 'label' ).to( this.model );
-
-		return new InputText( model, new InputTextView( this.locale ) );
-	}
-
+	/**
+	 * Initialize {@link ui.input.InputLabel InputLabel} class.
+	 *
+	 * @private
+	 * @returns {InputLabel}
+	 */
 	_createLabel() {
 		const model = new Model();
 
-		model.bind( 'for' ).to( this.input.view.model, 'uid' );
 		model.bind( 'text' ).to( this.model, 'label' );
+		model.bind( 'for' ).to( this.model, 'uid', value => `ck-input-${ value }` );
 
 		return new InputLabel( model, new InputLabelView( this.locale ) );
 	}
+
+	/**
+	 * Initialize {@link ui.input.InputText InputText} class.
+	 *
+	 * @private
+	 * @returns {InputText}
+	 */
+	_createInput() {
+		const model = new Model();
+
+		model.bind( 'value' ).to( this.model, 'value' );
+		model.bind( 'id' ).to( this.model, 'uid', value => `ck-input-${ value }` );
+
+		return new InputText( model, new InputTextView( this.locale ) );
+	}
 }
+
+/**
+ * The LabeledInput component {@link ui.Model model} interface.
+ *
+ * @interface ui.input.LabeledInputModel
+ */
+
+/**
+ * The text content of the label element.
+ *
+ * @observable
+ * @member {String} ui.input.LabeledInputModel#label
+ */
+
+/**
+ * The value of the input element.
+ *
+ * @observable
+ * @member {String} ui.input.LabeledInputModel#value
+ */
+
+/**
+ * The unique id to pair {@link ui.input.InputText input element} with {@link ui.input.InputLabel InputLabel label element}.
+ *
+ * @observable
+ * @member {String} ui.input.LabeledInputModel#uid
+ */
