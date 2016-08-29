@@ -32,7 +32,9 @@ export default class ButtonView extends View {
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
 					bind.if( 'withText', 'ck-button_with-text' )
-				]
+				],
+
+				type: bind.to( 'type', value => value ? value : 'button' )
 			},
 
 			children: [
@@ -56,11 +58,13 @@ export default class ButtonView extends View {
 					evt.preventDefault();
 				} ),
 
-				click: bind.to( () => {
+				click: bind.to( evt => {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
 					if ( this.model.isEnabled ) {
 						this.model.fire( 'click' );
+					} else {
+						evt.preventDefault();
 					}
 				} )
 			}

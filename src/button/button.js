@@ -37,7 +37,7 @@ export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
+		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText', 'type' ).to( model );
 
 		if ( model.icon ) {
 			view.model.bind( 'icon' ).to( model );
