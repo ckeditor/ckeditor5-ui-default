@@ -8,6 +8,15 @@ import Controller from '../controller.js';
 /**
  * The input label controller class.
  *
+ * 		const model = new Model( {
+ *			text: 'Label of some input',
+ *			for: 'ck-input-5'
+ *		} );
+ *
+ *		new InputLabel( model, new InputLabelView() );
+ *
+ * See {@link ui.input.InputLabelView}.
+ *
  * @memberOf ui.input
  * @extends ui.Controller
  */
@@ -21,6 +30,26 @@ export default class InputLabel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'for', 'text' ).to( model );
+		view.model.bind( 'text', 'for' ).to( model );
 	}
 }
+
+/**
+ * The InputLabel component {@link ui.Model} interface.
+ *
+ * @interface ui.input.InputLabelModel
+ */
+
+/**
+ * The text of the label.
+ *
+ * @observable
+ * @member {String} ui.input.InputLabelModel#text
+ */
+
+/**
+ * The for attribute of the label (to pair with input element).
+ *
+ * @observable
+ * @member {String} ui.input.InputLabelModel#for
+ */

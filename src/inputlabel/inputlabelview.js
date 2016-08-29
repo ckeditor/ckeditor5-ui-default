@@ -37,5 +37,31 @@ export default class InputLabelView extends View {
 				}
 			]
 		} );
+
+		/**
+		 * Model of this label view.
+		 *
+		 * @member {ui.input.InputLabelViewModel} ui.input.InputLabelView#model
+		 */
 	}
 }
+
+/**
+ * The input label view {@link ui.Model} interface.
+ *
+ * @interface ui.input.InputLabelViewModel
+ */
+
+/**
+ * The value of the input.
+ *
+ * @observable
+ * @member {String} ui.input.InputLabelViewModel#value
+ */
+
+/**
+ * The for attribute of the input (to pair with label element).
+ *
+ * @observable
+ * @member {String} ui.input.InputLabelViewModel#for
+ */
