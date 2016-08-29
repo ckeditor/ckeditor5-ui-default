@@ -31,15 +31,44 @@ export default class InputTextView extends View {
 					'ck-input',
 					'ck-input-text'
 				],
-				id: bind.to( 'uid' )
+				id: bind.to( 'id' )
 			}
 		} );
 
-		// `value` attribute can't be inline, because doesn't work on change.
+		// `value` can not be an HTML attribute, because it doesn't change HTMLInputElement value after edit.
 		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
+
+		/**
+		 * Model of this label view.
+		 *
+		 * @member {ui.input.InputLabelViewModel} ui.input.InputLabelView#model
+		 */
 	}
 
+	/**
+	 * Set focus to the input.
+	 */
 	focus() {
 		this.element.focus();
 	}
 }
+
+/**
+ * The text input view {@link ui.Model} interface.
+ *
+ * @interface ui.input.InputTextViewModel
+ */
+
+/**
+ * The value of the input.
+ *
+ * @observable
+ * @member {String} ui.input.InputTextViewModel#value
+ */
+
+/**
+ * The id attribute of the input (to pair with label element).
+ *
+ * @observable
+ * @member {String} ui.input.InputTextViewModel#id
+ */
