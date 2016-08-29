@@ -94,6 +94,13 @@ export default class ButtonView extends View {
  */
 
 /**
+ * The type of the button. Default `button`.
+ *
+ * @observable
+ * @member {String} ui.button.ButtonViewModel#type
+ */
+
+/**
  * Controls whether the button view is "on", e.g. some feature which it represents
  * is currently enabled.
  *

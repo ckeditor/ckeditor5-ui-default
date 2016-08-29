@@ -77,6 +77,13 @@ export default class Button extends Controller {
  */
 
 /**
+ * The type of the button. Default `button`.
+ *
+ * @observable
+ * @member {String} ui.button.ButtonModel#type
+ */
+
+/**
  * Whether the button is "on" (e.g. some feature which this button represents is currently enabled).
  *
  * @observable

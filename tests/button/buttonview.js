@@ -60,6 +60,18 @@ describe( 'ButtonView', () => {
 
 				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.true;
 			} );
+
+			it( 'reacts on model.type', () => {
+				// Default value.
+				expect( view.element.getAttribute( 'type' ) ).to.equal( 'button' );
+
+				model.set( 'type', 'submit' );
+				expect( view.element.getAttribute( 'type' ) ).to.equal( 'submit' );
+
+				// Default value.
+				model.type = null;
+				expect( view.element.getAttribute( 'type' ) ).to.equal( 'button' );
+			} );
 		} );
 
 		describe( 'text', () => {
