@@ -25,7 +25,7 @@ import InputLabelView from '../inputlabel/inputlabelview.js';
  *
  *		new LabeledInput( model, new LabeledInputView() );
  *
- * See {@link ui.input.LabeledInputView}.
+ * See {@link ui.input.labeled.LabeledInputView}.
  *
  * @memberOf ui.input.labeled
  * @extends ui.Controller
@@ -107,26 +107,26 @@ export default class LabeledInput extends Controller {
 /**
  * The LabeledInput component {@link ui.Model model} interface.
  *
- * @interface ui.input.LabeledInputModel
+ * @interface ui.input.labeled.LabeledInputModel
  */
 
 /**
  * The text content of the label element.
  *
  * @observable
- * @member {String} ui.input.LabeledInputModel#label
+ * @member {String} ui.input.labeled.LabeledInputModel#label
  */
 
 /**
  * The value of the input element.
  *
  * @observable
- * @member {String} ui.input.LabeledInputModel#value
+ * @member {String} ui.input.labeled.LabeledInputModel#value
  */
 
 /**
  * The unique id to pair {@link ui.input.InputText input element} with {@link ui.input.InputLabel InputLabel label element}.
  *
  * @observable
- * @member {String} ui.input.LabeledInputModel#uid
+ * @member {Number} ui.input.labeled.LabeledInputModel#uid
  */

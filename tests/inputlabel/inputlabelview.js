@@ -33,11 +33,11 @@ describe( 'InputLabelView', () => {
 	describe( 'DOM bindings', () => {
 		describe( 'text content', () => {
 			it( 'reacts on model#text', () => {
-				expect( view.element.innerHTML ).to.equal( 'foo' );
+				expect( view.element.textContent ).to.equal( 'foo' );
 
 				model.text = 'baz';
 
-				expect( view.element.innerHTML ).to.equal( 'baz' );
+				expect( view.element.textContent ).to.equal( 'baz' );
 			} );
 		} );
 

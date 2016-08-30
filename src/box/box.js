@@ -8,6 +8,14 @@ import Controller from '../controller.js';
 /**
  * The box controller class.
  *
+ * 		const model = new Model( {
+ *			alignRight: true,
+ *		} );
+ *
+ *		new Box( model, new BoxView() );
+ *
+ * See {@link ui.box.BoxView}.
+ *
  * @memberOf ui.box
  * @extends ui.Controller
  */
@@ -26,3 +34,16 @@ export default class Box extends Controller {
 		this.addCollection( 'content' );
 	}
 }
+
+/**
+ * The Box component {@link ui.Model model} interface.
+ *
+ * @interface ui.box.BoxModel
+ */
+
+/**
+ * (Optional) When `true` then children will be aligned to the right. When `false` then alignment will be inherited.
+ *
+ * @observable
+ * @member {Boolean} ui.box.BoxModel#alignRight
+ */

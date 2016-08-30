@@ -34,5 +34,24 @@ export default class BoxView extends View {
 		} );
 
 		this.register( 'content', el => el );
+
+		/**
+		 * Model of this box view.
+		 *
+		 * @member {ui.box.BoxViewModel} ui.box.boxView#model
+		 */
 	}
 }
+
+/**
+ * The box view {@link ui.Model} interface.
+ *
+ * @interface ui.box.BoxViewModel
+ */
+
+/**
+ * (Optional) When `true` then children will be aligned to the right. When `false` then alignment will be inherited.
+ *
+ * @observable
+ * @member {String} ui.box.BoxViewModel#alignRight
+ */

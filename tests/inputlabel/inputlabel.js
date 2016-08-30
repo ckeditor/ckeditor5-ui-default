@@ -24,8 +24,8 @@ describe( 'InputLabel', () => {
 
 	describe( 'constructor', () => {
 		it( 'binds view#model attributes to the InputLabel#model', () => {
-			expect( view.model.text ).to.equal( model.text );
-			expect( view.model.for ).to.equal( model.for );
+			expect( view.model.text ).to.equal( model.text ).to.equal( 'foo' );
+			expect( view.model.for ).to.equal( model.for ).to.equal( 'bar' );
 		} );
 	} );
 } );
