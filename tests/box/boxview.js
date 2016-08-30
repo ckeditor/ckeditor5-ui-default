@@ -23,7 +23,7 @@ describe( 'BoxView', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'creates element from template', () => {
+		it( 'should creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-box' ) ).to.be.true;
 		} );
@@ -36,7 +36,7 @@ describe( 'BoxView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'alignRight attribute', () => {
-			it( 'reacts on model#alignRight', () => {
+			it( 'should reacts on model#alignRight', () => {
 				expect( view.element.classList.contains( 'ck-box_align_right' ) ).to.be.true;
 
 				model.alignRight = false;

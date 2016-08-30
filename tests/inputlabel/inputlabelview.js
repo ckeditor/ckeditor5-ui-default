@@ -24,7 +24,7 @@ describe( 'InputLabelView', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'creates element from template', () => {
+		it( 'should creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'LABEL' );
 			expect( view.element.classList.contains( 'ck-input__label' ) ).to.be.true;
 		} );
@@ -32,7 +32,7 @@ describe( 'InputLabelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'text content', () => {
-			it( 'reacts on model#text', () => {
+			it( 'should reacts on model#text', () => {
 				expect( view.element.textContent ).to.equal( 'foo' );
 
 				model.text = 'baz';
@@ -42,7 +42,7 @@ describe( 'InputLabelView', () => {
 		} );
 
 		describe( 'for attribute', () => {
-			it( 'reacts on model#for', () => {
+			it( 'should reacts on model#for', () => {
 				expect( view.element.getAttribute( 'for' ) ).to.equal( 'bar' );
 
 				model.for = 'baz';

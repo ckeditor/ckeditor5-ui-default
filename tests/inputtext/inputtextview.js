@@ -24,7 +24,7 @@ describe( 'InputTextView', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'creates element from template', () => {
+		it( 'should creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'INPUT' );
 			expect( view.element.type ).to.equal( 'text' );
 			expect( view.element.classList.contains( 'ck-input' ) ).to.be.true;
@@ -34,7 +34,7 @@ describe( 'InputTextView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'value property', () => {
-			it( 'reacts on model#value', () => {
+			it( 'should reacts on model#value', () => {
 				expect( view.element.value ).to.equal( 'foo' );
 
 				model.value = 'baz';
@@ -44,7 +44,7 @@ describe( 'InputTextView', () => {
 		} );
 
 		describe( 'id attribute', () => {
-			it( 'reacts on model#id', () => {
+			it( 'should reacts on model#id', () => {
 				expect( view.element.id ).to.equal( 'bar' );
 
 				model.id = 'baz';
