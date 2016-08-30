@@ -34,15 +34,14 @@ export default class BalloonPanelView extends View {
 				class: [
 					'ck-balloon-panel',
 					'ck-link-balloon-panel',
-					bind.to( 'arrow', ( value ) =>  `ck-balloon-panel_arrow_${ value }` ),
-					bind.if( 'isVisible', 'ck-balloon-panel_visible' ),
+					bind.to( 'arrow', ( value ) => `ck-balloon-panel_arrow_${ value }` ),
+					bind.if( 'isVisible', 'ck-balloon-panel_visible' )
 				],
 
 				style: {
 					top: bind.to( 'top', ( value ) => `${ value }px` ),
 					left: bind.to( 'left', ( value ) => `${ value }px` ),
-					maxWidth: bind.to( 'maxWidth', ( value ) => `${ value }px` ),
-					maxHeight: bind.to( 'maxHeight', ( value ) => `${ value }px` ),
+					maxWidth: bind.to( 'maxWidth', ( value ) => `${ value }px` )
 				}
 			}
 		} );
@@ -224,13 +223,6 @@ export default class BalloonPanelView extends View {
  */
 
 /**
- * Max height of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#maxHeight
- */
-
-/**
  * Balloon panel arrow direction.
  *
  * @observable
@@ -336,7 +328,7 @@ function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
 	}
 
 	if ( boundingBox.height === undefined ) {
-		boundingBox.width = boundingBox.bottom - boundingBox.top;
+		boundingBox.height = boundingBox.bottom - boundingBox.top;
 	}
 
 	return boundingBox;
@@ -346,11 +338,12 @@ function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
  * Get bounding box of visible in viewport fragment of passed element.
  *
  * @private
- * @param {HTMLElement} element Element which visible area will be count.
+ * @param {HTMLElement|Object} elementOrRect Element or coordinates which visible area will be count.
  * @returns {AbsoluteDomRect} Bounding box of visible area.
  */
-function getVisibleInViewportRect( element ) {
-	const limiterRect = new AbsoluteDomRect( element, 'limiter' );
+function getVisibleInViewportRect( elementOrRect ) {
+	const limiterRect = new AbsoluteDomRect( elementOrRect, 'limiter' );
+
 	const windowScrollX = window.scrollX;
 	const windowScrollY = window.scrollY;
 	const bodyWidth = document.body.clientWidth;

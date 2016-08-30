@@ -27,8 +27,10 @@ export default class BalloonPanel extends Controller {
 
 		view.model.set( 'top', 0 );
 		view.model.set( 'left', 0 );
+		view.model.set( 'arrow', 'se' );
 		view.model.set( 'isVisible', false );
-		view.model.bind( 'arrow', 'maxWidth', 'maxHeight' ).to( model );
+
+		view.model.bind( 'maxWidth' ).to( model );
 		view.model.delegate( 'hide' ).to( model );
 
 		this.addCollection( 'content' );
@@ -42,45 +44,10 @@ export default class BalloonPanel extends Controller {
  */
 
 /**
- * Top position of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelModel#top
- */
-
-/**
- * Left position of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelModel#left
- */
-
-/**
  * Max width of the balloon panel.
  *
  * @observable
  * @member {Number} ui.balloonPanel.BalloonPanelModel#maxWidth
- */
-
-/**
- * Max height of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelModel#maxHeight
- */
-
-/**
- * Balloon panel arrow direction.
- *
- * @observable
- * @member {'se'|sw'|'ne'|nw'} ui.balloonPanel.BalloonPanelModel#arrow
- */
-
-/**
- * flag indicates when the balloon panel is visible or not.
- *
- * @observable
- * @member {Boolean} ui.balloonPanel.BalloonPanelModel#isVisible
  */
 
 /**
