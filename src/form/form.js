@@ -6,16 +6,21 @@
 import Controller from '../controller.js';
 
 /**
- * The balloon panel controller class.
+ * The form controller class. Allows to create regular HTML `<form />` element
+ * and handling submit event or make HTML validation for form fields.
  *
- * @memberOf ui.balloonPanel
+ *		new Box( new Model(), new FormView() );
+ *
+ * See {@link ui.form.FormView}.
+ *
+ * @memberOf ui.form
  * @extends ui.Controller
  */
 export default class Form extends Controller {
 	/**
-	 * Creates an instance of {@link ui.balloonPanel.BalloonPanel} class.
+	 * Creates an instance of {@link ui.form.Form} class.
 	 *
-	 * @param {ui.balloonPanel.BalloonPanelModel} model Model of this balloon panel.
+	 * @param {ui.form.FormModel} model Model of this balloon panel.
 	 * @param {ui.View} view View of this balloon panel.
 	 */
 	constructor( model, view ) {
@@ -26,3 +31,15 @@ export default class Form extends Controller {
 		this.addCollection( 'content' );
 	}
 }
+
+/**
+ * The Form component {@link ui.Model model} interface.
+ *
+ * @interface ui.box.FormModel
+ */
+
+/**
+ * Fired when the Form action should be executed.
+ *
+ * @event ui.button.FormModel#execute
+ */

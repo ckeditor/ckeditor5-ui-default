@@ -7,11 +7,11 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The balloon panel view class.
+ * The form view class.
  *
- * See {@link ui.balloonPanel.BalloonPanel}.
+ * See {@link ui.form.Form}.
  *
- * @memberOf ui.balloonPanel
+ * @memberOf ui.form
  * @extends ui.View
  */
 export default class FormView extends View {
@@ -35,5 +35,24 @@ export default class FormView extends View {
 		} );
 
 		this.register( 'content', el => el );
+
+		/**
+		 * Model of this form view.
+		 *
+		 * @member {ui.form.FormViewModel} ui.form.formView#model
+		 */
 	}
 }
+
+/**
+ * The button view {@link ui.Model} interface.
+ *
+ * @interface ui.form.FormViewModel
+ */
+
+/**
+ * Fired when the form view is submitted (when one of the child triggered submit event).
+ * E.g. click on {@link ui.button.Button Button} of type submit.
+ *
+ * @event ui.form.FormViewModel#submit
+ */
