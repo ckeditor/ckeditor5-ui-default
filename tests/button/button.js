@@ -21,7 +21,8 @@ describe( 'Button', () => {
 		model = new Model( {
 			label: 'foo',
 			isOn: false,
-			isEnabled: false
+			isEnabled: false,
+			keystroke: 'ALT+F'
 		} );
 
 		view = new ButtonView();
@@ -33,9 +34,22 @@ describe( 'Button', () => {
 			expect( view.model.label ).to.equal( model.label );
 			expect( view.model.isOn ).to.equal( model.isOn );
 			expect( view.model.isEnabled ).to.equal( model.isEnabled );
+			expect( view.model.title ).to.equal( `${ model.label } (${ model.keystroke })` );
 
 			expect( view.model.withText ).to.be.undefined;
 			expect( view.model.icon ).to.be.undefined;
+		} );
+
+		it( 'binds view.model#title to Button.model#label and Button.model#keystroke', () => {
+			model.label = 'ABC';
+			model.keystroke = '';
+			expect( view.model.title ).to.equal( 'ABC' );
+
+			model.keystroke = 'FOO';
+			expect( view.model.title ).to.equal( `ABC (FOO)` );
+
+			model.label = 'XYZ';
+			expect( view.model.title ).to.equal( `XYZ (FOO)` );
 		} );
 
 		it( 'binds view#model icon–related attributes to the Button#model', () => {

@@ -62,6 +62,20 @@ describe( 'ButtonView', () => {
 			} );
 		} );
 
+		describe( 'title', () => {
+			it( 'is set initially', () => {
+				expect( view.element.attributes.title.value ).to.equal( 'foo' );
+			} );
+
+			it( 'reacts on model.label and model.keystroke', () => {
+				model.label = 'baz';
+				expect( view.element.attributes.title.value ).to.equal( 'baz' );
+
+				model.set( 'keystroke', 'qux' );
+				expect( view.element.attributes.title.value ).to.equal( 'baz (qux)' );
+			} );
+		} );
+
 		describe( 'text', () => {
 			it( 'is set initially', () => {
 				expect( view.element.textContent ).to.equal( 'foo' );
