@@ -30,47 +30,53 @@ describe( 'LabeledInput', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should appends InputLabel and InputText components to content collection', () => {
-			const contentCollection = labeledInput.collections.get( 'content' );
-
-			expect( contentCollection ).to.have.length( 2 );
-			expect( contentCollection.get( 0 ) ).to.deep.equal( labeledInput.label );
-			expect( contentCollection.get( 1 ) ).to.deep.equal( labeledInput.input );
-		} );
-
-		describe( 'InputLabel', () => {
-			it( 'should creates InputLabel instance', () => {
-				expect( labeledInput.label ).to.instanceof( InputLabel );
+		describe( 'child components', () => {
+			it( 'should appends components to content collection', () => {
+				expect( labeledInput.collections.get( 'content' ) ).to.have.length( 2 );
 			} );
 
-			it( 'should binds InputLabel#model to the #model', () => {
-				expect( labeledInput.label.model.for ).to.match( /^ck-input-[0-9]+$/ );
+			describe( 'label', () => {
+				it( 'should creates instance', () => {
+					expect( labeledInput.label ).to.instanceof( InputLabel );
+				} );
 
-				assertBinding( labeledInput.label.model,
-					{ text: 'some label' },
-					[
-						[ model, { label: 'new label', uid: 2 } ]
-					],
-					{ text: 'new label', for: 'ck-input-2' }
-				);
+				it( 'should appends to "content" collection', () => {
+					expect( labeledInput.collections.get( 'content' ).get( 0 ) ).to.deep.equal( labeledInput.label );
+				} );
+
+				it( 'should binds InputLabel#model to the #model', () => {
+					expect( labeledInput.label.model.for ).to.match( /^ck-input-[0-9]+$/ );
+
+					assertBinding( labeledInput.label.model,
+						{ text: 'some label' },
+						[
+							[ model, { label: 'new label', uid: 2 } ]
+						],
+						{ text: 'new label', for: 'ck-input-2' }
+					);
+				} );
 			} );
-		} );
 
-		describe( 'InputText', () => {
-			it( 'should creates InputText instance', () => {
-				expect( labeledInput.input ).to.instanceof( InputText );
-			} );
+			describe( 'input', () => {
+				it( 'should creates instance', () => {
+					expect( labeledInput.input ).to.instanceof( InputText );
+				} );
 
-			it( 'should binds InputText#model to the #model', () => {
-				expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
+				it( 'should appends to "content" collection', () => {
+					expect( labeledInput.collections.get( 'content' ).get( 1 ) ).to.deep.equal( labeledInput.input );
+				} );
 
-				assertBinding( labeledInput.input.model,
-					{ value: 'some value' },
-					[
-						[ model, { value: 'new value', uid: 2 } ]
-					],
-					{ value: 'new value', id: 'ck-input-2' }
-				);
+				it( 'should binds InputText#model to the #model', () => {
+					expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
+
+					assertBinding( labeledInput.input.model,
+						{ value: 'some value' },
+						[
+							[ model, { value: 'new value', uid: 2 } ]
+						],
+						{ value: 'new value', id: 'ck-input-2' }
+					);
+				} );
 			} );
 		} );
 	} );
