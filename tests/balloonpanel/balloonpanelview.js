@@ -4,7 +4,7 @@
  */
 
 /* global document */
-/* bender-tags: ui, balloonPanel */
+/* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanel from '/ckeditor5/ui/balloonpanel/balloonpanel.js';
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
