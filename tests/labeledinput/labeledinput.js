@@ -45,15 +45,17 @@ describe( 'LabeledInput', () => {
 				} );
 
 				it( 'should binds InputLabel#model to the #model', () => {
-					expect( labeledInput.label.model.for ).to.match( /^ck-input-[0-9]+$/ );
-
 					assertBinding( labeledInput.label.model,
 						{ text: 'some label' },
 						[
-							[ model, { label: 'new label', uid: 2 } ]
+							[ model, { label: 'new label' } ]
 						],
-						{ text: 'new label', for: 'ck-input-2' }
+						{ text: 'new label' }
 					);
+				} );
+
+				it( 'should has unique for attribute', () => {
+					expect( labeledInput.label.model.for ).to.match( /^ck-input-[0-9]+$/ );
 				} );
 			} );
 
@@ -67,15 +69,17 @@ describe( 'LabeledInput', () => {
 				} );
 
 				it( 'should binds InputText#model to the #model', () => {
-					expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
-
 					assertBinding( labeledInput.input.model,
 						{ value: 'some value' },
 						[
-							[ model, { value: 'new value', uid: 2 } ]
+							[ model, { value: 'new value' } ]
 						],
-						{ value: 'new value', id: 'ck-input-2' }
+						{ value: 'new value' }
 					);
+				} );
+
+				it( 'should has unique id attribute', () => {
+					expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
 				} );
 			} );
 		} );

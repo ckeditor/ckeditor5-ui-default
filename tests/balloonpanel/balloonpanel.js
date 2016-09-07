@@ -28,16 +28,6 @@ describe( 'BalloonPanel', () => {
 			expect( view.model.maxWidth ).to.equal( model.maxWidth ).to.equal( 200 );
 		} );
 
-		it( 'should delegates view#hide model', () => {
-			const spy = sinon.spy();
-
-			model.on( 'hide', spy );
-
-			view.model.fire( 'hide' );
-
-			expect( spy.calledOnce ).to.be.true;
-		} );
-
 		it( 'should set default values to view#model', () => {
 			expect( view.model.top ).to.equal( 0 );
 			expect( view.model.left ).to.equal( 0 );
