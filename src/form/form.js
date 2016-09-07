@@ -9,7 +9,7 @@ import Controller from '../controller.js';
  * The form controller class. Allows to create regular HTML `<form />` element
  * and handling submit event or make HTML validation for form fields.
  *
- *		new Box( new Model(), new FormView() );
+ *		new Form( new Model(), new FormView() );
  *
  * See {@link ui.form.FormView}.
  *
@@ -20,8 +20,8 @@ export default class Form extends Controller {
 	/**
 	 * Creates an instance of {@link ui.form.Form} class.
 	 *
-	 * @param {ui.form.FormModel} model Model of this balloon panel.
-	 * @param {ui.View} view View of this balloon panel.
+	 * @param {ui.form.FormModel} model Model of this form.
+	 * @param {ui.View} view View of this form.
 	 */
 	constructor( model, view ) {
 		super( model, view );
@@ -35,11 +35,11 @@ export default class Form extends Controller {
 /**
  * The Form component {@link ui.Model model} interface.
  *
- * @interface ui.box.FormModel
+ * @interface ui.form.FormModel
  */
 
 /**
  * Fired when the Form action should be executed.
  *
- * @event ui.button.FormModel#execute
+ * @event ui.form.FormModel#execute
  */

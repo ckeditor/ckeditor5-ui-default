@@ -8,7 +8,7 @@ import Controller from '../controller.js';
 /**
  * The text input controller class.
  *
- * 		const model = new Model( {
+ *		const model = new Model( {
  *			value: 'init value',
  *			id: 'some-id'
  *		} );

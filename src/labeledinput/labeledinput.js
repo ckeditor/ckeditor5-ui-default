@@ -15,10 +15,10 @@ import InputLabel from '../inputlabel/inputlabel.js';
 import InputLabelView from '../inputlabel/inputlabelview.js';
 
 /**
- * The labeled input controller class. It contains two components {@link ui.input.InputLabel InputLabel} and
- * {@link ui.input.InputText InputText} pair each other by {@link ui.input.LabeledInputModel#uid unique id}.
+ * The labeled input controller class. It contains two components, {@link ui.input.InputLabel InputLabel} and
+ * {@link ui.input.InputText InputText}, connected by an {@link ui.input.LabeledInputModel#uid unique id}.
  *
- * 		const model = new Model( {
+ *		const model = new Model( {
  *			label: 'Label text'
  *			value: 'init value',
  *		} );
@@ -40,8 +40,13 @@ export default class LabeledInput extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		// Create unique id to pair input with label.
-		model.set( 'uid', uid() );
+		/**
+		 * Create unique id to pair input with label.
+		 *
+		 * @protected
+		 * @member {ui.input.InputLabel}
+		 */
+		this._uid = `ck-input-${ uid() }`;
 
 		/**
 		 * Label Instance.
@@ -83,7 +88,7 @@ export default class LabeledInput extends Controller {
 		const model = new Model();
 
 		model.bind( 'text' ).to( this.model, 'label' );
-		model.bind( 'for' ).to( this.model, 'uid', value => `ck-input-${ value }` );
+		model.set( 'for', this._uid );
 
 		return new InputLabel( model, new InputLabelView( this.locale ) );
 	}
@@ -98,7 +103,7 @@ export default class LabeledInput extends Controller {
 		const model = new Model();
 
 		model.bind( 'value' ).to( this.model, 'value' );
-		model.bind( 'id' ).to( this.model, 'uid', value => `ck-input-${ value }` );
+		model.set( 'id', this._uid );
 
 		return new InputText( model, new InputTextView( this.locale ) );
 	}

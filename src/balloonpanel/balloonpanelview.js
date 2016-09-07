@@ -48,11 +48,37 @@ export default class BalloonPanelView extends View {
 
 		this.register( 'content', el => el );
 
+		// Handle `Esc` press and hide panel.
+		this.listenTo( this.model, 'change:isVisible', ( evt, propertyName, value, previousValue ) => {
+			if ( value ) {
+				this.listenTo( document, 'keydown', this._closeOnEscPress.bind( this ) );
+			} else {
+				if ( previousValue ) {
+					this.stopListening( document, 'keydown' );
+				}
+			}
+		} );
+
 		/**
 		 * Model of this balloon panel view.
 		 *
-		 * @member {ui.balloonPanel.BalloonPanelView} ui.balloonPanel.BalloonPanelView#model
+		 * @member {ui.balloonPanel.BalloonPanelViewModel}} ui.balloonPanel.BalloonPanelView#model
 		 */
+	}
+
+	/**
+	 * Close balloon on `Esc` press.
+	 *
+	 * Note that method is protected only for testing purpose.
+	 *
+	 * @protected
+	 * @param {utils.EventInfo} evt Information about the event.
+	 * @param {KeyboardEvent} domEvt DOM `keydown` event.
+	 */
+	_closeOnEscPress( evt, domEvt ) {
+		if ( domEvt.keyCode == 27 ) {
+			this.hide();
+		}
 	}
 
 	/**
@@ -65,29 +91,17 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Show balloon and start listen to `keydown` event for closing by `Esc` key.
+	 * Show balloon.
 	 */
 	show() {
 		this.model.isVisible = true;
-
-		// Attach keydown listener for closing panel on Esc press.
-		this._keyCloseCallback = evt => {
-			if ( evt.keyCode == 27 ) {
-				this.hide();
-			}
-		};
-		document.addEventListener( 'keydown', this._keyCloseCallback );
 	}
 
 	/**
-	 * Hide balloon, and stop listen `keydown` event.
-	 *
-	 * @fires ui.balloonPanel.BalloonPanelModel#hide
+	 * Hide balloon.
 	 */
 	hide() {
 		this.model.isVisible = false;
-		this.model.fire( 'hide' );
-		document.removeEventListener( 'keydown', this._keyCloseCallback );
 	}
 
 	/**
@@ -139,7 +153,7 @@ export default class BalloonPanelView extends View {
 		const panelRect = new AbsoluteDomRect( this.element );
 		const visibleInViewportRect = getVisibleInViewportRect( limiter );
 
-		// Get bounding box of each available place and move balloon in this place where fits the best.
+		// Create the rect for each of the possible balloon positions and use the one which is best.
 		this._smartAttachTo( [
 			// South east.
 			panelRect.clone( 'se' ).moveTo( {
@@ -168,7 +182,7 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Move balloon in the place where fits the best.
+	 * Move balloon to the place where it fits the best.
 	 *
 	 * @private
 	 * @param {Array<{AbsoluteDomRect}>} rects List of positions where balloon can be placed.
@@ -237,10 +251,9 @@ export default class BalloonPanelView extends View {
  */
 
 /**
- * Private helper for count and manipulate bounding box of passed element relative to whole document.
+ * An abstract class which represents a bounding box of an HTMLElement or a Range in DOM.
  *
- * **Note** It is not bounding box relative to visible viewport like result of `element.getBoundingClientRect()`. It is relative to
- * whole document (includes scrollbars).
+ * **Note** Corresponds with coordinates used to position elements when position: absolute in CSS.
  *
  * @private
  */
@@ -248,7 +261,7 @@ class AbsoluteDomRect {
 	/**
 	 * Create instance of AbsoluteDomRect class.
 	 *
-	 * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be count.
+	 * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be counted.
 	 * @param {String} [name=undefined] Name of class instance.
 	 */
 	constructor( elementOrRangeOrRect, name ) {
@@ -270,7 +283,7 @@ class AbsoluteDomRect {
 	}
 
 	/**
-	 * Move current bounding to passed coordinates.
+	 * Move current box to specified position.
 	 *
 	 * @param {Number} top New to position.
 	 * @param {Number} left New left position.
@@ -300,10 +313,10 @@ class AbsoluteDomRect {
 }
 
 /**
- * Get relative to whole document bounding box of passed HTMLElement, Range, or Rect.
+ * Get the bounding box of HTMLElement, Range, or rect relative to the entire document (like it had position: absolute in CSS).
  *
  * @private
- * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be count.
+ * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be counted.
  * @returns {Object} Bounding box coordinates.
  */
 function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
@@ -338,7 +351,7 @@ function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
  * Get bounding box of visible in viewport fragment of passed element.
  *
  * @private
- * @param {HTMLElement|Object} elementOrRect Element or coordinates which visible area will be count.
+ * @param {HTMLElement|Object} elementOrRect Element or coordinates which visible area will be counted.
  * @returns {AbsoluteDomRect} Bounding box of visible area.
  */
 function getVisibleInViewportRect( elementOrRect ) {

@@ -10,7 +10,7 @@ import Controller from '../controller.js';
  *
  *		new BalloonPanel( new Model(), new BalloonPanelView() );
  *
- * See {@link ui.form.BalloonPanelView}.
+ * See {@link ui.balloonPanel.BalloonPanelView}.
  *
  * @memberOf ui.balloonPanel
  * @extends ui.Controller
@@ -25,13 +25,14 @@ export default class BalloonPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.set( 'top', 0 );
-		view.model.set( 'left', 0 );
-		view.model.set( 'arrow', 'se' );
-		view.model.set( 'isVisible', false );
+		view.model.set( {
+			top: 0,
+			left: 0,
+			arrow: 'se',
+			isVisible: false
+		} );
 
 		view.model.bind( 'maxWidth' ).to( model );
-		view.model.delegate( 'hide' ).to( model );
 
 		this.addCollection( 'content' );
 	}
@@ -48,10 +49,4 @@ export default class BalloonPanel extends Controller {
  *
  * @observable
  * @member {Number} ui.balloonPanel.BalloonPanelModel#maxWidth
- */
-
-/**
- * Fired when the balloon panel is hide.
- *
- * @event ui.balloonPanel.BalloonPanelModel#hide
  */

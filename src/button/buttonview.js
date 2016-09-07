@@ -94,10 +94,10 @@ export default class ButtonView extends View {
  */
 
 /**
- * The type of the button. Default `button`.
+ * The HTML type of the button. Default `button`.
  *
  * @observable
- * @member {String} ui.button.ButtonViewModel#type
+ * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonViewModel#type
  */
 
 /**

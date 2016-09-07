@@ -8,7 +8,7 @@ import Controller from '../controller.js';
 /**
  * The box controller class.
  *
- * 		const model = new Model( {
+ *		const model = new Model( {
  *			alignRight: true,
  *		} );
  *
@@ -42,7 +42,7 @@ export default class Box extends Controller {
  */
 
 /**
- * (Optional) When `true` then children will be aligned to the right. When `false` then alignment will be inherited.
+ * (Optional) When `true` then children will be aligned to the right. When false, the alignment will be inherited.
  *
  * @observable
  * @member {Boolean} ui.box.BoxModel#alignRight

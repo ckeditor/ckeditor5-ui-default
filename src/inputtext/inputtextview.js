@@ -39,9 +39,9 @@ export default class InputTextView extends View {
 		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
 
 		/**
-		 * Model of this label view.
+		 * Model of this input view.
 		 *
-		 * @member {ui.input.InputLabelViewModel} ui.input.InputLabelView#model
+		 * @member {ui.input.InputTextViewModel} ui.input.InputLabelView#model
 		 */
 	}
 

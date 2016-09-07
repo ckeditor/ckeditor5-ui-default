@@ -8,7 +8,7 @@ import Controller from '../controller.js';
 /**
  * The input label controller class.
  *
- * 		const model = new Model( {
+ *		const model = new Model( {
  *			text: 'Label of some input',
  *			for: 'ck-input-5'
  *		} );

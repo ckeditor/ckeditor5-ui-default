@@ -53,14 +53,14 @@ export default class InputLabelView extends View {
  */
 
 /**
- * The value of the input.
+ * The label text.
  *
  * @observable
- * @member {String} ui.input.InputLabelViewModel#value
+ * @member {String} ui.input.InputLabelViewModel#text
  */
 
 /**
- * The for attribute of the input (to pair with label element).
+ * The for attribute of the label (to pair with form element).
  *
  * @observable
  * @member {String} ui.input.InputLabelViewModel#for
