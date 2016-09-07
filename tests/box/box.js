@@ -22,7 +22,7 @@ describe( 'Box', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should binds view#model attributes to the InputText#model', () => {
+		it( 'should bind view#model attributes to the InputText#model', () => {
 			expect( view.model.alignRight ).to.equal( model.alignRight ).to.equal( true );
 		} );
 

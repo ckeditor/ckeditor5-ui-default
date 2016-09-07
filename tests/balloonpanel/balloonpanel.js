@@ -24,7 +24,7 @@ describe( 'BalloonPanel', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should binds view#model attributes to the BalloonPanel#model', () => {
+		it( 'should bind view#model attributes to the BalloonPanel#model', () => {
 			expect( view.model.maxWidth ).to.equal( model.maxWidth ).to.equal( 200 );
 		} );
 
@@ -35,7 +35,7 @@ describe( 'BalloonPanel', () => {
 			expect( view.model.isVisible ).to.equal( false );
 		} );
 
-		it( 'should create empty content collection', () => {
+		it( 'should create an empty content collection', () => {
 			expect( balloonPanel.collections.get( 'content' ) ).to.have.length( 0 );
 		} );
 	} );

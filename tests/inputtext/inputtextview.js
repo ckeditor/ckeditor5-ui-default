@@ -5,22 +5,20 @@
 
 /* bender-tags: ui, input */
 
-import InputText from '/ckeditor5/ui/inputtext/inputtext.js';
 import InputTextView from '/ckeditor5/ui/inputtext/inputtextview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'InputTextView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
+		view = new InputTextView();
+
+		view.model.set( {
 			value: 'foo',
 			id: 'bar'
 		} );
 
-		view = new InputTextView();
-
-		return new InputText( model, view ).init();
+		view.init();
 	} );
 
 	describe( 'constructor', () => {
@@ -34,20 +32,28 @@ describe( 'InputTextView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'value property', () => {
-			it( 'should reacts on model#value', () => {
+			it( 'should react on model#value', () => {
 				expect( view.element.value ).to.equal( 'foo' );
 
-				model.value = 'baz';
+				view.model.value = 'baz';
 
 				expect( view.element.value ).to.equal( 'baz' );
+			} );
+
+			it( 'should set to empty string when using `falsy` values', () => {
+				[ undefined, false, null ].forEach( ( value ) => {
+					view.model.value = value;
+
+					expect( view.element.value ).to.equal( '' );
+				} );
 			} );
 		} );
 
 		describe( 'id attribute', () => {
-			it( 'should reacts on model#id', () => {
+			it( 'should react on model#id', () => {
 				expect( view.element.id ).to.equal( 'bar' );
 
-				model.id = 'baz';
+				view.model.id = 'baz';
 
 				expect( view.element.id ).to.equal( 'baz' );
 			} );

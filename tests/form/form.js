@@ -23,7 +23,7 @@ describe( 'Form', () => {
 			expect( form.collections.get( 'content' ) ).to.have.length( 0 );
 		} );
 
-		it( 'should creates view#submit -> model#execute binding', () => {
+		it( 'should create view#submit -> model#execute binding', () => {
 			const spy = sinon.spy();
 
 			model.on( 'execute', spy );

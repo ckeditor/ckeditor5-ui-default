@@ -3,34 +3,28 @@
  * For licensing, see LICENSE.md.
  */
 
+/* global document */
 /* bender-tags: ui, input */
 
-import LabeledInput from '/ckeditor5/ui/labeledinput/labeledinput.js';
 import LabeledInputView from '/ckeditor5/ui/labeledinput/labeledinputview.js';
-import Model from '/ckeditor5/ui/model.js';
+import View from '/ckeditor5/ui/view.js';
 
 describe( 'InputTextView', () => {
-	let model, view, labeledInput;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
-			label: 'foo'
-		} );
-
 		view = new LabeledInputView();
 
-		labeledInput = new LabeledInput( model, view );
-
-		return labeledInput.init();
+		view.init();
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should creates element from template', () => {
+		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-labeled-input' ) ).to.be.true;
 		} );
 
-		it( 'should registers "content" region', () => {
+		it( 'should register "content" region', () => {
 			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
 			expect( view.regions.get( 0 ).element ).to.equal( view.element );
 		} );
@@ -38,13 +32,25 @@ describe( 'InputTextView', () => {
 
 	describe( 'focus', () => {
 		it( 'should focus input element', () => {
-			const focusSpy = sinon.spy( labeledInput.collections.get( 'content' ).get( 1 ).view, 'focus' );
+			const labeledInputViewMock = createViewMock();
+			labeledInputViewMock.focus = sinon.spy();
+
+			// Input view is on the second position in collection.
+			view.regions.get( 'content' ).views.add( createViewMock() );
+			view.regions.get( 'content' ).views.add( labeledInputViewMock );
 
 			view.focus();
 
-			expect( focusSpy.calledOnce ).to.true;
-
-			focusSpy.restore();
+			expect( labeledInputViewMock.focus.calledOnce ).to.true;
 		} );
 	} );
 } );
+
+// Create base View mock.
+function createViewMock() {
+	const mock = new View();
+
+	mock.element = document.createElement( 'div' );
+
+	return mock;
+}

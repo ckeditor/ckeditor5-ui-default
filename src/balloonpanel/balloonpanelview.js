@@ -39,9 +39,9 @@ export default class BalloonPanelView extends View {
 				],
 
 				style: {
-					top: bind.to( 'top', ( value ) => `${ value }px` ),
-					left: bind.to( 'left', ( value ) => `${ value }px` ),
-					maxWidth: bind.to( 'maxWidth', ( value ) => `${ value }px` )
+					top: bind.to( 'top', pixelize ),
+					left: bind.to( 'left', pixelize ),
+					maxWidth: bind.to( 'maxWidth', pixelize )
 				}
 			}
 		} );
@@ -381,4 +381,14 @@ function getVisibleInViewportRect( elementOrRect ) {
 		right: Math.min( limiterRect.right, bodyWidth + windowScrollX ),
 		bottom: Math.min( limiterRect.bottom, bodyHeight + windowScrollY )
 	}, 'visibleViewportRect' );
+}
+
+/**
+ * Add `px` unit to the passed value.
+ *
+ * @param {String|Number} value
+ * @returns {String} Value with `px` unit,
+ */
+function pixelize( value ) {
+	return `${ value }px`;
 }

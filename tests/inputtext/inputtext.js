@@ -23,14 +23,14 @@ describe( 'InputText', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should binds view#model attributes to the InputText#model', () => {
+		it( 'should bind view#model attributes to the InputText#model', () => {
 			expect( view.model.value ).to.equal( model.value ).to.equal( 'foo' );
 			expect( view.model.id ).to.equal( model.id ).to.equal( 'bar' );
 		} );
 	} );
 
 	describe( 'value', () => {
-		it( 'should returns InputText value', () => {
+		it( 'should return InputText value', () => {
 			inputText.model.value = 'baz';
 
 			expect( inputText.value ).to.equal( 'baz' );

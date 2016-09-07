@@ -31,20 +31,20 @@ describe( 'LabeledInput', () => {
 
 	describe( 'constructor', () => {
 		describe( 'child components', () => {
-			it( 'should appends components to content collection', () => {
+			it( 'should append components to content collection', () => {
 				expect( labeledInput.collections.get( 'content' ) ).to.have.length( 2 );
 			} );
 
 			describe( 'label', () => {
-				it( 'should creates instance', () => {
+				it( 'should be created', () => {
 					expect( labeledInput.label ).to.instanceof( InputLabel );
 				} );
 
-				it( 'should appends to "content" collection', () => {
+				it( 'should be added to "content" collection', () => {
 					expect( labeledInput.collections.get( 'content' ).get( 0 ) ).to.deep.equal( labeledInput.label );
 				} );
 
-				it( 'should binds InputLabel#model to the #model', () => {
+				it( 'should have InputLabel.model#label bound to the #model"', () => {
 					assertBinding( labeledInput.label.model,
 						{ text: 'some label' },
 						[
@@ -54,21 +54,21 @@ describe( 'LabeledInput', () => {
 					);
 				} );
 
-				it( 'should has unique for attribute', () => {
+				it( 'should have na unique for attribute', () => {
 					expect( labeledInput.label.model.for ).to.match( /^ck-input-[0-9]+$/ );
 				} );
 			} );
 
 			describe( 'input', () => {
-				it( 'should creates instance', () => {
+				it( 'should be created', () => {
 					expect( labeledInput.input ).to.instanceof( InputText );
 				} );
 
-				it( 'should appends to "content" collection', () => {
+				it( 'should be added to "content" collection', () => {
 					expect( labeledInput.collections.get( 'content' ).get( 1 ) ).to.deep.equal( labeledInput.input );
 				} );
 
-				it( 'should binds InputText#model to the #model', () => {
+				it( 'should have InputText.model#value bound to the #model', () => {
 					assertBinding( labeledInput.input.model,
 						{ value: 'some value' },
 						[
@@ -78,7 +78,7 @@ describe( 'LabeledInput', () => {
 					);
 				} );
 
-				it( 'should has unique id attribute', () => {
+				it( 'should have an unique id attribute', () => {
 					expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
 				} );
 			} );
@@ -86,7 +86,7 @@ describe( 'LabeledInput', () => {
 	} );
 
 	describe( 'value', () => {
-		it( 'should returns LabeledInput value', () => {
+		it( 'should return LabeledInput value', () => {
 			labeledInput.model.value = 'baz';
 
 			expect( labeledInput.value ).to.equal( 'baz' );

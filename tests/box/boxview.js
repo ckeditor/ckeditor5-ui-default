@@ -5,25 +5,23 @@
 
 /* bender-tags: ui, box */
 
-import Box from '/ckeditor5/ui/box/box.js';
 import BoxView from '/ckeditor5/ui/box/boxview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'BoxView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
+		view = new BoxView();
+
+		view.model.set( {
 			alignRight: true
 		} );
 
-		view = new BoxView();
-
-		return new Box( model, view ).init();
+		view.init();
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should creates element from template', () => {
+		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-box' ) ).to.be.true;
 		} );
@@ -36,10 +34,10 @@ describe( 'BoxView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'alignRight attribute', () => {
-			it( 'should reacts on model#alignRight', () => {
+			it( 'should react on view.model#alignRight', () => {
 				expect( view.element.classList.contains( 'ck-box_align_right' ) ).to.be.true;
 
-				model.alignRight = false;
+				view.model.alignRight = false;
 
 				expect( view.element.classList.contains( 'ck-box_align_right' ) ).to.be.false;
 			} );

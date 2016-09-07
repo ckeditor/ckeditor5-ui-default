@@ -5,26 +5,24 @@
 
 /* bender-tags: ui, input */
 
-import InputLabel from '/ckeditor5/ui/inputlabel/inputlabel.js';
 import InputLabelView from '/ckeditor5/ui/inputlabel/inputlabelview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'InputLabelView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
+		view = new InputLabelView();
+
+		view.model.set( {
 			text: 'foo',
 			for: 'bar'
 		} );
 
-		view = new InputLabelView();
-
-		return new InputLabel( model, view ).init();
+		view.init();
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should creates element from template', () => {
+		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'LABEL' );
 			expect( view.element.classList.contains( 'ck-input__label' ) ).to.be.true;
 		} );
@@ -32,20 +30,20 @@ describe( 'InputLabelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'text content', () => {
-			it( 'should reacts on model#text', () => {
+			it( 'should react on model#text', () => {
 				expect( view.element.textContent ).to.equal( 'foo' );
 
-				model.text = 'baz';
+				view.model.text = 'baz';
 
 				expect( view.element.textContent ).to.equal( 'baz' );
 			} );
 		} );
 
 		describe( 'for attribute', () => {
-			it( 'should reacts on model#for', () => {
+			it( 'should react on model#for', () => {
 				expect( view.element.getAttribute( 'for' ) ).to.equal( 'bar' );
 
-				model.for = 'baz';
+				view.model.for = 'baz';
 
 				expect( view.element.getAttribute( 'for' ) ).to.equal( 'baz' );
 			} );

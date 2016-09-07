@@ -45,7 +45,7 @@ export default class FormView extends View {
 }
 
 /**
- * The button view {@link ui.Model} interface.
+ * The form view {@link ui.Model} interface.
  *
  * @interface ui.form.FormViewModel
  */
