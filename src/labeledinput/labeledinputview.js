@@ -22,12 +22,7 @@ export default class LabeledInputView extends View {
 		super( locale );
 
 		this.template = new Template( {
-			tag: 'div',
-			attributes: {
-				class: [
-					'ck-labeled-input',
-				]
-			}
+			tag: 'div'
 		} );
 
 		this.register( 'content', el => el );

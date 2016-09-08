@@ -21,7 +21,6 @@ describe( 'InputTextView', () => {
 	describe( 'constructor', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
-			expect( view.element.classList.contains( 'ck-labeled-input' ) ).to.be.true;
 		} );
 
 		it( 'should register "content" region', () => {
