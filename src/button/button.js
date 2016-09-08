@@ -7,6 +7,7 @@ import Model from '../model.js';
 import Controller from '../controller.js';
 import Icon from '../icon/icon.js';
 import IconView from '../icon/iconview.js';
+import { getEnvKeystrokeText } from '../../utils/keyboard.js';
 
 /**
  * The button controller class. It uses {@link ui.icon.Icon} component
@@ -38,6 +39,13 @@ export default class Button extends Controller {
 		super( model, view );
 
 		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText', 'type' ).to( model );
+		view.model.bind( 'title' ).to( model, 'label', model, 'keystroke', ( label, keystroke ) => {
+			if ( keystroke ) {
+				label += ` (${ getEnvKeystrokeText( keystroke ) })`;
+			}
+
+			return label;
+		} );
 
 		if ( model.icon ) {
 			view.model.bind( 'icon' ).to( model );
@@ -71,6 +79,7 @@ export default class Button extends Controller {
 
 /**
  * The label of the button visible to the user.
+ * Also present in the button tooltip.
  *
  * @observable
  * @member {String} ui.button.ButtonModel#label
@@ -110,6 +119,14 @@ export default class Button extends Controller {
  *
  * @observable
  * @member {String} ui.button.ButtonModel#icon
+ */
+
+/**
+ * (Optional) The keystroke associated with the button, i.e. <kbd>CTRL+B</kbd>,
+ * in the string format compatible with {@link utils.keyboard}.
+ *
+ * @observable
+ * @member {String} ui.button.ButtonModel#keystroke
  */
 
 /**

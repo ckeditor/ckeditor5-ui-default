@@ -33,7 +33,9 @@ export default class ButtonView extends View {
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
 					bind.if( 'withText', 'ck-button_with-text' )
 				],
-
+				title: [
+					bind.to( 'title' )
+				],
 				type: bind.to( 'type', value => value ? value : 'button' )
 			},
 
@@ -120,6 +122,14 @@ export default class ButtonView extends View {
  *
  * @observable
  * @member {Boolean} ui.button.ButtonViewModel#withText
+ */
+
+/**
+ * (Optional) Title of the button displayed in the tooltip, i.e. when
+ * hovering the button with the mouse cursor.
+ *
+ * @observable
+ * @member {Boolean} ui.button.ButtonViewModel#title
  */
 
 /**
