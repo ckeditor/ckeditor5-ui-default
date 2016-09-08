@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
-/* bender-tags: ui, input */
+/* bender-tags: ui, label */
 
 import LabelView from '/ckeditor5/ui/label/labelview.js';
 

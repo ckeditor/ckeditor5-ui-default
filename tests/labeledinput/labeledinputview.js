@@ -34,7 +34,7 @@ describe( 'InputTextView', () => {
 			const labeledInputViewMock = createViewMock();
 			labeledInputViewMock.focus = sinon.spy();
 
-			// Input view is on the second position in collection.
+			// Input view is on the second position in the collection.
 			view.regions.get( 'content' ).views.add( createViewMock() );
 			view.regions.get( 'content' ).views.add( labeledInputViewMock );
 
