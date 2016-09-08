@@ -9,24 +9,27 @@ import LabeledInput from '/ckeditor5/ui/labeledinput/labeledinput.js';
 import LabeledInputView from '/ckeditor5/ui/labeledinput/labeledinputview.js';
 import Model from '/ckeditor5/ui/model.js';
 
-import InputLabel from '/ckeditor5/ui/inputlabel/inputlabel.js';
-import InputText from '/ckeditor5/ui/inputtext/inputtext.js';
+import Label from '/ckeditor5/ui/label/label.js';
+import InputComponent from '/ckeditor5/ui/inputtext/inputtext.js';
+import InputComponentView from '/ckeditor5/ui/inputtext/inputtextview.js';
 
 import utilsTestUtils from '/tests/utils/_utils/utils.js';
 
 const assertBinding = utilsTestUtils.assertBinding;
 
 describe( 'LabeledInput', () => {
-	let model, labeledInput, view;
+	let model, labeledInput, view, inputComponent;
 
 	beforeEach( () => {
+		inputComponent = new InputComponent( new Model(), new InputComponentView() );
+
 		model = new Model( {
 			label: 'some label',
 			value: 'some value'
 		} );
 
 		view = new LabeledInputView();
-		labeledInput = new LabeledInput( model, view );
+		labeledInput = new LabeledInput( model, view, inputComponent );
 	} );
 
 	describe( 'constructor', () => {
@@ -37,14 +40,14 @@ describe( 'LabeledInput', () => {
 
 			describe( 'label', () => {
 				it( 'should be created', () => {
-					expect( labeledInput.label ).to.instanceof( InputLabel );
+					expect( labeledInput.label ).to.instanceof( Label );
 				} );
 
 				it( 'should be added to "content" collection', () => {
 					expect( labeledInput.collections.get( 'content' ).get( 0 ) ).to.deep.equal( labeledInput.label );
 				} );
 
-				it( 'should have InputLabel.model#label bound to the #model"', () => {
+				it( 'should have Label.model#label bound to the #model"', () => {
 					assertBinding( labeledInput.label.model,
 						{ text: 'some label' },
 						[
@@ -60,8 +63,8 @@ describe( 'LabeledInput', () => {
 			} );
 
 			describe( 'input', () => {
-				it( 'should be created', () => {
-					expect( labeledInput.input ).to.instanceof( InputText );
+				it( 'should be attached', () => {
+					expect( labeledInput.input ).to.instanceof( InputComponent );
 				} );
 
 				it( 'should be added to "content" collection', () => {

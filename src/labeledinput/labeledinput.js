@@ -8,22 +8,21 @@ import uid from '../../utils/uid.js';
 import Model from '../model.js';
 import Controller from '../controller.js';
 
-import InputText from '../inputtext/inputtext.js';
-import InputTextView from '../inputtext/inputtextview.js';
-
-import InputLabel from '../inputlabel/inputlabel.js';
-import InputLabelView from '../inputlabel/inputlabelview.js';
+import Label from '../label/label.js';
+import LabelView from '../label/labelview.js';
 
 /**
- * The labeled input controller class. It contains two components, {@link ui.input.InputLabel InputLabel} and
- * {@link ui.input.InputText InputText}, connected by an {@link ui.input.LabeledInputModel#uid unique id}.
+ * The labeled input controller class. It contains two components, {@link ui.input.Label Label} and
+ * passed by a constructor InputComponent instance, connected by an unique id.
+ *
+ *		const input = new InputText( new Model(), new InputTextView() );
  *
  *		const model = new Model( {
  *			label: 'Label text'
  *			value: 'init value',
  *		} );
  *
- *		new LabeledInput( model, new LabeledInputView() );
+ *		new LabeledInput( model, new LabeledInputView(), input );
  *
  * See {@link ui.input.labeled.LabeledInputView}.
  *
@@ -36,22 +35,23 @@ export default class LabeledInput extends Controller {
 	 *
 	 * @param {ui.input.labeled.LabeledInputModel} model Model of this input.
 	 * @param {ui.View} view View of this input.
+	 * @param {ui.input.InputText} inputComponent Input component.
 	 */
-	constructor( model, view ) {
+	constructor( model, view, inputComponent ) {
 		super( model, view );
 
 		/**
 		 * Create unique id to pair input with label.
 		 *
 		 * @protected
-		 * @member {ui.input.InputLabel}
+		 * @member {ui.input.Label}
 		 */
 		this._uid = `ck-input-${ uid() }`;
 
 		/**
 		 * Label Instance.
 		 *
-		 * @member {ui.input.InputLabel}
+		 * @member {ui.input.Label}
 		 */
 		this.label = this._createLabel();
 
@@ -60,7 +60,7 @@ export default class LabeledInput extends Controller {
 		 *
 		 * @member {ui.input.InputText}
 		 */
-		this.input = this._createInput();
+		this.input = this._attachInput( inputComponent );
 
 		// Insert label and input to content collection.
 		const contentCollection = this.addCollection( 'content' );
@@ -79,10 +79,10 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Initialize {@link ui.input.InputLabel InputLabel} class.
+	 * Initialize {@link ui.input.Label Label} class.
 	 *
 	 * @private
-	 * @returns {InputLabel}
+	 * @returns {Label}
 	 */
 	_createLabel() {
 		const model = new Model();
@@ -90,22 +90,23 @@ export default class LabeledInput extends Controller {
 		model.bind( 'text' ).to( this.model, 'label' );
 		model.set( 'for', this._uid );
 
-		return new InputLabel( model, new InputLabelView( this.locale ) );
+		return new Label( model, new LabelView( this.locale ) );
 	}
 
 	/**
-	 * Initialize {@link ui.input.InputText InputText} class.
+	 * Bind input#model with {ui.input.labeled.LabeledInputModel}.
 	 *
 	 * @private
-	 * @returns {InputText}
+	 * @param {ui.input.InputText} inputComponent Constructor of Input component.
+	 * @returns {ui.input.InputText} inputComponent instance.
 	 */
-	_createInput() {
-		const model = new Model();
+	_attachInput( inputComponent ) {
+		const model = inputComponent.model;
 
 		model.bind( 'value' ).to( this.model, 'value' );
 		model.set( 'id', this._uid );
 
-		return new InputText( model, new InputTextView( this.locale ) );
+		return inputComponent;
 	}
 }
 
@@ -127,11 +128,4 @@ export default class LabeledInput extends Controller {
  *
  * @observable
  * @member {String} ui.input.labeled.LabeledInputModel#value
- */
-
-/**
- * The unique id to pair {@link ui.input.InputText input element} with {@link ui.input.InputLabel InputLabel label element}.
- *
- * @observable
- * @member {Number} ui.input.labeled.LabeledInputModel#uid
  */

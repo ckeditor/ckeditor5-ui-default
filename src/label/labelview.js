@@ -7,14 +7,14 @@ import View from '../view.js';
 import Template from '../template.js';
 
 /**
- * The input label view class.
+ * The label view class.
  *
- * See {@link ui.input.InputLabel}.
+ * See {@link ui.label.Label}.
  *
- * @memberOf ui.input
+ * @memberOf ui.label
  * @extends ui.View
  */
-export default class InputLabelView extends View {
+export default class LabelView extends View {
 	/**
 	 * @inheritDoc
 	 */
@@ -27,7 +27,7 @@ export default class InputLabelView extends View {
 			tag: 'label',
 			attributes: {
 				class: [
-					'ck-input__label'
+					'ck-label'
 				],
 				for: bind.to( 'for' )
 			},
@@ -41,27 +41,27 @@ export default class InputLabelView extends View {
 		/**
 		 * Model of this label view.
 		 *
-		 * @member {ui.input.InputLabelViewModel} ui.input.InputLabelView#model
+		 * @member {ui.label.LabelViewModel} ui.label.LabelView#model
 		 */
 	}
 }
 
 /**
- * The input label view {@link ui.Model} interface.
+ * The label view {@link ui.Model} interface.
  *
- * @interface ui.input.InputLabelViewModel
+ * @interface ui.label.LabelViewModel
  */
 
 /**
  * The label text.
  *
  * @observable
- * @member {String} ui.input.InputLabelViewModel#text
+ * @member {String} ui.label.LabelViewModel#text
  */
 
 /**
  * The for attribute of the label (to pair with form element).
  *
  * @observable
- * @member {String} ui.input.InputLabelViewModel#for
+ * @member {String} ui.label.LabelViewModel#for
  */

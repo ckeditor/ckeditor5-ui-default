@@ -5,13 +5,13 @@
 
 /* bender-tags: ui, input */
 
-import InputLabelView from '/ckeditor5/ui/inputlabel/inputlabelview.js';
+import LabelView from '/ckeditor5/ui/label/labelview.js';
 
-describe( 'InputLabelView', () => {
+describe( 'LabelView', () => {
 	let view;
 
 	beforeEach( () => {
-		view = new InputLabelView();
+		view = new LabelView();
 
 		view.model.set( {
 			text: 'foo',
@@ -24,7 +24,7 @@ describe( 'InputLabelView', () => {
 	describe( 'constructor', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'LABEL' );
-			expect( view.element.classList.contains( 'ck-input__label' ) ).to.be.true;
+			expect( view.element.classList.contains( 'ck-label' ) ).to.be.true;
 		} );
 	} );
 

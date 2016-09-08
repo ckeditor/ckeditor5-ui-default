@@ -6,25 +6,25 @@
 import Controller from '../controller.js';
 
 /**
- * The input label controller class.
+ * The label controller class.
  *
  *		const model = new Model( {
  *			text: 'Label of some input',
  *			for: 'ck-input-5'
  *		} );
  *
- *		new InputLabel( model, new InputLabelView() );
+ *		new Label( model, new LabelView() );
  *
- * See {@link ui.input.InputLabelView}.
+ * See {@link ui.input.LabelView}.
  *
- * @memberOf ui.input
+ * @memberOf ui.label
  * @extends ui.Controller
  */
-export default class InputLabel extends Controller {
+export default class Label extends Controller {
 	/**
-	 * Creates an instance of {@link ui.input.InputLabel} class.
+	 * Creates an instance of {@link ui.label.Label} class.
 	 *
-	 * @param {ui.input.InputLabelModel} model Model of this label.
+	 * @param {ui.label.LabelModel} model Model of this label.
 	 * @param {ui.View} view View of this label.
 	 */
 	constructor( model, view ) {
@@ -35,21 +35,21 @@ export default class InputLabel extends Controller {
 }
 
 /**
- * The InputLabel component {@link ui.Model model} interface.
+ * The Label component {@link ui.Model model} interface.
  *
- * @interface ui.input.InputLabelModel
+ * @interface ui.label.LabelModel
  */
 
 /**
  * The text of the label.
  *
  * @observable
- * @member {String} ui.input.InputLabelModel#text
+ * @member {String} ui.label.LabelModel#text
  */
 
 /**
  * The for attribute of the label (to pair with input element).
  *
  * @observable
- * @member {String} ui.input.InputLabelModel#for
+ * @member {String} ui.label.LabelModel#for
  */

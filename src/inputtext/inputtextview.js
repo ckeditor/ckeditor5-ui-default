@@ -41,7 +41,7 @@ export default class InputTextView extends View {
 		/**
 		 * Model of this input view.
 		 *
-		 * @member {ui.input.InputTextViewModel} ui.input.InputLabelView#model
+		 * @member {ui.input.InputTextViewModel} ui.input.InputTextView#model
 		 */
 	}
 
