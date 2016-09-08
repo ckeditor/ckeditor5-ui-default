@@ -46,7 +46,7 @@ export default class InputTextView extends View {
 	}
 
 	/**
-	 * Set focus to the input.
+	 * Sets focus to the input.
 	 */
 	focus() {
 		this.element.focus();

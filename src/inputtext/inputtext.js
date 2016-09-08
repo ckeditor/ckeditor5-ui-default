@@ -34,7 +34,7 @@ export default class InputText extends Controller {
 	}
 
 	/**
-	 * Get input value.
+	 * Gets input value.
 	 *
 	 * @returns {String} input value.
 	 */

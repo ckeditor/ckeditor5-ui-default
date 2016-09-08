@@ -41,7 +41,7 @@ export default class LabeledInput extends Controller {
 		super( model, view );
 
 		/**
-		 * Create unique id to pair input with label.
+		 * Unique id to pair input with label.
 		 *
 		 * @protected
 		 * @member {ui.input.Label}
@@ -70,7 +70,7 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Get input value.
+	 * Gets input value.
 	 *
 	 * @returns {String} Input value.
 	 */
@@ -79,7 +79,7 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Initialize {@link ui.input.Label Label} class.
+	 * Initializes {@link ui.input.Label Label} class.
 	 *
 	 * @private
 	 * @returns {Label}
@@ -94,7 +94,7 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Bind input#model with {ui.input.labeled.LabeledInputModel}.
+	 * Binds input#model with {ui.input.labeled.LabeledInputModel}.
 	 *
 	 * @private
 	 * @param {ui.input.InputText} inputComponent Constructor of Input component.

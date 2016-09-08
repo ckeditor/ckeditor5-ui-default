@@ -67,7 +67,7 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Close balloon on `Esc` press.
+	 * Closes balloon on `Esc` press.
 	 *
 	 * Note that method is protected only for testing purpose.
 	 *
@@ -82,7 +82,7 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Check if balloon is currently visible.
+	 * Checks if balloon is currently visible.
 	 *
 	 * @returns {Boolean}
 	 */
@@ -98,14 +98,14 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Hide balloon.
+	 * Hides balloon.
 	 */
 	hide() {
 		this.model.isVisible = false;
 	}
 
 	/**
-	 * Attach balloon panel to specified element or range including limits of viewport bounding box.
+	 * Attaches balloon panel to specified element or range including limits of viewport bounding box.
 	 *
 	 *  Balloon could show in 4 relative to the target element places:
 	 * * South east:
@@ -182,7 +182,7 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Move balloon to the place where it fits the best.
+	 * Moves balloon to the place where it fits the best.
 	 *
 	 * @private
 	 * @param {Array<{AbsoluteDomRect}>} rects List of positions where balloon can be placed.
