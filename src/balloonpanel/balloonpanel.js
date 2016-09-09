@@ -45,7 +45,7 @@ export default class BalloonPanel extends Controller {
  */
 
 /**
- * Max width of the balloon panel.
+ * Max width of the balloon panel, as in CSS.
  *
  * @observable
  * @member {Number} ui.balloonPanel.BalloonPanelModel#maxWidth

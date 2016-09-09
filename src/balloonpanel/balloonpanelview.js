@@ -48,7 +48,7 @@ export default class BalloonPanelView extends View {
 
 		this.register( 'content', el => el );
 
-		// Handle `Esc` press and hide panel.
+		// Handle `ESC` key press and hide panel.
 		this.listenTo( this.model, 'change:isVisible', ( evt, propertyName, value, previousValue ) => {
 			if ( value ) {
 				this.listenTo( document, 'keydown', this._closeOnEscPress.bind( this ) );
@@ -62,14 +62,162 @@ export default class BalloonPanelView extends View {
 		/**
 		 * Model of this balloon panel view.
 		 *
-		 * @member {ui.balloonPanel.BalloonPanelViewModel}} ui.balloonPanel.BalloonPanelView#model
+		 * @member {ui.balloonPanel.BalloonPanelViewModel} ui.balloonPanel.BalloonPanelView#model
 		 */
 	}
 
 	/**
-	 * Closes balloon on `Esc` press.
+	 * Returns balloon visibility state.
 	 *
-	 * Note that method is protected only for testing purpose.
+	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
+	 *
+	 * @returns {Boolean}
+	 */
+	get isVisible() {
+		return this.model.isVisible;
+	}
+
+	/**
+	 * Shows the balloon panel.
+	 *
+	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
+	 */
+	show() {
+		this.model.isVisible = true;
+	}
+
+	/**
+	 * Hides the balloon panel.
+	 *
+	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
+	 */
+	hide() {
+		this.model.isVisible = false;
+	}
+
+	/**
+	 * Attaches the balloon panel to a specified DOM element or range with a smart heuristics.
+	 *
+	 * **Notes**:
+	 *
+	 * * The algorithm takes the geometry of the "limiter element" into consideration so,
+	 * if possible, the balloon is positioned within the rect of that element.
+	 * * If possible, the balloon is positioned within the area of the "limiter element"
+	 * fitting into the browser viewport visible to the user. It prevents the panel from
+	 * appearing off screen.
+	 *
+	 * The heuristics choses from among 4 available positions relative to the target DOM element or range:
+	 *
+	 * * South east:
+	 *
+	 *		[ Target ]
+	 *		    ^
+	 *		+-----------------+
+	 *		|                 |
+	 *		+-----------------+
+	 *
+	 *
+	 * * South west:
+	 *
+	 *		         [ Target ]
+	 *		              ^
+	 *		+-----------------+
+	 *		|                 |
+	 *		+-----------------+
+	 *
+	 *
+	 * * North east:
+	 *
+	 *		+-----------------+
+	 *		|                 |
+	 *		+-----------------+
+	 *		    V
+	 *		[ Target ]
+	 *
+	 *
+	 * * North west:
+	 *
+	 *		+-----------------+
+	 *		|                 |
+	 *		+-----------------+
+	 *		              V
+	 *		         [ Target ]
+	 *
+	 * See {@ link ui.balloonPanel.BalloonPanelViewModel#arrow}.
+	 *
+	 * @param {HTMLElement|Range} elementOrRange Target DOM element or range to which the balloon will be attached.
+	 * @param {HTMLElement} limiterElement The DOM element beyond which area the balloon panel should not be positioned, if possible.
+	 */
+	attachTo( elementOrRange, limiterElement ) {
+		this.show();
+
+		const elementOrRangeRect = new AbsoluteDomRect( elementOrRange, 'elementOrRange' );
+		const panelRect = new AbsoluteDomRect( this.element );
+		const visibleRect = getAbsoluteRectVisisbleInTheViewport( limiterElement );
+
+		// Create a rect for each of the possible balloon positions and feed them to _smartAttachTo,
+		// which will use whichever is the optimal.
+		const possiblePanelRects = {
+			// The absolute rect for "South-East" position.
+			se: panelRect.clone().moveTo( {
+				top: elementOrRangeRect.bottom + arrowTopOffset,
+				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
+			} ),
+
+			// The absolute rect for "South west" position.
+			sw: panelRect.clone().moveTo( {
+				top: elementOrRangeRect.bottom + arrowTopOffset,
+				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
+			} ),
+
+			// The absolute rect for "North east" position.
+			ne: panelRect.clone().moveTo( {
+				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
+				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
+			} ),
+
+			// The absolute rect for "North west" position.
+			nw: panelRect.clone().moveTo( {
+				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
+				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
+			} )
+		};
+
+		this._smartAttachTo( possiblePanelRects, visibleRect );
+	}
+
+	/**
+	 * For the given `Array` of possible rects, choses the one which fits the best into
+	 * `visibleViewportRect`, which is when their intersection has the biggest area.
+	 *
+	 * @private
+	 * @param {Array<{AbsoluteDomRect}>} rects List of positions where balloon can be placed.
+	 * @param {AbsoluteDomRect} visibleViewportRect The absolute rect of the visible part of the browser viewport.
+	 */
+	_smartAttachTo( rects, visibleViewportRect ) {
+		let maxIntersectRectPos;
+		let maxIntersectArea = -1;
+
+		// Get best place.
+		for ( let rectPos in rects ) {
+			const intersectArea = rects[ rectPos ].getIntersectArea( visibleViewportRect );
+
+			if ( intersectArea > maxIntersectArea ) {
+				maxIntersectRectPos = rectPos;
+				maxIntersectArea = intersectArea;
+			}
+		}
+
+		// Move the balloon panel.
+		this.model.arrow = maxIntersectRectPos;
+		this.model.top = rects[ maxIntersectRectPos ].top;
+		this.model.left = rects[ maxIntersectRectPos ].left;
+	}
+
+	/**
+	 * Close balloon on `ESC` key press event.
+	 *
+	 * **Note**: this method is `@protected` for testing purposes only.
 	 *
 	 * @protected
 	 * @param {utils.EventInfo} evt Information about the event.
@@ -80,180 +228,14 @@ export default class BalloonPanelView extends View {
 			this.hide();
 		}
 	}
-
-	/**
-	 * Checks if balloon is currently visible.
-	 *
-	 * @returns {Boolean}
-	 */
-	get isVisible() {
-		return this.model.isVisible;
-	}
-
-	/**
-	 * Show balloon.
-	 */
-	show() {
-		this.model.isVisible = true;
-	}
-
-	/**
-	 * Hides balloon.
-	 */
-	hide() {
-		this.model.isVisible = false;
-	}
-
-	/**
-	 * Attaches balloon panel to specified element or range including limits of viewport bounding box.
-	 *
-	 *  Balloon could show in 4 relative to the target element places:
-	 * * South east:
-	 *
-	 * 		[ Target ]
-	 *		    ^
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *
-	 *
-	 * * South west:
-	 *
-	 * 		         [ Target ]
-	 *		              ^
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *
-	 *
-	 * * North east:
-	 *
-	 * 		+-----------------+
-	 * 		|                 |
-	 *		+-----------------+
-	 *		    V
-	 *		[ Target ]
-	 *
-	 *
-	 * * North west:
-	 *
-	 * 		+-----------------+
-	 * 		|                 |
-	 *		+-----------------+
-	 *		              V
-	 *		         [ Target ]
-	 *
-	 * @param {HTMLElement|Range} elementOrRange Target element to which the balloon will be attached.
-	 * @param {HTMLElement|Object} limiter Viewport element.
-	 */
-	attachTo( elementOrRange, limiter ) {
-		this.show();
-
-		const elementOrRangeRect = new AbsoluteDomRect( elementOrRange, 'elementOrRange' );
-		const panelRect = new AbsoluteDomRect( this.element );
-		const visibleInViewportRect = getVisibleInViewportRect( limiter );
-
-		// Create the rect for each of the possible balloon positions and use the one which is best.
-		this._smartAttachTo( [
-			// South east.
-			panelRect.clone( 'se' ).moveTo( {
-				top: elementOrRangeRect.bottom + arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
-			} ),
-
-			// South west.
-			panelRect.clone( 'sw' ).moveTo( {
-				top: elementOrRangeRect.bottom + arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
-			} ),
-
-			// North east.
-			panelRect.clone( 'ne' ).moveTo( {
-				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
-			} ),
-
-			// North west.
-			panelRect.clone( 'nw' ).moveTo( {
-				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
-			} )
-		], visibleInViewportRect );
-	}
-
-	/**
-	 * Moves balloon to the place where it fits the best.
-	 *
-	 * @private
-	 * @param {Array<{AbsoluteDomRect}>} rects List of positions where balloon can be placed.
-	 * @param {AbsoluteDomRect} visibleViewportRect Bounding box of visible part of viewport element.
-	 */
-	_smartAttachTo( rects, visibleViewportRect ) {
-		let maxIntersectRect;
-		let maxIntersectArea = -1;
-
-		// Get best place.
-		for ( let rect of rects ) {
-			const intersectArea = rect.getIntersectArea( visibleViewportRect );
-
-			if ( intersectArea > maxIntersectArea ) {
-				maxIntersectRect = rect;
-				maxIntersectArea = intersectArea;
-			}
-		}
-
-		// Move balloon.
-		this.model.arrow = maxIntersectRect.name;
-		this.model.top = maxIntersectRect.top;
-		this.model.left = maxIntersectRect.left;
-	}
 }
 
 /**
- * The balloon panel view {@link ui.Model model} interface.
+ * An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
  *
- * @interface ui.balloonPanel.BalloonPanelViewModel
- */
-
-/**
- * Top position of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#top
- */
-
-/**
- * Left position of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#left
- */
-
-/**
- * Max width of the balloon panel.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#maxWidth
- */
-
-/**
- * Balloon panel arrow direction.
- *
- * @observable
- * @member {'se'|sw'|'ne'|nw'} ui.balloonPanel.BalloonPanelViewModel#arrow
- */
-
-/**
- * Controls whether the balloon panel is visible or not.
- *
- * @observable
- * @member {Boolean} ui.balloonPanel.BalloonPanelViewModel#isVisible
- */
-
-/**
- * An abstract class which represents a bounding box of an HTMLElement or a Range in DOM.
- *
- * **Note** Corresponds with coordinates used to position elements when position: absolute in CSS.
+ * **Note**: The geometry used by each instance corresponds with coordinates of an object
+ * with `position: absolute` relative to the `<body>` (`document.body`), and hence
+ * it is useful to manage such objects.
  *
  * @private
  */
@@ -261,15 +243,10 @@ class AbsoluteDomRect {
 	/**
 	 * Create instance of AbsoluteDomRect class.
 	 *
-	 * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be counted.
-	 * @param {String} [name=undefined] Name of class instance.
+	 * @param {HTMLElement|Range|Object} elementOrRangeOrRect Source object to create the rect.
 	 */
-	constructor( elementOrRangeOrRect, name ) {
-		if ( name ) {
-			this.name = name;
-		}
-
-		Object.assign( this, getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) );
+	constructor( elementOrRangeOrRect ) {
+		Object.assign( this, getAbsoluteRect( elementOrRangeOrRect ) );
 	}
 
 	/**
@@ -313,13 +290,14 @@ class AbsoluteDomRect {
 }
 
 /**
- * Get the bounding box of HTMLElement, Range, or rect relative to the entire document (like it had position: absolute in CSS).
+ * Returns the client rect of an HTMLElement, Range, or rect. The obtained geometry of the rect
+ * corresponds with `position: absolute` relative to the `<body>` (`document.body`).
  *
  * @private
- * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch bounding box will be counted.
- * @returns {Object} Bounding box coordinates.
+ * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch rect is to be determined.
+ * @returns {Object} Client rect object.
  */
-function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
+function getAbsoluteRect( elementOrRangeOrRect ) {
 	if ( elementOrRangeOrRect instanceof HTMLElement || elementOrRangeOrRect instanceof Range ) {
 		const elementRect = elementOrRangeOrRect.getBoundingClientRect();
 		const bodyRect = document.body.getBoundingClientRect();
@@ -334,53 +312,55 @@ function getAbsoluteBoundingBoxOf( elementOrRangeOrRect ) {
 		};
 	}
 
-	let boundingBox = Object.assign( {}, elementOrRangeOrRect );
+	// The rect has been passed.
+	const absoluteRect = Object.assign( {}, elementOrRangeOrRect );
 
-	if ( boundingBox.width === undefined ) {
-		boundingBox.width = boundingBox.right - boundingBox.left;
+	if ( absoluteRect.width === undefined ) {
+		absoluteRect.width = absoluteRect.right - absoluteRect.left;
 	}
 
-	if ( boundingBox.height === undefined ) {
-		boundingBox.height = boundingBox.bottom - boundingBox.top;
+	if ( absoluteRect.height === undefined ) {
+		absoluteRect.height = absoluteRect.bottom - absoluteRect.top;
 	}
 
-	return boundingBox;
+	return absoluteRect;
 }
 
 /**
- * Get bounding box of visible in viewport fragment of passed element.
+ * Returns the client rect of the element limited by the visible (to the user)
+ * viewport of the browser window.
+ *
+ *		[Browser viewport]
+ *		+---------------------------------------+
+ *		|                        [Element]      |
+ *		|                        +----------------------+
+ *		|                        |##############|       |
+ *		|                        |##############|       |
+ *		|                        |#######^######|       |
+ *		|                        +-------|--------------+
+ *		|                                |      |
+ *		+--------------------------------|------+
+ *		                                 |
+ *		                                  \- [Element rect visible in the viewport]
  *
  * @private
- * @param {HTMLElement|Object} elementOrRect Element or coordinates which visible area will be counted.
- * @returns {AbsoluteDomRect} Bounding box of visible area.
+ * @param {HTMLElement|Object} element Object which visible area rect is to be determined.
+ * @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
  */
-function getVisibleInViewportRect( elementOrRect ) {
-	const limiterRect = new AbsoluteDomRect( elementOrRect, 'limiter' );
+function getAbsoluteRectVisisbleInTheViewport( element ) {
+	const limiterRect = new AbsoluteDomRect( element, 'limiterElement' );
 
 	const windowScrollX = window.scrollX;
 	const windowScrollY = window.scrollY;
 	const bodyWidth = document.body.clientWidth;
 	const bodyHeight = document.body.clientHeight;
 
-	// 	[Viewport]
-	// 	+---------------------------------------+
-	// 	|                        [Element]      |
-	// 	|                        +----------------------+
-	// 	|                        |##############|       |
-	// 	|                        |##############|       |
-	// 	|                        |##############|       |
-	// 	|                        +-------^--------------+
-	// 	|                                |      |
-	// 	+--------------------------------|------+
-	//                                   |
-	//                                    \- [Visible Viewport Rect]
-	//
 	return new AbsoluteDomRect( {
 		top: Math.max( limiterRect.top, windowScrollY ),
 		left: Math.max( limiterRect.left, windowScrollX ),
 		right: Math.min( limiterRect.right, bodyWidth + windowScrollX ),
 		bottom: Math.min( limiterRect.bottom, bodyHeight + windowScrollY )
-	}, 'visibleViewportRect' );
+	} );
 }
 
 /**
@@ -392,3 +372,44 @@ function getVisibleInViewportRect( elementOrRect ) {
 function pixelize( value ) {
 	return `${ value }px`;
 }
+
+/**
+ * The balloon panel view {@link ui.Model model} interface.
+ *
+ * @interface ui.balloonPanel.BalloonPanelViewModel
+ */
+
+/**
+ * The absolute top position of the balloon panel in pixels.
+ *
+ * @observable
+ * @member {Number} ui.balloonPanel.BalloonPanelViewModel#top
+ */
+
+/**
+ * The absolute left position of the balloon panel in pixels.
+ *
+ * @observable
+ * @member {Number} ui.balloonPanel.BalloonPanelViewModel#left
+ */
+
+/**
+ * The maximum width of the balloon panel, as in CSS.
+ *
+ * @observable
+ * @member {Number} ui.balloonPanel.BalloonPanelViewModel#maxWidth
+ */
+
+/**
+ * Balloon panel arrow direction.
+ *
+ * @observable
+ * @member {'se'|sw'|'ne'|nw'} ui.balloonPanel.BalloonPanelViewModel#arrow
+ */
+
+/**
+ * Controls whether the balloon panel is visible or not.
+ *
+ * @observable
+ * @member {Boolean} ui.balloonPanel.BalloonPanelViewModel#isVisible
+ */
