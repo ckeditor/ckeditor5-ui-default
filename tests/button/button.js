@@ -36,6 +36,7 @@ describe( 'Button', () => {
 			expect( view.model.isEnabled ).to.equal( model.isEnabled );
 			expect( view.model.title ).to.equal( `${ model.label } (${ model.keystroke })` );
 
+			expect( view.model.type ).to.be.undefined;
 			expect( view.model.withText ).to.be.undefined;
 			expect( view.model.icon ).to.be.undefined;
 		} );

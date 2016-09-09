@@ -51,7 +51,7 @@ export default class EditorUIView extends View {
 
 		new Template( {
 			attributes: {
-				class: 'ck-body ck-reset_all'
+				class: 'ck-body ck-rounded-corners ck-reset_all'
 			}
 		} ).apply( bodyElement );
 

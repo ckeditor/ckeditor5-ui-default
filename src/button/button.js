@@ -38,7 +38,7 @@ export default class Button extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText' ).to( model );
+		view.model.bind( 'label', 'isOn', 'isEnabled', 'withText', 'type' ).to( model );
 		view.model.bind( 'title' ).to( model, 'label', model, 'keystroke', ( label, keystroke ) => {
 			if ( keystroke ) {
 				label += ` (${ getEnvKeystrokeText( keystroke ) })`;
@@ -83,6 +83,13 @@ export default class Button extends Controller {
  *
  * @observable
  * @member {String} ui.button.ButtonModel#label
+ */
+
+/**
+ * The HTML type of the button. Default `button`.
+ *
+ * @observable
+ * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonModel#type
  */
 
 /**

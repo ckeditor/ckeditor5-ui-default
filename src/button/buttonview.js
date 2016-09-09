@@ -35,7 +35,8 @@ export default class ButtonView extends View {
 				],
 				title: [
 					bind.to( 'title' )
-				]
+				],
+				type: bind.to( 'type', value => value ? value : 'button' )
 			},
 
 			children: [
@@ -59,11 +60,13 @@ export default class ButtonView extends View {
 					evt.preventDefault();
 				} ),
 
-				click: bind.to( () => {
+				click: bind.to( evt => {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
 					if ( this.model.isEnabled ) {
 						this.model.fire( 'click' );
+					} else {
+						evt.preventDefault();
 					}
 				} )
 			}
@@ -90,6 +93,13 @@ export default class ButtonView extends View {
  *
  * @observable
  * @member {String} ui.button.ButtonViewModel#label
+ */
+
+/**
+ * The HTML type of the button. Default `button`.
+ *
+ * @observable
+ * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonViewModel#type
  */
 
 /**
