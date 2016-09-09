@@ -12,8 +12,8 @@ import Label from '../label/label.js';
 import LabelView from '../label/labelview.js';
 
 /**
- * The labeled input controller class. It contains two components, {@link ui.input.Label Label} and
- * passed by a constructor InputComponent instance, connected by an unique id.
+ * The labeled input controller class. It contains two components, {@link ui.input.Label Label}
+ * and `InputComponent` instance, connected by an unique id.
  *
  *		const input = new InputText( new Model(), new InputTextView() );
  *
@@ -41,7 +41,7 @@ export default class LabeledInput extends Controller {
 		super( model, view );
 
 		/**
-		 * Unique id to pair input with label.
+		 * An unique `id` to pair the input with its label.
 		 *
 		 * @protected
 		 * @member {ui.input.Label}
@@ -49,14 +49,14 @@ export default class LabeledInput extends Controller {
 		this._uid = `ck-input-${ uid() }`;
 
 		/**
-		 * Label Instance.
+		 * The `Label` controller instance.
 		 *
 		 * @member {ui.input.Label}
 		 */
 		this.label = this._createLabel();
 
 		/**
-		 * Input instance.
+		 * The input controller instance.
 		 *
 		 * @member {ui.input.InputText}
 		 */
@@ -70,7 +70,7 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Gets input value.
+	 * Returns the input value.
 	 *
 	 * @returns {String} Input value.
 	 */
@@ -79,7 +79,7 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Initializes {@link ui.input.Label Label} class.
+	 * Initializes the {@link ui.input.Label Label} instance.
 	 *
 	 * @private
 	 * @returns {Label}
@@ -94,11 +94,11 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Binds input#model with {ui.input.labeled.LabeledInputModel}.
+	 * Binds the model of {@link ui.input.LabeledInput#input} with {ui.input.labeled.LabeledInputModel}.
 	 *
 	 * @private
-	 * @param {ui.input.InputText} inputComponent Constructor of Input component.
-	 * @returns {ui.input.InputText} inputComponent instance.
+	 * @param {ui.Controller} inputComponent An instance of the input component.
+	 * @returns {ui.Controller} inputComponent An instance of the input component.
 	 */
 	_attachInput( inputComponent ) {
 		const model = inputComponent.model;
@@ -117,14 +117,14 @@ export default class LabeledInput extends Controller {
  */
 
 /**
- * The text content of the label element.
+ * The text content of the {@link ui.input.LabeledInput#label}.
  *
  * @observable
  * @member {String} ui.input.labeled.LabeledInputModel#label
  */
 
 /**
- * The value of the input element.
+ * The value of the {@link ui.input.LabeledInput#input}.
  *
  * @observable
  * @member {String} ui.input.labeled.LabeledInputModel#value

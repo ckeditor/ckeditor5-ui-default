@@ -9,8 +9,8 @@ import Controller from '../controller.js';
  * The label controller class.
  *
  *		const model = new Model( {
- *			text: 'Label of some input',
- *			for: 'ck-input-5'
+ *			text: 'Label of some input.',
+ *			for: 'id-of-related-input'
  *		} );
  *
  *		new Label( model, new LabelView() );
@@ -35,7 +35,7 @@ export default class Label extends Controller {
 }
 
 /**
- * The Label component {@link ui.Model model} interface.
+ * The label component {@link ui.Model model} interface.
  *
  * @interface ui.label.LabelModel
  */
@@ -48,7 +48,7 @@ export default class Label extends Controller {
  */
 
 /**
- * The for attribute of the label (to pair with input element).
+ * The `for` attribute of the label (i.e. to pair with an `<input>` element).
  *
  * @observable
  * @member {String} ui.label.LabelModel#for

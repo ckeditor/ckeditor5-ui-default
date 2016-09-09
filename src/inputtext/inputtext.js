@@ -9,8 +9,8 @@ import Controller from '../controller.js';
  * The text input controller class.
  *
  *		const model = new Model( {
- *			value: 'init value',
- *			id: 'some-id'
+ *			value: 'Initial value.',
+ *			id: 'id-of-this-input'
  *		} );
  *
  *		new InputText( model, new InputTextView() );
@@ -34,7 +34,7 @@ export default class InputText extends Controller {
 	}
 
 	/**
-	 * Gets input value.
+	 * Returns the input value.
 	 *
 	 * @returns {String} input value.
 	 */
@@ -44,7 +44,7 @@ export default class InputText extends Controller {
 }
 
 /**
- * The InputText component {@link ui.Model model} interface.
+ * The text input component {@link ui.Model model} interface.
  *
  * @interface ui.input.InputTextModel
  */
@@ -57,7 +57,7 @@ export default class InputText extends Controller {
  */
 
 /**
- * The id attribute of the input (to pair with `label` element).
+ * The `id` attribute of the input (i.e. to pair with a `<label>` element).
  *
  * @observable
  * @member {String} ui.input.InputTextModel#id

@@ -35,7 +35,7 @@ export default class InputTextView extends View {
 			}
 		} );
 
-		// `value` can not be an HTML attribute, because it doesn't change HTMLInputElement value after edit.
+		// Note: `value` cannot be an HTML attribute, because it doesn't change HTMLInputElement value once changed.
 		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
 
 		/**
@@ -67,7 +67,7 @@ export default class InputTextView extends View {
  */
 
 /**
- * The id attribute of the input (to pair with label element).
+ * The `id` attribute of the input (i.e. to pair with a `<label>` element).
  *
  * @observable
  * @member {String} ui.input.InputTextViewModel#id
