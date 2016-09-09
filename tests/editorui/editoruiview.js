@@ -23,6 +23,14 @@ describe( 'EditorUIView', () => {
 			expect( el.parentNode ).to.equal( document.body );
 			expect( el.nextSibling ).to.be.null;
 		} );
+
+		it( 'sets the right class set to the body region', () => {
+			const el = editorUIView.regions.get( 'body' ).element;
+
+			expect( el.classList.contains( 'ck-body' ) ).to.be.true;
+			expect( el.classList.contains( 'ck-rounded-corners' ) ).to.be.true;
+			expect( el.classList.contains( 'ck-reset_all' ) ).to.be.true;
+		} );
 	} );
 
 	describe( 'destroy', () => {
