@@ -18,18 +18,16 @@ import utilsTestUtils from '/tests/utils/_utils/utils.js';
 const assertBinding = utilsTestUtils.assertBinding;
 
 describe( 'LabeledInput', () => {
-	let model, labeledInput, view, inputComponent;
+	let model, labeledInput, view;
 
 	beforeEach( () => {
-		inputComponent = new InputComponent( new Model(), new InputComponentView() );
-
 		model = new Model( {
 			label: 'some label',
 			value: 'some value'
 		} );
 
 		view = new LabeledInputView();
-		labeledInput = new LabeledInput( model, view, inputComponent );
+		labeledInput = new LabeledInput( model, view, InputComponent, InputComponentView, new Model() );
 	} );
 
 	describe( 'constructor', () => {
@@ -83,6 +81,12 @@ describe( 'LabeledInput', () => {
 
 				it( 'should have an unique id attribute', () => {
 					expect( labeledInput.input.model.id ).to.match( /^ck-input-[0-9]+$/ );
+				} );
+
+				describe( 'view', () => {
+					it( 'should inherit the locale', () => {
+						expect( labeledInput.input.view.locale ).to.equal( labeledInput.view.locale );
+					} );
 				} );
 			} );
 		} );

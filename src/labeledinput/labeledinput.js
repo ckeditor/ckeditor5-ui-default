@@ -35,9 +35,11 @@ export default class LabeledInput extends Controller {
 	 *
 	 * @param {ui.input.labeled.LabeledInputModel} model Model of this input.
 	 * @param {ui.View} view View of this input.
-	 * @param {ui.input.InputText} inputComponent Input component.
+	 * @param {Function} InputClass Constructor of the input component.
+	 * @param {Function} InputViewClass Constructor of the input view.
+	 * @param {ui.Model} model Model of the input component.
 	 */
-	constructor( model, view, inputComponent ) {
+	constructor( model, view, InputClass, InputViewClass, inputModel ) {
 		super( model, view );
 
 		/**
@@ -60,7 +62,7 @@ export default class LabeledInput extends Controller {
 		 *
 		 * @member {ui.input.InputText}
 		 */
-		this.input = this._attachInput( inputComponent );
+		this.input = this._spawnInput( InputClass, InputViewClass, inputModel );
 
 		// Insert label and input to content collection.
 		const contentCollection = this.addCollection( 'content' );
@@ -94,19 +96,19 @@ export default class LabeledInput extends Controller {
 	}
 
 	/**
-	 * Binds the model of {@link ui.input.LabeledInput#input} with {ui.input.labeled.LabeledInputModel}.
+	 * Creates the new input using given constructor and model.
+	 * Binds basic attributes of the newly created input's model to {ui.input.labeled.LabeledInputModel}.
 	 *
 	 * @private
-	 * @param {ui.Controller} inputComponent An instance of the input component.
-	 * @returns {ui.Controller} inputComponent An instance of the input component.
+	 * @param {Function} InputClass A constructor of the input component.
+	 * @param {ui.Model} inputModel Model of the input component.
+	 * @returns {ui.Controller} An instance of the input component.
 	 */
-	_attachInput( inputComponent ) {
-		const model = inputComponent.model;
+	_spawnInput( InputClass, InputViewClass, inputModel ) {
+		inputModel.bind( 'value' ).to( this.model, 'value' );
+		inputModel.set( 'id', this._uid );
 
-		model.bind( 'value' ).to( this.model, 'value' );
-		model.set( 'id', this._uid );
-
-		return inputComponent;
+		return new InputClass( inputModel, new InputViewClass( this.locale ) );
 	}
 }
 
