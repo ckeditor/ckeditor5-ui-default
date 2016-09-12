@@ -60,15 +60,15 @@ describe( 'InputTextView', () => {
 		} );
 	} );
 
-	describe( 'focus', () => {
-		it( 'should focus input element', () => {
-			const focusSpy = sinon.spy( view.element, 'focus' );
+	describe( 'select', () => {
+		it( 'should select input value', () => {
+			const selectSpy = sinon.spy( view.element, 'select' );
 
-			view.focus();
+			view.select();
 
-			expect( focusSpy.calledOnce ).to.true;
+			expect( selectSpy.calledOnce ).to.true;
 
-			focusSpy.restore();
+			selectSpy.restore();
 		} );
 	} );
 } );

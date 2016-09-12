@@ -46,10 +46,10 @@ export default class InputTextView extends View {
 	}
 
 	/**
-	 * Sets focus to the input.
+	 * Moves the focus to the input and select entire value.
 	 */
-	focus() {
-		this.element.focus();
+	select() {
+		this.element.select();
 	}
 }
 

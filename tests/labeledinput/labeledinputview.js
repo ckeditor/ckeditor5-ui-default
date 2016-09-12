@@ -29,18 +29,18 @@ describe( 'InputTextView', () => {
 		} );
 	} );
 
-	describe( 'focus', () => {
-		it( 'should focus input element', () => {
+	describe( 'select', () => {
+		it( 'should select input value', () => {
 			const labeledInputViewMock = createViewMock();
-			labeledInputViewMock.focus = sinon.spy();
+			labeledInputViewMock.select = sinon.spy();
 
 			// Input view is on the second position in the collection.
 			view.regions.get( 'content' ).views.add( createViewMock() );
 			view.regions.get( 'content' ).views.add( labeledInputViewMock );
 
-			view.focus();
+			view.select();
 
-			expect( labeledInputViewMock.focus.calledOnce ).to.true;
+			expect( labeledInputViewMock.select.calledOnce ).to.true;
 		} );
 	} );
 } );
