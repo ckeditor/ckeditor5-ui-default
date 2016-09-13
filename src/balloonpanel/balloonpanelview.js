@@ -404,7 +404,7 @@ function pixelize( value ) {
  * Balloon panel arrow direction.
  *
  * @observable
- * @member {'se'|sw'|'ne'|nw'} ui.balloonPanel.BalloonPanelViewModel#arrow
+ * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelViewModel#arrow
  */
 
 /**
