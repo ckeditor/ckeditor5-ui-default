@@ -29,9 +29,9 @@ export default class LabeledInputView extends View {
 	}
 
 	/**
-	 * Moves the focus to the input.
+	 * Moves the focus to the input and selects the value.
 	 */
-	focus() {
-		this.regions.get( 'content' ).views.get( 1 ).focus();
+	select() {
+		this.regions.get( 'content' ).views.get( 1 ).select();
 	}
 }
