@@ -20,19 +20,89 @@ export default class StickyToolbarView extends ToolbarView {
 	/**
 	 * @inheritDoc
 	 */
-	constructor() {
-		super();
+	constructor( locale, limiterElement ) {
+		super( locale );
 
 		const bind = this.bind;
 
 		this.model.set( 'isSticky', false );
+		this.model.set( 'isStickyToLimiterBottom', false );
+		this.model.set( 'left', null );
+		this.model.set( 'marginLeft', null );
+
+		/**
+		 * The limiter element for the sticky toolbar instance. Its bounding rect limits
+		 * the "stickyness" of the toolbar, i.e. when the toolbar reaches the bottom
+		 * edge of the limiter, it becomes sticky to that edge and does not float
+		 * off the limiter.
+		 *
+		 * @member {HTMLElement} ui.stickyToolbar.StickyToolbarView#limiterElement
+		 */
+		this.limiterElement = limiterElement;
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
+		 */
+		this._toolbarRect = null;
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.stickyToolbar.StickyToolbarView#limiterElement}
+		 * of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
+		 */
+		this._limiterRect = null;
 
 		Template.extend( this.template, {
 			attributes: {
-				// Toggle class of the toolbar when "sticky" state changes in the model.
-				class: bind.if( 'isSticky', 'ck-toolbar_sticky' )
+				class: [
+					// Toggle class of the toolbar when "sticky" state changes in the model.
+					bind.if( 'isSticky', 'ck-toolbar_sticky' ),
+					bind.if( 'isStickyToLimiterBottom', 'ck-toolbar_sticky_bottom-limit' ),
+				],
+				style: {
+					width: bind.to( 'isSticky', ( isSticky ) => {
+						return isSticky ? pixelize( this._limiterRect.width ) : null;
+					} ),
+
+					top: bind.to( 'isStickyToLimiterBottom', ( isStickyToLimiterBottom ) => {
+						return isStickyToLimiterBottom ?
+							pixelize( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height ) : null;
+					} ),
+
+					left: bind.to( 'left' ),
+					marginLeft: bind.to( 'marginLeft' )
+				}
 			}
 		} );
+
+		/**
+		 * A dummy element which visually fills the space as long as the
+		 * actual toolbar is sticky. It prevents flickering of the UI.
+		 *
+		 * @private
+		 * @property {HTMLElement} ui.stickyToobar.StickyToolbarView#_elementPlaceholder
+		 */
+		this._elementPlaceholder = new Template( {
+			tag: 'div',
+			attributes: {
+				class: [
+					'ck-toolbar__placeholder'
+				],
+				style: {
+					display: bind.to( 'isSticky', ( isSticky ) => {
+						return isSticky ? 'block' : 'none';
+					} ),
+					height: bind.to( 'isSticky', ( isSticky ) => {
+						return isSticky ? pixelize( this._toolbarRect.height ) : null;
+					} )
+				}
+			}
+		} ).render();
 
 		/**
 		 * Model of this sticky toolbar view.
@@ -44,15 +114,6 @@ export default class StickyToolbarView extends ToolbarView {
 	init() {
 		super.init();
 
-		/**
-		 * A dummy element which visually fills the space as long as the
-		 * actual toolbar is sticky. It prevents flickering of the UI.
-		 *
-		 * @private
-		 * @property {HTMLElement} ui.stickyToobar.StickyToolbarView#_elementPlaceholder
-		 */
-		this._elementPlaceholder = document.createElement( 'div' );
-		this._elementPlaceholder.classList.add( 'ck-toolbar__placeholder' );
 		this.element.parentNode.insertBefore( this._elementPlaceholder, this.element );
 
 		// Update sticky state of the toolbar as the window is being scrolled.
@@ -61,12 +122,8 @@ export default class StickyToolbarView extends ToolbarView {
 		} );
 
 		// Synchronize with `model.isActive` because sticking an inactive toolbar is pointless.
-		this.listenTo( this.model, 'change:isActive', ( evt, name, value ) => {
-			if ( value ) {
-				this._checkIfShouldBeSticky();
-			} else {
-				this._detach();
-			}
+		this.listenTo( this.model, 'change:isActive', () => {
+			this._checkIfShouldBeSticky();
 		} );
 	}
 
@@ -87,64 +144,40 @@ export default class StickyToolbarView extends ToolbarView {
 	 * @protected
 	 */
 	_checkIfShouldBeSticky() {
-		const rectElement = this.model.isSticky ?
-			this._elementPlaceholder : this.element;
-		const rect = rectElement.getBoundingClientRect();
+		const limiterRect = this._limiterRect = this.limiterElement.getBoundingClientRect();
 
-		if ( rect.top < 0 && this.model.isActive ) {
-			this._stick( rect );
-		} else {
-			this._detach();
+		// Stick the toolbar to the top edge of the viewport simulating CSS position:sticky.
+		// TODO: Possibly replaced by CSS in the future http://caniuse.com/#feat=css-sticky
+		if ( limiterRect.top < 0 && this.model.isActive ) {
+			const toolbarRect = this._toolbarRect = this.element.getBoundingClientRect();
+
+			this.model.isSticky = true;
+			this.model.isStickyToLimiterBottom = limiterRect.bottom < toolbarRect.height;
+
+			if ( this.model.isStickyToLimiterBottom ) {
+				this.model.left = pixelize( limiterRect.left - document.body.getBoundingClientRect().left );
+				this.model.marginLeft = null;
+			} else {
+				this.model.left = null;
+				this.model.marginLeft = pixelize( -window.scrollX - 1 );
+			}
+		}
+		// Detach the toolbar from the top edge of the viewport.
+		else {
+			this.model.isSticky = this.model.isStickyToLimiterBottom = false;
+			this.model.marginLeft = this.model.left = null;
 		}
 	}
+}
 
-	/**
-	 * Sticks the toolbar to the top edge of the viewport simulating
-	 * CSS position:sticky. Also see {@link #_detach}.
-	 *
-	 * TODO: Possibly replaced by CSS in the future
-	 * http://caniuse.com/#feat=css-sticky
-	 *
-	 * @protected
-	 * @param {Object} regionRect An output of getBoundingClientRect native DOM method.
-	 */
-	_stick( regionRect ) {
-		// Setup placeholder.
-		Object.assign( this._elementPlaceholder.style, {
-			display: 'block',
-			height: regionRect.height + 'px'
-		} );
-
-		// Stick the top region.
-		Object.assign( this.element.style, {
-			// Compensate 1px border which is added when becoming "sticky".
-			width: regionRect.width + 2 + 'px',
-			marginLeft: -window.scrollX - 1 + 'px'
-		} );
-
-		this.model.isSticky = true;
-	}
-
-	/**
-	 * Detaches the toolbar from the top edge of the viewport.
-	 * See {@link #_stick}.
-	 *
-	 * @protected
-	 */
-	_detach() {
-		// Release the placeholder.
-		Object.assign( this._elementPlaceholder.style, {
-			display: 'none'
-		} );
-
-		// Detach the top region.
-		Object.assign( this.element.style, {
-			width: 'auto',
-			marginLeft: 'auto'
-		} );
-
-		this.model.isSticky = false;
-	}
+/**
+ * Add `px` unit to the passed value.
+ *
+ * @param {String|Number} value
+ * @returns {String} Value with `px` unit,
+ */
+function pixelize( value ) {
+	return `${ value }px`;
 }
 
 /**
@@ -168,4 +201,29 @@ export default class StickyToolbarView extends ToolbarView {
  * @readonly
  * @observable
  * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#isSticky
+ */
+
+/**
+ * Controls whether the sticky toolbar reached the bottom edge of the
+ * {@link ui.stickyToolbar.StickyToolbarView#limiterElement}.
+ *
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#isStickyToLimiterBottom
+ */
+
+/**
+ * Controls the `left` CSS style of the toolbar.
+ *
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#left
+ */
+
+/**
+ * Controls the `margin-left` CSS style of the toolbar.
+ *
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#marginLeft
  */
