@@ -40,23 +40,6 @@ export default class StickyToolbarView extends ToolbarView {
 		 */
 		this.limiterElement = limiterElement;
 
-		/**
-		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
-		 *
-		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
-		 */
-		this._toolbarRect = null;
-
-		/**
-		 * The DOM bounding client rect of the {@link ui.stickyToolbar.StickyToolbarView#limiterElement}
-		 * of the toolbar.
-		 *
-		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
-		 */
-		this._limiterRect = null;
-
 		Template.extend( this.template, {
 			attributes: {
 				class: [
@@ -102,6 +85,21 @@ export default class StickyToolbarView extends ToolbarView {
 				}
 			}
 		} ).render();
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
+		 */
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.stickyToolbar.StickyToolbarView#limiterElement}
+		 * of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
+		 */
 
 		/**
 		 * Model of this sticky toolbar view.
@@ -203,7 +201,7 @@ function pixelize( value ) {
  */
 
 /**
- * Controls whether the sticky toolbar reached the bottom edge of the
+ * Set `true` if the sticky toolbar reached the bottom edge of the
  * {@link ui.stickyToolbar.StickyToolbarView#limiterElement}.
  *
  * @readonly
@@ -216,7 +214,7 @@ function pixelize( value ) {
  *
  * @readonly
  * @observable
- * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#left
+ * @member {String} ui.stickyToobar.StickyToolbarViewModel#left
  */
 
 /**
@@ -224,5 +222,5 @@ function pixelize( value ) {
  *
  * @readonly
  * @observable
- * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#marginLeft
+ * @member {String} ui.stickyToobar.StickyToolbarViewModel#marginLeft
  */
