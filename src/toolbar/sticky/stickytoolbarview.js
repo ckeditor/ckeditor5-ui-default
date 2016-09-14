@@ -66,7 +66,8 @@ export default class StickyToolbarView extends ToolbarView {
 				],
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
-						return isSticky ? pixelize( this._limiterRect.width ) : null;
+						// 2px compensates the border.
+						return isSticky ? pixelize( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
 					} ),
 
 					top: bind.to( 'isStickyToLimiterBottom', ( isStickyToLimiterBottom ) => {
@@ -94,9 +95,7 @@ export default class StickyToolbarView extends ToolbarView {
 					'ck-toolbar__placeholder'
 				],
 				style: {
-					display: bind.to( 'isSticky', ( isSticky ) => {
-						return isSticky ? 'block' : 'none';
-					} ),
+					display: bind.to( 'isSticky', isSticky => isSticky ? 'block' : 'none' ),
 					height: bind.to( 'isSticky', ( isSticky ) => {
 						return isSticky ? pixelize( this._toolbarRect.height ) : null;
 					} )
