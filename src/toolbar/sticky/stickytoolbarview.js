@@ -20,7 +20,7 @@ export default class StickyToolbarView extends ToolbarView {
 	/**
 	 * @inheritDoc
 	 */
-	constructor( locale, limiterElement ) {
+	constructor( locale ) {
 		super( locale );
 
 		const bind = this.bind;
@@ -29,16 +29,7 @@ export default class StickyToolbarView extends ToolbarView {
 		this.model.set( 'isStickyToLimiterBottom', false );
 		this.model.set( 'left', null );
 		this.model.set( 'marginLeft', null );
-
-		/**
-		 * The limiter element for the sticky toolbar instance. Its bounding rect limits
-		 * the "stickyness" of the toolbar, i.e. when the toolbar reaches the bottom
-		 * edge of the limiter, it becomes sticky to that edge and does not float
-		 * off the limiter.
-		 *
-		 * @member {HTMLElement} ui.stickyToolbar.StickyToolbarView#limiterElement
-		 */
-		this.limiterElement = limiterElement;
+		this.model.set( 'limiterElement', null );
 
 		Template.extend( this.template, {
 			attributes: {
@@ -94,7 +85,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 */
 
 		/**
-		 * The DOM bounding client rect of the {@link ui.stickyToolbar.StickyToolbarView#limiterElement}
+		 * The DOM bounding client rect of the {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}
 		 * of the toolbar.
 		 *
 		 * @protected
@@ -141,7 +132,7 @@ export default class StickyToolbarView extends ToolbarView {
 	 * @protected
 	 */
 	_checkIfShouldBeSticky() {
-		const limiterRect = this._limiterRect = this.limiterElement.getBoundingClientRect();
+		const limiterRect = this._limiterRect = this.model.limiterElement.getBoundingClientRect();
 		const toolbarRect = this._toolbarRect = this.element.getBoundingClientRect();
 
 		this.model.isSticky = limiterRect.top < 0 && this.model.isActive;
@@ -202,7 +193,7 @@ function pixelize( value ) {
 
 /**
  * Set `true` if the sticky toolbar reached the bottom edge of the
- * {@link ui.stickyToolbar.StickyToolbarView#limiterElement}.
+ * {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}.
  *
  * @readonly
  * @observable
@@ -223,4 +214,16 @@ function pixelize( value ) {
  * @readonly
  * @observable
  * @member {String} ui.stickyToobar.StickyToolbarViewModel#marginLeft
+ */
+
+/**
+ * The limiter element for the sticky toolbar instance. Its bounding rect limits
+ * the "stickyness" of the toolbar, i.e. when the toolbar reaches the bottom
+ * edge of the limiter, it becomes sticky to that edge and does not float
+ * off the limiter. It is mandatory for the toolbar to work properly and once
+ * set, it cannot be changed.
+ *
+ * @readonly
+ * @observable
+ * @member {String} ui.stickyToobar.StickyToolbarViewModel#limiterElement
  */

@@ -3,27 +3,32 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals document */
 /* bender-tags: ui, toolbar */
 
 import Model from '/ckeditor5/ui/model.js';
+import View from '/ckeditor5/ui/view.js';
 import StickyToolbar from '/ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
-import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 
 describe( 'StickyToolbar', () => {
-	let toolbar, view, model;
+	let toolbar, view, model, limiterElement;
 
 	beforeEach( () => {
+		limiterElement = document.createElement( 'div' );
+
 		model = new Model( {
-			isActive: false
+			isActive: false,
+			limiterElement: limiterElement
 		} );
 
-		view = new StickyToolbarView();
+		view = new View();
 		toolbar = new StickyToolbar( model, view );
 	} );
 
 	describe( 'constructor', () => {
 		it( 'binds view#model attributes to the StickyToolbar#model', () => {
 			expect( view.model.isActive ).to.equal( model.isActive );
+			expect( view.model.limiterElement ).to.equal( limiterElement );
 		} );
 	} );
 } );

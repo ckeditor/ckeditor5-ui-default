@@ -19,10 +19,11 @@ describe( 'StickyToolbarView', () => {
 		locale = {};
 		limiterElement = document.createElement( 'div' );
 
-		view = new StickyToolbarView( locale, limiterElement );
+		view = new StickyToolbarView( locale );
 		model = view.model;
 		element = view.element;
 
+		// This one is usually bound by the controller.
 		model.set( 'isActive', false );
 
 		// Dummy values just to let non–geometrical tests pass without reference errors.
@@ -42,14 +43,11 @@ describe( 'StickyToolbarView', () => {
 			expect( model.isStickyToLimiterBottom ).to.be.false;
 			expect( model.left ).to.be.null;
 			expect( model.marginLeft ).to.be.null;
+			expect( model.limiterElement ).to.be.null;
 		} );
 
 		it( 'accepts the locale', () => {
 			expect( view.locale ).to.equal( locale );
-		} );
-
-		it( 'accepts limiter element', () => {
-			expect( view.limiterElement ).to.equal( limiterElement );
 		} );
 
 		it( 'creates the _elementPlaceholder', () => {
@@ -58,6 +56,10 @@ describe( 'StickyToolbarView', () => {
 	} );
 
 	describe( 'element model bindings', () => {
+		beforeEach( () => {
+			model.limiterElement = limiterElement;
+		} );
+
 		it( 'update the class on model#isSticky change', () => {
 			model.isSticky = false;
 			expect( element.classList.contains( 'ck-toolbar_sticky' ) ).to.be.false;
@@ -134,6 +136,10 @@ describe( 'StickyToolbarView', () => {
 	} );
 
 	describe( 'init', () => {
+		beforeEach( () => {
+			model.limiterElement = limiterElement;
+		} );
+
 		it( 'calls init on parent class', () => {
 			const spy = testUtils.sinon.spy( ToolbarView.prototype, 'init' );
 
@@ -183,9 +189,13 @@ describe( 'StickyToolbarView', () => {
 	} );
 
 	describe( '_checkIfShouldBeSticky', () => {
+		beforeEach( () => {
+			model.limiterElement = limiterElement;
+		} );
+
 		describe( 'model.isSticky', () => {
 			it( 'is true if beyond the top of the viewport (toolbar is active)', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( { top: -10 } );
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( { top: -10 } );
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
@@ -195,7 +205,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is false if beyond the top of the viewport (toolbar is inactive)', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( { top: -10 } );
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( { top: -10 } );
 				model.isActive = false;
 
 				expect( model.isSticky ).to.be.false;
@@ -205,7 +215,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is false if in the viewport (toolbar is active)', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( { top: 10 } );
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( { top: 10 } );
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
@@ -217,7 +227,7 @@ describe( 'StickyToolbarView', () => {
 
 		describe( 'model.isStickyToLimiterBottom', () => {
 			it( 'is true if model.isSticky is true and reached the bottom edge of view.limiterElement', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 10
 				} );
@@ -237,7 +247,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is false if model.isSticky is true and not reached the bottom edge of view.limiterElement', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 30
 				} );
@@ -257,7 +267,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is false if model.isSticky is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: 10,
 				} );
 
@@ -274,7 +284,7 @@ describe( 'StickyToolbarView', () => {
 
 		describe( 'model.left', () => {
 			it( 'is set if model.isSticky and model.isStickyToLimiterBottom are true', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 10,
 					left: 60
@@ -301,7 +311,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is not set if model.isStickyToLimiterBottom is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 30
 				} );
@@ -323,7 +333,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is not set if model.isSticky is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: 10,
 				} );
 
@@ -342,7 +352,7 @@ describe( 'StickyToolbarView', () => {
 
 		describe( 'model.marginLeft', () => {
 			it( 'is set if model.isSticky is true model.isStickyToLimiterBottom is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 30
 				} );
@@ -366,7 +376,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is not set if model.isStickyToLimiterBottom is true', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 10,
 					left: 60
@@ -393,7 +403,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 
 			it( 'is not set if model.isSticky is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
+				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: 10,
 				} );
 
