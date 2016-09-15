@@ -40,7 +40,7 @@ describe( 'StickyToolbarView', () => {
 
 		it( 'sets model attributes', () => {
 			expect( model.isSticky ).to.be.false;
-			expect( model.isStickyToLimiterBottom ).to.be.false;
+			expect( model._isStickyToLimiterBottom ).to.be.false;
 			expect( model.left ).to.be.null;
 			expect( model.marginLeft ).to.be.null;
 			expect( model.limiterElement ).to.be.null;
@@ -68,11 +68,11 @@ describe( 'StickyToolbarView', () => {
 			expect( element.classList.contains( 'ck-toolbar_sticky' ) ).to.be.true;
 		} );
 
-		it( 'update the class on model#isStickyToLimiterBottom change', () => {
-			model.isStickyToLimiterBottom = false;
+		it( 'update the class on model#_isStickyToLimiterBottom change', () => {
+			model._isStickyToLimiterBottom = false;
 			expect( element.classList.contains( 'ck-toolbar_sticky_bottom-limit' ) ).to.be.false;
 
-			model.isStickyToLimiterBottom = true;
+			model._isStickyToLimiterBottom = true;
 			expect( element.classList.contains( 'ck-toolbar_sticky_bottom-limit' ) ).to.be.true;
 		} );
 
@@ -91,10 +91,10 @@ describe( 'StickyToolbarView', () => {
 			view._toolbarRect = { height: 20 };
 			window.scrollY = 10;
 
-			model.isStickyToLimiterBottom = false;
+			model._isStickyToLimiterBottom = false;
 			expect( element.style.top ).to.equal( '' );
 
-			model.isStickyToLimiterBottom = true;
+			model._isStickyToLimiterBottom = true;
 			expect( element.style.top ).to.equal( '20px' );
 		} );
 
@@ -225,7 +225,7 @@ describe( 'StickyToolbarView', () => {
 			} );
 		} );
 
-		describe( 'model.isStickyToLimiterBottom', () => {
+		describe( 'model._isStickyToLimiterBottom', () => {
 			it( 'is true if model.isSticky is true and reached the bottom edge of view.limiterElement', () => {
 				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
@@ -239,11 +239,11 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.true;
+				expect( model._isStickyToLimiterBottom ).to.be.true;
 			} );
 
 			it( 'is false if model.isSticky is true and not reached the bottom edge of view.limiterElement', () => {
@@ -259,11 +259,11 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 			} );
 
 			it( 'is false if model.isSticky is false', () => {
@@ -274,16 +274,16 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 			} );
 		} );
 
 		describe( 'model.left', () => {
-			it( 'is set if model.isSticky and model.isStickyToLimiterBottom are true', () => {
+			it( 'is set if model.isSticky and model._isStickyToLimiterBottom are true', () => {
 				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 10,
@@ -301,16 +301,16 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.left ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.true;
+				expect( model._isStickyToLimiterBottom ).to.be.true;
 				expect( model.left ).to.equal( '20px' );
 			} );
 
-			it( 'is not set if model.isStickyToLimiterBottom is false', () => {
+			it( 'is not set if model._isStickyToLimiterBottom is false', () => {
 				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 30
@@ -323,12 +323,12 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.left ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.left ).to.equal( null );
 			} );
 
@@ -340,18 +340,18 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.left ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.left ).to.equal( null );
 			} );
 		} );
 
 		describe( 'model.marginLeft', () => {
-			it( 'is set if model.isSticky is true model.isStickyToLimiterBottom is false', () => {
+			it( 'is set if model.isSticky is true model._isStickyToLimiterBottom is false', () => {
 				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 30
@@ -366,16 +366,16 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.marginLeft ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.marginLeft ).to.equal( '-11px' );
 			} );
 
-			it( 'is not set if model.isStickyToLimiterBottom is true', () => {
+			it( 'is not set if model._isStickyToLimiterBottom is true', () => {
 				testUtils.sinon.stub( model.limiterElement, 'getBoundingClientRect' ).returns( {
 					top: -10,
 					bottom: 10,
@@ -393,12 +393,12 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.marginLeft ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.true;
-				expect( model.isStickyToLimiterBottom ).to.be.true;
+				expect( model._isStickyToLimiterBottom ).to.be.true;
 				expect( model.marginLeft ).to.equal( null );
 			} );
 
@@ -410,12 +410,12 @@ describe( 'StickyToolbarView', () => {
 				model.isActive = true;
 
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.marginLeft ).to.equal( null );
 
 				view._checkIfShouldBeSticky();
 				expect( model.isSticky ).to.be.false;
-				expect( model.isStickyToLimiterBottom ).to.be.false;
+				expect( model._isStickyToLimiterBottom ).to.be.false;
 				expect( model.marginLeft ).to.equal( null );
 			} );
 		} );

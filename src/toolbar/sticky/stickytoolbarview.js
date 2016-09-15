@@ -26,7 +26,7 @@ export default class StickyToolbarView extends ToolbarView {
 		const bind = this.bind;
 
 		this.model.set( 'isSticky', false );
-		this.model.set( 'isStickyToLimiterBottom', false );
+		this.model.set( '_isStickyToLimiterBottom', false );
 		this.model.set( 'left', null );
 		this.model.set( 'marginLeft', null );
 		this.model.set( 'limiterElement', null );
@@ -36,7 +36,7 @@ export default class StickyToolbarView extends ToolbarView {
 				class: [
 					// Toggle class of the toolbar when "sticky" state changes in the model.
 					bind.if( 'isSticky', 'ck-toolbar_sticky' ),
-					bind.if( 'isStickyToLimiterBottom', 'ck-toolbar_sticky_bottom-limit' ),
+					bind.if( '_isStickyToLimiterBottom', 'ck-toolbar_sticky_bottom-limit' ),
 				],
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
@@ -44,8 +44,8 @@ export default class StickyToolbarView extends ToolbarView {
 						return isSticky ? pixelize( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
 					} ),
 
-					top: bind.to( 'isStickyToLimiterBottom', ( isStickyToLimiterBottom ) => {
-						return isStickyToLimiterBottom ?
+					top: bind.to( '_isStickyToLimiterBottom', ( _isStickyToLimiterBottom ) => {
+						return _isStickyToLimiterBottom ?
 							pixelize( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height ) : null;
 					} ),
 
@@ -140,9 +140,9 @@ export default class StickyToolbarView extends ToolbarView {
 		// Stick the toolbar to the top edge of the viewport simulating CSS position:sticky.
 		// TODO: Possibly replaced by CSS in the future http://caniuse.com/#feat=css-sticky
 		if ( this.model.isSticky ) {
-			this.model.isStickyToLimiterBottom = limiterRect.bottom < toolbarRect.height;
+			this.model._isStickyToLimiterBottom = limiterRect.bottom < toolbarRect.height;
 
-			if ( this.model.isStickyToLimiterBottom ) {
+			if ( this.model._isStickyToLimiterBottom ) {
 				this.model.left = pixelize( limiterRect.left - document.body.getBoundingClientRect().left );
 				this.model.marginLeft = null;
 			} else {
@@ -152,7 +152,7 @@ export default class StickyToolbarView extends ToolbarView {
 		}
 		// Detach the toolbar from the top edge of the viewport.
 		else {
-			this.model.isStickyToLimiterBottom = false;
+			this.model._isStickyToLimiterBottom = false;
 			this.model.marginLeft = this.model.left = null;
 		}
 	}
@@ -192,15 +192,6 @@ function pixelize( value ) {
  */
 
 /**
- * Set `true` if the sticky toolbar reached the bottom edge of the
- * {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}.
- *
- * @readonly
- * @observable
- * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#isStickyToLimiterBottom
- */
-
-/**
  * Controls the `left` CSS style of the toolbar.
  *
  * @readonly
@@ -226,4 +217,14 @@ function pixelize( value ) {
  * @readonly
  * @observable
  * @member {String} ui.stickyToobar.StickyToolbarViewModel#limiterElement
+ */
+
+/**
+ * Set `true` if the sticky toolbar reached the bottom edge of the
+ * {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}.
+ *
+ * @protected
+ * @readonly
+ * @observable
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#_isStickyToLimiterBottom
  */
