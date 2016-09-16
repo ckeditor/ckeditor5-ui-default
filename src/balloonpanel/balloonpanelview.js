@@ -7,6 +7,7 @@
 
 import View from '../view.js';
 import Template from '../template.js';
+import toPx from '../../utils/dom/topx.js';
 
 const arrowLeftOffset = 30;
 const arrowTopOffset = 15;
@@ -39,9 +40,9 @@ export default class BalloonPanelView extends View {
 				],
 
 				style: {
-					top: bind.to( 'top', pixelize ),
-					left: bind.to( 'left', pixelize ),
-					maxWidth: bind.to( 'maxWidth', pixelize )
+					top: bind.to( 'top', toPx ),
+					left: bind.to( 'left', toPx ),
+					maxWidth: bind.to( 'maxWidth', toPx )
 				}
 			}
 		} );
@@ -361,16 +362,6 @@ function getAbsoluteRectVisisbleInTheViewport( element ) {
 		right: Math.min( limiterRect.right, bodyWidth + windowScrollX ),
 		bottom: Math.min( limiterRect.bottom, bodyHeight + windowScrollY )
 	} );
-}
-
-/**
- * Add `px` unit to the passed value.
- *
- * @param {String|Number} value
- * @returns {String} Value with `px` unit,
- */
-function pixelize( value ) {
-	return `${ value }px`;
 }
 
 /**

@@ -7,6 +7,7 @@
 
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
+import toPx from '../../../utils/dom/topx.js';
 
 /**
  * The sticky toolbar view class.
@@ -41,12 +42,12 @@ export default class StickyToolbarView extends ToolbarView {
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
 						// 2px compensates the border.
-						return isSticky ? pixelize( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
+						return isSticky ? toPx( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
 					} ),
 
 					top: bind.to( '_isStickyToLimiterBottom', ( _isStickyToLimiterBottom ) => {
 						return _isStickyToLimiterBottom ?
-							pixelize( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height ) : null;
+							toPx( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height ) : null;
 					} ),
 
 					left: bind.to( 'left' ),
@@ -71,7 +72,7 @@ export default class StickyToolbarView extends ToolbarView {
 				style: {
 					display: bind.to( 'isSticky', isSticky => isSticky ? 'block' : 'none' ),
 					height: bind.to( 'isSticky', ( isSticky ) => {
-						return isSticky ? pixelize( this._toolbarRect.height ) : null;
+						return isSticky ? toPx( this._toolbarRect.height ) : null;
 					} )
 				}
 			}
@@ -143,11 +144,11 @@ export default class StickyToolbarView extends ToolbarView {
 			this.model._isStickyToLimiterBottom = limiterRect.bottom < toolbarRect.height;
 
 			if ( this.model._isStickyToLimiterBottom ) {
-				this.model.left = pixelize( limiterRect.left - document.body.getBoundingClientRect().left );
+				this.model.left = toPx( limiterRect.left - document.body.getBoundingClientRect().left );
 				this.model.marginLeft = null;
 			} else {
 				this.model.left = null;
-				this.model.marginLeft = pixelize( -window.scrollX - 1 );
+				this.model.marginLeft = toPx( -window.scrollX - 1 );
 			}
 		}
 		// Detach the toolbar from the top edge of the viewport.
@@ -156,16 +157,6 @@ export default class StickyToolbarView extends ToolbarView {
 			this.model.marginLeft = this.model.left = null;
 		}
 	}
-}
-
-/**
- * Add `px` unit to the passed value.
- *
- * @param {String|Number} value
- * @returns {String} Value with `px` unit,
- */
-function pixelize( value ) {
-	return `${ value }px`;
 }
 
 /**
