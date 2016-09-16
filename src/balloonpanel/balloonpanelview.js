@@ -7,8 +7,9 @@
 
 import View from '../view.js';
 import Template from '../template.js';
-import toPx from '../../utils/dom/topx.js';
+import toUnit from '../../utils/dom/tounit.js';
 
+const toPx = toUnit( 'px' );
 const arrowLeftOffset = 30;
 const arrowTopOffset = 15;
 

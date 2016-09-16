@@ -7,7 +7,9 @@
 
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
-import toPx from '../../../utils/dom/topx.js';
+import toUnit from '../../../utils/dom/tounit.js';
+
+const toPx = toUnit( 'px' );
 
 /**
  * The sticky toolbar view class.
