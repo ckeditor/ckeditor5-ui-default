@@ -29,17 +29,18 @@ export default class StickyToolbarView extends ToolbarView {
 		const bind = this.bind;
 
 		this.model.set( 'isSticky', false );
-		this.model.set( '_isStickyToLimiterBottom', false );
 		this.model.set( 'left', null );
 		this.model.set( 'marginLeft', null );
 		this.model.set( 'limiterElement', null );
+		this.model.set( 'limiterOffset', 50 );
+		this.model.set( '_isStickyToTheLimiter', false );
 
 		Template.extend( this.template, {
 			attributes: {
 				class: [
 					// Toggle class of the toolbar when "sticky" state changes in the model.
 					bind.if( 'isSticky', 'ck-toolbar_sticky' ),
-					bind.if( '_isStickyToLimiterBottom', 'ck-toolbar_sticky_bottom-limit' ),
+					bind.if( '_isStickyToTheLimiter', 'ck-toolbar_sticky_bottom-limit' ),
 				],
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
@@ -47,9 +48,11 @@ export default class StickyToolbarView extends ToolbarView {
 						return isSticky ? toPx( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
 					} ),
 
-					top: bind.to( '_isStickyToLimiterBottom', ( _isStickyToLimiterBottom ) => {
-						return _isStickyToLimiterBottom ?
-							toPx( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height ) : null;
+					top: bind.to( '_isStickyToTheLimiter', ( _isStickyToTheLimiter ) => {
+						return _isStickyToTheLimiter ?
+								toPx( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height - this.model.limiterOffset )
+							:
+								null;
 					} ),
 
 					left: bind.to( 'left' ),
@@ -138,14 +141,22 @@ export default class StickyToolbarView extends ToolbarView {
 		const limiterRect = this._limiterRect = this.model.limiterElement.getBoundingClientRect();
 		const toolbarRect = this._toolbarRect = this.element.getBoundingClientRect();
 
-		this.model.isSticky = limiterRect.top < 0 && this.model.isActive;
+		// The toolbar must be active to become sticky.
+		this.model.isSticky = this.model.isActive &&
+			// The limiter's top edge must be beyond the upper edge of the visible viewport.
+			limiterRect.top < 0 &&
+			// The model#limiterElement's height mustn't be smaller than the toolbar's height and model#limiterOffset.
+			// There's no point in entering the sticky mode if the model#limiterElement is very, very small, because
+			// it would immediately set model#_isStickyToTheLimiter true and, given model#limiterOffset, the toolbar
+			// would be positioned before the model#limiterElement.
+			this._toolbarRect.height + this.model.limiterOffset < limiterRect.height;
 
 		// Stick the toolbar to the top edge of the viewport simulating CSS position:sticky.
 		// TODO: Possibly replaced by CSS in the future http://caniuse.com/#feat=css-sticky
 		if ( this.model.isSticky ) {
-			this.model._isStickyToLimiterBottom = limiterRect.bottom < toolbarRect.height;
+			this.model._isStickyToTheLimiter = limiterRect.bottom < toolbarRect.height + this.model.limiterOffset;
 
-			if ( this.model._isStickyToLimiterBottom ) {
+			if ( this.model._isStickyToTheLimiter ) {
 				this.model.left = toPx( limiterRect.left - document.body.getBoundingClientRect().left );
 				this.model.marginLeft = null;
 			} else {
@@ -155,7 +166,7 @@ export default class StickyToolbarView extends ToolbarView {
 		}
 		// Detach the toolbar from the top edge of the viewport.
 		else {
-			this.model._isStickyToLimiterBottom = false;
+			this.model._isStickyToTheLimiter = false;
 			this.model.marginLeft = this.model.left = null;
 		}
 	}
@@ -213,11 +224,22 @@ export default class StickyToolbarView extends ToolbarView {
  */
 
 /**
+ * The offset from the bottom edge of {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}
+ * which stops the toolbar from stickying any further to prevent limiter's content
+ * from being completely covered.
+ *
+ * @readonly
+ * @observable
+ * @default 50
+ * @member {Number} ui.stickyToobar.StickyToolbarViewModel#limiterOffset
+ */
+
+/**
  * Set `true` if the sticky toolbar reached the bottom edge of the
  * {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement}.
  *
  * @protected
  * @readonly
  * @observable
- * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#_isStickyToLimiterBottom
+ * @member {Boolean} ui.stickyToobar.StickyToolbarViewModel#_isStickyToTheLimiter
  */
