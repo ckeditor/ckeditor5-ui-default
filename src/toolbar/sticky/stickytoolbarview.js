@@ -209,7 +209,7 @@ export default class StickyToolbarView extends ToolbarView {
  *
  * @readonly
  * @observable
- * @member {String} ui.stickyToobar.StickyToolbarViewModel#limiterElement
+ * @member {HTMLElement} ui.stickyToobar.StickyToolbarViewModel#limiterElement
  */
 
 /**
