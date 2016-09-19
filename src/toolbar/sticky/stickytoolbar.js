@@ -55,5 +55,5 @@ export default class StickyToolbar extends Toolbar {
  *
  * @readonly
  * @observable
- * @member {String} ui.stickyToobar.StickyToolbarModel#limiterElement
+ * @member {Element} ui.stickyToobar.StickyToolbarModel#limiterElement
  */
