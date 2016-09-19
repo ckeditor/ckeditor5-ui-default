@@ -48,17 +48,6 @@ export default class BalloonPanelView extends View {
 
 		this.register( 'content', el => el );
 
-		// Handle `ESC` key press and hide panel.
-		this.listenTo( this.model, 'change:isVisible', ( evt, propertyName, value, previousValue ) => {
-			if ( value ) {
-				this.listenTo( document, 'keydown', this._closeOnEscPress.bind( this ) );
-			} else {
-				if ( previousValue ) {
-					this.stopListening( document, 'keydown' );
-				}
-			}
-		} );
-
 		/**
 		 * Model of this balloon panel view.
 		 *
@@ -212,21 +201,6 @@ export default class BalloonPanelView extends View {
 		this.model.arrow = maxIntersectRectPos;
 		this.model.top = rects[ maxIntersectRectPos ].top;
 		this.model.left = rects[ maxIntersectRectPos ].left;
-	}
-
-	/**
-	 * Close balloon on `ESC` key press event.
-	 *
-	 * **Note**: this method is `@protected` for testing purposes only.
-	 *
-	 * @protected
-	 * @param {utils.EventInfo} evt Information about the event.
-	 * @param {KeyboardEvent} domEvt DOM `keydown` event.
-	 */
-	_closeOnEscPress( evt, domEvt ) {
-		if ( domEvt.keyCode == 27 ) {
-			this.hide();
-		}
 	}
 }
 
