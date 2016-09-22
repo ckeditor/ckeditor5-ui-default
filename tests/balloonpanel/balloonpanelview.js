@@ -36,14 +36,11 @@ describe( 'BalloonPanelView', () => {
 		} );
 
 		it( 'should make element focusable', () => {
-			const focusSpy = testUtils.sinon.spy();
-
 			document.body.appendChild( view.element );
-			view.element.addEventListener( 'focus', focusSpy );
 
 			view.element.focus();
 
-			expect( focusSpy.calledOnce ).to.true;
+			expect( document.activeElement ).to.equal( view.element );
 
 			document.body.removeChild( view.element );
 		} );
