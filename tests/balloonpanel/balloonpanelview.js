@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document, Event */
+/* global document */
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
@@ -35,37 +35,6 @@ describe( 'BalloonPanelView', () => {
 		it( 'should register "content" region', () => {
 			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
 			expect( view.regions.get( 0 ).element ).to.equal( view.element );
-		} );
-	} );
-
-	describe( 'keyboard support', () => {
-		it( 'should handle `keydown` event only when balloon is open', () => {
-			const escPressSpy = sinon.spy( view, '_closeOnEscPress' );
-
-			view.model.isVisible = true;
-
-			document.dispatchEvent( new Event( 'keydown' ) );
-
-			expect( escPressSpy.calledOnce ).to.true;
-
-			view.model.isVisible = false;
-
-			document.dispatchEvent( new Event( 'keydown' ) );
-
-			// Still called only once.
-			expect( escPressSpy.calledOnce ).to.true;
-		} );
-
-		it( 'should hide balloon on `Esc` press', () => {
-			const hideSpy = sinon.spy( view, 'hide' );
-			const fakeEventInfo = {};
-			const fakeKeydownEvent = { keyCode: 27 };
-
-			view._closeOnEscPress( fakeEventInfo, fakeKeydownEvent );
-
-			view.model.isVisible = false;
-
-			expect( hideSpy.calledOnce ).to.true;
 		} );
 	} );
 
