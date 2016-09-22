@@ -7,6 +7,9 @@
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import testUtils from '/tests/core/_utils/utils.js';
+
+testUtils.createSinonSandbox();
 
 describe( 'BalloonPanelView', () => {
 	let view;
@@ -30,6 +33,19 @@ describe( 'BalloonPanelView', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-balloon-panel' ) ).to.true;
 			expect( view.element.classList.contains( 'ck-link-balloon-panel' ) ).to.true;
+		} );
+
+		it( 'should make element focusable', () => {
+			const focusSpy = testUtils.sinon.spy();
+
+			document.body.appendChild( view.element );
+			view.element.addEventListener( 'focus', focusSpy );
+
+			view.element.focus();
+
+			expect( focusSpy.calledOnce ).to.true;
+
+			document.body.removeChild( view.element );
 		} );
 
 		it( 'should register "content" region', () => {
