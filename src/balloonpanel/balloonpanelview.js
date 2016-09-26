@@ -216,41 +216,33 @@ export default class BalloonPanelView extends View {
 	}
 }
 
-/**
- * An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
- *
- * **Note**: The geometry used by each instance corresponds with coordinates of an object
- * with `position: absolute` relative to the `<body>` (`document.body`), and hence
- * it is useful to manage such objects.
- *
- * @private
- */
+// An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
+//
+// Note: The geometry used by each instance corresponds with coordinates of an object
+// with `position: absolute` relative to the `<body>` (`document.body`), and hence
+// it is useful to manage such objects.
+//
+// @private
 class AbsoluteDomRect {
-	/**
-	 * Create instance of AbsoluteDomRect class.
-	 *
-	 * @param {HTMLElement|Range|Object} elementOrRangeOrRect Source object to create the rect.
-	 */
+	// Create instance of AbsoluteDomRect class.
+	//
+	// @param {HTMLElement|Range|Object} elementOrRangeOrRect Source object to create the rect.
 	constructor( elementOrRangeOrRect ) {
 		Object.assign( this, getAbsoluteRect( elementOrRangeOrRect ) );
 	}
 
-	/**
-	 * Clone instance of this class.
-	 *
-	 * @returns {AbsoluteDomRect}
-	 */
+	// Clone instance of this class.
+	//
+	// @returns {AbsoluteDomRect}
 	clone() {
 		return new AbsoluteDomRect( this );
 	}
 
-	/**
-	 * Move current box to specified position.
-	 *
-	 * @param {Number} top New to position.
-	 * @param {Number} left New left position.
-	 * @returns {AbsoluteDomRect}
-	 */
+	// Move current box to specified position.
+	//
+	// @param {Number} top New to position.
+	// @param {Number} left New left position.
+	// @returns {AbsoluteDomRect}
 	moveTo( { top, left } ) {
 		this.top = top;
 		this.right = left + this.width;
@@ -260,12 +252,10 @@ class AbsoluteDomRect {
 		return this;
 	}
 
-	/**
-	 * Get intersect surface area of this AbsoluteDomRect and other AbsoluteDomRect.
-	 *
-	 * @param {AbsoluteDomRect} rect
-	 * @returns {Number} Overlap surface area.
-	 */
+	// Get intersect surface area of this AbsoluteDomRect and other AbsoluteDomRect.
+	//
+	// @param {AbsoluteDomRect} rect
+	// @returns {Number} Overlap surface area.
 	getIntersectArea( rect ) {
 		const hOverlap = Math.max( 0, Math.min( this.right, rect.right ) - Math.max( this.left, rect.left ) );
 		const vOverlap = Math.max( 0, Math.min( this.bottom, rect.bottom ) - Math.max( this.top, rect.top ) );
@@ -274,14 +264,12 @@ class AbsoluteDomRect {
 	}
 }
 
-/**
- * Returns the client rect of an HTMLElement, Range, or rect. The obtained geometry of the rect
- * corresponds with `position: absolute` relative to the `<body>` (`document.body`).
- *
- * @private
- * @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch rect is to be determined.
- * @returns {Object} Client rect object.
- */
+// Returns the client rect of an HTMLElement, Range, or rect. The obtained geometry of the rect
+// corresponds with `position: absolute` relative to the `<body>` (`document.body`).
+//
+// @private
+// @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch rect is to be determined.
+// @returns {Object} Client rect object.
 function getAbsoluteRect( elementOrRangeOrRect ) {
 	const bodyRect = document.body.getBoundingClientRect();
 
@@ -312,27 +300,25 @@ function getAbsoluteRect( elementOrRangeOrRect ) {
 	return absoluteRect;
 }
 
-/**
- * Returns the client rect of the element limited by the visible (to the user)
- * viewport of the browser window.
- *
- *		[Browser viewport]
- *		+---------------------------------------+
- *		|                        [Element]      |
- *		|                        +----------------------+
- *		|                        |##############|       |
- *		|                        |##############|       |
- *		|                        |#######^######|       |
- *		|                        +-------|--------------+
- *		|                                |      |
- *		+--------------------------------|------+
- *		                                 |
- *		                                  \- [Element rect visible in the viewport]
- *
- * @private
- * @param {HTMLElement|Object} element Object which visible area rect is to be determined.
- * @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
- */
+// Returns the client rect of the element limited by the visible (to the user)
+// viewport of the browser window.
+//
+//		[Browser viewport]
+//		+---------------------------------------+
+//		|                        [Element]      |
+//		|                        +----------------------+
+//		|                        |##############|       |
+//		|                        |##############|       |
+//		|                        |#######^######|       |
+//		|                        +-------|--------------+
+//		|                                |      |
+//		+--------------------------------|------+
+//		                                 |
+//		                                  \- [Element rect visible in the viewport]
+//
+// @private
+// @param {HTMLElement|Object} element Object which visible area rect is to be determined.
+// @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
 function getAbsoluteRectVisibleInTheViewport( element ) {
 	const limiterRect = getAbsoluteRect( element );
 	const viewportRect = getViewportRect();
@@ -345,12 +331,10 @@ function getAbsoluteRectVisibleInTheViewport( element ) {
 	} );
 }
 
-/**
- * Get browser viewport rect.
- *
- * @private
- * @returns {Object} Viewport rect.
- */
+// Get browser viewport rect.
+//
+// @private
+// @returns {Object} Viewport rect.
 function getViewportRect() {
 	const windowScrollX = window.scrollX;
 	const windowScrollY = window.scrollY;
