@@ -3,10 +3,13 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
+/* global document, window */
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import testUtils from '/tests/core/_utils/utils.js';
+
+testUtils.createSinonSandbox();
 
 describe( 'BalloonPanelView', () => {
 	let view;
@@ -118,21 +121,23 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'attachTo', () => {
-		const limiter = { left: 0, top: 0, right: 300, bottom: 300 };
+		const limiter = { left: 0, top: 0, right: 500, bottom: 500 };
 		let targetEl;
 
 		beforeEach( () => {
 			// Create and append target element.
 			targetEl = document.createElement( 'div' );
-			targetEl.style.cssText = 'position: absolute; width: 50px; height: 50px;';
+			targetEl.style.position = 'absolute';
+			targetEl.style.width = '50px';
+			targetEl.style.height = '50px';
 			document.body.appendChild( targetEl );
 
-			// Make sure that viewport has min dimensions.
-			document.body.style.minHeight = '350px';
-			document.body.style.minWidth = '350px';
+			// Make sure that limiter is fully visible in viewport.
+			testUtils.sinon.stub( window, 'innerWidth', 500 );
+			testUtils.sinon.stub( window, 'innerHeight', 500 );
 
 			// Set dimensions to balloon panel element and append it to the document.
-			view.element.style.width = '150px';
+			view.element.style.width = '100px';
 			view.element.style.height = '100px';
 			document.body.appendChild( view.element );
 		} );
@@ -146,26 +151,27 @@ describe( 'BalloonPanelView', () => {
 			document.body.removeChild( view.element );
 		} );
 
-		it( 'should put balloon on on the `south east` side of the target element', () => {
-			targetEl.style.top = 0;
-			targetEl.style.left = 0;
+		it( 'should put balloon on the `south east` side of the target element at default', () => {
+			// Place target element at the center of the limiter.
+			targetEl.style.top = '225px';
+			targetEl.style.left = '225px';
 
 			view.attachTo( targetEl, limiter );
 
 			expect( view.model.arrow ).to.equal( 'se' );
 		} );
 
-		it( 'should put balloon on on the `south west` side of the target element', () => {
+		it( 'should put balloon on the `south west` side of the target element when target is on the right side of the limiter', () => {
 			targetEl.style.top = 0;
-			targetEl.style.left = '250px';
+			targetEl.style.left = '450px';
 
 			view.attachTo( targetEl, limiter );
 
 			expect( view.model.arrow ).to.equal( 'sw' );
 		} );
 
-		it( 'should put balloon on on the `north east` side of the target element', () => {
-			targetEl.style.top = '250px';
+		it( 'should put balloon on the `north east` side of the target element when target is on the bottom of the limiter ', () => {
+			targetEl.style.top = '450px';
 			targetEl.style.left = 0;
 
 			view.attachTo( targetEl, limiter );
@@ -173,13 +179,35 @@ describe( 'BalloonPanelView', () => {
 			expect( view.model.arrow ).to.equal( 'ne' );
 		} );
 
-		it( 'should put balloon on on the `north west` side of the target element', () => {
-			targetEl.style.top = '250px';
-			targetEl.style.left = '250px';
+		it( 'should put balloon on the `north west` side of the target element when target is on the bottom right of the limiter', () => {
+			targetEl.style.top = '450px';
+			targetEl.style.left = '450px';
 
 			view.attachTo( targetEl, limiter );
 
 			expect( view.model.arrow ).to.equal( 'nw' );
+		} );
+
+		it( 'should put balloon on the `north` position when `south` position is out of viewport', () => {
+			targetEl.style.top = '225px';
+			targetEl.style.left = '225px';
+
+			testUtils.sinon.stub( window, 'innerHeight', 275 );
+
+			view.attachTo( targetEl, limiter );
+
+			expect( [ 'nw', 'ne' ] ).to.contain( view.model.arrow );
+		} );
+
+		it( 'should put balloon on the `west` position when `east` position is out of viewport', () => {
+			targetEl.style.top = '225px';
+			targetEl.style.left = '225px';
+
+			testUtils.sinon.stub( window, 'innerWidth', 275 );
+
+			view.attachTo( targetEl, limiter );
+
+			expect( [ 'nw', 'sw' ] ).to.contain( view.model.arrow );
 		} );
 	} );
 } );

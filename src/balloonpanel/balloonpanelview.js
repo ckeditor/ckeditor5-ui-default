@@ -138,19 +138,20 @@ export default class BalloonPanelView extends View {
 	 * See {@ link ui.balloonPanel.BalloonPanelViewModel#arrow}.
 	 *
 	 * @param {HTMLElement|Range} elementOrRange Target DOM element or range to which the balloon will be attached.
-	 * @param {HTMLElement} limiterElement The DOM element beyond which area the balloon panel should not be positioned, if possible.
+	 * @param {HTMLElement|Object} limiterElementOrRect The DOM element or element rect beyond which area the balloon panel should not be
+	 * positioned, if possible.
 	 */
-	attachTo( elementOrRange, limiterElement ) {
+	attachTo( elementOrRange, limiterElementOrRect ) {
 		this.show();
 
-		const elementOrRangeRect = new AbsoluteDomRect( elementOrRange, 'elementOrRange' );
+		const elementOrRangeRect = new AbsoluteDomRect( elementOrRange );
 		const panelRect = new AbsoluteDomRect( this.element );
-		const visibleRect = getAbsoluteRectVisisbleInTheViewport( limiterElement );
+		const limiterVisibleRect = getAbsoluteRectVisibleInTheViewport( limiterElementOrRect );
 
 		// Create a rect for each of the possible balloon positions and feed them to _smartAttachTo,
 		// which will use whichever is the optimal.
 		const possiblePanelRects = {
-			// The absolute rect for "South-East" position.
+			// The absolute rect for "South east" position.
 			se: panelRect.clone().moveTo( {
 				top: elementOrRangeRect.bottom + arrowTopOffset,
 				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
@@ -175,30 +176,37 @@ export default class BalloonPanelView extends View {
 			} )
 		};
 
-		this._smartAttachTo( possiblePanelRects, visibleRect );
+		this._smartAttachTo( possiblePanelRects, limiterVisibleRect, panelRect.width * panelRect.height );
 	}
 
 	/**
-	 * For the given `Array` of possible rects, choses the one which fits the best into
-	 * `visibleViewportRect`, which is when their intersection has the biggest area.
+	 * For the given set of possible rects, chooses the one which fits the best into both - browser viewport and
+	 * `visibleContainerRect`, which is when their intersection has the biggest area. Note that priority is a possible
+	 * highest intersection area with browser viewport.
 	 *
 	 * @private
-	 * @param {Array<{AbsoluteDomRect}>} rects List of positions where balloon can be placed.
-	 * @param {AbsoluteDomRect} visibleViewportRect The absolute rect of the visible part of the browser viewport.
+	 * @param {Object} rects Set of positions where balloon can be placed.
+	 * @param {AbsoluteDomRect} visibleContainerRect The absolute rect of the visible part of container element.
 	 */
-	_smartAttachTo( rects, visibleViewportRect ) {
+	_smartAttachTo( rects, visibleContainerRect, panelSurfaceArea ) {
+		const viewportRect = new AbsoluteDomRect( getViewportRect() );
 		let maxIntersectRectPos;
-		let maxIntersectArea = -1;
+		let maxContainerIntersectArea = -1;
+		let maxViewportIntersectArea = -1;
 
 		// Get best place.
-		for ( let rectPos in rects ) {
-			const intersectArea = rects[ rectPos ].getIntersectArea( visibleViewportRect );
+		Object.keys( rects ).some( ( rectPos ) => {
+			const containerIntersectArea = rects[ rectPos ].getIntersectArea( visibleContainerRect );
+			const viewportIntersectArea = rects[ rectPos ].getIntersectArea( viewportRect );
 
-			if ( intersectArea > maxIntersectArea ) {
+			if ( viewportIntersectArea >= maxViewportIntersectArea && containerIntersectArea >= maxContainerIntersectArea ) {
 				maxIntersectRectPos = rectPos;
-				maxIntersectArea = intersectArea;
+				maxContainerIntersectArea = containerIntersectArea;
+				maxViewportIntersectArea = viewportIntersectArea;
 			}
-		}
+
+			return maxContainerIntersectArea === panelSurfaceArea;
+		} );
 
 		// Move the balloon panel.
 		this.model.arrow = maxIntersectRectPos;
@@ -229,11 +237,10 @@ class AbsoluteDomRect {
 	/**
 	 * Clone instance of this class.
 	 *
-	 * @param {String} newName Name of new instance.
 	 * @returns {AbsoluteDomRect}
 	 */
-	clone( newName ) {
-		return new AbsoluteDomRect( this, newName );
+	clone() {
+		return new AbsoluteDomRect( this );
 	}
 
 	/**
@@ -275,9 +282,10 @@ class AbsoluteDomRect {
  * @returns {Object} Client rect object.
  */
 function getAbsoluteRect( elementOrRangeOrRect ) {
+	const bodyRect = document.body.getBoundingClientRect();
+
 	if ( elementOrRangeOrRect instanceof HTMLElement || elementOrRangeOrRect instanceof Range ) {
 		const elementRect = elementOrRangeOrRect.getBoundingClientRect();
-		const bodyRect = document.body.getBoundingClientRect();
 
 		return {
 			top: elementRect.top - bodyRect.top,
@@ -324,20 +332,36 @@ function getAbsoluteRect( elementOrRangeOrRect ) {
  * @param {HTMLElement|Object} element Object which visible area rect is to be determined.
  * @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
  */
-function getAbsoluteRectVisisbleInTheViewport( element ) {
-	const limiterRect = new AbsoluteDomRect( element, 'limiterElement' );
-
-	const windowScrollX = window.scrollX;
-	const windowScrollY = window.scrollY;
-	const bodyWidth = document.body.clientWidth;
-	const bodyHeight = document.body.clientHeight;
+function getAbsoluteRectVisibleInTheViewport( element ) {
+	const limiterRect = getAbsoluteRect( element );
+	const viewportRect = getViewportRect();
 
 	return new AbsoluteDomRect( {
-		top: Math.max( limiterRect.top, windowScrollY ),
-		left: Math.max( limiterRect.left, windowScrollX ),
-		right: Math.min( limiterRect.right, bodyWidth + windowScrollX ),
-		bottom: Math.min( limiterRect.bottom, bodyHeight + windowScrollY )
+		top: Math.max( limiterRect.top, viewportRect.top ),
+		left: Math.max( limiterRect.left, viewportRect.left ),
+		right: Math.min( limiterRect.right, viewportRect.right ),
+		bottom: Math.min( limiterRect.bottom, viewportRect.bottom )
 	} );
+}
+
+/**
+ * Get browser viewport rect.
+ *
+ * @private
+ * @returns {Object} Viewport rect.
+ */
+function getViewportRect() {
+	const windowScrollX = window.scrollX;
+	const windowScrollY = window.scrollY;
+	const windowWidth = window.innerWidth;
+	const windowHeight = window.innerHeight;
+
+	return {
+		top: windowScrollY,
+		right: windowWidth + windowScrollX,
+		bottom: windowHeight + windowScrollY,
+		left: windowScrollX
+	};
 }
 
 /**
