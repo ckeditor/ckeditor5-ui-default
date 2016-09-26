@@ -200,7 +200,7 @@ export default class BalloonPanelView extends View {
 			const containerIntersectArea = rects[ rectPos ].getIntersectArea( visibleContainerRect );
 			const viewportIntersectArea = rects[ rectPos ].getIntersectArea( viewportRect );
 
-			if ( viewportIntersectArea >= maxViewportIntersectArea && containerIntersectArea >= maxContainerIntersectArea ) {
+			if ( viewportIntersectArea >= maxViewportIntersectArea && containerIntersectArea > maxContainerIntersectArea ) {
 				maxIntersectRectPos = rectPos;
 				maxContainerIntersectArea = containerIntersectArea;
 				maxViewportIntersectArea = viewportIntersectArea;
