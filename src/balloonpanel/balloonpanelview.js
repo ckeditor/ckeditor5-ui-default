@@ -42,7 +42,10 @@ export default class BalloonPanelView extends View {
 					top: bind.to( 'top', pixelize ),
 					left: bind.to( 'left', pixelize ),
 					maxWidth: bind.to( 'maxWidth', pixelize )
-				}
+				},
+
+				// Make this element `focusable` to be available for adding to FocusManager.
+				tabindex: -1
 			}
 		} );
 

@@ -32,6 +32,16 @@ describe( 'BalloonPanelView', () => {
 			expect( view.element.classList.contains( 'ck-link-balloon-panel' ) ).to.true;
 		} );
 
+		it( 'should make element focusable', () => {
+			document.body.appendChild( view.element );
+
+			view.element.focus();
+
+			expect( document.activeElement ).to.equal( view.element );
+
+			document.body.removeChild( view.element );
+		} );
+
 		it( 'should register "content" region', () => {
 			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
 			expect( view.regions.get( 0 ).element ).to.equal( view.element );
