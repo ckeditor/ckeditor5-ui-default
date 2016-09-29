@@ -29,7 +29,7 @@ describe( 'escPressHandler', () => {
 			controller: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
-			action: actionSpy
+			callback: actionSpy
 		} );
 	} );
 
@@ -66,7 +66,7 @@ describe( 'escPressHandler', () => {
 			controller: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
-			action: spy
+			callback: spy
 		} );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
@@ -83,7 +83,7 @@ describe( 'escPressHandler', () => {
 			controller: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
-			action: spy
+			callback: spy
 		} );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );

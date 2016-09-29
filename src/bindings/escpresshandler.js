@@ -8,22 +8,22 @@
 import { keyCodes } from '../../utils/keyboard.js';
 
 /**
- * Handles ESC keydown and fires action.
+ * Handles <kbd>Esc</kbd> keydown and fires action.
  *
  * @param {Object} [options] Configuration options.
  * @param {Object} [options.controller] Object with DOMEmitter interface for listening `keydown` event. This behaviour will be destroyed
  * together with the controller.
  * @param {ui.Model} [options.model] Used together with `options.activeIf` to know when to listen for keydown.
  * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for keydown.
- * @param {Function} [options.action] Function fired after ESC press.
+ * @param {Function} [options.callback] Function fired after <kbd>Esc</kbd> is pressed.
  * @returns {Function} Click handler
  */
 export default function escPressHandler( options ) {
 	const controller = options.controller;
-	const keypressHandler = ( evt, domEvt ) => handleEscPress( domEvt.keyCode, options.action );
+	const keypressHandler = ( evt, domEvt ) => handleEscPress( domEvt.keyCode, options.callback );
 
 	controller.listenTo( options.model, `change:${ options.activeIf }`, ( evt, name, value ) => {
-		if ( !!value ) {
+		if ( value ) {
 			controller.listenTo( document, 'keydown', keypressHandler );
 		} else {
 			controller.stopListening( document, 'keydown', keypressHandler );
@@ -31,7 +31,7 @@ export default function escPressHandler( options ) {
 	} );
 
 	// When `activeIf` property is `true` on init.
-	if ( !!options.model[ options.activeIf ] ) {
+	if ( options.model[ options.activeIf ] ) {
 		controller.listenTo( document, 'keydown', keypressHandler );
 	}
 }
