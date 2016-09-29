@@ -30,16 +30,7 @@ describe( 'BalloonPanelView', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-balloon-panel' ) ).to.true;
 			expect( view.element.classList.contains( 'ck-link-balloon-panel' ) ).to.true;
-		} );
-
-		it( 'should make element focusable', () => {
-			document.body.appendChild( view.element );
-
-			view.element.focus();
-
-			expect( document.activeElement ).to.equal( view.element );
-
-			document.body.removeChild( view.element );
+			expect( view.element.getAttribute( 'tabindex' ) ).to.equal( '-1' );
 		} );
 
 		it( 'should register "content" region', () => {
