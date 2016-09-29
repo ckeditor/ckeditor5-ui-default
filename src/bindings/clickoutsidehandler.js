@@ -12,8 +12,7 @@
  * opens and closes element at the same time.
  *
  * @param {Object} [options] Configuration options.
- * @param {Object} [options.controller] Object with DOMEmitter interface for listening `click` event. This behaviour will be destroyed
- * together with the controller.
+ * @param {ui.Controller} [options.controller] The controller to which this behavior should be added.
  * @param {utils.Observable} [options.model] Used together with `options.activeIf` to know when to listen for clicks.
  * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for clicks.
  * @param {HTMLElement} [options.contextElement] Target element, click on it will not fire callback.

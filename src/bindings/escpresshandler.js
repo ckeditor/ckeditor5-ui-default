@@ -11,9 +11,8 @@ import { keyCodes } from '../../utils/keyboard.js';
  * Handles <kbd>Esc</kbd> keydown and fires action.
  *
  * @param {Object} [options] Configuration options.
- * @param {Object} [options.controller] Object with DOMEmitter interface for listening `keydown` event. This behaviour will be destroyed
- * together with the controller.
- * @param {ui.Model} [options.model] Used together with `options.activeIf` to know when to listen for keydown.
+ * @param {ui.Controller} [options.controller] The controller to which this behavior should be added.
+ * @param {utils.Observable} [options.model] Used together with `options.activeIf` to know when to listen for keydown.
  * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for keydown.
  * @param {Function} [options.callback] Function fired after <kbd>Esc</kbd> is pressed.
  * @returns {Function} Click handler
