@@ -32,7 +32,7 @@ describe( 'clickOutsideHandler', () => {
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
-			action: actionSpy
+			callback: actionSpy
 		} );
 	} );
 
@@ -82,7 +82,7 @@ describe( 'clickOutsideHandler', () => {
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
-			action: spy
+			callback: spy
 		} );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
@@ -100,7 +100,7 @@ describe( 'clickOutsideHandler', () => {
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
-			action: spy
+			callback: spy
 		} );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );

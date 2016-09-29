@@ -17,11 +17,11 @@
  * @param {utils.Observable} [options.model] Used together with `options.activeIf` to know when to listen for clicks.
  * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for clicks.
  * @param {HTMLElement} [options.contextElement] Target element, click on it will not fire callback.
- * @param {Function} [options.action] Function fired after clicking outside of specified element.
+ * @param {Function} [options.callback] Function fired after clicking outside of specified element.
  */
 export default function clickOutsideHandler( options ) {
 	const controller = options.controller;
-	const clickHandler = ( evt, domEvt ) => handleClickOutside( domEvt.target, options.contextElement, options.action );
+	const clickHandler = ( evt, domEvt ) => handleClickOutside( domEvt.target, options.contextElement, options.callback );
 
 	controller.listenTo( options.model, `change:${ options.activeIf }`, ( evt, name, value ) => {
 		if ( value ) {
