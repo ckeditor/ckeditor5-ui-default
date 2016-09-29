@@ -7,9 +7,6 @@
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
-import testUtils from '/tests/core/_utils/utils.js';
-
-testUtils.createSinonSandbox();
 
 describe( 'BalloonPanelView', () => {
 	let view;
