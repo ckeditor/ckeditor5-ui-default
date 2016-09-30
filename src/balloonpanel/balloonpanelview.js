@@ -276,8 +276,9 @@ class AbsoluteDomRect {
  */
 function getAbsoluteRect( elementOrRangeOrRect ) {
 	if ( elementOrRangeOrRect instanceof HTMLElement || elementOrRangeOrRect instanceof Range ) {
-		const elementRect = elementOrRangeOrRect.getBoundingClientRect();
 		const bodyRect = document.body.getBoundingClientRect();
+		const elementRect = elementOrRangeOrRect instanceof Range && elementOrRangeOrRect.collapsed ?
+			elementOrRangeOrRect.getClientRects()[ 0 ] : elementOrRangeOrRect.getBoundingClientRect();
 
 		return {
 			top: elementRect.top - bodyRect.top,
