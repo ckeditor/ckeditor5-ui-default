@@ -13,7 +13,7 @@ describe( 'InputTextView', () => {
 	beforeEach( () => {
 		view = new InputTextView();
 
-		view.model.set( {
+		view.set( {
 			value: 'foo',
 			id: 'bar'
 		} );
@@ -32,17 +32,17 @@ describe( 'InputTextView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'value property', () => {
-			it( 'should react on model#value', () => {
+			it( 'should react on view#change', () => {
 				expect( view.element.value ).to.equal( 'foo' );
 
-				view.model.value = 'baz';
+				view.value = 'baz';
 
 				expect( view.element.value ).to.equal( 'baz' );
 			} );
 
 			it( 'should set to empty string when using `falsy` values', () => {
 				[ undefined, false, null ].forEach( ( value ) => {
-					view.model.value = value;
+					view.value = value;
 
 					expect( view.element.value ).to.equal( '' );
 				} );
@@ -50,10 +50,10 @@ describe( 'InputTextView', () => {
 		} );
 
 		describe( 'id attribute', () => {
-			it( 'should react on model#id', () => {
+			it( 'should react on view#id', () => {
 				expect( view.element.id ).to.equal( 'bar' );
 
-				view.model.id = 'baz';
+				view.id = 'baz';
 
 				expect( view.element.id ).to.equal( 'baz' );
 			} );

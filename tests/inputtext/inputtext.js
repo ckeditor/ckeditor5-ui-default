@@ -23,9 +23,9 @@ describe( 'InputText', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should bind view#model attributes to the InputText#model', () => {
-			expect( view.model.value ).to.equal( model.value ).to.equal( 'foo' );
-			expect( view.model.id ).to.equal( model.id ).to.equal( 'bar' );
+		it( 'should bind view attributes to the InputText#model', () => {
+			expect( view.value ).to.equal( model.value ).to.equal( 'foo' );
+			expect( view.id ).to.equal( model.id ).to.equal( 'bar' );
 		} );
 	} );
 
