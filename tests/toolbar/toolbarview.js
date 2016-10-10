@@ -6,16 +6,21 @@
 /* bender-tags: ui, toolbar */
 
 import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'ToolbarView', () => {
-	let model, view;
+	let locale, view;
 
 	beforeEach( () => {
-		model = new Model();
-		view = new ToolbarView( model );
+		locale = {};
+		view = new ToolbarView( locale );
 
 		return view.init();
+	} );
+
+	describe( 'constructor', () => {
+		it( 'accepts the locale', () => {
+			expect( view.locale ).to.equal( locale );
+		} );
 	} );
 
 	describe( 'the main element bindings', () => {

@@ -19,10 +19,10 @@
 
 ### Notes:
 
-* Play with `listDropdownModel.isOn` to control visibility of the panel.
-* Play with `listDropdownModel.isEnabled` to control dropdown state.
+* Play with `listDropdownModel.isOn` to control its "on/off" state.
+* Play with `listDropdownModel.isEnabled` to control whether it's disabled.
 * Play with `listDropdownModel.label` to control dropdown label.
-* Play with `listDropdownCollection`, i.e. add new item
+* Play with `listDropdownCollection`, i.e. add new item:
 ```
 listDropdownCollection.add(
 	new window.Model( {

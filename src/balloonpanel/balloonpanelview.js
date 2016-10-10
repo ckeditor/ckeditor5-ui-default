@@ -9,6 +9,7 @@ import View from '../view.js';
 import Template from '../template.js';
 import toUnit from '../../utils/dom/tounit.js';
 
+const toPx = toUnit( 'px' );
 const arrowLeftOffset = 30;
 const arrowTopOffset = 15;
 
@@ -40,9 +41,9 @@ export default class BalloonPanelView extends View {
 				],
 
 				style: {
-					top: bind.to( 'top', toUnit( 'px' ) ),
-					left: bind.to( 'left', toUnit( 'px' ) ),
-					maxWidth: bind.to( 'maxWidth', toUnit( 'px' ) )
+					top: bind.to( 'top', toPx ),
+					left: bind.to( 'left', toPx ),
+					maxWidth: bind.to( 'maxWidth', toPx )
 				},
 
 				// Make this element `focusable` to be available for adding to FocusTracker.
