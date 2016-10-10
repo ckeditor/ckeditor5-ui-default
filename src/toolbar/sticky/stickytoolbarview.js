@@ -44,8 +44,21 @@ export default class StickyToolbarView extends ToolbarView {
 				],
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
-						// 2px compensates the border.
-						return isSticky ? toPx( this._elementPlaceholder.getBoundingClientRect().width + 2 ) : null;
+						if ( isSticky ) {
+							const toolbarComputedStyle = window.getComputedStyle( this.element );
+
+							return toPx(
+								this._elementPlaceholder.getBoundingClientRect().width +
+
+								// getBoundingClientRect returns dimensions including the border width.
+								// When going sticky, the toolbar gets the border. If the border is not
+								// considered, the sticky toolbar becomes narrower than the placeholder.
+								parseFloat( toolbarComputedStyle.borderLeftWidth ) +
+								parseFloat( toolbarComputedStyle.borderRightWidth )
+							);
+						}
+
+						return null;
 					} ),
 
 					top: bind.to( '_isStickyToTheLimiter', ( _isStickyToTheLimiter ) => {
