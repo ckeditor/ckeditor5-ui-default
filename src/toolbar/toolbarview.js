@@ -18,8 +18,8 @@ export default class ToolbarView extends View {
 	/**
 	 * @inheritDoc
 	 */
-	constructor() {
-		super();
+	constructor( locale ) {
+		super( locale );
 
 		this.template = new Template( {
 			tag: 'div',

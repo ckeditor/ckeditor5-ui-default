@@ -7,7 +7,9 @@
 
 import View from '../view.js';
 import Template from '../template.js';
+import toUnit from '../../utils/dom/tounit.js';
 
+const toPx = toUnit( 'px' );
 const arrowLeftOffset = 30;
 const arrowTopOffset = 15;
 
@@ -39,9 +41,9 @@ export default class BalloonPanelView extends View {
 				],
 
 				style: {
-					top: bind.to( 'top', pixelize ),
-					left: bind.to( 'left', pixelize ),
-					maxWidth: bind.to( 'maxWidth', pixelize )
+					top: bind.to( 'top', toPx ),
+					left: bind.to( 'left', toPx ),
+					maxWidth: bind.to( 'maxWidth', toPx )
 				},
 
 				// Make this element `focusable` to be available for adding to FocusTracker.
@@ -338,16 +340,6 @@ function getAbsoluteRectVisisbleInTheViewport( element ) {
 		right: Math.min( limiterRect.right, bodyWidth + windowScrollX ),
 		bottom: Math.min( limiterRect.bottom, bodyHeight + windowScrollY )
 	} );
-}
-
-/**
- * Add `px` unit to the passed value.
- *
- * @param {String|Number} value
- * @returns {String} Value with `px` unit,
- */
-function pixelize( value ) {
-	return `${ value }px`;
 }
 
 /**

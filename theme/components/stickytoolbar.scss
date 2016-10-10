@@ -7,5 +7,9 @@
 		top: 0;
 		border: 1px solid ck-border-color();
 		background: ck-color( 'foreground' );
+
+		&.ck-toolbar_sticky_bottom-limit {
+			position: absolute;
+		}
 	}
 }
