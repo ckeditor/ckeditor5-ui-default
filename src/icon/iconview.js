@@ -21,7 +21,7 @@ export default class IconView extends View {
 	constructor() {
 		super();
 
-		const bind = this.bind;
+		const bind = this.templateBind;
 
 		this.template = new Template( {
 			tag: 'svg',
@@ -46,23 +46,11 @@ export default class IconView extends View {
 		} );
 
 		/**
-		 * Model of this icon view.
+		 * The name of the icon. It corresponds with the name of the
+		 * file in the {@link ui.iconManager.IconManager}.
 		 *
-		 * @member {ui.icon.IconViewModel} ui.icon.IconView#model
+		 * @observable
+		 * @member {String} ui.icon.IconView#name
 		 */
 	}
 }
-
-/**
- * The icon view {@link ui.Model} interface.
- *
- * @interface ui.icon.IconViewModel
- */
-
-/**
- * The name of the icon. It corresponds with the name of the
- * file in the {@link ui.iconManager.IconManager}.
- *
- * @observable
- * @member {String} ui.icon.IconViewModel#name
- */
