@@ -21,7 +21,7 @@ export default class FormView extends View {
 	constructor() {
 		super();
 
-		const bind = this.bind;
+		const bind = this.templateBind;
 
 		this.template = new Template( {
 			tag: 'form',
@@ -29,30 +29,18 @@ export default class FormView extends View {
 			on: {
 				submit: bind.to( evt => {
 					evt.preventDefault();
-					this.model.fire( 'submit' );
+					this.fire( 'submit' );
 				} )
 			}
 		} );
 
 		this.register( 'content', el => el );
-
-		/**
-		 * Model of this form view.
-		 *
-		 * @member {ui.form.FormViewModel} ui.form.formView#model
-		 */
 	}
 }
-
-/**
- * The form view {@link ui.Model} interface.
- *
- * @interface ui.form.FormViewModel
- */
 
 /**
  * Fired when the form view is submitted (when one of the child triggered submit event).
  * E.g. click on {@link ui.button.Button Button} of type submit.
  *
- * @event ui.form.FormViewModel#submit
+ * @event ui.form.FormView#submit
  */

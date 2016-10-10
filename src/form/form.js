@@ -26,7 +26,7 @@ export default class Form extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.on( 'submit', () => model.fire( 'execute' ) );
+		view.on( 'submit', () => model.fire( 'execute' ) );
 
 		this.addCollection( 'content' );
 	}
