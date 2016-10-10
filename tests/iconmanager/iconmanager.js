@@ -23,8 +23,8 @@ describe( 'IconManager', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the IconManager#model', () => {
-			expect( view.model.sprite ).to.equal( model.sprite );
+		it( 'binds view attributes to the IconManager#model', () => {
+			expect( view.sprite ).to.equal( model.sprite );
 		} );
 	} );
 } );
