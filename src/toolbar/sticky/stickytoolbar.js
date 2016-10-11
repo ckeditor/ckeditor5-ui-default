@@ -51,7 +51,7 @@ export default class StickyToolbar extends Toolbar {
 
 /**
  * The limiter element for the sticky toolbar instance. See
- * {@link ui.stickyToobar.StickyToolbarViewModel#limiterElement} to learn more.
+ * {@link ui.stickyToobar.StickyToolbarView#limiterElement} to learn more.
  *
  * @readonly
  * @observable
