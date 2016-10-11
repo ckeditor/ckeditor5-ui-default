@@ -26,7 +26,7 @@ export default class StickyToolbarView extends ToolbarView {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.templateBind;
+		const bind = this.bindTemplate;
 
 		this.set( 'isSticky', false );
 		this.set( 'limiterElement', null );

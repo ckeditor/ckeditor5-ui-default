@@ -28,7 +28,7 @@ export default class BalloonPanelView extends View {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.templateBind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'div',

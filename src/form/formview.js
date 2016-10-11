@@ -21,7 +21,7 @@ export default class FormView extends View {
 	constructor() {
 		super();
 
-		const bind = this.templateBind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'form',

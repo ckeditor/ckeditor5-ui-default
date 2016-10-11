@@ -25,7 +25,7 @@ export default class EditableUIView extends View {
 	constructor( locale, editableElement ) {
 		super( locale );
 
-		const bind = this.templateBind;
+		const bind = this.bindTemplate;
 
 		if ( editableElement ) {
 			this.element = this.editableElement = editableElement;

@@ -25,7 +25,7 @@ export default class InlineEditableUIView extends EditableUIView {
 	constructor( locale, editableElement ) {
 		super( locale, editableElement );
 
-		const bind = this.templateBind;
+		const bind = this.bindTemplate;
 		const t = this.t;
 
 		const getLabel = ( value ) => {
