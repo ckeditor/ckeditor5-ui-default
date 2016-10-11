@@ -55,7 +55,7 @@ describe( 'ListItemView', () => {
 			it( 'triggers click event when "click" is fired in DOM', () => {
 				const spy = sinon.spy();
 
-				view.model.on( 'click', spy );
+				view.on( 'click', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.calledOnce ).to.be.true;
