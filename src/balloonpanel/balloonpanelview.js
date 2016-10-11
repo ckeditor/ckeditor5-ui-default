@@ -35,7 +35,6 @@ export default class BalloonPanelView extends View {
 			attributes: {
 				class: [
 					'ck-balloon-panel',
-					'ck-link-balloon-panel',
 					bind.to( 'arrow', ( value ) => `ck-balloon-panel_arrow_${ value }` ),
 					bind.if( 'isVisible', 'ck-balloon-panel_visible' )
 				],
