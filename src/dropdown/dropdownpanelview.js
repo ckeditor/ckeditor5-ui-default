@@ -21,7 +21,7 @@ export default class DropdownPanelView extends View {
 	constructor() {
 		super();
 
-		const bind = this.bind;
+		const bind = this.templateBind;
 
 		this.template = new Template( {
 			tag: 'div',
@@ -38,22 +38,10 @@ export default class DropdownPanelView extends View {
 		this.register( 'content', el => el );
 
 		/**
-		 * Model of this dropdown panel view.
+		 * Controls whether the panel is visible.
 		 *
-		 * @member {ui.dropdown.DropdownPanelViewModel} ui.dropdown.DropdownPanelView#model
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownPanelView#isVisible
 		 */
 	}
 }
-
-/**
- * The dropdown panel view model interface.
- *
- * @interface ui.dropdown.DropdownPanelViewModel
- */
-
-/**
- * Controls whether the panel is visible.
- *
- * @observable
- * @member {Boolean} ui.dropdown.DropdownPanelViewModel#isVisible
- */
