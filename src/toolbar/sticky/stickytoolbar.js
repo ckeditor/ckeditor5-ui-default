@@ -30,7 +30,7 @@ export default class StickyToolbar extends Toolbar {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'isActive', 'limiterElement' ).to( model );
+		view.bind( 'isActive', 'limiterElement' ).to( model );
 	}
 }
 

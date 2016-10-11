@@ -26,9 +26,9 @@ describe( 'StickyToolbar', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the StickyToolbar#model', () => {
-			expect( view.model.isActive ).to.equal( model.isActive );
-			expect( view.model.limiterElement ).to.equal( limiterElement );
+		it( 'binds view attributes to the StickyToolbar#model', () => {
+			expect( view.isActive ).to.equal( model.isActive );
+			expect( view.limiterElement ).to.equal( limiterElement );
 		} );
 	} );
 } );
