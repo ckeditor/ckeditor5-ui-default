@@ -29,7 +29,6 @@ describe( 'BalloonPanelView', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-balloon-panel' ) ).to.true;
-			expect( view.element.classList.contains( 'ck-link-balloon-panel' ) ).to.true;
 			expect( view.element.getAttribute( 'tabindex' ) ).to.equal( '-1' );
 		} );
 
