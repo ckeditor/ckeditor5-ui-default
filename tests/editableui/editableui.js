@@ -26,10 +26,10 @@ describe( 'EditableUI', () => {
 			expect( editableUI.editor ).to.equal( editor );
 		} );
 
-		it( 'binds editableUIView#model attributes to the editable', () => {
+		describe( 'binds editableUIView attributes to the editable', () => {
 			it( 'binds isFocused to editable.isFocused', () => {
 				testUtils.assertBinding(
-					editableUIView.model,
+					editableUIView,
 					{ isFocused: false },
 					[
 						[ editable, { isFocused: true } ]
@@ -40,7 +40,7 @@ describe( 'EditableUI', () => {
 
 			it( 'binds isReadOnly to editable.isReadOnly', () => {
 				testUtils.assertBinding(
-					editableUIView.model,
+					editableUIView,
 					{ isReadOnly: false },
 					[
 						[ editable, { isReadOnly: true } ]
