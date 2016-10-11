@@ -6,22 +6,18 @@
 /* globals Event */
 /* bender-tags: ui, list */
 
-import ListItem from '/ckeditor5/ui/list/listitem.js';
 import ListItemView from '/ckeditor5/ui/list/listitemview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'ListItemView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
+		view = new ListItemView();
+
+		view.set( {
 			style: 'foo',
 			label: 'bar'
 		} );
-
-		view = new ListItemView( model );
-
-		return new ListItem( model, view ).init();
 	} );
 
 	describe( 'constructor', () => {
@@ -32,20 +28,20 @@ describe( 'ListItemView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( '"style" attribute', () => {
-			it( 'reacts on model#style', () => {
+			it( 'reacts on view#style', () => {
 				expect( view.element.attributes.getNamedItem( 'style' ).value ).to.equal( 'foo' );
 
-				model.style = 'color: red';
+				view.style = 'color: red';
 
 				expect( view.element.attributes.getNamedItem( 'style' ).value ).to.equal( 'color: red' );
 			} );
 		} );
 
 		describe( 'text content', () => {
-			it( 'reacts on model#label', () => {
+			it( 'reacts on view#label', () => {
 				expect( view.element.innerHTML ).to.equal( 'bar' );
 
-				model.label = 'baz';
+				view.label = 'baz';
 
 				expect( view.element.innerHTML ).to.equal( 'baz' );
 			} );
@@ -55,7 +51,7 @@ describe( 'ListItemView', () => {
 			it( 'triggers click event when "click" is fired in DOM', () => {
 				const spy = sinon.spy();
 
-				view.model.on( 'click', spy );
+				view.on( 'click', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.calledOnce ).to.be.true;

@@ -13,7 +13,7 @@ describe( 'LabelView', () => {
 	beforeEach( () => {
 		view = new LabelView();
 
-		view.model.set( {
+		view.set( {
 			text: 'foo',
 			for: 'bar'
 		} );
@@ -30,20 +30,20 @@ describe( 'LabelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'text content', () => {
-			it( 'should react on model#text', () => {
+			it( 'should react on view#text', () => {
 				expect( view.element.textContent ).to.equal( 'foo' );
 
-				view.model.text = 'baz';
+				view.text = 'baz';
 
 				expect( view.element.textContent ).to.equal( 'baz' );
 			} );
 		} );
 
 		describe( 'for attribute', () => {
-			it( 'should react on model#for', () => {
+			it( 'should react on view#for', () => {
 				expect( view.element.getAttribute( 'for' ) ).to.equal( 'bar' );
 
-				view.model.for = 'baz';
+				view.for = 'baz';
 
 				expect( view.element.getAttribute( 'for' ) ).to.equal( 'baz' );
 			} );

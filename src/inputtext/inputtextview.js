@@ -21,7 +21,7 @@ export default class InputTextView extends View {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'input',
@@ -36,12 +36,20 @@ export default class InputTextView extends View {
 		} );
 
 		// Note: `value` cannot be an HTML attribute, because it doesn't change HTMLInputElement value once changed.
-		this.model.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
+		this.on( 'change:value', ( evt, propertyName, value ) => this.element.value = value || '' );
 
 		/**
-		 * Model of this input view.
+		 * The value of the input.
 		 *
-		 * @member {ui.input.InputTextViewModel} ui.input.InputTextView#model
+		 * @observable
+		 * @member {String} ui.input.InputTextView#value
+		 */
+
+		/**
+		 * The `id` attribute of the input (i.e. to pair with a `<label>` element).
+		 *
+		 * @observable
+		 * @member {String} ui.input.InputTextView#id
 		 */
 	}
 
@@ -52,23 +60,3 @@ export default class InputTextView extends View {
 		this.element.select();
 	}
 }
-
-/**
- * The text input view {@link ui.Model model} interface.
- *
- * @interface ui.input.InputTextViewModel
- */
-
-/**
- * The value of the input.
- *
- * @observable
- * @member {String} ui.input.InputTextViewModel#value
- */
-
-/**
- * The `id` attribute of the input (i.e. to pair with a `<label>` element).
- *
- * @observable
- * @member {String} ui.input.InputTextViewModel#id
- */

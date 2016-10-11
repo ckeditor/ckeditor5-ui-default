@@ -30,7 +30,7 @@ export default class Icon extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'name' ).to( model );
+		view.bind( 'name' ).to( model );
 	}
 }
 

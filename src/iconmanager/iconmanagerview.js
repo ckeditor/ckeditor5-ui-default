@@ -29,22 +29,23 @@ export default class IconManagerView extends View {
 		} );
 
 		/**
-		 * Model of this icon manager view.
+		 * The actual SVG (HTML) of the icons to be injected in DOM.
 		 *
-		 * @member {ui.iconManager.IconManagerViewModel} ui.iconManager.IconManagerView#model
+		 * @observable
+		 * @member {String} ui.iconManager.IconManagerView#sprite
 		 */
 	}
 
 	init() {
 		// Note: In MS Edge it's not enough to set:
 		//
-		//		this.element.innerHTML = this.model.sprite;
+		//		this.element.innerHTML = this.sprite;
 		//
 		// because for some reason the browser won't parse the symbols string
 		// properly as svg content. Instead, an explicit parsing is needed (#55).
 		const tmp = document.createElement( 'div' );
 
-		tmp.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg">${ this.model.sprite }</svg>`;
+		tmp.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg">${ this.sprite }</svg>`;
 
 		const symbols = tmp.firstChild.childNodes;
 
@@ -57,16 +58,3 @@ export default class IconManagerView extends View {
 		return super.init();
 	}
 }
-
-/**
- * The icon manager view {@link ui.Model} interface.
- *
- * @interface ui.iconManager.IconManagerViewModel
- */
-
-/**
- * The actual SVG (HTML) of the icons to be injected in DOM.
- *
- * @observable
- * @member {String} ui.iconManager.IconManagerViewModel#sprite
- */

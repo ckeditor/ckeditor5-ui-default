@@ -3,10 +3,13 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
+/* global document, window */
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import testUtils from '/tests/core/_utils/utils.js';
+
+testUtils.createSinonSandbox();
 
 describe( 'BalloonPanelView', () => {
 	let view;
@@ -14,7 +17,7 @@ describe( 'BalloonPanelView', () => {
 	beforeEach( () => {
 		view = new BalloonPanelView();
 
-		view.model.set( {
+		view.set( {
 			top: 0,
 			left: 0,
 			arrow: 'se',
@@ -40,46 +43,46 @@ describe( 'BalloonPanelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'arrow', () => {
-			it( 'should react on view.model#arrow', () => {
+			it( 'should react on view#arrow', () => {
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_se' ) ).to.true;
 
-				view.model.set( 'arrow', 'sw' );
+				view.set( 'arrow', 'sw' );
 
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_sw' ) ).to.true;
 			} );
 		} );
 
 		describe( 'isVisible', () => {
-			it( 'should react on view.model#isvisible', () => {
+			it( 'should react on view#isvisible', () => {
 				expect( view.element.classList.contains( 'ck-balloon-panel_visible' ) ).to.false;
 
-				view.model.isVisible = true;
+				view.isVisible = true;
 
 				expect( view.element.classList.contains( 'ck-balloon-panel_visible' ) ).to.true;
 			} );
 		} );
 
 		describe( 'styles', () => {
-			it( 'should react on view.model#top', () => {
+			it( 'should react on view#top', () => {
 				expect( view.element.style.top ).to.equal( '0px' );
 
-				view.model.top = 10;
+				view.top = 10;
 
 				expect( view.element.style.top ).to.equal( '10px' );
 			} );
 
-			it( 'should react on view.model#left', () => {
+			it( 'should react on view#left', () => {
 				expect( view.element.style.left ).to.equal( '0px' );
 
-				view.model.left = 10;
+				view.left = 10;
 
 				expect( view.element.style.left ).to.equal( '10px' );
 			} );
 
-			it( 'should react on view.model#maxWidth', () => {
+			it( 'should react on view#maxWidth', () => {
 				expect( view.element.style.maxWidth ).to.equal( '200px' );
 
-				view.model.maxWidth = 10;
+				view.maxWidth = 10;
 
 				expect( view.element.style.maxWidth ).to.equal( '10px' );
 			} );
@@ -87,18 +90,18 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'isVisible', () => {
-		it( 'should return view.model#isVisible value', () => {
+		it( 'should return view#isVisible value', () => {
 			expect( view.isVisible ).to.false;
 
-			view.model.isVisible = true;
+			view.isVisible = true;
 
 			expect( view.isVisible ).to.true;
 		} );
 	} );
 
 	describe( 'show', () => {
-		it( 'should set view.model#isVisible as true', () => {
-			view.model.isVisible = false;
+		it( 'should set view#isVisible as true', () => {
+			view.isVisible = false;
 
 			view.show();
 
@@ -107,8 +110,8 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'hide', () => {
-		it( 'should set view.model#isVisible as false', () => {
-			view.model.isVisible = true;
+		it( 'should set view#isVisible as false', () => {
+			view.isVisible = true;
 
 			view.hide();
 
@@ -117,68 +120,201 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'attachTo', () => {
-		const limiter = { left: 0, top: 0, right: 300, bottom: 300 };
-		let targetEl;
+		let targetEl, limiterEl;
 
 		beforeEach( () => {
-			// Create and append target element.
+			limiterEl = document.createElement( 'div' );
 			targetEl = document.createElement( 'div' );
-			targetEl.style.cssText = 'position: absolute; width: 50px; height: 50px;';
-			document.body.appendChild( targetEl );
 
-			// Make sure that viewport has min dimensions.
-			document.body.style.minHeight = '350px';
-			document.body.style.minWidth = '350px';
+			// Mock balloon panel element dimensions.
+			mockBoundingBox( view.element, {
+				top: 0,
+				left: 0,
+				width: 100,
+				height: 100
+			} );
 
-			// Set dimensions to balloon panel element and append it to the document.
-			view.element.style.width = '150px';
-			view.element.style.height = '100px';
-			document.body.appendChild( view.element );
+			// Make sure that limiterEl is fully visible in viewport.
+			testUtils.sinon.stub( window, 'innerWidth', 500 );
+			testUtils.sinon.stub( window, 'innerHeight', 500 );
 		} );
 
-		afterEach( () => {
-			document.body.removeChild( targetEl );
+		describe( 'limited by limiter element', () => {
+			beforeEach( () => {
+				// Mock limiter element dimensions.
+				mockBoundingBox( limiterEl, {
+					left: 0,
+					top: 0,
+					width: 500,
+					height: 500
+				} );
+			} );
 
-			document.body.style.minHeight = null;
-			document.body.style.minWidth = null;
+			it( 'should put balloon on the `south east` side of the target element at default', () => {
+				// Place target element at the center of the limiterEl.
+				mockBoundingBox( targetEl, {
+					top: 225,
+					left: 225,
+					width: 50,
+					height: 50
+				} );
 
-			document.body.removeChild( view.element );
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'se' );
+			} );
+
+			it( 'should put balloon on the `south east` side of the target element when target is on the top left side of the limiterEl', () => {
+				// Place target element at the center of the limiterEl.
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 0,
+					width: 50,
+					height: 50
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'se' );
+			} );
+
+			it( 'should put balloon on the `south west` side of the target element when target is on the right side of the limiterEl', () => {
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 450,
+					width: 50,
+					height: 50
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'sw' );
+			} );
+
+			it( 'should put balloon on the `north east` side of the target element when target is on the bottom of the limiterEl ', () => {
+				mockBoundingBox( targetEl, {
+					top: 450,
+					left: 0,
+					width: 50,
+					height: 50
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'ne' );
+			} );
+
+			it( 'should put balloon on the `north west` side of the target element when target is on the bottom right of the limiterEl', () => {
+				mockBoundingBox( targetEl, {
+					top: 450,
+					left: 450,
+					width: 50,
+					height: 50
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'nw' );
+			} );
 		} );
 
-		it( 'should put balloon on on the `south east` side of the target element', () => {
-			targetEl.style.top = 0;
-			targetEl.style.left = 0;
+		describe( 'limited by viewport', () => {
+			it( 'should put balloon on the `south west` position when `south east` is limited', () => {
+				mockBoundingBox( limiterEl, {
+					left: 0,
+					top: 0,
+					width: 500,
+					height: 500
+				} );
 
-			view.attachTo( targetEl, limiter );
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 225,
+					width: 50,
+					height: 50
+				} );
 
-			expect( view.model.arrow ).to.equal( 'se' );
-		} );
+				testUtils.sinon.stub( window, 'innerWidth', 275 );
 
-		it( 'should put balloon on on the `south west` side of the target element', () => {
-			targetEl.style.top = 0;
-			targetEl.style.left = '250px';
+				view.attachTo( targetEl, limiterEl );
 
-			view.attachTo( targetEl, limiter );
+				expect( view.arrow ).to.equal( 'sw' );
+			} );
 
-			expect( view.model.arrow ).to.equal( 'sw' );
-		} );
+			it( 'should put balloon on the `south east` position when `south west` is limited', () => {
+				mockBoundingBox( limiterEl, {
+					left: -400,
+					top: 0,
+					width: 500,
+					height: 500
+				} );
 
-		it( 'should put balloon on on the `north east` side of the target element', () => {
-			targetEl.style.top = '250px';
-			targetEl.style.left = 0;
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 0,
+					width: 50,
+					height: 50
+				} );
 
-			view.attachTo( targetEl, limiter );
+				testUtils.sinon.stub( window, 'scrollX', 400 );
 
-			expect( view.model.arrow ).to.equal( 'ne' );
-		} );
+				view.attachTo( targetEl, limiterEl );
 
-		it( 'should put balloon on on the `north west` side of the target element', () => {
-			targetEl.style.top = '250px';
-			targetEl.style.left = '250px';
+				expect( view.arrow ).to.equal( 'se' );
+			} );
 
-			view.attachTo( targetEl, limiter );
+			it( 'should put balloon on the `north east` position when `south east` is limited', () => {
+				mockBoundingBox( limiterEl, {
+					left: 0,
+					top: 0,
+					width: 500,
+					height: 500
+				} );
 
-			expect( view.model.arrow ).to.equal( 'nw' );
+				mockBoundingBox( targetEl, {
+					top: 225,
+					left: 0,
+					width: 50,
+					height: 50
+				} );
+
+				testUtils.sinon.stub( window, 'innerHeight', 275 );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'ne' );
+			} );
+
+			it( 'should put balloon on the `south east` position when `north east` is limited', () => {
+				mockBoundingBox( limiterEl, {
+					left: 0,
+					top: -400,
+					width: 500,
+					height: 500
+				} );
+
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 0,
+					width: 50,
+					height: 50
+				} );
+
+				testUtils.sinon.stub( window, 'scrollY', 400 );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.arrow ).to.equal( 'se' );
+			} );
 		} );
 	} );
 } );
+
+function mockBoundingBox( element, data ) {
+	const boundingBox = Object.assign( {}, data );
+
+	boundingBox.right = boundingBox.left + boundingBox.width;
+	boundingBox.bottom = boundingBox.top + boundingBox.height;
+
+	testUtils.sinon.stub( element, 'getBoundingClientRect' ).returns( boundingBox );
+}
