@@ -25,8 +25,8 @@ describe( 'DropdownPanel', () => {
 			expect( panel.collections.get( 'content' ) ).to.be.instanceof( ControllerCollection );
 		} );
 
-		it( 'binds view#model attributes to the DropdownPanel#model', () => {
-			expect( panel.view.model.isVisble ).to.equal( model.isVisble );
+		it( 'binds view attributes to the DropdownPanel#model', () => {
+			expect( panel.view.isVisble ).to.equal( model.isVisble );
 		} );
 	} );
 } );

@@ -21,7 +21,7 @@ export default class ListItemView extends View {
 	constructor() {
 		super();
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'li',
@@ -45,35 +45,23 @@ export default class ListItemView extends View {
 		} );
 
 		/**
-		 * Model of this list item view.
+		 * The label of the list item.
 		 *
-		 * @member {ui.list.ListItemViewModel} ui.list.ListItemView#model
+		 * @observable
+		 * @member {String} ui.list.ListItemView#label
+		 */
+
+		/**
+		 * (Optional) The DOM style attribute of the list item.
+		 *
+		 * @observable
+		 * @member {String} ui.list.ListItemView#style
+		 */
+
+		/**
+		 * Fired when the list item has been clicked.
+		 *
+		 * @event ui.list.ListItemView#click
 		 */
 	}
 }
-
-/**
- * The list item view {@link ui.Model} interface.
- *
- * @interface ui.list.ListItemViewModel
- */
-
-/**
- * The label of the list item.
- *
- * @observable
- * @member {String} ui.list.ListItemViewModel#label
- */
-
-/**
- * (Optional) The DOM style attribute of the list item.
- *
- * @observable
- * @member {String} ui.list.ListItemViewModel#style
- */
-
-/**
- * Fired when the list item has been clicked.
- *
- * @event ui.list.ListItemViewModel#click
- */

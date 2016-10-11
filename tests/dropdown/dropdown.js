@@ -57,9 +57,9 @@ describe( 'Dropdown', () => {
 			);
 		} );
 
-		it( 'creates a listener which updates view.model#isOpen when button fires #execute', () => {
+		it( 'creates a listener which updates view#isOpen when button fires #execute', () => {
 			const buttonModel = dropdown.button.model;
-			const viewModel = dropdown.view.model;
+			const viewModel = dropdown.view;
 
 			buttonModel.fire( 'execute' );
 			expect( viewModel.isOpen ).to.be.true;
@@ -75,11 +75,11 @@ describe( 'Dropdown', () => {
 			expect( dropdown.panel.view ).to.be.instanceof( DropdownPanelView );
 		} );
 
-		it( 'binds DropdownPanel#model to the view#model', () => {
+		it( 'binds DropdownPanel#model to the view', () => {
 			assertBinding( dropdown.panel.model,
 				{ isVisible: false },
 				[
-					[ dropdown.view.model, { isOpen: true } ]
+					[ dropdown.view, { isOpen: true } ]
 				],
 				{ isVisible: true }
 			);

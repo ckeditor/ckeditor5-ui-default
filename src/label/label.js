@@ -30,7 +30,7 @@ export default class Label extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'text', 'for' ).to( model );
+		view.bind( 'text', 'for' ).to( model );
 	}
 }
 

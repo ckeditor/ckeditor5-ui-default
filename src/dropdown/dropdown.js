@@ -51,7 +51,7 @@ export default class Dropdown extends Controller {
 	 */
 	_createButton() {
 		const model = this.model;
-		const viewModel = this.view.model;
+		const view = this.view;
 		const buttonModel = new Model();
 
 		// Button needs a separate Model because otherwise it would fire #execute event
@@ -67,7 +67,7 @@ export default class Dropdown extends Controller {
 		this.add( 'main', this.button = new Button( buttonModel, new DropdownButtonView() ) );
 
 		// When ui.dropdown.Dropdown#button is clicked switch the open/closed state of the Dropdown.
-		this.listenTo( buttonModel, 'execute', () => viewModel.isOpen = !viewModel.isOpen );
+		this.listenTo( buttonModel, 'execute', () => view.isOpen = !view.isOpen );
 	}
 
 	/**
@@ -78,7 +78,7 @@ export default class Dropdown extends Controller {
 	_createPanel() {
 		const panelModel = new Model();
 
-		panelModel.bind( 'isVisible' ).to( this.view.model, 'isOpen' );
+		panelModel.bind( 'isVisible' ).to( this.view, 'isOpen' );
 
 		/**
 		 * Panel of this dropdown.

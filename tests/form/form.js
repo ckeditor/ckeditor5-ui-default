@@ -28,7 +28,7 @@ describe( 'Form', () => {
 
 			model.on( 'execute', spy );
 
-			view.model.fire( 'submit' );
+			view.fire( 'submit' );
 
 			expect( spy.calledOnce ).to.be.true;
 		} );

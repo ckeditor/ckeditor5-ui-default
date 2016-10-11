@@ -22,8 +22,8 @@ describe( 'Icon', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the Icon#model', () => {
-			expect( view.model.name ).to.equal( model.name );
+		it( 'binds view attributes to the Icon#model', () => {
+			expect( view.name ).to.equal( model.name );
 		} );
 	} );
 } );

@@ -25,7 +25,7 @@ export default class EditableUIView extends View {
 	constructor( locale, editableElement ) {
 		super( locale );
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		if ( editableElement ) {
 			this.element = this.editableElement = editableElement;
@@ -50,9 +50,24 @@ export default class EditableUIView extends View {
 		 */
 
 		/**
-		 * Model of this editable UI view.
+		 * Controls whether the editable is writable or not.
 		 *
-		 * @member {ui.editableUI.EditableUIViewModel} ui.editableUI.EditableUIView#model
+		 * @observable
+		 * @member {Boolean} ui.editableUI.EditableUIView#isReadOnly
+		 */
+
+		/**
+		 * Controls whether the editable is focused, i.e. the user is typing in it.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.editableUI.EditableUIView#isFocused
+		 */
+
+		/**
+		 * The name of the editable UI view.
+		 *
+		 * @observable
+		 * @member {String} ui.editableUI.EditableUIView#name
 		 */
 	}
 
@@ -76,30 +91,3 @@ export default class EditableUIView extends View {
 		this.editableElement.contentEditable = false;
 	}
 }
-
-/**
- * The editable UI view {@link ui.Model} interface.
- *
- * @interface ui.editableUI.EditableUIViewModel
- */
-
-/**
- * Controls whether the editable is writable or not.
- *
- * @observable
- * @member {Boolean} ui.editableUI.EditableUIViewModel#isReadOnly
- */
-
-/**
- * Controls whether the editable is focused, i.e. the user is typing in it.
- *
- * @observable
- * @member {Boolean} ui.editableUI.EditableUIViewModel#isFocused
- */
-
-/**
- * The name of the editable UI view.
- *
- * @observable
- * @member {String} ui.editableUI.EditableUIViewModel#name
- */

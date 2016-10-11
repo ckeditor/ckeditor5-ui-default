@@ -32,7 +32,7 @@ export default class IconManager extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'sprite' ).to( model );
+		view.bind( 'sprite' ).to( model );
 	}
 }
 

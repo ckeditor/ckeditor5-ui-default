@@ -50,7 +50,7 @@ export default class ListDropdown extends Dropdown {
 
 		// Collapse the dropdown when an item in the panel is clicked.
 		this.listenTo( model, 'execute', () => {
-			view.model.isOpen = false;
+			view.isOpen = false;
 		} );
 
 		this.panel.add( 'content', this.list );

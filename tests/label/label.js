@@ -23,9 +23,9 @@ describe( 'Label', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should bind view#model attributes to the Label#model', () => {
-			expect( view.model.text ).to.equal( model.text ).to.equal( 'foo' );
-			expect( view.model.for ).to.equal( model.for ).to.equal( 'bar' );
+		it( 'should bind view attributes to the Label#model', () => {
+			expect( view.text ).to.equal( model.text ).to.equal( 'foo' );
+			expect( view.for ).to.equal( model.for ).to.equal( 'bar' );
 		} );
 	} );
 } );

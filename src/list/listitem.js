@@ -21,13 +21,13 @@ export default class ListItem extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'label' ).to( model );
+		view.bind( 'label' ).to( model );
 
 		if ( model.style ) {
-			view.model.bind( 'style' ).to( model );
+			view.bind( 'style' ).to( model );
 		}
 
-		view.model.on( 'click', () => model.fire( 'execute' ) );
+		view.on( 'click', () => model.fire( 'execute' ) );
 	}
 }
 

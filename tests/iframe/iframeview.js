@@ -6,24 +6,16 @@
 /* globals document */
 /* bender-tags: ui, iframe */
 
-import Iframe from '/ckeditor5/ui/iframe/iframe.js';
 import IframeView from '/ckeditor5/ui/iframe/iframeview.js';
-import Model from '/ckeditor5/ui/model.js';
 
 describe( 'IframeView', () => {
-	let model, view;
-
-	beforeEach( () => {
-		model = new Model();
-		view = new IframeView();
-
-		document.body.appendChild( view.element );
-
-		return new Iframe( model, view ).init();
-	} );
+	let view;
 
 	describe( 'constructor', () => {
 		it( 'creates view element from the template', () => {
+			view = new IframeView();
+			document.body.appendChild( view.element );
+
 			expect( view.element.classList.contains( 'ck-reset_all' ) ).to.be.true;
 			expect( view.element.attributes.getNamedItem( 'sandbox' ).value ).to.equal( 'allow-same-origin allow-scripts' );
 		} );
@@ -54,9 +46,7 @@ describe( 'IframeView', () => {
 		it( 'is fired when frame finished loading', ( done ) => {
 			view = new IframeView();
 
-			view.model.on( 'loaded', () => {
-				done();
-			} );
+			view.on( 'loaded', () => done() );
 
 			view.init();
 

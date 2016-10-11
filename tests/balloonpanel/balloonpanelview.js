@@ -14,7 +14,7 @@ describe( 'BalloonPanelView', () => {
 	beforeEach( () => {
 		view = new BalloonPanelView();
 
-		view.model.set( {
+		view.set( {
 			top: 0,
 			left: 0,
 			arrow: 'se',
@@ -41,46 +41,46 @@ describe( 'BalloonPanelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'arrow', () => {
-			it( 'should react on view.model#arrow', () => {
+			it( 'should react on view#arrow', () => {
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_se' ) ).to.true;
 
-				view.model.set( 'arrow', 'sw' );
+				view.set( 'arrow', 'sw' );
 
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_sw' ) ).to.true;
 			} );
 		} );
 
 		describe( 'isVisible', () => {
-			it( 'should react on view.model#isvisible', () => {
+			it( 'should react on view#isvisible', () => {
 				expect( view.element.classList.contains( 'ck-balloon-panel_visible' ) ).to.false;
 
-				view.model.isVisible = true;
+				view.isVisible = true;
 
 				expect( view.element.classList.contains( 'ck-balloon-panel_visible' ) ).to.true;
 			} );
 		} );
 
 		describe( 'styles', () => {
-			it( 'should react on view.model#top', () => {
+			it( 'should react on view#top', () => {
 				expect( view.element.style.top ).to.equal( '0px' );
 
-				view.model.top = 10;
+				view.top = 10;
 
 				expect( view.element.style.top ).to.equal( '10px' );
 			} );
 
-			it( 'should react on view.model#left', () => {
+			it( 'should react on view#left', () => {
 				expect( view.element.style.left ).to.equal( '0px' );
 
-				view.model.left = 10;
+				view.left = 10;
 
 				expect( view.element.style.left ).to.equal( '10px' );
 			} );
 
-			it( 'should react on view.model#maxWidth', () => {
+			it( 'should react on view#maxWidth', () => {
 				expect( view.element.style.maxWidth ).to.equal( '200px' );
 
-				view.model.maxWidth = 10;
+				view.maxWidth = 10;
 
 				expect( view.element.style.maxWidth ).to.equal( '10px' );
 			} );
@@ -88,18 +88,18 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'isVisible', () => {
-		it( 'should return view.model#isVisible value', () => {
+		it( 'should return view#isVisible value', () => {
 			expect( view.isVisible ).to.false;
 
-			view.model.isVisible = true;
+			view.isVisible = true;
 
 			expect( view.isVisible ).to.true;
 		} );
 	} );
 
 	describe( 'show', () => {
-		it( 'should set view.model#isVisible as true', () => {
-			view.model.isVisible = false;
+		it( 'should set view#isVisible as true', () => {
+			view.isVisible = false;
 
 			view.show();
 
@@ -108,8 +108,8 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'hide', () => {
-		it( 'should set view.model#isVisible as false', () => {
-			view.model.isVisible = true;
+		it( 'should set view#isVisible as false', () => {
+			view.isVisible = true;
 
 			view.hide();
 
@@ -152,7 +152,7 @@ describe( 'BalloonPanelView', () => {
 
 			view.attachTo( targetEl, limiter );
 
-			expect( view.model.arrow ).to.equal( 'se' );
+			expect( view.arrow ).to.equal( 'se' );
 		} );
 
 		it( 'should put balloon on on the `south west` side of the target element', () => {
@@ -161,7 +161,7 @@ describe( 'BalloonPanelView', () => {
 
 			view.attachTo( targetEl, limiter );
 
-			expect( view.model.arrow ).to.equal( 'sw' );
+			expect( view.arrow ).to.equal( 'sw' );
 		} );
 
 		it( 'should put balloon on on the `north east` side of the target element', () => {
@@ -170,7 +170,7 @@ describe( 'BalloonPanelView', () => {
 
 			view.attachTo( targetEl, limiter );
 
-			expect( view.model.arrow ).to.equal( 'ne' );
+			expect( view.arrow ).to.equal( 'ne' );
 		} );
 
 		it( 'should put balloon on on the `north west` side of the target element', () => {
@@ -179,7 +179,7 @@ describe( 'BalloonPanelView', () => {
 
 			view.attachTo( targetEl, limiter );
 
-			expect( view.model.arrow ).to.equal( 'nw' );
+			expect( view.arrow ).to.equal( 'nw' );
 		} );
 	} );
 } );

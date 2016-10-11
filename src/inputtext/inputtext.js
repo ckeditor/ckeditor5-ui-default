@@ -30,7 +30,7 @@ export default class InputText extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'value', 'id' ).to( model );
+		view.bind( 'value', 'id' ).to( model );
 	}
 
 	/**
