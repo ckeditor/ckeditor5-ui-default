@@ -28,7 +28,7 @@ export default class BalloonPanelView extends View {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'div',
@@ -54,39 +54,57 @@ export default class BalloonPanelView extends View {
 		this.register( 'content', el => el );
 
 		/**
-		 * Model of this balloon panel view.
+		 * The absolute top position of the balloon panel in pixels.
 		 *
-		 * @member {ui.balloonPanel.BalloonPanelViewModel} ui.balloonPanel.BalloonPanelView#model
+		 * @observable
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
 		 */
-	}
 
-	/**
-	 * Returns balloon visibility state.
-	 *
-	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
-	 *
-	 * @returns {Boolean}
-	 */
-	get isVisible() {
-		return this.model.isVisible;
+		/**
+		 * The absolute left position of the balloon panel in pixels.
+		 *
+		 * @observable
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#left
+		 */
+
+		/**
+		 * The maximum width of the balloon panel, as in CSS.
+		 *
+		 * @observable
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#maxWidth
+		 */
+
+		/**
+		 * Balloon panel arrow direction.
+		 *
+		 * @observable
+		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#arrow
+		 */
+
+		/**
+		 * Controls whether the balloon panel is visible or not.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
+		 */
 	}
 
 	/**
 	 * Shows the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
+	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
 	 */
 	show() {
-		this.model.isVisible = true;
+		this.isVisible = true;
 	}
 
 	/**
 	 * Hides the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelViewModel#isVisible}.
+	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
 	 */
 	hide() {
-		this.model.isVisible = false;
+		this.isVisible = false;
 	}
 
 	/**
@@ -100,7 +118,7 @@ export default class BalloonPanelView extends View {
 	 * fitting into the browser viewport visible to the user. It prevents the panel from
 	 * appearing off screen.
 	 *
-	 * The heuristics choses from among 4 available positions relative to the target DOM element or range:
+	 * The heuristics chooses from among 4 available positions relative to the target DOM element or range:
 	 *
 	 * * South east:
 	 *
@@ -137,7 +155,7 @@ export default class BalloonPanelView extends View {
 	 *		              V
 	 *		         [ Target ]
 	 *
-	 * See {@ link ui.balloonPanel.BalloonPanelViewModel#arrow}.
+	 * See {@ link ui.balloonPanel.BalloonPanelView#arrow}.
 	 *
 	 * @param {HTMLElement|Range} elementOrRange Target DOM element or range to which the balloon will be attached.
 	 * @param {HTMLElement|Object} limiterElementOrRect The DOM element or element rect beyond which area the balloon panel should not be
@@ -212,9 +230,9 @@ export default class BalloonPanelView extends View {
 		} );
 
 		// Move the balloon panel.
-		this.model.arrow = maxIntersectRectPos;
-		this.model.top = rects[ maxIntersectRectPos ].top;
-		this.model.left = rects[ maxIntersectRectPos ].left;
+		this.arrow = maxIntersectRectPos;
+		this.top = rects[ maxIntersectRectPos ].top;
+		this.left = rects[ maxIntersectRectPos ].left;
 	}
 }
 
@@ -350,44 +368,3 @@ function getAbsoluteViewportRect() {
 		left: windowScrollX
 	};
 }
-
-/**
- * The balloon panel view {@link ui.Model model} interface.
- *
- * @interface ui.balloonPanel.BalloonPanelViewModel
- */
-
-/**
- * The absolute top position of the balloon panel in pixels.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#top
- */
-
-/**
- * The absolute left position of the balloon panel in pixels.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#left
- */
-
-/**
- * The maximum width of the balloon panel, as in CSS.
- *
- * @observable
- * @member {Number} ui.balloonPanel.BalloonPanelViewModel#maxWidth
- */
-
-/**
- * Balloon panel arrow direction.
- *
- * @observable
- * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelViewModel#arrow
- */
-
-/**
- * Controls whether the balloon panel is visible or not.
- *
- * @observable
- * @member {Boolean} ui.balloonPanel.BalloonPanelViewModel#isVisible
- */

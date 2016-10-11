@@ -53,14 +53,14 @@ describe( 'ListDropdown', () => {
 			content.fire( 'execute' );
 		} );
 
-		it( 'changes view.model#isOpen on model#execute', () => {
-			view.model.isOpen = true;
+		it( 'changes view#isOpen on model#execute', () => {
+			view.isOpen = true;
 
 			model.fire( 'execute' );
-			expect( view.model.isOpen ).to.be.false;
+			expect( view.isOpen ).to.be.false;
 
 			model.fire( 'execute' );
-			expect( view.model.isOpen ).to.be.false;
+			expect( view.isOpen ).to.be.false;
 		} );
 	} );
 } );

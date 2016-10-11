@@ -30,30 +30,30 @@ describe( 'Button', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the Button#model', () => {
-			expect( view.model.label ).to.equal( model.label );
-			expect( view.model.isOn ).to.equal( model.isOn );
-			expect( view.model.isEnabled ).to.equal( model.isEnabled );
-			expect( view.model.title ).to.equal( `${ model.label } (${ model.keystroke })` );
+		it( 'binds view attributes to the Button#model', () => {
+			expect( view.label ).to.equal( model.label );
+			expect( view.isOn ).to.equal( model.isOn );
+			expect( view.isEnabled ).to.equal( model.isEnabled );
+			expect( view.title ).to.equal( `${ model.label } (${ model.keystroke })` );
 
-			expect( view.model.type ).to.be.undefined;
-			expect( view.model.withText ).to.be.undefined;
-			expect( view.model.icon ).to.be.undefined;
+			expect( view.type ).to.be.undefined;
+			expect( view.withText ).to.be.undefined;
+			expect( view.icon ).to.be.undefined;
 		} );
 
-		it( 'binds view.model#title to Button.model#label and Button.model#keystroke', () => {
+		it( 'binds view#title to Button.model#label and Button.model#keystroke', () => {
 			model.label = 'ABC';
 			model.keystroke = '';
-			expect( view.model.title ).to.equal( 'ABC' );
+			expect( view.title ).to.equal( 'ABC' );
 
 			model.keystroke = 'FOO';
-			expect( view.model.title ).to.equal( `ABC (FOO)` );
+			expect( view.title ).to.equal( `ABC (FOO)` );
 
 			model.label = 'XYZ';
-			expect( view.model.title ).to.equal( `XYZ (FOO)` );
+			expect( view.title ).to.equal( `XYZ (FOO)` );
 		} );
 
-		it( 'binds view#model icon–related attributes to the Button#model', () => {
+		it( 'binds view icon–related attributes to the Button#model', () => {
 			model.set( {
 				icon: 'abc'
 			} );
@@ -61,7 +61,7 @@ describe( 'Button', () => {
 			view = new ButtonView();
 			button = new Button( model, view );
 
-			expect( view.model.icon ).to.equal( model.icon );
+			expect( view.icon ).to.equal( model.icon );
 		} );
 
 		it( 'creates view#click -> model#execute binding', () => {
@@ -69,7 +69,7 @@ describe( 'Button', () => {
 
 			model.on( 'execute', spy );
 
-			view.model.fire( 'click' );
+			view.fire( 'click' );
 
 			expect( spy.calledOnce ).to.be.true;
 		} );

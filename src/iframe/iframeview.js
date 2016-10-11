@@ -23,7 +23,7 @@ export default class IframeView extends View {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'iframe',
@@ -60,15 +60,9 @@ export default class IframeView extends View {
 			this._iframeDeferred = { resolve, reject };
 		} );
 
-		this.model.on( 'loaded', () => {
+		this.on( 'loaded', () => {
 			this._iframeDeferred.resolve();
 		} );
-
-		/**
-		 * Model of this iframe view.
-		 *
-		 * @member {ui.iframe.IframeViewModel} ui.iframe.IframeView#model
-		 */
 	}
 
 	/**
@@ -86,13 +80,7 @@ export default class IframeView extends View {
 }
 
 /**
- * The iframe view model interface.
- *
- * @interface ui.iframe.IframeViewModel
- */
-
-/**
  * Fired when the DOM iframe's `contentDocument` finished loading.
  *
- * @event ui.iframe.IframeViewModel#loaded
+ * @event ui.iframe.IframeView#loaded
  */

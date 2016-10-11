@@ -112,7 +112,7 @@ describe( 'ButtonView', () => {
 			it( 'triggers click event if button is not disabled', () => {
 				const spy = sinon.spy();
 
-				view.model.on( 'click', spy );
+				view.on( 'click', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.callCount ).to.equal( 1 );

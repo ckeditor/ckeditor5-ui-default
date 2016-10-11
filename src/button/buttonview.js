@@ -21,7 +21,7 @@ export default class ButtonView extends View {
 	constructor() {
 		super();
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'button',
@@ -63,8 +63,8 @@ export default class ButtonView extends View {
 				click: bind.to( evt => {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
-					if ( this.model.isEnabled ) {
-						this.model.fire( 'click' );
+					if ( this.isEnabled ) {
+						this.fire( 'click' );
 					} else {
 						evt.preventDefault();
 					}
@@ -75,62 +75,50 @@ export default class ButtonView extends View {
 		this.register( 'children', el => el );
 
 		/**
-		 * Model of this button view.
+		 * The label of the button view visible to the user.
 		 *
-		 * @member {ui.button.ButtonViewModel} ui.button.ButtonView#model
+		 * @observable
+		 * @member {String} ui.button.ButtonView#label
+		 */
+
+		/**
+		 * The HTML type of the button. Default `button`.
+		 *
+		 * @observable
+		 * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonView#type
+		 */
+
+		/**
+		 * Controls whether the button view is "on", e.g. some feature which it represents
+		 * is currently enabled.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.button.ButtonView#isOn
+		 */
+
+		/**
+		 * Controls whether the button view is enabled (can be clicked).
+		 *
+		 * @observable
+		 * @member {Boolean} ui.button.ButtonView#isEnabled
+		 */
+
+		/**
+		 * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
+		 *
+		 * @observable
+		 * @member {Boolean} ui.button.ButtonView#withText
+		 */
+
+		/**
+		 * (Optional) Title of the button displayed in the tooltip, i.e. when
+		 * hovering the button with the mouse cursor.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.button.ButtonView#title
 		 */
 	}
 }
-
-/**
- * The button view {@link ui.Model} interface.
- *
- * @interface ui.button.ButtonViewModel
- */
-
-/**
- * The label of the button view visible to the user.
- *
- * @observable
- * @member {String} ui.button.ButtonViewModel#label
- */
-
-/**
- * The HTML type of the button. Default `button`.
- *
- * @observable
- * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonViewModel#type
- */
-
-/**
- * Controls whether the button view is "on", e.g. some feature which it represents
- * is currently enabled.
- *
- * @observable
- * @member {Boolean} ui.button.ButtonViewModel#isOn
- */
-
-/**
- * Controls whether the button view is enabled (can be clicked).
- *
- * @observable
- * @member {Boolean} ui.button.ButtonViewModel#isEnabled
- */
-
-/**
- * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
- *
- * @observable
- * @member {Boolean} ui.button.ButtonViewModel#withText
- */
-
-/**
- * (Optional) Title of the button displayed in the tooltip, i.e. when
- * hovering the button with the mouse cursor.
- *
- * @observable
- * @member {Boolean} ui.button.ButtonViewModel#title
- */
 
 /**
  * Fired when the button view is clicked. It won't be fired when the button is disabled.

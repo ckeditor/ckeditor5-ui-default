@@ -30,7 +30,7 @@ export default class DropdownPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.bind( 'isVisible' ).to( model );
+		view.bind( 'isVisible' ).to( model );
 
 		this.addCollection( 'content' );
 	}

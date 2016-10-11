@@ -33,7 +33,7 @@ describe( 'FormView', () => {
 			it( 'should trigger submit event', () => {
 				const spy = sinon.spy();
 
-				view.model.on( 'submit', spy );
+				view.on( 'submit', spy );
 				view.element.dispatchEvent( new Event( 'submit' ) );
 
 				expect( spy.calledOnce ).to.true;

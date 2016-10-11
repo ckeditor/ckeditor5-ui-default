@@ -21,7 +21,7 @@ export default class LabelView extends View {
 	constructor( locale ) {
 		super( locale );
 
-		const bind = this.bind;
+		const bind = this.bindTemplate;
 
 		this.template = new Template( {
 			tag: 'label',
@@ -39,29 +39,17 @@ export default class LabelView extends View {
 		} );
 
 		/**
-		 * Model of this label view.
+		 * The text of the label.
 		 *
-		 * @member {ui.label.LabelViewModel} ui.label.LabelView#model
+		 * @observable
+		 * @member {String} ui.label.LabelView#text
+		 */
+
+		/**
+		 * The `for` attribute of the label (i.e. to pair with an `<input>` element).
+		 *
+		 * @observable
+		 * @member {String} ui.label.LabelView#for
 		 */
 	}
 }
-
-/**
- * The label view {@link ui.Model} interface.
- *
- * @interface ui.label.LabelViewModel
- */
-
-/**
- * The text of the label.
- *
- * @observable
- * @member {String} ui.label.LabelViewModel#text
- */
-
-/**
- * The `for` attribute of the label (i.e. to pair with an `<input>` element).
- *
- * @observable
- * @member {String} ui.label.LabelViewModel#for
- */

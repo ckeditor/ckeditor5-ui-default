@@ -15,8 +15,8 @@ describe( 'DropdownView', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'sets model#isOpen false', () => {
-			expect( view.model.isOpen ).to.be.false;
+		it( 'sets view#isOpen false', () => {
+			expect( view.isOpen ).to.be.false;
 		} );
 
 		it( 'registers "dropdown" region', () => {

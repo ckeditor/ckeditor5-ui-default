@@ -25,14 +25,14 @@ export default class BalloonPanel extends Controller {
 	constructor( model, view ) {
 		super( model, view );
 
-		view.model.set( {
+		view.set( {
 			top: 0,
 			left: 0,
 			arrow: 'se',
 			isVisible: false
 		} );
 
-		view.model.bind( 'maxWidth' ).to( model );
+		view.bind( 'maxWidth' ).to( model );
 
 		this.addCollection( 'content' );
 	}

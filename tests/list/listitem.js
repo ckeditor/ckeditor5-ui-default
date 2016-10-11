@@ -23,18 +23,18 @@ describe( 'ListItem', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'binds view#model attributes to the ListItem#model', () => {
-			expect( view.model.label ).to.equal( model.label );
-			expect( view.model.style ).to.be.undefined;
+		it( 'binds view attributes to the ListItem#model', () => {
+			expect( view.label ).to.equal( model.label );
+			expect( view.style ).to.be.undefined;
 		} );
 
-		it( 'binds view.model#style to ListItem.model#style when present', () => {
+		it( 'binds view#style to ListItem.model#style when present', () => {
 			model.set( 'style', 'foo' );
 
 			view = new ListItemView();
 
 			return new ListItem( model, view ).init().then( () => {
-				expect( view.model.style ).to.equal( 'foo' );
+				expect( view.style ).to.equal( 'foo' );
 			} );
 		} );
 	} );

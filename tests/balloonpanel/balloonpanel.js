@@ -24,15 +24,15 @@ describe( 'BalloonPanel', () => {
 	} );
 
 	describe( 'constructor', () => {
-		it( 'should bind view#model attributes to the BalloonPanel#model', () => {
-			expect( view.model.maxWidth ).to.equal( model.maxWidth ).to.equal( 200 );
+		it( 'should bind view attributes to the BalloonPanel#model', () => {
+			expect( view.maxWidth ).to.equal( model.maxWidth ).to.equal( 200 );
 		} );
 
-		it( 'should set default values to view#model', () => {
-			expect( view.model.top ).to.equal( 0 );
-			expect( view.model.left ).to.equal( 0 );
-			expect( view.model.arrow ).to.equal( 'se' );
-			expect( view.model.isVisible ).to.equal( false );
+		it( 'should set default values to view', () => {
+			expect( view.top ).to.equal( 0 );
+			expect( view.left ).to.equal( 0 );
+			expect( view.arrow ).to.equal( 'se' );
+			expect( view.isVisible ).to.equal( false );
 		} );
 
 		it( 'should create an empty content collection', () => {
