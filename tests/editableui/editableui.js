@@ -50,8 +50,8 @@ describe( 'EditableUI', () => {
 			} );
 		} );
 
-		it( 'sets editableUIView.model#name to editable#rootName', () => {
-			expect( editableUIView.model.name ).to.equal( editable.rootName );
+		it( 'sets editableUIView#name to editable#rootName', () => {
+			expect( editableUIView.name ).to.equal( editable.rootName );
 		} );
 	} );
 } );

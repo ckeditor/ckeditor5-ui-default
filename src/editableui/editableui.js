@@ -37,8 +37,8 @@ export default class EditableUI extends Controller {
 		 */
 		this.editor = editor;
 
-		view.model.bind( 'isReadOnly', 'isFocused' ).to( editable );
-		view.model.set( 'name', editable.rootName );
+		view.bind( 'isReadOnly', 'isFocused' ).to( editable );
+		view.set( 'name', editable.rootName );
 	}
 }
 
