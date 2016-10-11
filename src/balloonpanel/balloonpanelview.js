@@ -151,7 +151,7 @@ export default class BalloonPanelView extends View {
 		const limiterVisibleRect = getAbsoluteRectVisibleInTheViewport( limiterElementOrRect );
 
 		// Create a rect for each of the possible balloon positions and feed them to _smartAttachTo,
-		// which will use whichever is the optimal.
+		// which will use whichever is the optimal. Position are ordered from most to less desired.
 		const possiblePanelRects = {
 			// The absolute rect for "South east" position.
 			se: panelRect.clone().moveTo( {
@@ -189,14 +189,15 @@ export default class BalloonPanelView extends View {
 	 * @private
 	 * @param {Object} rects Set of positions where balloon can be placed.
 	 * @param {AbsoluteDomRect} visibleContainerRect The absolute rect of the visible part of container element.
+	 * @param {Number} panelSurfaceArea Panel surface area.
 	 */
 	_smartAttachTo( rects, visibleContainerRect, panelSurfaceArea ) {
-		const viewportRect = new AbsoluteDomRect( getViewportRect() );
+		const viewportRect = new AbsoluteDomRect( getAbsoluteViewportRect() );
 		let maxIntersectRectPos;
 		let maxContainerIntersectArea = -1;
 		let maxViewportIntersectArea = -1;
 
-		// Get best place.
+		// Find the best place. Stop searching when the position with fully visible panel has been found.
 		Object.keys( rects ).some( ( rectPos ) => {
 			const containerIntersectArea = rects[ rectPos ].getIntersectArea( visibleContainerRect );
 			const viewportIntersectArea = rects[ rectPos ].getIntersectArea( viewportRect );
@@ -321,14 +322,14 @@ function getAbsoluteRect( elementOrRangeOrRect ) {
 // @param {HTMLElement|Object} element Object which visible area rect is to be determined.
 // @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
 function getAbsoluteRectVisibleInTheViewport( element ) {
-	const limiterRect = getAbsoluteRect( element );
-	const viewportRect = getViewportRect();
+	const elementRect = getAbsoluteRect( element );
+	const viewportRect = getAbsoluteViewportRect();
 
 	return new AbsoluteDomRect( {
-		top: Math.max( limiterRect.top, viewportRect.top ),
-		left: Math.max( limiterRect.left, viewportRect.left ),
-		right: Math.min( limiterRect.right, viewportRect.right ),
-		bottom: Math.min( limiterRect.bottom, viewportRect.bottom )
+		top: Math.max( elementRect.top, viewportRect.top ),
+		left: Math.max( elementRect.left, viewportRect.left ),
+		right: Math.min( elementRect.right, viewportRect.right ),
+		bottom: Math.min( elementRect.bottom, viewportRect.bottom )
 	} );
 }
 
@@ -336,7 +337,7 @@ function getAbsoluteRectVisibleInTheViewport( element ) {
 //
 // @private
 // @returns {Object} Viewport rect.
-function getViewportRect() {
+function getAbsoluteViewportRect() {
 	const windowScrollX = window.scrollX;
 	const windowScrollY = window.scrollY;
 	const windowWidth = window.innerWidth;
