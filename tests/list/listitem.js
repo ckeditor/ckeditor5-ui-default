@@ -37,5 +37,13 @@ describe( 'ListItem', () => {
 				expect( view.style ).to.equal( 'foo' );
 			} );
 		} );
+
+		it( 'creates view#click -> model#execute event propagation', ( done ) => {
+			model.on( 'execute', () => {
+				done();
+			} );
+
+			view.fire( 'click' );
+		} );
 	} );
 } );
