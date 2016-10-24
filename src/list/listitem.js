@@ -27,6 +27,7 @@ export default class ListItem extends Controller {
 			view.bind( 'style' ).to( model );
 		}
 
+		// TODO: Event delegation with altered event name.
 		view.on( 'click', () => model.fire( 'execute' ) );
 	}
 }
