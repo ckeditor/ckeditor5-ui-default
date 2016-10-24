@@ -6,6 +6,8 @@
 import View from '../view.js';
 import Template from '../template.js';
 
+import LabelView from '../label/labelview.js';
+
 /**
  * The labeled input view class.
  *
@@ -16,22 +18,42 @@ import Template from '../template.js';
  */
 export default class LabeledInputView extends View {
 	/**
-	 * @inheritDoc
+	 * Creates an instance of the labeled input view class.
+	 *
+	 * @param {Function} InputViewClass Constructor of the input view.
+	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
 	 */
-	constructor( locale ) {
+	constructor( InputViewClass, locale ) {
 		super( locale );
 
-		this.template = new Template( {
-			tag: 'div'
-		} );
+		/**
+		 * The label view.
+		 *
+		 * @member {ui.label.LabelView} ui.input.labeled.LabeledInput#labelView
+		 */
+		this.labelView = new LabelView( this.locale );
 
-		this.register( 'content', el => el );
+		/**
+		 * The input view.
+		 *
+		 * @member {ui.View} ui.input.labeled.LabeledInput#inputView
+		 */
+		this.inputView = new InputViewClass( this.locale );
+
+		this.template = new Template( {
+			tag: 'div',
+
+			children: [
+				this.labelView,
+				this.inputView
+			]
+		} );
 	}
 
 	/**
 	 * Moves the focus to the input and selects the value.
 	 */
 	select() {
-		this.regions.get( 'content' ).views.get( 1 ).select();
+		this.inputView.select();
 	}
 }

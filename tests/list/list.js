@@ -38,7 +38,7 @@ describe( 'List', () => {
 
 	describe( 'constructor', () => {
 		it( 'creates list collection', () => {
-			expect( list.collections ).to.have.length( 1 );
+			expect( list.collections ).to.have.length( 2 );
 			expect( list.collections.get( 'list' ) ).to.be.instanceof( ControllerCollection );
 		} );
 

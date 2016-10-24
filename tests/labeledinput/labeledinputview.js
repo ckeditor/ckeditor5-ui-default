@@ -3,17 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
 /* bender-tags: ui, input */
 
 import LabeledInputView from '/ckeditor5/ui/labeledinput/labeledinputview.js';
-import View from '/ckeditor5/ui/view.js';
+import InputTextView from '/ckeditor5/ui/inputtext/inputtextview.js';
+import LabelView from '/ckeditor5/ui/label/labelview.js';
 
 describe( 'InputTextView', () => {
 	let view;
 
 	beforeEach( () => {
-		view = new LabeledInputView();
+		view = new LabeledInputView( InputTextView );
 
 		view.init();
 	} );
@@ -23,33 +23,32 @@ describe( 'InputTextView', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 		} );
 
-		it( 'should register "content" region', () => {
-			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
-			expect( view.regions.get( 0 ).element ).to.equal( view.element );
+		it( 'should create #labelView', () => {
+			expect( view.labelView ).to.be.instanceOf( LabelView );
+		} );
+
+		it( 'should create #inputView', () => {
+			expect( view.inputView ).to.be.instanceOf( InputTextView );
+		} );
+	} );
+
+	describe( 'template', () => {
+		it( 'has label view', () => {
+			expect( view.template.children.get( 0 ) ).to.equal( view.labelView );
+		} );
+
+		it( 'has input view', () => {
+			expect( view.template.children.get( 1 ) ).to.equal( view.inputView );
 		} );
 	} );
 
 	describe( 'select', () => {
 		it( 'should select input value', () => {
-			const labeledInputViewMock = createViewMock();
-			labeledInputViewMock.select = sinon.spy();
-
-			// Input view is on the second position in the collection.
-			view.regions.get( 'content' ).views.add( createViewMock() );
-			view.regions.get( 'content' ).views.add( labeledInputViewMock );
+			const spy = sinon.spy( view.inputView, 'select' );
 
 			view.select();
 
-			expect( labeledInputViewMock.select.calledOnce ).to.true;
+			sinon.assert.calledOnce( spy );
 		} );
 	} );
 } );
-
-// Create base View mock.
-function createViewMock() {
-	const mock = new View();
-
-	mock.element = document.createElement( 'div' );
-
-	return mock;
-}

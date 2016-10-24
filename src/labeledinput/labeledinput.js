@@ -9,7 +9,6 @@ import Model from '../model.js';
 import Controller from '../controller.js';
 
 import Label from '../label/label.js';
-import LabelView from '../label/labelview.js';
 
 /**
  * The labeled input controller class. It contains two components, {@link ui.input.Label Label}
@@ -36,10 +35,9 @@ export default class LabeledInput extends Controller {
 	 * @param {ui.input.labeled.LabeledInputModel} model Model of this input.
 	 * @param {ui.View} view View of this input.
 	 * @param {Function} InputClass Constructor of the input component.
-	 * @param {Function} InputViewClass Constructor of the input view.
 	 * @param {ui.Model} model Model of the input component.
 	 */
-	constructor( model, view, InputClass, InputViewClass, inputModel ) {
+	constructor( model, view, InputClass, inputModel ) {
 		super( model, view );
 
 		/**
@@ -62,13 +60,7 @@ export default class LabeledInput extends Controller {
 		 *
 		 * @member {ui.input.InputText}
 		 */
-		this.input = this._spawnInput( InputClass, InputViewClass, inputModel );
-
-		// Insert label and input to content collection.
-		const contentCollection = this.addCollection( 'content' );
-
-		contentCollection.add( this.label );
-		contentCollection.add( this.input );
+		this.input = this._spawnInput( InputClass, inputModel );
 	}
 
 	/**
@@ -92,7 +84,7 @@ export default class LabeledInput extends Controller {
 		model.bind( 'text' ).to( this.model, 'label' );
 		model.set( 'for', this._uid );
 
-		return new Label( model, new LabelView( this.locale ) );
+		return new Label( model, this.view.labelView );
 	}
 
 	/**
@@ -104,11 +96,11 @@ export default class LabeledInput extends Controller {
 	 * @param {ui.Model} inputModel Model of the input component.
 	 * @returns {ui.Controller} An instance of the input component.
 	 */
-	_spawnInput( InputClass, InputViewClass, inputModel ) {
+	_spawnInput( InputClass, inputModel ) {
 		inputModel.bind( 'value' ).to( this.model, 'value' );
 		inputModel.set( 'id', this._uid );
 
-		return new InputClass( inputModel, new InputViewClass( this.locale ) );
+		return new InputClass( inputModel, this.view.inputView );
 	}
 }
 
