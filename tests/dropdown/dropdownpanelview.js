@@ -5,49 +5,47 @@
 
 /* bender-tags: ui, dropdown */
 
-import DropdownPanel from 'ckeditor5/ui/dropdown/dropdownpanel.js';
-import DropdownPanelView from 'ckeditor5/ui/dropdown/dropdownpanelview.js';
-import Model from 'ckeditor5/ui/model.js';
+import ViewCollection from '/ckeditor5/ui/viewcollection.js';
+import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
 
 describe( 'DropdownPanelView', () => {
-	let model, view;
+	let view, locale;
 
 	beforeEach( () => {
-		model = new Model( {
-			isVisible: false
-		} );
+		locale = { t() {} };
 
-		view = new DropdownPanelView();
-
-		return new DropdownPanel( model, view ).init();
+		return ( view = new DropdownPanelView( locale ) ).init();
 	} );
 
-	describe( 'constructor()', () => {
-		it( 'registers "content" region', () => {
-			expect( view.regions ).to.have.length( 1 );
-			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
+	describe( 'constructor', () => {
+		it( 'sets view#locale', () => {
+			expect( view.locale ).to.equal( locale );
+		} );
 
-			view.init();
+		it( 'sets view#isVisible false', () => {
+			expect( view.isVisible ).to.be.false;
+		} );
 
-			expect( view.regions.get( 0 ).element ).to.equal( view.element );
+		it( 'creates view#children collection', () => {
+			expect( view.children ).to.be.instanceOf( ViewCollection );
 		} );
 
 		it( 'creates element from template', () => {
 			expect( view.element.classList.contains( 'ck-reset' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-dropdown__panel' ) ).to.be.true;
 		} );
-	} );
 
-	describe( 'panel bindings', () => {
-		describe( 'class', () => {
-			it( 'reacts on model#isVisible', () => {
-				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
+		describe( 'template bindings', () => {
+			describe( 'class', () => {
+				it( 'reacts on view#isVisible', () => {
+					expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
 
-				model.isVisible = true;
-				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.true;
+					view.isVisible = true;
+					expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.true;
 
-				model.isVisible = false;
-				expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
+					view.isVisible = false;
+					expect( view.element.classList.contains( 'ck-dropdown__panel-visible' ) ).to.be.false;
+				} );
 			} );
 		} );
 	} );

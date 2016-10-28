@@ -18,9 +18,32 @@ export default class DropdownView extends View {
 	/**
 	 * @inheritDoc
 	 */
-	constructor() {
-		super();
+	constructor( locale, buttonView, panelView ) {
+		super( locale );
 
+		/**
+		 * Button of this dropdown view.
+		 *
+		 * @readonly
+		 * @member {ui.button.ButtonView} ui.dropdown.DropdownView#buttonView
+		 */
+		this.addChild( this.buttonView = buttonView );
+
+		/**
+		 * Panel of this dropdown view.
+		 *
+		 * @readonly
+		 * @member {ui.dropdown.DropdownPanelView} ui.dropdown.DropdownView#panelView
+		 */
+		this.addChild( this.panelView = panelView );
+
+		/**
+		 * Controls whether the dropdown view is open, which also means its
+		 * {@link ui.dropdown.DropdownView#panel} is visible.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownView#isOpen
+		 */
 		this.set( 'isOpen', false );
 
 		this.template = new Template( {
@@ -30,17 +53,54 @@ export default class DropdownView extends View {
 				class: [
 					'ck-dropdown'
 				]
+			},
+
+			children: [
+				buttonView,
+				panelView
+			]
+		} );
+
+		Template.extend( buttonView.template, {
+			attributes: {
+				class: [
+					'ck-dropdown__button'
+				]
 			}
 		} );
 
-		this.register( 'main', el => el );
+		// Toggle the the dropdown when it's button has been clicked.
+		this.listenTo( buttonView, 'execute', () => this.isOpen = !this.isOpen );
 
-		/**
-		 * Controls whether the dropdown view is open, which also means its
-		 * {@link ui.dropdown.Dropdown#panel} is visible.
-		 *
-		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownViewl#isOpen
-		 */
+		// Toggle the visibility of the panel when the dropdown becomes open.
+		panelView.bind( 'isVisible' ).to( this, 'isOpen' );
 	}
+
+	/**
+	 * The label of the dropdown.
+	 *
+	 * @observable
+	 * @member {String} ui.dropdown.DropdownView#label
+	 */
+
+	/**
+	 * Controls whether the dropdown is enabled (can be clicked).
+	 *
+	 * @observable
+	 * @member {Boolean} ui.dropdown.DropdownView#isEnabled
+	 */
+
+	/**
+	 * Controls whether the {@link ui.dropdown.DropdownView#buttonView} is "pushed".
+	 *
+	 * @observable
+	 * @member {Boolean} ui.dropdown.DropdownView#isOn
+	 */
+
+	/**
+	 * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
+	 *
+	 * @observable
+	 * @member {Boolean} ui.dropdown.DropdownView#withText
+	 */
 }
