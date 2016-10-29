@@ -5,6 +5,7 @@
 
 import View from '../view.js';
 import Template from '../template.js';
+import IconView from '../icon/iconview.js';
 
 /**
  * The button view class.
@@ -18,8 +19,8 @@ export default class ButtonView extends View {
 	/**
 	 * @inheritDoc
 	 */
-	constructor() {
-		super();
+	constructor( locale ) {
+		super( locale );
 
 		const bind = this.bindTemplate;
 
@@ -64,7 +65,7 @@ export default class ButtonView extends View {
 					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
 					// Though, shouldn't this condition be moved to the button controller?
 					if ( this.isEnabled ) {
-						this.fire( 'click' );
+						this.fire( 'execute' );
 					} else {
 						evt.preventDefault();
 					}
@@ -72,7 +73,13 @@ export default class ButtonView extends View {
 			}
 		} );
 
-		this.register( 'children', el => el );
+		if ( this.icon ) {
+			const iconView = new IconView();
+
+			iconView.bind( 'name' ).to( this, 'icon' );
+
+			this.template.children.push( iconView );
+		}
 
 		/**
 		 * The label of the button view visible to the user.
@@ -117,11 +124,11 @@ export default class ButtonView extends View {
 		 * @observable
 		 * @member {Boolean} ui.button.ButtonView#title
 		 */
+
+		/**
+		 * Fired when the button view is clicked. It won't be fired when the button is disabled.
+		 *
+		 * @event ui.button.ButtonView#execute
+		 */
 	}
 }
-
-/**
- * Fired when the button view is clicked. It won't be fired when the button is disabled.
- *
- * @event ui.button.ButtonView#click
- */

@@ -17,7 +17,7 @@ describe( 'ListView', () => {
 	describe( 'constructor()', () => {
 		it( 'registers "list" region', () => {
 			expect( view.regions ).to.have.length( 1 );
-			expect( view.regions.get( 0 ).name ).to.be.equal( 'list' );
+			expect( view.regions.get( 0 ).name ).to.equal( 'list' );
 
 			view.init();
 

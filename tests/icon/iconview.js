@@ -24,8 +24,8 @@ describe( 'IconView', () => {
 
 	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
-			expect( view.element.tagName ).to.be.equal( 'svg' );
-			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );
+			expect( view.element.tagName ).to.equal( 'svg' );
+			expect( view.element.getAttribute( 'class' ) ).to.equal( 'ck-icon' );
 		} );
 	} );
 
@@ -35,11 +35,11 @@ describe( 'IconView', () => {
 				const svgUseElement = view.element.firstChild;
 				const svgHrefNs = 'http://www.w3.org/1999/xlink';
 
-				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-foo' );
+				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-foo' );
 
 				model.name = 'abc';
 
-				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.be.equal( '#ck-icon-abc' );
+				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-abc' );
 			} );
 		} );
 	} );

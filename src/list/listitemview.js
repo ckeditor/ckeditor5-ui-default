@@ -40,7 +40,7 @@ export default class ListItemView extends View {
 			],
 
 			on: {
-				click: bind.to( 'click' )
+				click: bind.to( 'execute' )
 			}
 		} );
 
@@ -61,7 +61,7 @@ export default class ListItemView extends View {
 		/**
 		 * Fired when the list item has been clicked.
 		 *
-		 * @event ui.list.ListItemView#click
+		 * @event ui.list.ListItemView#execute
 		 */
 	}
 }

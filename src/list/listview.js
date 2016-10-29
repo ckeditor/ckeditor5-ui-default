@@ -21,6 +21,8 @@ export default class ListView extends View {
 	constructor() {
 		super();
 
+		this.items = this.createCollection();
+
 		this.template = new Template( {
 			tag: 'ul',
 
@@ -29,9 +31,9 @@ export default class ListView extends View {
 					'ck-reset',
 					'ck-list'
 				]
-			}
-		} );
+			},
 
-		this.register( 'list', el => el );
+			children: this.items
+		} );
 	}
 }
