@@ -5,21 +5,19 @@
 
 /* bender-tags: ui, icon */
 
+<<<<<<< HEAD
 import Icon from 'ckeditor5/ui/icon/icon.js';
 import IconView from 'ckeditor5/ui/icon/iconview.js';
 import Model from 'ckeditor5/ui/model.js';
+=======
+import IconView from '/ckeditor5/ui/icon/iconview.js';
+>>>>>>> Removed Icon controller. Updated tests of IconView.
 
 describe( 'IconView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
-		model = new Model( {
-			name: 'foo'
-		} );
-
-		view = new IconView();
-
-		return new Icon( model, view ).init();
+		return ( view = new IconView() ).init();
 	} );
 
 	describe( 'constructor()', () => {
@@ -35,10 +33,10 @@ describe( 'IconView', () => {
 				const svgUseElement = view.element.firstChild;
 				const svgHrefNs = 'http://www.w3.org/1999/xlink';
 
+				view.set( 'name', 'foo' );
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-foo' );
 
-				model.name = 'abc';
-
+				view.name = 'abc';
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-abc' );
 			} );
 		} );
