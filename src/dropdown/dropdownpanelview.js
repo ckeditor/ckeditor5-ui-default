@@ -31,6 +31,12 @@ export default class DropdownPanelView extends View {
 		 */
 		this.set( 'isVisible', false );
 
+		/**
+		 * Collection of the child views.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.dropdown.DropdownPanelView#children
+		 */
 		this.children = this.createCollection();
 
 		this.template = new Template( {
