@@ -74,33 +74,33 @@ export default class DropdownView extends View {
 
 		// Toggle the visibility of the panel when the dropdown becomes open.
 		panelView.bind( 'isVisible' ).to( this, 'isOpen' );
+
+		/**
+		 * The label of the dropdown.
+		 *
+		 * @observable
+		 * @member {String} ui.dropdown.DropdownView#label
+		 */
+
+		/**
+		 * Controls whether the dropdown is enabled (can be clicked).
+		 *
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownView#isEnabled
+		 */
+
+		/**
+		 * Controls whether the {@link ui.dropdown.DropdownView#buttonView} is "pushed".
+		 *
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownView#isOn
+		 */
+
+		/**
+		 * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownView#withText
+		 */
 	}
-
-	/**
-	 * The label of the dropdown.
-	 *
-	 * @observable
-	 * @member {String} ui.dropdown.DropdownView#label
-	 */
-
-	/**
-	 * Controls whether the dropdown is enabled (can be clicked).
-	 *
-	 * @observable
-	 * @member {Boolean} ui.dropdown.DropdownView#isEnabled
-	 */
-
-	/**
-	 * Controls whether the {@link ui.dropdown.DropdownView#buttonView} is "pushed".
-	 *
-	 * @observable
-	 * @member {Boolean} ui.dropdown.DropdownView#isOn
-	 */
-
-	/**
-	 * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
-	 *
-	 * @observable
-	 * @member {Boolean} ui.dropdown.DropdownView#withText
-	 */
 }
