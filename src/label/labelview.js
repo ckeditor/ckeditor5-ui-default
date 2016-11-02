@@ -9,8 +9,6 @@ import Template from '../template.js';
 /**
  * The label view class.
  *
- * See {@link ui.label.Label}.
- *
  * @memberOf ui.label
  * @extends ui.View
  */
