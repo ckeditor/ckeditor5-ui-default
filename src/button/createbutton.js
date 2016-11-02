@@ -11,7 +11,7 @@ import { getEnvKeystrokeText } from '../../utils/keyboard.js';
  *
  * @param {ui.button.ButtonModel} model Model of this button.
  * @param {utils.Locale} locale The {@link core.editor.Editor#locale editor's locale} instance.
- * @returns {ui.button.ButtonView} The button view instance.
+ * @returns {ui.button.ButtonView} The button view class constructor.
  */
 export default function createButton( model, locale, ButtonView ) {
 	const buttonView = new ButtonView( locale );
@@ -25,7 +25,7 @@ export default function createButton( model, locale, ButtonView ) {
 		return label;
 	} );
 
-	buttonView.on( 'click', () => model.fire( 'execute' ) );
+	buttonView.delegate( 'execute' ).to( model );
 
 	return buttonView;
 }

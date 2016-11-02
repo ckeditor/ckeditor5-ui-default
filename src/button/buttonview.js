@@ -73,14 +73,6 @@ export default class ButtonView extends View {
 			}
 		} );
 
-		if ( this.icon ) {
-			const iconView = new IconView();
-
-			iconView.bind( 'name' ).to( this, 'icon' );
-
-			this.template.children.push( iconView );
-		}
-
 		/**
 		 * The label of the button view visible to the user.
 		 *
@@ -126,9 +118,38 @@ export default class ButtonView extends View {
 		 */
 
 		/**
+		 * (Optional) The name of the icon of the button view.
+		 * See {@link ui.icon.Icon} and {@link ui.iconManager.IconManager}.
+		 *
+		 * @observable
+		 * @member {String} ui.button.ButtonView#icon
+		 */
+
+		/**
 		 * Fired when the button view is clicked. It won't be fired when the button is disabled.
 		 *
 		 * @event ui.button.ButtonView#execute
 		 */
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	get element() {
+		if ( this.icon ) {
+			/**
+			 * Icon of the button view.
+			 *
+			 * @readonly
+			 * @member {ui.icon.IconView} ui.button.ButtonView#iconView
+			 */
+			const iconView = this.iconView = new IconView();
+
+			iconView.bind( 'name' ).to( this, 'icon' );
+
+			this.template.children.add( iconView );
+		}
+
+		return super.element;
 	}
 }
