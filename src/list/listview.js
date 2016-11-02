@@ -21,6 +21,12 @@ export default class ListView extends View {
 	constructor() {
 		super();
 
+		/**
+		 * Collection of the child list views.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.list.ListView#items
+		 */
 		this.items = this.createCollection();
 
 		this.template = new Template( {

@@ -5,28 +5,26 @@
 
 /* bender-tags: ui, list */
 
-import ListView from 'ckeditor5/ui/list/listview.js';
+import ViewCollection from '/ckeditor5/ui/viewcollection.js';
+import ListView from '/ckeditor5/ui/list/listview.js';
 
 describe( 'ListView', () => {
 	let view;
 
 	beforeEach( () => {
-		view = new ListView();
+		return ( view = new ListView() ).init();
 	} );
 
-	describe( 'constructor()', () => {
-		it( 'registers "list" region', () => {
-			expect( view.regions ).to.have.length( 1 );
-			expect( view.regions.get( 0 ).name ).to.equal( 'list' );
-
-			view.init();
-
-			expect( view.regions.get( 0 ).element ).to.equal( view.element );
-		} );
-
+	describe( 'constructor', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.classList.contains( 'ck-reset' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-list' ) ).to.be.true;
+		} );
+
+		it( 'creates view#children collection', () => {
+			expect( view.items ).to.be.instanceOf( ViewCollection );
+			expect( view.template.children ).to.have.length( 1 );
+			expect( view.template.children.get( 0 ) ).to.equal( view.items );
 		} );
 	} );
 } );
