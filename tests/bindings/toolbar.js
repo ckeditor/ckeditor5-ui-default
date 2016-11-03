@@ -5,13 +5,13 @@
 
 /* bender-tags: ui, bindings, toolbar */
 
-import Editor from '/ckeditor5/core/editor/editor.js';
-import Model from '/ckeditor5/ui/model.js';
-import View from '/ckeditor5/ui/view.js';
-import Controller from '/ckeditor5/ui/controller.js';
-import Toolbar from '/ckeditor5/ui/bindings/toolbar.js';
+import Editor from 'ckeditor5/core/editor/editor.js';
+import Model from 'ckeditor5/ui/model.js';
+import View from 'ckeditor5/ui/view.js';
+import Controller from 'ckeditor5/ui/controller.js';
+import Toolbar from 'ckeditor5/ui/bindings/toolbar.js';
 
-import testUtils from '/tests/core/_utils/utils.js';
+import testUtils from 'tests/core/_utils/utils.js';
 testUtils.createSinonSandbox();
 
 describe( 'Toolbar', () => {

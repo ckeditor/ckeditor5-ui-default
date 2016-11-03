@@ -6,9 +6,9 @@
 /* globals document, window, Event */
 /* bender-tags: ui, toolbar */
 
-import testUtils from '/tests/core/_utils/utils.js';
-import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
-import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
+import testUtils from 'tests/core/_utils/utils.js';
+import StickyToolbarView from 'ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
+import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
 
 testUtils.createSinonSandbox();
 

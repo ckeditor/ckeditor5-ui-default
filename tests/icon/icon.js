@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, icon */
 
-import Icon from '/ckeditor5/ui/icon/icon.js';
-import IconView from '/ckeditor5/ui/icon/iconview.js';
-import Model from '/ckeditor5/ui/model.js';
+import Icon from 'ckeditor5/ui/icon/icon.js';
+import IconView from 'ckeditor5/ui/icon/iconview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'Icon', () => {
 	let model, icon, view;

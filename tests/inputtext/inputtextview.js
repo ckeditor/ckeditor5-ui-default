@@ -5,7 +5,7 @@
 
 /* bender-tags: ui, input */
 
-import InputTextView from '/ckeditor5/ui/inputtext/inputtextview.js';
+import InputTextView from 'ckeditor5/ui/inputtext/inputtextview.js';
 
 describe( 'InputTextView', () => {
 	let view;

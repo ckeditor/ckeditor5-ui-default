@@ -3,8 +3,8 @@
  * For licensing, see LICENSE.md.
  */
 
-import BoxedEditorUIView from '/ckeditor5/ui/editorui/boxed/boxededitoruiview.js';
-import Locale from '/ckeditor5/utils/locale.js';
+import BoxedEditorUIView from 'ckeditor5/ui/editorui/boxed/boxededitoruiview.js';
+import Locale from 'ckeditor5/utils/locale.js';
 
 describe( 'BoxedEditorUIView', () => {
 	let boxedEditorUIView, element, topRegionEl, mainRegionEl;

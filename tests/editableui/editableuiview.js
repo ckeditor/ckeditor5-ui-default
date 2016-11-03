@@ -6,10 +6,10 @@
 /* globals document */
 /* bender-tags: editable */
 
-import EditableUI from '/ckeditor5/ui/editableui/editableui.js';
-import EditableUIView from '/ckeditor5/ui/editableui/editableuiview.js';
-import Model from '/ckeditor5/ui/model.js';
-import Locale from '/ckeditor5/utils/locale.js';
+import EditableUI from 'ckeditor5/ui/editableui/editableui.js';
+import EditableUIView from 'ckeditor5/ui/editableui/editableuiview.js';
+import Model from 'ckeditor5/ui/model.js';
+import Locale from 'ckeditor5/utils/locale.js';
 
 describe( 'EditableUIView', () => {
 	let editable, view, editableElement, locale;

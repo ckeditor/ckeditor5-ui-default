@@ -5,15 +5,15 @@
 
 /* bender-tags: ui, input */
 
-import LabeledInput from '/ckeditor5/ui/labeledinput/labeledinput.js';
-import LabeledInputView from '/ckeditor5/ui/labeledinput/labeledinputview.js';
-import Model from '/ckeditor5/ui/model.js';
+import LabeledInput from 'ckeditor5/ui/labeledinput/labeledinput.js';
+import LabeledInputView from 'ckeditor5/ui/labeledinput/labeledinputview.js';
+import Model from 'ckeditor5/ui/model.js';
 
-import Label from '/ckeditor5/ui/label/label.js';
-import InputText from '/ckeditor5/ui/inputtext/inputtext.js';
-import InputTextView from '/ckeditor5/ui/inputtext/inputtextview.js';
+import Label from 'ckeditor5/ui/label/label.js';
+import InputText from 'ckeditor5/ui/inputtext/inputtext.js';
+import InputTextView from 'ckeditor5/ui/inputtext/inputtextview.js';
 
-import utilsTestUtils from '/tests/utils/_utils/utils.js';
+import utilsTestUtils from 'tests/utils/_utils/utils.js';
 
 const assertBinding = utilsTestUtils.assertBinding;
 

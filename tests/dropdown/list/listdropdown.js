@@ -5,13 +5,13 @@
 
 /* bender-tags: ui, dropdown */
 
-import Collection from '/ckeditor5/utils/collection.js';
-import Model from '/ckeditor5/ui/model.js';
-import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
-import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
+import Collection from 'ckeditor5/utils/collection.js';
+import Model from 'ckeditor5/ui/model.js';
+import ListDropdown from 'ckeditor5/ui/dropdown/list/listdropdown.js';
+import ListDropdownView from 'ckeditor5/ui/dropdown/list/listdropdownview.js';
 
-import List from '/ckeditor5/ui/list/list.js';
-import ListView from '/ckeditor5/ui/list/listview.js';
+import List from 'ckeditor5/ui/list/list.js';
+import ListView from 'ckeditor5/ui/list/listview.js';
 
 describe( 'ListDropdown', () => {
 	let model, content, view, dropdown;

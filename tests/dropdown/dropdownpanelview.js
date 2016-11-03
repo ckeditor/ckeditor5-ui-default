@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, dropdown */
 
-import DropdownPanel from '/ckeditor5/ui/dropdown/dropdownpanel.js';
-import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
-import Model from '/ckeditor5/ui/model.js';
+import DropdownPanel from 'ckeditor5/ui/dropdown/dropdownpanel.js';
+import DropdownPanelView from 'ckeditor5/ui/dropdown/dropdownpanelview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'DropdownPanelView', () => {
 	let model, view;

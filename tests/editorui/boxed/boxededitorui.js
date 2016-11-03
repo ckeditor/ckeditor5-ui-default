@@ -3,9 +3,9 @@
  * For licensing, see LICENSE.md.
  */
 
-import Editor from '/ckeditor5/core/editor/editor.js';
-import BoxedEditorUI from '/ckeditor5/ui/editorui/boxed/boxededitorui.js';
-import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
+import Editor from 'ckeditor5/core/editor/editor.js';
+import BoxedEditorUI from 'ckeditor5/ui/editorui/boxed/boxededitorui.js';
+import ControllerCollection from 'ckeditor5/ui/controllercollection.js';
 
 describe( 'BoxedEditorUI', () => {
 	let editor, boxedEditorUI;

@@ -5,7 +5,7 @@
 
 /* bender-tags: ui, toolbar */
 
-import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
+import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
 
 describe( 'ToolbarView', () => {
 	let locale, view;

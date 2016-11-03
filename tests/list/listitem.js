@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, list */
 
-import ListItem from '/ckeditor5/ui/list/listitem.js';
-import ListItemView from '/ckeditor5/ui/list/listitemview.js';
-import Model from '/ckeditor5/ui/model.js';
+import ListItem from 'ckeditor5/ui/list/listitem.js';
+import ListItemView from 'ckeditor5/ui/list/listitemview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'ListItem', () => {
 	let model, view;

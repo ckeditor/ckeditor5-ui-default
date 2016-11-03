@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, label */
 
-import Label from '/ckeditor5/ui/label/label.js';
-import LabelView from '/ckeditor5/ui/label/labelview.js';
-import Model from '/ckeditor5/ui/model.js';
+import Label from 'ckeditor5/ui/label/label.js';
+import LabelView from 'ckeditor5/ui/label/labelview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'Label', () => {
 	let model, label, view;

@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, balloonPanel */
 
-import BalloonPanel from '/ckeditor5/ui/balloonpanel/balloonpanel.js';
-import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
-import Model from '/ckeditor5/ui/model.js';
+import BalloonPanel from 'ckeditor5/ui/balloonpanel/balloonpanel.js';
+import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'BalloonPanel', () => {
 	let model, balloonPanel, view;

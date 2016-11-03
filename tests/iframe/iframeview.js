@@ -6,7 +6,7 @@
 /* globals document */
 /* bender-tags: ui, iframe */
 
-import IframeView from '/ckeditor5/ui/iframe/iframeview.js';
+import IframeView from 'ckeditor5/ui/iframe/iframeview.js';
 
 describe( 'IframeView', () => {
 	let view;

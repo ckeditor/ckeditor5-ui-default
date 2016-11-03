@@ -5,10 +5,10 @@
 
 /* bender-tags: ui, toolbar */
 
-import Toolbar from '/ckeditor5/ui/toolbar/toolbar.js';
-import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
-import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
-import Model from '/ckeditor5/ui/model.js';
+import Toolbar from 'ckeditor5/ui/toolbar/toolbar.js';
+import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
+import ControllerCollection from 'ckeditor5/ui/controllercollection.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'Toolbar', () => {
 	let model, toolbar;
