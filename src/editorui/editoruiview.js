@@ -7,11 +7,12 @@
 
 import View from '../view.js';
 import Template from '../template.js';
+import ComponentFactory from '../componentfactory.js';
+import IconManagerView from '../iconmanager/iconmanagerview.js';
+import iconManagerModel from '../../../theme/iconmanagermodel.js';
 
 /**
  * The editor UI view class. Base class for the editor main views.
- *
- * See {@link ui.editorUI.EditorUI}.
  *
  * @memberOf ui.editorUI
  * @extends ui.View
@@ -22,8 +23,21 @@ export default class EditorUIView extends View {
 	 *
 	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
 	 */
-	constructor( locale ) {
+	constructor( editor, locale ) {
 		super( locale );
+
+		/**
+		 * Editor that the UI belongs to.
+		 *
+		 * @type {core.editor.Editor}
+		 */
+		this.editor = editor;
+
+		/**
+		 * @readonly
+		 * @member {ui.ComponentFactory} ui.editorUI.EditorUIView#featureComponents
+		 */
+		this.featureComponents = new ComponentFactory( editor );
 
 		this._createBodyRegion();
 
@@ -31,13 +45,28 @@ export default class EditorUIView extends View {
 		 * The element holding elements of the 'body' region.
 		 *
 		 * @private
-		 * @member {HTMLElement} ui.editorUI.EditorUIView#_bodyRegionContainer
+		 * @member {HTMLElement} ui.editorUI.EditorUIView#_bodyCollectionContainer
 		 */
 	}
 
+	/**
+	 * Initializes EditorUIView instance.
+	 *
+	 * @returns {Promise}
+	 */
+	init() {
+		return this._setupIconManager().then(
+			() => super.init() );
+	}
+
+	/**
+	 * TODO
+	 */
 	destroy() {
-		this._bodyRegionContainer.remove();
-		this._bodyRegionContainer = null;
+		this._bodyCollectionContainer.remove();
+		this._bodyCollectionContainer = null;
+
+		return super.destroy();
 	}
 
 	/**
@@ -46,17 +75,46 @@ export default class EditorUIView extends View {
 	 * @private
 	 */
 	_createBodyRegion() {
-		const bodyElement = document.createElement( 'div' );
-		document.body.appendChild( bodyElement );
+		/**
+		 * Collection of the child views, detached from the DOM
+		 * structure of the editor, like panels, icons etc.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
+		 */
+		this.body = this.createCollection();
 
-		new Template( {
+		const bodyElement = this._bodyCollectionContainer = new Template( {
+			tag: 'div',
 			attributes: {
-				class: 'ck-body ck-rounded-corners ck-reset_all'
-			}
-		} ).apply( bodyElement );
+				class: [
+					'ck-body',
+					'ck-rounded-corners',
+					'ck-reset_all'
+				]
+			},
+			children: this.body
+		} ).render();
 
-		this._bodyRegionContainer = bodyElement;
+		document.body.appendChild( bodyElement );
+	}
 
-		this.register( 'body', () => bodyElement );
+	/**
+	 * Injects the {@link ui.iconManager.IconManager} into DOM.
+	 *
+	 * @protected
+	 */
+	_setupIconManager() {
+		/**
+		 * Icons available in the UI.
+		 *
+		 * @readonly
+		 * @member {Array} ui.editorUI.EditorUIView#icons
+		 */
+		this.set( 'icons', iconManagerModel.icons );
+		this.iconManagerView = new IconManagerView();
+		this.iconManagerView.bind( 'sprite' ).to( iconManagerModel );
+
+		return this.body.add( this.iconManagerView );
 	}
 }
