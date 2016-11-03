@@ -25,40 +25,39 @@ describe( 'ButtonView', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {
 				expect( view.element.classList ).to.have.length( 3 );
-				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-button' ) ).to.true;
+				expect( view.element.classList.contains( 'ck-off' ) ).to.true;
 			} );
 
 			it( 'reacts on view#isEnabled', () => {
-				view.set( 'isEnabled', true );
-				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.false;
+				view.isEnabled = true;
+				expect( view.element.classList.contains( 'ck-disabled' ) ).to.false;
 
-				view.set( 'isEnabled', false );
-				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.true;
+				view.isEnabled = false;
+				expect( view.element.classList.contains( 'ck-disabled' ) ).to.true;
 			} );
 
 			it( 'reacts on view#isOn', () => {
-				view.set( 'isOn', true );
-				expect( view.element.classList.contains( 'ck-on' ) ).to.be.true;
+				view.isOn = true;
+				expect( view.element.classList.contains( 'ck-on' ) ).to.true;
 
-				view.set( 'isOn', false );
-				expect( view.element.classList.contains( 'ck-on' ) ).to.be.false;
+				view.isOn = false;
+				expect( view.element.classList.contains( 'ck-on' ) ).to.false;
 			} );
 
 			it( 'reacts on view#withText', () => {
-				view.set( 'withText', true );
-				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.true;
+				view.withText = true;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.true;
 
-				view.set( 'withText', false );
-				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.false;
+				view.withText = false;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.false;
 			} );
 
 			it( 'reacts on view#type', () => {
 				// Default value.
 				expect( view.element.getAttribute( 'type' ) ).to.equal( 'button' );
 
-				view.set( 'type', 'submit' );
+				view.type = 'submit';
 				expect( view.element.getAttribute( 'type' ) ).to.equal( 'submit' );
 
 				// Default value.
@@ -69,13 +68,28 @@ describe( 'ButtonView', () => {
 
 		describe( 'title', () => {
 			it( 'is not initially set ', () => {
-				expect( view.element.attributes.title ).to.be.undefined;
+				expect( view.element.attributes.title ).to.undefined;
 			} );
 
-			it( 'reacts on view#title', () => {
-				view.set( 'title', 'bar' );
+			it( 'is always equal to view#title if is defined', () => {
+				view.title = 'bar';
+				view.label = 'foo';
+				view.keystroke = 'A';
 
 				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+			} );
+
+			it( 'is equal to view#label when view#title is not defined', () => {
+				view.label = 'bar';
+
+				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+			} );
+
+			it.skip( 'contains keystroke when view#label and view#keystroke is defined', () => {
+				view.label = 'bar';
+				view.keystroke = 'A';
+
+				expect( view.element.attributes.title.value ).to.equal( 'bar (A)' );
 			} );
 		} );
 
@@ -85,7 +99,7 @@ describe( 'ButtonView', () => {
 			} );
 
 			it( 'reacts on view#label', () => {
-				view.set( 'label', 'bar' );
+				view.label = 'bar';
 
 				expect( view.element.textContent ).to.equal( 'bar' );
 			} );
@@ -95,7 +109,7 @@ describe( 'ButtonView', () => {
 			it( 'should be prevented', () => {
 				const ret = view.element.dispatchEvent( new Event( 'mousedown', { cancelable: true } ) );
 
-				expect( ret ).to.be.false;
+				expect( ret ).to.false;
 			} );
 		} );
 
@@ -109,7 +123,7 @@ describe( 'ButtonView', () => {
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.callCount ).to.equal( 1 );
 
-				view.set( 'isEnabled', false );
+				view.isEnabled = false;
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.callCount ).to.equal( 1 );
@@ -120,14 +134,14 @@ describe( 'ButtonView', () => {
 	describe( 'icon', () => {
 		it( 'is not initially set', () => {
 			expect( view.element.childNodes ).to.have.length( 1 );
-			expect( view.iconView ).to.be.undefined;
+			expect( view.iconView ).to.undefined;
 		} );
 
 		it( 'is set when view#icon is defined', () => {
-			view.set( 'icon', 'foo' );
+			view.icon = 'foo';
 
 			expect( view.element.childNodes ).to.have.length( 2 );
-			expect( view.iconView ).to.be.instanceOf( IconView );
+			expect( view.iconView ).to.instanceOf( IconView );
 			expect( view.iconView.name ).to.equal( 'foo' );
 
 			view.icon = 'bar';
