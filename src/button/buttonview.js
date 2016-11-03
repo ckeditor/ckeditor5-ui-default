@@ -183,7 +183,7 @@ export default class ButtonView extends View {
 	}
 
 	/**
-	 * Gets title from title, label and keystroke properties.
+	 * Gets value for DOM title attribute from title, label and keystroke properties.
 	 *
 	 * @private
 	 * @param {String} title Button title
