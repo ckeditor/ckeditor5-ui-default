@@ -66,11 +66,19 @@ describe( 'EditorUIView', () => {
 	} );
 
 	describe( 'view#_setupIconManager', () => {
-		it( 'sets "icon" property', () => {
-			view._setupIconManager();
+		it( 'injects the manager into DOM', () => {
+			view._setupIconManager().then( () => {
+				const iconManagerElement = view._bodyCollectionContainer.firstChild;
 
-			expect( view.icons ).to.be.an( 'array' );
-			expect( view.icons ).to.not.be.empty;
+				expect( iconManagerElement.classList.contains( 'ck-icon-manager__sprite' ) ).to.be.true;
+			} );
+		} );
+
+		it( 'sets view#icon attribute', () => {
+			view._setupIconManager().then( () => {
+				expect( view.icons ).to.be.an( 'array' );
+				expect( view.icons ).to.not.be.empty;
+			} );
 		} );
 	} );
 
