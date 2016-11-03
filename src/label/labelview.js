@@ -19,6 +19,22 @@ export default class LabelView extends View {
 	constructor( locale ) {
 		super( locale );
 
+		/**
+		 * The text of the label.
+		 *
+		 * @observable
+		 * @member {String} ui.label.LabelView#text
+		 */
+		this.set( 'text' );
+
+		/**
+		 * The `for` attribute of the label (i.e. to pair with an `<input>` element).
+		 *
+		 * @observable
+		 * @member {String} ui.label.LabelView#for
+		 */
+		this.set( 'for' );
+
 		const bind = this.bindTemplate;
 
 		this.template = new Template( {
@@ -35,19 +51,5 @@ export default class LabelView extends View {
 				}
 			]
 		} );
-
-		/**
-		 * The text of the label.
-		 *
-		 * @observable
-		 * @member {String} ui.label.LabelView#text
-		 */
-
-		/**
-		 * The `for` attribute of the label (i.e. to pair with an `<input>` element).
-		 *
-		 * @observable
-		 * @member {String} ui.label.LabelView#for
-		 */
 	}
 }

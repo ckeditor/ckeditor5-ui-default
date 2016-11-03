@@ -13,11 +13,6 @@ describe( 'LabelView', () => {
 	beforeEach( () => {
 		view = new LabelView();
 
-		view.set( {
-			text: 'foo',
-			for: 'bar'
-		} );
-
 		view.init();
 	} );
 
@@ -29,6 +24,11 @@ describe( 'LabelView', () => {
 	} );
 
 	describe( 'DOM bindings', () => {
+		beforeEach( () => {
+			view.text = 'foo';
+			view.for = 'bar';
+		} );
+
 		describe( 'text content', () => {
 			it( 'should react on view#text', () => {
 				expect( view.element.textContent ).to.equal( 'foo' );
