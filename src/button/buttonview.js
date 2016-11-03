@@ -49,7 +49,7 @@ export default class ButtonView extends View {
 		 * @observable
 		 * @member {Boolean} ui.button.ButtonView#title
 		 */
-		this.bind( 'title' ).to( this, 'title', this, 'label', this, 'keystroke', this._getTitle.bind( this ) );
+		this.set( 'title' );
 
 		/**
 		 * The HTML type of the button. Default `button`.
@@ -93,6 +93,16 @@ export default class ButtonView extends View {
 		 */
 		this.set( 'icon' );
 
+		/**
+		 * Title of the button bound to the template.
+		 * @see ui.button.ButtonView#title
+		 *
+		 * @private
+		 * @observable
+		 * @member {Boolean} ui.button.ButtonView#_title
+		 */
+		this.bind( '_title' ).to( this, 'title', this, 'label', this, 'keystroke', this._getTitle.bind( this ) );
+
 		const bind = this.bindTemplate;
 
 		this.template = new Template( {
@@ -106,7 +116,7 @@ export default class ButtonView extends View {
 					bind.if( 'withText', 'ck-button_with-text' )
 				],
 				title: [
-					bind.to( 'title' )
+					bind.to( '_title' )
 				],
 				type: bind.to( 'type', value => value ? value : 'button' )
 			},

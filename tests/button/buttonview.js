@@ -85,7 +85,7 @@ describe( 'ButtonView', () => {
 				expect( view.element.attributes.title.value ).to.equal( 'bar' );
 			} );
 
-			it.skip( 'contains keystroke when view#label and view#keystroke is defined', () => {
+			it( 'contains keystroke when view#label and view#keystroke is defined', () => {
 				view.label = 'bar';
 				view.keystroke = 'A';
 
