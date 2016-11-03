@@ -13,11 +13,6 @@ describe( 'InputTextView', () => {
 	beforeEach( () => {
 		view = new InputTextView();
 
-		view.set( {
-			value: 'foo',
-			id: 'bar'
-		} );
-
 		view.init();
 	} );
 
@@ -31,8 +26,13 @@ describe( 'InputTextView', () => {
 	} );
 
 	describe( 'DOM bindings', () => {
-		describe( 'value property', () => {
-			it( 'should react on view#change', () => {
+		beforeEach( () => {
+			view.value = 'foo';
+			view.id = 'bar';
+		} );
+
+		describe( 'value', () => {
+			it( 'should react on view#value', () => {
 				expect( view.element.value ).to.equal( 'foo' );
 
 				view.value = 'baz';
@@ -49,7 +49,7 @@ describe( 'InputTextView', () => {
 			} );
 		} );
 
-		describe( 'id attribute', () => {
+		describe( 'id', () => {
 			it( 'should react on view#id', () => {
 				expect( view.element.id ).to.equal( 'bar' );
 
