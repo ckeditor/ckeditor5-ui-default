@@ -22,9 +22,6 @@ describe( 'StickyToolbarView', () => {
 		view = new StickyToolbarView( locale );
 		element = view.element;
 
-		// This one is usually bound by the controller.
-		view.set( 'isActive', false );
-
 		// Dummy values just to let non–geometrical tests pass without reference errors.
 		view._toolbarRect = { top: 10, right: 20, bottom: 30, left: 40, width: 50, height: 60 };
 		view._limiterRect = { top: 5, right: 10, bottom: 15, left: 20, width: 25, height: 30 };

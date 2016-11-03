@@ -14,8 +14,6 @@ const toPx = toUnit( 'px' );
 /**
  * The sticky toolbar view class.
  *
- * See {@link ui.stickyToolbar.StickyToolbar}, {@link ui.toolbar.ToolbarView}.
- *
  * @memberOf ui.stickyToolbar
  * @extends ui.toolbar.ToolbarView
  */
