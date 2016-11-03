@@ -5,10 +5,8 @@
 
 /* bender-tags: ui, dropdown */
 
-import Model from '/ckeditor5/ui/model.js';
 import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
 import ButtonView from '/ckeditor5/ui/button/buttonview.js';
-import createButton from '/ckeditor5/ui/button/createbutton.js';
 import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
 
 describe( 'DropdownView', () => {
@@ -17,8 +15,7 @@ describe( 'DropdownView', () => {
 	beforeEach( () => {
 		locale = { t() {} };
 
-		buttonView = createButton( new Model(), locale, ButtonView );
-
+		buttonView = new ButtonView( locale );
 		panelView = new DropdownPanelView( locale );
 
 		return ( view = new DropdownView( locale, buttonView, panelView ) ).init();

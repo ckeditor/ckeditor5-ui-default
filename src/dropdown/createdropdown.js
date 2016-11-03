@@ -3,12 +3,9 @@
  * For licensing, see LICENSE.md.
  */
 
-import Model from '../model.js';
 import ButtonView from '../button/buttonview.js';
 import DropdownView from './dropdownview.js';
 import DropdownPanelView from './dropdownpanelview.js';
-
-import createButton from '../button/createbutton.js';
 
 /**
  * Creates an instance of {@link ui.dropdown.DropdownView} class using
@@ -19,10 +16,9 @@ import createButton from '../button/createbutton.js';
  * @returns {ui.dropdown.DropdownView} The dropdown view instance.
  */
 export default function createDropdown( model, locale ) {
-	const buttonModel = new Model( {} );
-	buttonModel.bind( 'label', 'isOn', 'isEnabled', 'withText', 'keystroke' ).to( model );
+	const buttonView = new ButtonView( locale );
+	buttonView.bind( 'label', 'isOn', 'isEnabled', 'withText', 'keystroke' ).to( model );
 
-	const buttonView = createButton( buttonModel, locale, ButtonView );
 	const panelView = new DropdownPanelView( locale );
 
 	return new DropdownView( locale, buttonView, panelView );
