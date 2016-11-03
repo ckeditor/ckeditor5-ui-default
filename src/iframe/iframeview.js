@@ -9,8 +9,6 @@ import Template from '../template.js';
 /**
  * The iframe view class.
  *
- * See {@link ui.iframe.Iframe}.
- *
  * @memberOf ui.iframe
  * @extends ui.View
  */
