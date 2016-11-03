@@ -5,7 +5,7 @@
 
 /* globals document */
 
-import EditorUIView from '/ckeditor5/ui/editorui/editoruiview.js';
+import EditorUIView from 'ckeditor5/ui/editorui/editoruiview.js';
 
 describe( 'EditorUIView', () => {
 	let editorUIView;

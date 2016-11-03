@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, iconmanager */
 
-import Model from '/ckeditor5/ui/model.js';
-import IconManager from '/ckeditor5/ui/iconmanager/iconmanager.js';
-import IconManagerView from '/ckeditor5/ui/iconmanager/iconmanagerview.js';
+import Model from 'ckeditor5/ui/model.js';
+import IconManager from 'ckeditor5/ui/iconmanager/iconmanager.js';
+import IconManagerView from 'ckeditor5/ui/iconmanager/iconmanagerview.js';
 
 describe( 'IconManager', () => {
 	let model, view;

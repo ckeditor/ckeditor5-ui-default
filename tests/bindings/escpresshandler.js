@@ -5,13 +5,13 @@
 
 /* global document */
 
-import escPressHandler from '/ckeditor5/ui/bindings/escpresshandler.js';
+import escPressHandler from 'ckeditor5/ui/bindings/escpresshandler.js';
 
-import Model from '/ckeditor5/ui/model.js';
-import DOMEmitterMixin from '/ckeditor5/ui/domemittermixin.js';
-import { keyCodes } from '/ckeditor5/utils/keyboard.js';
+import Model from 'ckeditor5/ui/model.js';
+import DOMEmitterMixin from 'ckeditor5/ui/domemittermixin.js';
+import { keyCodes } from 'ckeditor5/utils/keyboard.js';
 
-import testUtils from '/tests/core/_utils/utils.js';
+import testUtils from 'tests/core/_utils/utils.js';
 
 testUtils.createSinonSandbox();
 

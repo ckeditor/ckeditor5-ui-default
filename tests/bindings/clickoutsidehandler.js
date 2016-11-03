@@ -5,12 +5,12 @@
 
 /* global document, Event */
 
-import clickOutsideHandler from '/ckeditor5/ui/bindings/clickoutsidehandler.js';
+import clickOutsideHandler from 'ckeditor5/ui/bindings/clickoutsidehandler.js';
 
-import Model from '/ckeditor5/ui/model.js';
-import DOMEmitterMixin from '/ckeditor5/ui/domemittermixin.js';
+import Model from 'ckeditor5/ui/model.js';
+import DOMEmitterMixin from 'ckeditor5/ui/domemittermixin.js';
 
-import testUtils from '/tests/core/_utils/utils.js';
+import testUtils from 'tests/core/_utils/utils.js';
 
 testUtils.createSinonSandbox();
 

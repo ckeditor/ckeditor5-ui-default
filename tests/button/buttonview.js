@@ -6,10 +6,10 @@
 /* globals Event */
 /* bender-tags: ui, button */
 
-import testUtils from '/tests/core/_utils/utils.js';
-import Button from '/ckeditor5/ui/button/button.js';
-import ButtonView from '/ckeditor5/ui/button/buttonview.js';
-import Model from '/ckeditor5/ui/model.js';
+import testUtils from 'tests/core/_utils/utils.js';
+import Button from 'ckeditor5/ui/button/button.js';
+import ButtonView from 'ckeditor5/ui/button/buttonview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 testUtils.createSinonSandbox();
 

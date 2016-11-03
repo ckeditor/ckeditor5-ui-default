@@ -6,9 +6,9 @@
 /* globals document */
 /* bender-tags: ui, toolbar */
 
-import Model from '/ckeditor5/ui/model.js';
-import View from '/ckeditor5/ui/view.js';
-import StickyToolbar from '/ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
+import Model from 'ckeditor5/ui/model.js';
+import View from 'ckeditor5/ui/view.js';
+import StickyToolbar from 'ckeditor5/ui/toolbar/sticky/stickytoolbar.js';
 
 describe( 'StickyToolbar', () => {
 	let toolbar, view, model, limiterElement;

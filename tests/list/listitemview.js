@@ -6,7 +6,7 @@
 /* globals Event */
 /* bender-tags: ui, list */
 
-import ListItemView from '/ckeditor5/ui/list/listitemview.js';
+import ListItemView from 'ckeditor5/ui/list/listitemview.js';
 
 describe( 'ListItemView', () => {
 	let view;

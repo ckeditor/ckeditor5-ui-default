@@ -5,18 +5,18 @@
 
 /* bender-tags: ui, dropdown */
 
-import Model from '/ckeditor5/ui/model.js';
+import Model from 'ckeditor5/ui/model.js';
 
-import Dropdown from '/ckeditor5/ui/dropdown/dropdown.js';
-import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
+import Dropdown from 'ckeditor5/ui/dropdown/dropdown.js';
+import DropdownView from 'ckeditor5/ui/dropdown/dropdownview.js';
 
-import Button from '/ckeditor5/ui/button/button.js';
-import DropdownButtonView from '/ckeditor5/ui/dropdown/dropdownbuttonview.js';
+import Button from 'ckeditor5/ui/button/button.js';
+import DropdownButtonView from 'ckeditor5/ui/dropdown/dropdownbuttonview.js';
 
-import DropdownPanel from '/ckeditor5/ui/dropdown/dropdownpanel.js';
-import DropdownPanelView from '/ckeditor5/ui/dropdown/dropdownpanelview.js';
+import DropdownPanel from 'ckeditor5/ui/dropdown/dropdownpanel.js';
+import DropdownPanelView from 'ckeditor5/ui/dropdown/dropdownpanelview.js';
 
-import utilsTestUtils from '/tests/utils/_utils/utils.js';
+import utilsTestUtils from 'tests/utils/_utils/utils.js';
 
 const assertBinding = utilsTestUtils.assertBinding;
 

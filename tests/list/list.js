@@ -5,15 +5,15 @@
 
 /* bender-tags: ui, list */
 
-import testUtils from '/tests/core/_utils/utils.js';
+import testUtils from 'tests/core/_utils/utils.js';
 
-import List from '/ckeditor5/ui/list/list.js';
-import ListView from '/ckeditor5/ui/list/listview.js';
+import List from 'ckeditor5/ui/list/list.js';
+import ListView from 'ckeditor5/ui/list/listview.js';
 
-import Collection from '/ckeditor5/utils/collection.js';
-import Controller from '/ckeditor5/ui/controller.js';
-import ControllerCollection from '/ckeditor5/ui/controllercollection.js';
-import Model from '/ckeditor5/ui/model.js';
+import Collection from 'ckeditor5/utils/collection.js';
+import Controller from 'ckeditor5/ui/controller.js';
+import ControllerCollection from 'ckeditor5/ui/controllercollection.js';
+import Model from 'ckeditor5/ui/model.js';
 
 testUtils.createSinonSandbox();
 

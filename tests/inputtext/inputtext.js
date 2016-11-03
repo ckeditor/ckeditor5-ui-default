@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, input */
 
-import InputText from '/ckeditor5/ui/inputtext/inputtext.js';
-import InputTextView from '/ckeditor5/ui/inputtext/inputtextview.js';
-import Model from '/ckeditor5/ui/model.js';
+import InputText from 'ckeditor5/ui/inputtext/inputtext.js';
+import InputTextView from 'ckeditor5/ui/inputtext/inputtextview.js';
+import Model from 'ckeditor5/ui/model.js';
 
 describe( 'InputText', () => {
 	let model, inputText, view;
