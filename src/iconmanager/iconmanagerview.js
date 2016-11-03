@@ -17,8 +17,8 @@ import Template from '../template.js';
  * @extends ui.View
  */
 export default class IconManagerView extends View {
-	constructor( locale ) {
-		super( locale );
+	constructor() {
+		super();
 
 		this.template = new Template( {
 			tag: 'svg',
@@ -34,6 +34,7 @@ export default class IconManagerView extends View {
 		 * @observable
 		 * @member {String} ui.iconManager.IconManagerView#sprite
 		 */
+		this.set( 'sprite', null );
 	}
 
 	init() {
