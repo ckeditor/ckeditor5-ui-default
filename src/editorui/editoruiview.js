@@ -42,6 +42,22 @@ export default class EditorUIView extends View {
 		this._createBodyRegion();
 
 		/**
+		 * Collection of the child views, detached from the DOM
+		 * structure of the editor, like panels, icons etc.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
+		 */
+
+		/**
+		 * Icons available in the UI.
+		 *
+		 * @observable
+		 * @readonly
+		 * @member {Array} ui.editorUI.EditorUIView#icons
+		 */
+
+		/**
 		 * The element holding elements of the 'body' region.
 		 *
 		 * @private
@@ -75,13 +91,6 @@ export default class EditorUIView extends View {
 	 * @private
 	 */
 	_createBodyRegion() {
-		/**
-		 * Collection of the child views, detached from the DOM
-		 * structure of the editor, like panels, icons etc.
-		 *
-		 * @readonly
-		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
-		 */
 		this.body = this.createCollection();
 
 		const bodyElement = this._bodyCollectionContainer = new Template( {
@@ -105,12 +114,6 @@ export default class EditorUIView extends View {
 	 * @protected
 	 */
 	_setupIconManager() {
-		/**
-		 * Icons available in the UI.
-		 *
-		 * @readonly
-		 * @member {Array} ui.editorUI.EditorUIView#icons
-		 */
 		this.set( 'icons', iconManagerModel.icons );
 		this.iconManagerView = new IconManagerView();
 		this.iconManagerView.bind( 'sprite' ).to( iconManagerModel );

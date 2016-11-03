@@ -6,25 +6,24 @@
 /* globals document */
 /* bender-tags: editable */
 
+<<<<<<< HEAD
 import EditableUI from 'ckeditor5/ui/editableui/editableui.js';
 import InlineEditableUIView from 'ckeditor5/ui/editableui/inline/inlineeditableuiview.js';
 import Model from 'ckeditor5/ui/model.js';
 import Locale from 'ckeditor5/utils/locale.js';
+=======
+import InlineEditableUIView from '/ckeditor5/ui/editableui/inline/inlineeditableuiview.js';
+import Locale from '/ckeditor5/utils/locale.js';
+>>>>>>> Refactoring in *EditableUIView classes and tests.
 
 describe( 'InlineEditableUIView', () => {
-	let editable, view, editableElement, locale;
+	let view, editableElement, locale;
 
 	beforeEach( () => {
-		editable = new Model( {
-			isReadOnly: false,
-			isFocused: false,
-			rootName: 'foo'
-		} );
 		locale = new Locale( 'en' );
-		view = new InlineEditableUIView( locale );
 		editableElement = document.createElement( 'div' );
 
-		return new EditableUI( editable, view ).init();
+		return ( view = new InlineEditableUIView( locale ) ).init();
 	} );
 
 	describe( 'constructor()', () => {
@@ -45,6 +44,10 @@ describe( 'InlineEditableUIView', () => {
 
 	describe( 'editableElement', () => {
 		const ariaLabel = 'Rich Text Editor, foo';
+
+		beforeEach( () => {
+			view.name = 'foo';
+		} );
 
 		it( 'has proper accessibility role', () => {
 			expect( view.element.attributes.getNamedItem( 'role' ).value ).to.equal( 'textbox' );

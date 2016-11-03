@@ -43,18 +43,12 @@ export default class EditableUIView extends View {
 		} );
 
 		/**
-		 * The element which is the main editable element (usually the one with `contentEditable="true"`).
-		 *
-		 * @readonly
-		 * @member {HTMLElement} ui.editableUI.EditableUIView#editableElement
-		 */
-
-		/**
 		 * Controls whether the editable is writable or not.
 		 *
 		 * @observable
 		 * @member {Boolean} ui.editableUI.EditableUIView#isReadOnly
 		 */
+		this.set( 'isReadOnly', false );
 
 		/**
 		 * Controls whether the editable is focused, i.e. the user is typing in it.
@@ -62,12 +56,21 @@ export default class EditableUIView extends View {
 		 * @observable
 		 * @member {Boolean} ui.editableUI.EditableUIView#isFocused
 		 */
+		this.set( 'isFocused', false );
 
 		/**
 		 * The name of the editable UI view.
 		 *
 		 * @observable
 		 * @member {String} ui.editableUI.EditableUIView#name
+		 */
+		this.set( 'name', null );
+
+		/**
+		 * The element which is the main editable element (usually the one with `contentEditable="true"`).
+		 *
+		 * @readonly
+		 * @member {HTMLElement} ui.editableUI.EditableUIView#editableElement
 		 */
 	}
 
@@ -82,12 +85,15 @@ export default class EditableUIView extends View {
 			this.editableElement = this.element;
 		}
 
-		super.init();
+		return super.init();
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	destroy() {
-		super.destroy();
-
 		this.editableElement.contentEditable = false;
+
+		return super.destroy();
 	}
 }
