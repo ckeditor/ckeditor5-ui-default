@@ -28,13 +28,95 @@ export default class StickyToolbarView extends ToolbarView {
 
 		const bind = this.bindTemplate;
 
+		/**
+		 * Controls whether the sticky toolbar should be active. When any editable
+		 * is focused in the editor, toolbar becomes active.
+		 *
+		 * @readonly
+		 * @observable
+		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isActive
+		 */
+		this.set( 'isActive', false );
+
+		/**
+		 * Controls whether the sticky toolbar is in the "sticky" state.
+		 *
+		 * @readonly
+		 * @observable
+		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isSticky
+		 */
 		this.set( 'isSticky', false );
+
+		/**
+		 * The limiter element for the sticky toolbar instance. Its bounding rect limits
+		 * the "stickyness" of the toolbar, i.e. when the toolbar reaches the bottom
+		 * edge of the limiter, it becomes sticky to that edge and does not float
+		 * off the limiter. It is mandatory for the toolbar to work properly and once
+		 * set, it cannot be changed.
+		 *
+		 * @readonly
+		 * @observable
+		 * @member {HTMLElement} ui.stickyToobar.StickyToolbarView#limiterElement
+		 */
 		this.set( 'limiterElement', null );
+
+		/**
+		 * The offset from the bottom edge of {@link ui.stickyToobar.StickyToolbarView#limiterElement}
+		 * which stops the toolbar from stickying any further to prevent limiter's content
+		 * from being completely covered.
+		 *
+		 * @readonly
+		 * @observable
+		 * @default 50
+		 * @member {Number} ui.stickyToobar.StickyToolbarView#limiterOffset
+		 */
 		this.set( 'limiterOffset', 50 );
 
+		/**
+		 * Controls the `left` CSS style of the toolbar.
+		 *
+		 * @protected
+		 * @readonly
+		 * @observable
+		 * @member {String} ui.stickyToobar.StickyToolbarView#_left
+		 */
 		this.set( '_left', null );
+
+		/**
+		 * Controls the `margin-left` CSS style of the toolbar.
+		 *
+		 * @protected
+		 * @readonly
+		 * @observable
+		 * @member {String} ui.stickyToobar.StickyToolbarView#_marginLeft
+		 */
 		this.set( '_marginLeft', null );
+
+		/**
+		 * Set `true` if the sticky toolbar reached the bottom edge of the
+		 * {@link ui.stickyToobar.StickyToolbarView#limiterElement}.
+		 *
+		 * @protected
+		 * @readonly
+		 * @observable
+		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#_isStickyToTheLimiter
+		 */
 		this.set( '_isStickyToTheLimiter', false );
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
+		 */
+
+		/**
+		 * The DOM bounding client rect of the {@link ui.stickyToobar.StickyToolbarView#limiterElement}
+		 * of the toolbar.
+		 *
+		 * @protected
+		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
+		 */
 
 		Template.extend( this.template, {
 			attributes: {
@@ -96,91 +178,11 @@ export default class StickyToolbarView extends ToolbarView {
 				}
 			}
 		} ).render();
-
-		/**
-		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
-		 *
-		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
-		 */
-
-		/**
-		 * The DOM bounding client rect of the {@link ui.stickyToobar.StickyToolbarView#limiterElement}
-		 * of the toolbar.
-		 *
-		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
-		 */
-
-		/**
-		 * Controls whether the sticky toolbar should be active. When any editable
-		 * is focused in the editor, toolbar becomes active.
-		 *
-		 * @readonly
-		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isActive
-		 */
-
-		/**
-		 * Controls whether the sticky toolbar is in the "sticky" state.
-		 *
-		 * @readonly
-		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isSticky
-		 */
-
-		/**
-		 * The limiter element for the sticky toolbar instance. Its bounding rect limits
-		 * the "stickyness" of the toolbar, i.e. when the toolbar reaches the bottom
-		 * edge of the limiter, it becomes sticky to that edge and does not float
-		 * off the limiter. It is mandatory for the toolbar to work properly and once
-		 * set, it cannot be changed.
-		 *
-		 * @readonly
-		 * @observable
-		 * @member {HTMLElement} ui.stickyToobar.StickyToolbarView#limiterElement
-		 */
-
-		/**
-		 * The offset from the bottom edge of {@link ui.stickyToobar.StickyToolbarView#limiterElement}
-		 * which stops the toolbar from stickying any further to prevent limiter's content
-		 * from being completely covered.
-		 *
-		 * @readonly
-		 * @observable
-		 * @default 50
-		 * @member {Number} ui.stickyToobar.StickyToolbarView#limiterOffset
-		 */
-
-		/**
-		 * Controls the `left` CSS style of the toolbar.
-		 *
-		 * @protected
-		 * @readonly
-		 * @observable
-		 * @member {String} ui.stickyToobar.StickyToolbarView#_left
-		 */
-
-		/**
-		 * Controls the `margin-left` CSS style of the toolbar.
-		 *
-		 * @protected
-		 * @readonly
-		 * @observable
-		 * @member {String} ui.stickyToobar.StickyToolbarView#_marginLeft
-		 */
-
-		/**
-		 * Set `true` if the sticky toolbar reached the bottom edge of the
-		 * {@link ui.stickyToobar.StickyToolbarView#limiterElement}.
-		 *
-		 * @protected
-		 * @readonly
-		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#_isStickyToTheLimiter
-		 */
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	init() {
 		super.init();
 
