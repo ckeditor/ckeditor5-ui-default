@@ -59,6 +59,20 @@ describe( 'createListDropdown', () => {
 				expect( view.listView.items.get( 0 ).style ).to.equal( 'b' );
 			} );
 
+			it( 'binds all attributes in model#items', () => {
+				const itemModel = new Model( { label: 'a', style: 'b', foo: 'bar', baz: 'qux' } );
+
+				items.add( itemModel );
+
+				const item = view.listView.items.get( 0 );
+
+				expect( item.foo ).to.equal( 'bar' );
+				expect( item.baz ).to.equal( 'qux' );
+
+				itemModel.baz = 'foo?';
+				expect( item.baz ).to.equal( 'foo?' );
+			} );
+
 			it( 'delegates view.listView#execute to the view', ( done ) => {
 				items.add( new Model( { label: 'a', style: 'b' } ) );
 
