@@ -22,7 +22,7 @@ describe( 'IconManager', () => {
 		return new IconManager( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'binds view attributes to the IconManager#model', () => {
 			expect( view.sprite ).to.equal( model.sprite );
 		} );

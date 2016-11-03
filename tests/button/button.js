@@ -29,7 +29,7 @@ describe( 'Button', () => {
 		button = new Button( model, view );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'binds view attributes to the Button#model', () => {
 			expect( view.label ).to.equal( model.label );
 			expect( view.isOn ).to.equal( model.isOn );

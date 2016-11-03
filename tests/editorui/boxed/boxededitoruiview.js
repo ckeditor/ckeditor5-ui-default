@@ -20,7 +20,7 @@ describe( 'BoxedEditorUIView', () => {
 		mainRegionEl = regions.get( 'main' ).element;
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates the regions', () => {
 			expect( topRegionEl.parentNode ).to.equal( boxedEditorUIView.element );
 			expect( mainRegionEl.parentNode ).to.equal( boxedEditorUIView.element );

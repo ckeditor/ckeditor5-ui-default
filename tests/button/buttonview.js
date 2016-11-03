@@ -28,7 +28,7 @@ describe( 'ButtonView', () => {
 		return new Button( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'registers "children" region', () => {
 			expect( view.regions.get( 0 ).name ).to.equal( 'children' );
 		} );

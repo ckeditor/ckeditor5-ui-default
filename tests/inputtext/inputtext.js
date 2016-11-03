@@ -22,7 +22,7 @@ describe( 'InputText', () => {
 		inputText = new InputText( model, view );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'should bind view attributes to the InputText#model', () => {
 			expect( view.value ).to.equal( model.value ).to.equal( 'foo' );
 			expect( view.id ).to.equal( model.id ).to.equal( 'bar' );

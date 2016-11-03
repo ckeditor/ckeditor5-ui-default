@@ -14,7 +14,7 @@ describe( 'DropdownView', () => {
 		view = new DropdownView();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets view#isOpen false', () => {
 			expect( view.isOpen ).to.be.false;
 		} );

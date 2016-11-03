@@ -14,7 +14,7 @@ describe( 'DropdownButtonView', () => {
 		view = new DropdownButtonView();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.classList.contains( 'ck-dropdown__button' ) ).to.be.true;
 		} );

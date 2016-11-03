@@ -32,7 +32,7 @@ describe( 'ListDropdownView', () => {
 		} );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'listens to model#isOn and reacts to DOM events (valid target)', () => {
 			// Open the dropdown.
 			view.isOpen = true;

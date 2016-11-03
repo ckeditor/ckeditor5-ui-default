@@ -27,7 +27,7 @@ describe( 'EditableUIView', () => {
 		return new EditableUI( editable, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'renders element from template when no editableElement', () => {
 			view = new EditableUIView( locale );
 			view.init();

@@ -30,7 +30,7 @@ describe( 'LabeledInput', () => {
 		labeledInput = new LabeledInput( model, view, InputText, new Model() );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		describe( 'child components', () => {
 			describe( 'label', () => {
 				it( 'should be created', () => {

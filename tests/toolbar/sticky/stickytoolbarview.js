@@ -32,7 +32,7 @@ describe( 'StickyToolbarView', () => {
 		document.body.appendChild( element );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'inherits from ToolbarView', () => {
 			expect( view ).to.be.instanceof( ToolbarView );
 		} );

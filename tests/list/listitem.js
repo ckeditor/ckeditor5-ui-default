@@ -22,7 +22,7 @@ describe( 'ListItem', () => {
 		return new ListItem( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'binds view attributes to the ListItem#model', () => {
 			expect( view.label ).to.equal( model.label );
 			expect( view.style ).to.be.undefined;

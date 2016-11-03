@@ -19,7 +19,7 @@ describe( 'EditorUI', () => {
 		editorUI = new EditorUI( editor );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets all the properties', () => {
 			expect( editorUI ).to.have.property( 'editor', editor );
 

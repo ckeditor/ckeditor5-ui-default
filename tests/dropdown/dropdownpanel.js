@@ -20,7 +20,7 @@ describe( 'DropdownPanel', () => {
 		panel = new DropdownPanel( model, new DropdownPanelView() );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates "content" collection', () => {
 			expect( panel.collections.get( 'content' ) ).to.be.instanceof( ControllerCollection );
 		} );

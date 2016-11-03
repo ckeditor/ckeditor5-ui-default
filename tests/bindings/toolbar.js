@@ -34,7 +34,7 @@ describe( 'Toolbar', () => {
 		toolbar = new Toolbar( model, new View(), editor );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets all the properties', () => {
 			expect( toolbar ).to.have.property( 'editor', editor );
 		} );

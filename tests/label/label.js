@@ -22,7 +22,7 @@ describe( 'Label', () => {
 		label = new Label( model, view );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'should bind view attributes to the Label#model', () => {
 			expect( view.text ).to.equal( model.text ).to.equal( 'foo' );
 			expect( view.for ).to.equal( model.for ).to.equal( 'bar' );

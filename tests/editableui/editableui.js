@@ -21,7 +21,7 @@ describe( 'EditableUI', () => {
 		editableUI = new EditableUI( editable, editableUIView, editor );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets all properties', () => {
 			expect( editableUI.editor ).to.equal( editor );
 		} );

@@ -20,7 +20,7 @@ describe( 'ListItemView', () => {
 		} );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.classList.contains( 'ck-list__item' ) ).to.be.true;
 		} );

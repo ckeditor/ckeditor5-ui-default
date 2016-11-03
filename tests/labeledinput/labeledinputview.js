@@ -18,7 +18,7 @@ describe( 'InputTextView', () => {
 		view.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 		} );

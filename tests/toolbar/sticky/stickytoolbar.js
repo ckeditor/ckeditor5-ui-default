@@ -25,7 +25,7 @@ describe( 'StickyToolbar', () => {
 		toolbar = new StickyToolbar( model, view );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'binds view attributes to the StickyToolbar#model', () => {
 			expect( view.isActive ).to.equal( model.isActive );
 			expect( view.limiterElement ).to.equal( limiterElement );

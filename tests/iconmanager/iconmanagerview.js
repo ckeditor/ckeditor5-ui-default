@@ -24,7 +24,7 @@ describe( 'IconManagerView', () => {
 		return new IconManager( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.equal( 'ck-icon-manager__sprite' );

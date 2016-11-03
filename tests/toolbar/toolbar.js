@@ -19,7 +19,7 @@ describe( 'Toolbar', () => {
 		toolbar = new Toolbar( model, new ToolbarView() );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'accepts a model instance', () => {
 			expect( toolbar.model ).to.equal( model );
 		} );

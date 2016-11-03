@@ -32,7 +32,7 @@ describe( 'ListDropdown', () => {
 		dropdown = new ListDropdown( model, view );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'adds a list to the panel', () => {
 			const contentCollection = dropdown.panel.collections.get( 'content' );
 

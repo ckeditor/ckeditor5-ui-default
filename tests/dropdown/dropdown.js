@@ -33,7 +33,7 @@ describe( 'Dropdown', () => {
 		dropdown = new Dropdown( model, new DropdownView() );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'appends button and panel to dropdown collection', () => {
 			expect( dropdown.collections.get( 'main' ) ).to.have.length( 2 );
 			expect( dropdown.collections.get( 'main' ).get( 0 ) ).to.equal( dropdown.button );

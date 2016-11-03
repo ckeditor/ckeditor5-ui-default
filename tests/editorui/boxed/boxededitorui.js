@@ -20,7 +20,7 @@ describe( 'BoxedEditorUI', () => {
 		boxedEditorUI = new BoxedEditorUI( editor );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'adds controller collections', () => {
 			expect( boxedEditorUI.collections.get( 'top' ) ).to.be.instanceof( ControllerCollection );
 			expect( boxedEditorUI.collections.get( 'main' ) ).to.be.instanceof( ControllerCollection );

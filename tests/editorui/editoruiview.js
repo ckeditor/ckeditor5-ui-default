@@ -16,7 +16,7 @@ describe( 'EditorUIView', () => {
 		return editorUIView.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates the body region', () => {
 			const el = editorUIView.regions.get( 'body' ).element;
 

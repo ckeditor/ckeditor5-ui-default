@@ -17,7 +17,7 @@ describe( 'ToolbarView', () => {
 		return view.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'accepts the locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

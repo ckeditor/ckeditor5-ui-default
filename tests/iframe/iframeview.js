@@ -11,7 +11,7 @@ import IframeView from 'ckeditor5/ui/iframe/iframeview.js';
 describe( 'IframeView', () => {
 	let view;
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates view element from the template', () => {
 			view = new IframeView();
 			document.body.appendChild( view.element );

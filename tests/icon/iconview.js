@@ -22,7 +22,7 @@ describe( 'IconView', () => {
 		return new Icon( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.be.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.be.equal( 'ck-icon' );

@@ -22,7 +22,7 @@ describe( 'DropdownPanelView', () => {
 		return new DropdownPanel( model, view ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'registers "content" region', () => {
 			expect( view.regions ).to.have.length( 1 );
 			expect( view.regions.get( 0 ).name ).to.equal( 'content' );

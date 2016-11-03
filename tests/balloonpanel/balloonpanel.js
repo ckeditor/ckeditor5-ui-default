@@ -23,7 +23,7 @@ describe( 'BalloonPanel', () => {
 		return balloonPanel.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'should bind view attributes to the BalloonPanel#model', () => {
 			expect( view.maxWidth ).to.equal( model.maxWidth ).to.equal( 200 );
 		} );
