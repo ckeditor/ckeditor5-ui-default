@@ -39,11 +39,11 @@ describe( 'InputTextView', () => {
 	} );
 
 	describe( 'template', () => {
-		it( 'has label view', () => {
+		it( 'should have label view', () => {
 			expect( view.template.children.get( 0 ) ).to.equal( view.labelView );
 		} );
 
-		it( 'has input view', () => {
+		it( 'should have input view', () => {
 			expect( view.template.children.get( 1 ) ).to.equal( view.inputView );
 		} );
 	} );
