@@ -5,7 +5,8 @@
 
 /* bender-tags: ui, toolbar */
 
-import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
+import ToolbarView from '/ckeditor5/ui/toolbar/toolbarview.js';
+import ViewCollection from '/ckeditor5/ui/viewcollection.js';
 
 describe( 'ToolbarView', () => {
 	let locale, view;
@@ -17,21 +18,19 @@ describe( 'ToolbarView', () => {
 		return view.init();
 	} );
 
-	describe( 'constructor()', () => {
-		it( 'accepts the locale', () => {
+	describe( 'constructor', () => {
+		it( 'should set view#locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );
-	} );
 
-	describe( 'the main element bindings', () => {
-		it( 'is fine', () => {
-			expect( view.element.classList.contains( 'ck-toolbar' ) );
+		it( 'should create view#children collection', () => {
+			expect( view.items ).to.be.instanceOf( ViewCollection );
 		} );
 	} );
 
-	describe( 'items region', () => {
-		it( 'is bound to the main element', () => {
-			expect( view.regions.get( 'items' ).element ).to.equal( view.element );
+	describe( 'template', () => {
+		it( 'should create element from template', () => {
+			expect( view.element.classList.contains( 'ck-toolbar' ) ).to.true;
 		} );
 	} );
 } );

@@ -9,8 +9,6 @@ import Template from '../template.js';
 /**
  * The toolbar view class.
  *
- * See {@link ui.toolbar.Toolbar}.
- *
  * @memberOf ui.toolbar
  * @extends ui.View
  */
@@ -21,15 +19,17 @@ export default class ToolbarView extends View {
 	constructor( locale ) {
 		super( locale );
 
+		this.items = this.createCollection();
+
 		this.template = new Template( {
 			tag: 'div',
 			attributes: {
 				class: [
 					'ck-toolbar'
 				]
-			}
-		} );
+			},
 
-		this.register( 'items', el => el );
+			children: this.items
+		} );
 	}
 }
