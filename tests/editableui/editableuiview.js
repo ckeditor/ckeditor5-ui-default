@@ -6,15 +6,8 @@
 /* globals document */
 /* bender-tags: editable */
 
-<<<<<<< HEAD
-import EditableUI from 'ckeditor5/ui/editableui/editableui.js';
 import EditableUIView from 'ckeditor5/ui/editableui/editableuiview.js';
-import Model from 'ckeditor5/ui/model.js';
 import Locale from 'ckeditor5/utils/locale.js';
-=======
-import EditableUIView from '/ckeditor5/ui/editableui/editableuiview.js';
-import Locale from '/ckeditor5/utils/locale.js';
->>>>>>> Refactoring in *EditableUIView classes and tests.
 
 describe( 'EditableUIView', () => {
 	let view, editableElement, locale;
@@ -26,9 +19,6 @@ describe( 'EditableUIView', () => {
 		return ( view = new EditableUIView( locale ) ).init();
 	} );
 
-<<<<<<< HEAD
-	describe( 'constructor()', () => {
-=======
 	describe( 'constructor', () => {
 		it( 'sets initial values of attributes', () => {
 			expect( view.isReadOnly ).to.be.false;
@@ -36,7 +26,6 @@ describe( 'EditableUIView', () => {
 			expect( view.name ).to.be.null;
 		} );
 
->>>>>>> Refactoring in *EditableUIView classes and tests.
 		it( 'renders element from template when no editableElement', () => {
 			view = new EditableUIView( locale );
 

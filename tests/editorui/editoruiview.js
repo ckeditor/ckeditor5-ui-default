@@ -3,19 +3,13 @@
  * For licensing, see LICENSE.md.
  */
 
-<<<<<<< HEAD
-/* globals document */
-
+import testUtils from 'tests/core/_utils/utils.js';
+import Editor from 'ckeditor5/core/editor/editor.js';
 import EditorUIView from 'ckeditor5/ui/editorui/editoruiview.js';
-=======
-import testUtils from '/tests/core/_utils/utils.js';
-import Editor from '/ckeditor5/core/editor/editor.js';
-import EditorUIView from '/ckeditor5/ui/editorui/editoruiview.js';
-import ComponentFactory from '/ckeditor5/ui/componentfactory.js';
-import ViewCollection from '/ckeditor5/ui/viewcollection.js';
+import ComponentFactory from 'ckeditor5/ui/componentfactory.js';
+import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 
 testUtils.createSinonSandbox();
->>>>>>> Refactoring in *EditorUIView classes and tests.
 
 describe( 'EditorUIView', () => {
 	let view, editor, locale;
@@ -28,16 +22,10 @@ describe( 'EditorUIView', () => {
 		return view.init();
 	} );
 
-<<<<<<< HEAD
-	describe( 'constructor()', () => {
-		it( 'creates the body region', () => {
-			const el = editorUIView.regions.get( 'body' ).element;
-=======
 	describe( 'constructor', () => {
 		it( 'accepts locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );
->>>>>>> Refactoring in *EditorUIView classes and tests.
 
 		it( 'sets all the properties', () => {
 			expect( view ).to.have.property( 'editor', editor );

@@ -3,15 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
-<<<<<<< HEAD
+import Editor from 'ckeditor5/core/editor/editor.js';
 import BoxedEditorUIView from 'ckeditor5/ui/editorui/boxed/boxededitoruiview.js';
 import Locale from 'ckeditor5/utils/locale.js';
-=======
-import Editor from '/ckeditor5/core/editor/editor.js';
-import BoxedEditorUIView from '/ckeditor5/ui/editorui/boxed/boxededitoruiview.js';
-import Locale from '/ckeditor5/utils/locale.js';
-import ViewCollection from '/ckeditor5/ui/viewcollection.js';
->>>>>>> Refactoring in *EditorUIView classes and tests.
+import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 
 describe( 'BoxedEditorUIView', () => {
 	let view, element, editor;
@@ -24,12 +19,6 @@ describe( 'BoxedEditorUIView', () => {
 		element = view.element;
 	} );
 
-<<<<<<< HEAD
-	describe( 'constructor()', () => {
-		it( 'creates the regions', () => {
-			expect( topRegionEl.parentNode ).to.equal( boxedEditorUIView.element );
-			expect( mainRegionEl.parentNode ).to.equal( boxedEditorUIView.element );
-=======
 	describe( 'constructor', () => {
 		it( 'adds controller collections', () => {
 			expect( view.top ).to.be.instanceof( ViewCollection );
@@ -39,7 +28,6 @@ describe( 'BoxedEditorUIView', () => {
 		it( 'sets "width" and "height" attributes', () => {
 			expect( view.width ).to.equal( editor.config.get( 'ui.width' ) );
 			expect( view.height ).to.equal( editor.config.get( 'ui.height' ) );
->>>>>>> Refactoring in *EditorUIView classes and tests.
 		} );
 
 		it( 'bootstraps the view element from template', () => {

@@ -6,15 +6,8 @@
 /* globals document */
 /* bender-tags: editable */
 
-<<<<<<< HEAD
-import EditableUI from 'ckeditor5/ui/editableui/editableui.js';
 import InlineEditableUIView from 'ckeditor5/ui/editableui/inline/inlineeditableuiview.js';
-import Model from 'ckeditor5/ui/model.js';
 import Locale from 'ckeditor5/utils/locale.js';
-=======
-import InlineEditableUIView from '/ckeditor5/ui/editableui/inline/inlineeditableuiview.js';
-import Locale from '/ckeditor5/utils/locale.js';
->>>>>>> Refactoring in *EditableUIView classes and tests.
 
 describe( 'InlineEditableUIView', () => {
 	let view, editableElement, locale;
@@ -26,7 +19,7 @@ describe( 'InlineEditableUIView', () => {
 		return ( view = new InlineEditableUIView( locale ) ).init();
 	} );
 
-	describe( 'constructor()', () => {
+	describe( 'constructor', () => {
 		it( 'accepts locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

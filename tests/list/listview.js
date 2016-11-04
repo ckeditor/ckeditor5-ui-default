@@ -5,8 +5,8 @@
 
 /* bender-tags: ui, list */
 
-import ViewCollection from '/ckeditor5/ui/viewcollection.js';
-import ListView from '/ckeditor5/ui/list/listview.js';
+import ViewCollection from 'ckeditor5/ui/viewcollection.js';
+import ListView from 'ckeditor5/ui/list/listview.js';
 
 describe( 'ListView', () => {
 	let view;

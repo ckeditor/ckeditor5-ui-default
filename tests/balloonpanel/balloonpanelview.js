@@ -6,15 +6,10 @@
 /* global document, window */
 /* bender-tags: ui, balloonPanel, browser-only */
 
-<<<<<<< HEAD
+import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
-=======
-import ViewCollection from '/ckeditor5/ui/viewcollection.js';
-import BalloonPanelView from '/ckeditor5/ui/balloonpanel/balloonpanelview.js';
-import ButtonView from '/ckeditor5/ui/button/buttonview.js';
-import testUtils from '/tests/core/_utils/utils.js';
->>>>>>> Updated balloon panel.
 
 testUtils.createSinonSandbox();
 
@@ -29,7 +24,7 @@ describe( 'BalloonPanelView', () => {
 		return view.init();
 	} );
 
-	describe( 'constructor()', () => {
+	describe( 'constructor', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
 			expect( view.element.classList.contains( 'ck-balloon-panel' ) ).to.true;
