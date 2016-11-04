@@ -49,22 +49,16 @@ describe( 'InputTextView', () => {
 	} );
 
 	describe( 'binding', () => {
-		it( 'should bind view#text to view.labelView#text', () => {
-			view.text = 'Foo bar';
+		it( 'should bind view#text to view.labelView#label', () => {
+			view.label = 'Foo bar';
 
-			expect( view.labelView.text ).to.equal( 'Foo bar' );
+			expect( view.labelView.label ).to.equal( 'Foo bar' );
 		} );
 
 		it( 'should bind view#value to view.inputView#value', () => {
 			view.value = 'Lorem ipsum';
 
 			expect( view.inputView.value ).to.equal( 'Lorem ipsum' );
-		} );
-
-		it( 'should bind view.inputView#value to view#value', () => {
-			view.inputView.value = 'Lorem ipsum';
-
-			expect( view.value ).to.equal( 'Lorem ipsum' );
 		} );
 	} );
 

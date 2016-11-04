@@ -31,15 +31,15 @@ export default class LabeledInputView extends View {
 		 * The text of the label.
 		 *
 		 * @observable
-		 * @member {String} ui.labeledInput.LabeledInputView#text
+		 * @member {String} ui.labeledInput.LabeledInputView#label
 		 */
-		this.set( 'text' );
+		this.set( 'label' );
 
 		/**
 		 * The value of the input.
 		 *
 		 * @observable
-		 * @member {String} ui.labeledInput.LabeledInputView#text
+		 * @member {String} ui.labeledInput.LabeledInputView#value
 		 */
 		this.set( 'value' );
 
@@ -78,7 +78,7 @@ export default class LabeledInputView extends View {
 		const labelView = new LabelView( this.locale );
 
 		labelView.for = id;
-		labelView.bind( 'text' ).to( this );
+		labelView.bind( 'text' ).to( this, 'label' );
 
 		return labelView;
 	}
@@ -96,7 +96,6 @@ export default class LabeledInputView extends View {
 
 		inputView.id = id;
 		inputView.bind( 'value' ).to( this );
-		this.bind( 'value' ).to( inputView );
 
 		return inputView;
 	}
