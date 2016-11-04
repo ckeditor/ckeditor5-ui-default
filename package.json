@@ -4,7 +4,9 @@
   "description": "The default library of UI components for CKEditor 5.",
   "keywords": [],
   "dependencies": {
-    "ckeditor5-ui": "ckeditor/ckeditor5-ui"
+    "ckeditor5-ui": "ckeditor/ckeditor5-ui",
+    "ckeditor5-theme-lark": "ckeditor/ckeditor5-theme-lark",
+    "ckeditor5-utils": "ckeditor/ckeditor5-utils"
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-dev-lint": "^1.0.1",
