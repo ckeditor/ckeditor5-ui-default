@@ -161,11 +161,10 @@ export default class ButtonView extends View {
 		 */
 	}
 
-	/**
-	 * @inheritDoc
-	 */
-	get element() {
-		if ( this.icon ) {
+	init() {
+		let promise = Promise.resolve();
+
+		if ( this.icon && !this.iconView ) {
 			/**
 			 * Icon of the button view.
 			 *
@@ -176,10 +175,13 @@ export default class ButtonView extends View {
 
 			iconView.bind( 'name' ).to( this, 'icon' );
 
-			this.template.children.add( iconView );
+			this.element.insertBefore( iconView.element, this.element.firstChild );
+
+			// Make sure the icon view will be destroyed along with button.
+			promise = promise.then( () => this.addChild( iconView ) );
 		}
 
-		return super.element;
+		return promise.then( () => super.init() );
 	}
 
 	/**

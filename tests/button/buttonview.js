@@ -121,12 +121,12 @@ describe( 'ButtonView', () => {
 				view.set( 'isEnabled', true );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
-				expect( spy.callCount ).to.equal( 1 );
+				sinon.assert.callCount( spy, 1 );
 
 				view.isEnabled = false;
 
 				view.element.dispatchEvent( new Event( 'click' ) );
-				expect( spy.callCount ).to.equal( 1 );
+				sinon.assert.callCount( spy, 1 );
 			} );
 		} );
 	} );
@@ -138,14 +138,32 @@ describe( 'ButtonView', () => {
 		} );
 
 		it( 'is set when view#icon is defined', () => {
+			view = new ButtonView( locale );
 			view.icon = 'foo';
 
-			expect( view.element.childNodes ).to.have.length( 2 );
-			expect( view.iconView ).to.instanceOf( IconView );
-			expect( view.iconView.name ).to.equal( 'foo' );
+			return view.init().then( () => {
+				expect( view.element.childNodes ).to.have.length( 2 );
+				expect( view.element.childNodes[ 0 ] ).to.equal( view.iconView.element );
 
-			view.icon = 'bar';
-			expect( view.iconView.name ).to.equal( 'bar' );
+				expect( view.iconView ).to.instanceOf( IconView );
+				expect( view.iconView.name ).to.equal( 'foo' );
+
+				view.icon = 'bar';
+				expect( view.iconView.name ).to.equal( 'bar' );
+			} );
+		} );
+
+		it( 'is destroyed with the view', () => {
+			view = new ButtonView( locale );
+			view.icon = 'foo';
+
+			return view.init().then( () => {
+				const spy = sinon.spy( view.iconView, 'destroy' );
+
+				return view.destroy().then( () => {
+					sinon.assert.calledOnce( spy );
+				} );
+			} );
 		} );
 	} );
 } );
