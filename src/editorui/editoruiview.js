@@ -71,8 +71,8 @@ export default class EditorUIView extends View {
 	 * @returns {Promise}
 	 */
 	init() {
-		return super.init().then(
-			() => this._setupIconManager() );
+		return this._setupIconManager()
+			.then( () => super.init() );
 	}
 
 	/**
