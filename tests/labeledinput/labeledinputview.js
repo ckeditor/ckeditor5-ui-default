@@ -9,7 +9,7 @@ import LabeledInputView from '/ckeditor5/ui/labeledinput/labeledinputview.js';
 import InputView from '/ckeditor5/ui/inputtext/inputtextview.js';
 import LabelView from '/ckeditor5/ui/label/labelview.js';
 
-describe( 'InputTextView', () => {
+describe( 'LabeledInputView', () => {
 	const locale = {};
 
 	let view;
@@ -52,7 +52,7 @@ describe( 'InputTextView', () => {
 		it( 'should bind view#text to view.labelView#label', () => {
 			view.label = 'Foo bar';
 
-			expect( view.labelView.label ).to.equal( 'Foo bar' );
+			expect( view.labelView.text ).to.equal( 'Foo bar' );
 		} );
 
 		it( 'should bind view#value to view.inputView#value', () => {
