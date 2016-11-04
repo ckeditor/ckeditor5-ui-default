@@ -7,7 +7,7 @@
 
 import ListView from '../../list/listview.js';
 import ListItemView from '../../list/listitemview.js';
-import createDropdown from '../createDropdown.js';
+import createDropdown from '../createdropdown.js';
 
 /**
  * Creates an instance of {@link ui.dropdown.list.ListDropdownView} class using
