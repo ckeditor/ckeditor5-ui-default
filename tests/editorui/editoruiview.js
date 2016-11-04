@@ -22,7 +22,7 @@ describe( 'EditorUIView', () => {
 		return view.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'accepts locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

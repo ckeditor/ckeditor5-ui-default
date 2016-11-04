@@ -19,7 +19,7 @@ describe( 'BoxedEditorUIView', () => {
 		element = view.element;
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'adds controller collections', () => {
 			expect( view.top ).to.be.instanceof( ViewCollection );
 			expect( view.main ).to.be.instanceof( ViewCollection );

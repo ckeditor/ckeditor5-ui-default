@@ -21,7 +21,7 @@ describe( 'DropdownView', () => {
 		return ( view = new DropdownView( locale, buttonView, panelView ) ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets view#locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

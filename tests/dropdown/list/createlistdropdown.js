@@ -30,7 +30,7 @@ describe( 'createListDropdown', () => {
 		} );
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets view#locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

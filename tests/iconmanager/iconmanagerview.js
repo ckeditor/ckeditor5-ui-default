@@ -20,7 +20,7 @@ describe( 'IconManagerView', () => {
 		return view.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets initial view attribute values', () => {
 			expect( new IconManagerView().sprite ).to.be.null;
 		} );

@@ -17,7 +17,7 @@ describe( 'DropdownPanelView', () => {
 		return ( view = new DropdownPanelView( locale ) ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets view#locale', () => {
 			expect( view.locale ).to.equal( locale );
 		} );

@@ -19,7 +19,7 @@ describe( 'EditableUIView', () => {
 		return ( view = new EditableUIView( locale ) ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'sets initial values of attributes', () => {
 			expect( view.isReadOnly ).to.be.false;
 			expect( view.isFocused ).to.be.false;

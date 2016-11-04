@@ -20,7 +20,7 @@ describe( 'LabeledInputView', () => {
 		view.init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'should set view#locale', () => {
 			expect( view.locale ).to.deep.equal( locale );
 		} );

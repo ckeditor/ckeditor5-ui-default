@@ -14,7 +14,7 @@ describe( 'IconView', () => {
 		return ( view = new IconView() ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.equal( 'ck-icon' );

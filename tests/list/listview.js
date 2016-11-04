@@ -15,7 +15,7 @@ describe( 'ListView', () => {
 		return ( view = new ListView() ).init();
 	} );
 
-	describe( 'constructor', () => {
+	describe( 'constructor()', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.classList.contains( 'ck-reset' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-list' ) ).to.be.true;
