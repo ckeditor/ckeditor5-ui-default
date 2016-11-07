@@ -47,6 +47,14 @@ describe( 'escPressHandler', () => {
 		expect( actionSpy.calledOnce ).to.true;
 	} );
 
+	it( 'should not fired callback after pressing a key different than `Esc`', () => {
+		model.observableProperty = true;
+
+		dispatchKeyboardEvent( document, 'keydown', keyCodes.ctrlKey );
+
+		expect( actionSpy.notCalled ).to.true;
+	} );
+
 	it( 'should not fired callback after pressing Esc when listener is not active', () => {
 		model.observableProperty = false;
 
