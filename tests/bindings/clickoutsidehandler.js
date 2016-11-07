@@ -28,7 +28,7 @@ describe( 'clickOutsideHandler', () => {
 		actionSpy = testUtils.sinon.spy();
 
 		clickOutsideHandler( {
-			controller: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
@@ -78,7 +78,7 @@ describe( 'clickOutsideHandler', () => {
 		model.observableProperty = true;
 
 		clickOutsideHandler( {
-			controller: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
@@ -96,7 +96,7 @@ describe( 'clickOutsideHandler', () => {
 		model.observableProperty = false;
 
 		clickOutsideHandler( {
-			controller: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DOMEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,

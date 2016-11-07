@@ -12,27 +12,26 @@
  * opens and closes element at the same time.
  *
  * @param {Object} [options] Configuration options.
- * @param {ui.Controller} [options.controller] The controller to which this behavior should be added.
+ * @param {ui.DOMEmitter} [options.emitter] The emitter to which this behavior should be added.
  * @param {utils.Observable} [options.model] Used together with `options.activeIf` to know when to listen for clicks.
  * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for clicks.
  * @param {HTMLElement} [options.contextElement] Target element, click on it will not fire callback.
  * @param {Function} [options.callback] Function fired after clicking outside of specified element.
  */
-export default function clickOutsideHandler( options ) {
-	const controller = options.controller;
-	const clickHandler = ( evt, domEvt ) => handleClickOutside( domEvt.target, options.contextElement, options.callback );
+export default function clickOutsideHandler( { emitter, model, activeIf, callback, contextElement } ) {
+	const clickHandler = ( evt, domEvt ) => handleClickOutside( domEvt.target, contextElement, callback );
 
-	controller.listenTo( options.model, `change:${ options.activeIf }`, ( evt, name, value ) => {
+	emitter.listenTo( model, `change:${ activeIf }`, ( evt, name, value ) => {
 		if ( value ) {
-			controller.listenTo( document, 'mouseup', clickHandler );
+			emitter.listenTo( document, 'mouseup', clickHandler );
 		} else {
-			controller.stopListening( document, 'mouseup', clickHandler );
+			emitter.stopListening( document, 'mouseup', clickHandler );
 		}
 	} );
 
 	// When `activeIf` property is `true` on init.
-	if ( options.model[ options.activeIf ] ) {
-		controller.listenTo( document, 'mouseup', clickHandler );
+	if ( model[ activeIf ] ) {
+		emitter.listenTo( document, 'mouseup', clickHandler );
 	}
 }
 

@@ -16,7 +16,7 @@ import testUtils from 'tests/core/_utils/utils.js';
 testUtils.createSinonSandbox();
 
 describe( 'escPressHandler', () => {
-	let model, controller, actionSpy;
+	let model, emitter, actionSpy;
 
 	beforeEach( () => {
 		model = new Model( {
@@ -25,10 +25,10 @@ describe( 'escPressHandler', () => {
 
 		actionSpy = testUtils.sinon.spy();
 
-		controller = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DOMEmitterMixin );
 
 		escPressHandler( {
-			controller: controller,
+			emitter: emitter,
 			model: model,
 			activeIf: 'observableProperty',
 			callback: actionSpy
@@ -36,7 +36,7 @@ describe( 'escPressHandler', () => {
 	} );
 
 	afterEach( () => {
-		controller.stopListening();
+		emitter.stopListening();
 	} );
 
 	it( 'should fired callback after pressing `Esc` when listener is active', () => {
@@ -76,10 +76,10 @@ describe( 'escPressHandler', () => {
 
 		model.observableProperty = true;
 
-		controller = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DOMEmitterMixin );
 
 		escPressHandler( {
-			controller: controller,
+			emitter: emitter,
 			model: model,
 			activeIf: 'observableProperty',
 			callback: spy
@@ -95,10 +95,10 @@ describe( 'escPressHandler', () => {
 
 		model.observableProperty = false;
 
-		controller = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DOMEmitterMixin );
 
 		escPressHandler( {
-			controller: controller,
+			emitter: emitter,
 			model: model,
 			activeIf: 'observableProperty',
 			callback: spy
