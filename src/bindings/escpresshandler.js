@@ -19,46 +19,20 @@ import { keyCodes } from '../../utils/keyboard.js';
  */
 export default function escPressHandler( options ) {
 	const controller = options.controller;
-	const listenerManager = getListenerManager( controller, ( evt, domEvt ) => {
-		handleEscPress( domEvt.keyCode, options.callback );
+	const keypressHandler = ( evt, domEvt ) => handleEscPress( domEvt.keyCode, options.callback );
+
+	controller.listenTo( options.model, `change:${ options.activeIf }`, ( evt, name, value ) => {
+		if ( value ) {
+			controller.listenTo( document, 'keydown', keypressHandler );
+		} else {
+			controller.stopListening( document, 'keydown', keypressHandler );
+		}
 	} );
 
 	// When `activeIf` property is `true` on init.
 	if ( options.model[ options.activeIf ] ) {
-		listenerManager.start();
+		controller.listenTo( document, 'keydown', keypressHandler );
 	}
-
-	controller.listenTo( options.model, `change:${ options.activeIf }`, ( evt, name, value ) => {
-		if ( value ) {
-			listenerManager.start();
-		} else {
-			listenerManager.stop();
-		}
-	} );
-}
-
-// A simple helper to avoid duplicated listeners.
-//
-// @private
-// @param {ui.Controller}.
-// @param {Function}
-function getListenerManager( controller, handler ) {
-	let isListening = false;
-
-	return {
-		start() {
-			if ( !isListening ) {
-				controller.listenTo( document, 'keydown', handler );
-				isListening = true;
-			}
-		},
-
-		stop() {
-			controller.stopListening( document, 'keydown', handler );
-			isListening = false;
-		}
-
-	};
 }
 
 // Fires callback when ESC key was pressed.
