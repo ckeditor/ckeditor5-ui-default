@@ -45,7 +45,7 @@ describe( 'clickOutsideHandler', () => {
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( actionSpy.calledOnce ).to.true;
+		sinon.assert.calledOnce( actionSpy );
 	} );
 
 	it( 'should not fired callback after clicking out of context element when listener is not active', () => {
@@ -53,7 +53,7 @@ describe( 'clickOutsideHandler', () => {
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( actionSpy.notCalled ).to.true;
+		sinon.assert.notCalled( actionSpy );
 	} );
 
 	it( 'should not fired callback after clicking on context element when listener is active', () => {
@@ -61,7 +61,7 @@ describe( 'clickOutsideHandler', () => {
 
 		contextElement.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( actionSpy.notCalled ).to.true;
+		sinon.assert.notCalled( actionSpy );
 	} );
 
 	it( 'should not fired callback after clicking on context element when listener is not active', () => {
@@ -69,7 +69,7 @@ describe( 'clickOutsideHandler', () => {
 
 		contextElement.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( actionSpy.notCalled ).to.true;
+		sinon.assert.notCalled( actionSpy );
 	} );
 
 	it( 'should listen when model initial `ifActive` value was `true`', () => {
@@ -87,7 +87,7 @@ describe( 'clickOutsideHandler', () => {
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( spy.calledOnce ).to.true;
+		sinon.assert.calledOnce( spy );
 	} );
 
 	it( 'should not listen when model initial `ifActive` value was `false`', () => {
@@ -105,7 +105,7 @@ describe( 'clickOutsideHandler', () => {
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( spy.notCalled ).to.true;
+		sinon.assert.notCalled( spy );
 	} );
 
 	it( 'should react on model `ifActive` property change', () => {
@@ -113,20 +113,20 @@ describe( 'clickOutsideHandler', () => {
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
-		expect( actionSpy.calledOnce ).to.true;
+		sinon.assert.calledOnce( actionSpy );
 
 		model.observableProperty = false;
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
 		// Still called once, was not called second time.
-		expect( actionSpy.calledOnce ).to.true;
+		sinon.assert.calledOnce( actionSpy );
 
 		model.observableProperty = true;
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
 		// Called one more time.
-		expect( actionSpy.calledTwice ).to.true;
+		sinon.assert.calledTwice( actionSpy );
 	} );
 } );
