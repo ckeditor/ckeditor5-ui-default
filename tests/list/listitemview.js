@@ -13,11 +13,12 @@ describe( 'ListItemView', () => {
 
 	beforeEach( () => {
 		view = new ListItemView();
-
 		view.set( {
 			style: 'foo',
 			label: 'bar'
 		} );
+
+		return view.init();
 	} );
 
 	describe( 'constructor()', () => {
@@ -47,11 +48,11 @@ describe( 'ListItemView', () => {
 			} );
 		} );
 
-		describe( 'click event', () => {
-			it( 'triggers click event when "click" is fired in DOM', () => {
+		describe( 'view#execute event', () => {
+			it( 'triggers view#execute event when "click" is fired in DOM', () => {
 				const spy = sinon.spy();
 
-				view.on( 'click', spy );
+				view.on( 'execute', spy );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
 				expect( spy.calledOnce ).to.be.true;

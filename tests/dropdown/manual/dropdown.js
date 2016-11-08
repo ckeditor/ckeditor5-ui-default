@@ -3,45 +3,34 @@
  * For licensing, see LICENSE.md.
  */
 
-/* globals window */
+/* globals document, window */
 
-import testUtils from '/tests/ui/_utils/utils.js';
+import Model from 'ckeditor5/ui/model.js';
+import Collection from 'ckeditor5/utils/collection.js';
 
-import Model from '/ckeditor5/ui/model.js';
-import Collection from '/ckeditor5/utils/collection.js';
+import createDropdown from 'ckeditor5/ui/dropdown/createDropdown.js';
+import createListDropdown from 'ckeditor5/ui/dropdown/list/createListDropdown.js';
 
-import Dropdown from '/ckeditor5/ui/dropdown/dropdown.js';
-import DropdownView from '/ckeditor5/ui/dropdown/dropdownview.js';
+function renderInto( selector, view ) {
+	view.init().then( () => {
+		document.querySelector( selector ).appendChild( view.element );
+	} );
+}
 
-import ListDropdown from '/ckeditor5/ui/dropdown/list/listdropdown.js';
-import ListDropdownView from '/ckeditor5/ui/dropdown/list/listdropdownview.js';
-
-testUtils.createTestUIController( {
-	dropdown: 'div#dropdown',
-	listDropdown: 'div#list-dropdown',
-	dropdownShared: 'div#dropdown-shared',
-	dropdownLabel: 'div#dropdown-label'
-} ).then( ui => {
-	createEmptyDropdown( ui );
-	createListDropdown( ui );
-	createSharedModelDropdowns( ui );
-	createLongLabelDropdown( ui );
-} );
-
-function createEmptyDropdown( ui ) {
-	const dropdown = createDropdown( {
+function testEmpty() {
+	const dropdownView = createDropdown( new Model( {
 		label: 'Dropdown',
 		isEnabled: true,
 		isOn: false,
 		withText: true
-	} );
+	} ) );
 
-	ui.add( 'dropdown', dropdown );
+	dropdownView.panelView.element.innerHTML = 'Empty panel. There is no child view in this DropdownPanelView.';
 
-	dropdown.panel.view.element.innerHTML = 'Empty panel. There is no child view in this DropdownPanelView.';
+	renderInto( '#dropdown', dropdownView );
 }
 
-function createListDropdown( ui ) {
+function testList() {
 	const collection = new Collection( { idProperty: 'label' } );
 
 	[ '0.8em', '1em', '1.2em', '1.5em', '2.0em', '3.0em' ].forEach( font => {
@@ -56,55 +45,54 @@ function createListDropdown( ui ) {
 		isEnabled: true,
 		isOn: false,
 		withText: true,
-		content: new Model( {
-			items: collection
-		} )
+		items: collection
 	} );
 
-	model.on( 'execute', ( evt ) => {
+	const dropdownView = createListDropdown( model );
+
+	dropdownView.on( 'execute', ( evt ) => {
 		/* global console */
 		console.log( 'List#execute:', evt.source.label );
 	} );
 
-	const dropdown = new ListDropdown( model, new ListDropdownView() );
-
-	ui.add( 'listDropdown', dropdown );
+	renderInto( '#list-dropdown', dropdownView );
 
 	window.listDropdownModel = model;
 	window.listDropdownCollection = collection;
 	window.Model = Model;
 }
 
-function createSharedModelDropdowns( ui ) {
-	const modelDef = {
+function testSharedModel() {
+	const model = new Model( {
 		label: 'Shared Model',
-		isEnabled: true,
-		isOn: false,
-		withText: true
-	};
-
-	const dropdown1 = createDropdown( modelDef );
-	const dropdown2 = createDropdown( modelDef );
-
-	ui.add( 'dropdownShared', dropdown1 );
-	ui.add( 'dropdownShared', dropdown2 );
-
-	dropdown1.panel.view.element.innerHTML = dropdown2.panel.view.element.innerHTML = 'Empty panel.';
-}
-
-function createLongLabelDropdown( ui ) {
-	const dropdown = createDropdown( {
-		label: 'Dropdown with a very long label',
 		isEnabled: true,
 		isOn: false,
 		withText: true
 	} );
 
-	ui.add( 'dropdownLabel', dropdown );
+	const dropdownView1 = createDropdown( model );
+	const dropdownView2 = createDropdown( model );
 
-	dropdown.panel.view.element.innerHTML = 'Empty panel. There is no child view in this DropdownPanelView.';
+	renderInto( '#dropdown-shared', dropdownView1 );
+	renderInto( '#dropdown-shared', dropdownView2 );
+
+	dropdownView1.panelView.element.innerHTML = dropdownView2.panelView.element.innerHTML = 'Empty panel.';
 }
 
-function createDropdown( modelDef ) {
-	return new Dropdown( new Model( modelDef ), new DropdownView() );
+function testLongLabel() {
+	const dropdownView = createDropdown( new Model( {
+		label: 'Dropdown with a very long label',
+		isEnabled: true,
+		isOn: false,
+		withText: true
+	} ) );
+
+	renderInto( '#dropdown-label', dropdownView );
+
+	dropdownView.panelView.element.innerHTML = 'Empty panel. There is no child view in this DropdownPanelView.';
 }
+
+testEmpty();
+testList();
+testSharedModel();
+testLongLabel();

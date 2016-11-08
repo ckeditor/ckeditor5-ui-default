@@ -7,94 +7,99 @@
 /* bender-tags: ui, button */
 
 import testUtils from 'tests/core/_utils/utils.js';
-import Button from 'ckeditor5/ui/button/button.js';
 import ButtonView from 'ckeditor5/ui/button/buttonview.js';
-import Model from 'ckeditor5/ui/model.js';
+import IconView from 'ckeditor5/ui/icon/iconview.js';
 
 testUtils.createSinonSandbox();
 
 describe( 'ButtonView', () => {
-	let model, view;
+	let locale, view;
 
 	beforeEach( () => {
-		model = new Model( {
-			label: 'foo',
-			isEnabled: true,
-			isOn: false
-		} );
+		locale = { t() {} };
 
-		view = new ButtonView();
-
-		return new Button( model, view ).init();
-	} );
-
-	describe( 'constructor()', () => {
-		it( 'registers "children" region', () => {
-			expect( view.regions.get( 0 ).name ).to.equal( 'children' );
-		} );
+		return ( view = new ButtonView( locale ) ).init();
 	} );
 
 	describe( '<button> bindings', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {
-				expect( view.element.classList.contains( 'ck-button' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-enabled' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-off' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.false;
+				expect( view.element.classList ).to.have.length( 3 );
+				expect( view.element.classList.contains( 'ck-button' ) ).to.true;
+				expect( view.element.classList.contains( 'ck-off' ) ).to.true;
 			} );
 
-			it( 'reacts on model.isEnabled', () => {
-				model.isEnabled = false;
+			it( 'reacts on view#isEnabled', () => {
+				view.isEnabled = true;
+				expect( view.element.classList.contains( 'ck-disabled' ) ).to.false;
 
-				expect( view.element.classList.contains( 'ck-disabled' ) ).to.be.true;
+				view.isEnabled = false;
+				expect( view.element.classList.contains( 'ck-disabled' ) ).to.true;
 			} );
 
-			it( 'reacts on model.isOn', () => {
-				model.isOn = true;
+			it( 'reacts on view#isOn', () => {
+				view.isOn = true;
+				expect( view.element.classList.contains( 'ck-on' ) ).to.true;
 
-				expect( view.element.classList.contains( 'ck-on' ) ).to.be.true;
+				view.isOn = false;
+				expect( view.element.classList.contains( 'ck-on' ) ).to.false;
 			} );
 
-			it( 'reacts on model.withText', () => {
-				model.set( 'withText', true );
+			it( 'reacts on view#withText', () => {
+				view.withText = true;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.true;
 
-				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.be.true;
+				view.withText = false;
+				expect( view.element.classList.contains( 'ck-button_with-text' ) ).to.false;
 			} );
 
-			it( 'reacts on model.type', () => {
+			it( 'reacts on view#type', () => {
 				// Default value.
 				expect( view.element.getAttribute( 'type' ) ).to.equal( 'button' );
 
-				model.set( 'type', 'submit' );
+				view.type = 'submit';
 				expect( view.element.getAttribute( 'type' ) ).to.equal( 'submit' );
 
 				// Default value.
-				model.type = null;
+				view.type = null;
 				expect( view.element.getAttribute( 'type' ) ).to.equal( 'button' );
 			} );
 		} );
 
 		describe( 'title', () => {
-			it( 'is set initially', () => {
-				expect( view.element.attributes.title.value ).to.equal( 'foo' );
+			it( 'is not initially set ', () => {
+				expect( view.element.attributes.title ).to.undefined;
 			} );
 
-			it( 'reacts on model.label and model.keystroke', () => {
-				model.label = 'baz';
-				expect( view.element.attributes.title.value ).to.equal( 'baz' );
+			it( 'is always equal to view#title if is defined', () => {
+				view.title = 'bar';
+				view.label = 'foo';
+				view.keystroke = 'A';
 
-				model.set( 'keystroke', 'qux' );
-				expect( view.element.attributes.title.value ).to.equal( 'baz (qux)' );
+				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+			} );
+
+			it( 'is equal to view#label when view#title is not defined', () => {
+				view.label = 'bar';
+
+				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+			} );
+
+			it( 'contains keystroke when view#label and view#keystroke is defined', () => {
+				view.label = 'bar';
+				view.keystroke = 'A';
+
+				expect( view.element.attributes.title.value ).to.equal( 'bar (A)' );
 			} );
 		} );
 
 		describe( 'text', () => {
-			it( 'is set initially', () => {
-				expect( view.element.textContent ).to.equal( 'foo' );
+			it( 'is not initially set ', () => {
+				expect( view.element.textContent ).to.equal( '' );
 			} );
 
-			it( 'reacts on model.label', () => {
-				model.label = 'bar';
+			it( 'reacts on view#label', () => {
+				view.label = 'bar';
 
 				expect( view.element.textContent ).to.equal( 'bar' );
 			} );
@@ -104,23 +109,60 @@ describe( 'ButtonView', () => {
 			it( 'should be prevented', () => {
 				const ret = view.element.dispatchEvent( new Event( 'mousedown', { cancelable: true } ) );
 
-				expect( ret ).to.be.false;
+				expect( ret ).to.false;
 			} );
 		} );
 
-		describe( 'click event', () => {
-			it( 'triggers click event if button is not disabled', () => {
+		describe( 'execute event', () => {
+			it( 'triggers view#execute event if button is not disabled', () => {
 				const spy = sinon.spy();
 
-				view.on( 'click', spy );
+				view.on( 'execute', spy );
+				view.set( 'isEnabled', true );
 
 				view.element.dispatchEvent( new Event( 'click' ) );
-				expect( spy.callCount ).to.equal( 1 );
+				sinon.assert.callCount( spy, 1 );
 
-				model.isEnabled = false;
+				view.isEnabled = false;
 
 				view.element.dispatchEvent( new Event( 'click' ) );
-				expect( spy.callCount ).to.equal( 1 );
+				sinon.assert.callCount( spy, 1 );
+			} );
+		} );
+	} );
+
+	describe( 'icon', () => {
+		it( 'is not initially set', () => {
+			expect( view.element.childNodes ).to.have.length( 1 );
+			expect( view.iconView ).to.undefined;
+		} );
+
+		it( 'is set when view#icon is defined', () => {
+			view = new ButtonView( locale );
+			view.icon = 'foo';
+
+			return view.init().then( () => {
+				expect( view.element.childNodes ).to.have.length( 2 );
+				expect( view.element.childNodes[ 0 ] ).to.equal( view.iconView.element );
+
+				expect( view.iconView ).to.instanceOf( IconView );
+				expect( view.iconView.name ).to.equal( 'foo' );
+
+				view.icon = 'bar';
+				expect( view.iconView.name ).to.equal( 'bar' );
+			} );
+		} );
+
+		it( 'is destroyed with the view', () => {
+			view = new ButtonView( locale );
+			view.icon = 'foo';
+
+			return view.init().then( () => {
+				const spy = sinon.spy( view.iconView, 'destroy' );
+
+				return view.destroy().then( () => {
+					sinon.assert.calledOnce( spy );
+				} );
 			} );
 		} );
 	} );

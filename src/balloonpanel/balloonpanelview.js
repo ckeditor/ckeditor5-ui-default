@@ -30,6 +30,56 @@ export default class BalloonPanelView extends View {
 
 		const bind = this.bindTemplate;
 
+		/**
+		 * The absolute top position of the balloon panel in pixels.
+		 *
+		 * @observable
+		 * @default 0
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
+		 */
+		this.set( 'top', 0 );
+		/**
+		 * The absolute left position of the balloon panel in pixels.
+		 *
+		 * @observable
+		 * @default 0
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#left
+		 */
+		this.set( 'left', 0 );
+
+		/**
+		 * Balloon panel arrow direction.
+		 *
+		 * @observable
+		 * @default 'se'
+		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#arrow
+		 */
+		this.set( 'arrow', 'se' );
+
+		/**
+		 * Controls whether the balloon panel is visible or not.
+		 *
+		 * @observable
+		 * @default false
+		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
+		 */
+		this.set( 'isVisible', false );
+
+		/**
+		 * Max width of the balloon panel, as in CSS.
+		 *
+		 * @observable
+		 * @member {Number} ui.balloonPanel.BalloonPanelView#maxWidth
+		 */
+
+		/**
+		 * Collection of the child views which creates balloon panel contents.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.list.ListView#content
+		 */
+		this.content = this.createCollection();
+
 		this.template = new Template( {
 			tag: 'div',
 			attributes: {
@@ -47,45 +97,10 @@ export default class BalloonPanelView extends View {
 
 				// Make this element `focusable` to be available for adding to FocusTracker.
 				tabindex: -1
-			}
+			},
+
+			children: this.content
 		} );
-
-		this.register( 'content', el => el );
-
-		/**
-		 * The absolute top position of the balloon panel in pixels.
-		 *
-		 * @observable
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
-		 */
-
-		/**
-		 * The absolute left position of the balloon panel in pixels.
-		 *
-		 * @observable
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#left
-		 */
-
-		/**
-		 * The maximum width of the balloon panel, as in CSS.
-		 *
-		 * @observable
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#maxWidth
-		 */
-
-		/**
-		 * Balloon panel arrow direction.
-		 *
-		 * @observable
-		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#arrow
-		 */
-
-		/**
-		 * Controls whether the balloon panel is visible or not.
-		 *
-		 * @observable
-		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
-		 */
 	}
 
 	/**

@@ -6,83 +6,78 @@
 /* globals document */
 /* bender-tags: editable */
 
-import EditableUI from 'ckeditor5/ui/editableui/editableui.js';
 import EditableUIView from 'ckeditor5/ui/editableui/editableuiview.js';
-import Model from 'ckeditor5/ui/model.js';
 import Locale from 'ckeditor5/utils/locale.js';
 
 describe( 'EditableUIView', () => {
-	let editable, view, editableElement, locale;
+	let view, editableElement, locale;
 
 	beforeEach( () => {
-		editable = new Model( {
-			isReadOnly: false,
-			isFocused: false,
-			rootName: 'foo'
-		} );
 		locale = new Locale( 'en' );
-		view = new EditableUIView( locale );
 		editableElement = document.createElement( 'div' );
 
-		return new EditableUI( editable, view ).init();
+		return ( view = new EditableUIView( locale ) ).init();
 	} );
 
 	describe( 'constructor()', () => {
+		it( 'sets initial values of attributes', () => {
+			expect( view.isReadOnly ).to.be.false;
+			expect( view.isFocused ).to.be.false;
+			expect( view.name ).to.be.null;
+		} );
+
 		it( 'renders element from template when no editableElement', () => {
 			view = new EditableUIView( locale );
-			view.init();
 
-			expect( view.element ).to.equal( view.editableElement );
-			expect( view.element.classList.contains( 'ck-editor__editable' ) ).to.be.true;
+			return view.init().then( () => {
+				expect( view.element ).to.equal( view.editableElement );
+				expect( view.element.classList.contains( 'ck-editor__editable' ) ).to.be.true;
+			} );
 		} );
 
 		it( 'accepts editableElement as an argument', () => {
 			view = new EditableUIView( locale, editableElement );
-			view.init();
 
-			expect( view.element ).to.equal( editableElement );
-			expect( view.element ).to.equal( view.editableElement );
-			expect( view.element.classList.contains( 'ck-editor__editable' ) ).to.be.true;
+			return view.init().then( () => {
+				expect( view.element ).to.equal( editableElement );
+				expect( view.element ).to.equal( view.editableElement );
+				expect( view.element.classList.contains( 'ck-editor__editable' ) ).to.be.true;
+			} );
 		} );
 	} );
 
 	describe( 'View bindings', () => {
 		describe( 'class', () => {
-			it( 'has initial value set', () => {
-				expect( view.element.classList.contains( 'ck-blurred' ) ).to.be.true;
-				expect( view.element.classList.contains( 'ck-focused' ) ).to.be.false;
-			} );
+			it( 'reacts on view#isFocused', () => {
+				view.isFocused = true;
 
-			it( 'reacts on editable.isFocused', () => {
-				editable.isFocused = true;
-
-				expect( view.element.classList.contains( 'ck-blurred' ) ).to.be.false;
 				expect( view.element.classList.contains( 'ck-focused' ) ).to.be.true;
+				expect( view.element.classList.contains( 'ck-blurred' ) ).to.be.false;
+
+				view.isFocused = false;
+				expect( view.element.classList.contains( 'ck-focused' ) ).to.be.false;
+				expect( view.element.classList.contains( 'ck-blurred' ) ).to.be.true;
 			} );
 		} );
 
 		describe( 'contenteditable', () => {
-			it( 'has initial value set', () => {
-				expect( view.element.getAttribute( 'contenteditable' ) ).to.equal( 'true' );
-			} );
-
-			it( 'reacts on editable.isReadOnly', () => {
-				editable.isReadOnly = true;
-
+			it( 'reacts on view#isReadOnly', () => {
+				view.isReadOnly = true;
 				expect( view.element.hasAttribute( 'contenteditable' ) ).to.be.false;
+
+				view.isReadOnly = false;
+				expect( view.element.hasAttribute( 'contenteditable' ) ).to.be.true;
 			} );
 		} );
 	} );
 
 	describe( 'destroy', () => {
 		it( 'updates contentEditable property of editableElement', () => {
-			view = new EditableUIView( locale, editableElement );
-
-			return new EditableUI( editable, view ).init().then( () => {
+			return new EditableUIView( locale, editableElement ).init().then( () => {
 				expect( view.editableElement.contentEditable ).to.equal( 'true' );
-
-				view.destroy();
-
+			} )
+			.then( () => view.destroy() )
+			.then( () => {
 				expect( view.editableElement.contentEditable ).to.equal( 'false' );
 			} );
 		} );

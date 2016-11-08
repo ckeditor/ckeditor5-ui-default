@@ -18,10 +18,26 @@ export default class DropdownPanelView extends View {
 	/**
 	 * @inheritDoc
 	 */
-	constructor() {
-		super();
+	constructor( locale ) {
+		super( locale );
 
 		const bind = this.bindTemplate;
+
+		/**
+		 * Controls whether the panel is visible.
+		 *
+		 * @observable
+		 * @member {Boolean} ui.dropdown.DropdownPanelView#isVisible
+		 */
+		this.set( 'isVisible', false );
+
+		/**
+		 * Collection of the child views.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.dropdown.DropdownPanelView#children
+		 */
+		this.children = this.createCollection();
 
 		this.template = new Template( {
 			tag: 'div',
@@ -32,16 +48,9 @@ export default class DropdownPanelView extends View {
 					'ck-dropdown__panel',
 					bind.if( 'isVisible', 'ck-dropdown__panel-visible' )
 				]
-			}
+			},
+
+			children: this.children
 		} );
-
-		this.register( 'content', el => el );
-
-		/**
-		 * Controls whether the panel is visible.
-		 *
-		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownPanelView#isVisible
-		 */
 	}
 }

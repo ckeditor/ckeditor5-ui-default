@@ -6,39 +6,59 @@
 /* bender-tags: ui, input */
 
 import LabeledInputView from 'ckeditor5/ui/labeledinput/labeledinputview.js';
-import InputTextView from 'ckeditor5/ui/inputtext/inputtextview.js';
+import InputView from 'ckeditor5/ui/inputtext/inputtextview.js';
 import LabelView from 'ckeditor5/ui/label/labelview.js';
 
-describe( 'InputTextView', () => {
+describe( 'LabeledInputView', () => {
+	const locale = {};
+
 	let view;
 
 	beforeEach( () => {
-		view = new LabeledInputView( InputTextView );
+		view = new LabeledInputView( locale, InputView );
 
 		view.init();
 	} );
 
 	describe( 'constructor()', () => {
-		it( 'should create element from template', () => {
-			expect( view.element.tagName ).to.equal( 'DIV' );
+		it( 'should set view#locale', () => {
+			expect( view.locale ).to.deep.equal( locale );
 		} );
 
-		it( 'should create #labelView', () => {
-			expect( view.labelView ).to.be.instanceOf( LabelView );
+		it( 'should create view#inputView', () => {
+			expect( view.inputView ).to.instanceOf( InputView );
 		} );
 
-		it( 'should create #inputView', () => {
-			expect( view.inputView ).to.be.instanceOf( InputTextView );
+		it( 'should create view#labelView', () => {
+			expect( view.labelView ).to.instanceOf( LabelView );
+		} );
+
+		it( 'should pair inputView and labelView by unique id', () => {
+			expect( view.labelView.for ).to.equal( view.inputView.id ).to.ok;
 		} );
 	} );
 
 	describe( 'template', () => {
-		it( 'has label view', () => {
+		it( 'should have label view', () => {
 			expect( view.template.children.get( 0 ) ).to.equal( view.labelView );
 		} );
 
-		it( 'has input view', () => {
+		it( 'should have input view', () => {
 			expect( view.template.children.get( 1 ) ).to.equal( view.inputView );
+		} );
+	} );
+
+	describe( 'binding', () => {
+		it( 'should bind view#text to view.labelView#label', () => {
+			view.label = 'Foo bar';
+
+			expect( view.labelView.text ).to.equal( 'Foo bar' );
+		} );
+
+		it( 'should bind view#value to view.inputView#value', () => {
+			view.value = 'Lorem ipsum';
+
+			expect( view.inputView.value ).to.equal( 'Lorem ipsum' );
 		} );
 	} );
 

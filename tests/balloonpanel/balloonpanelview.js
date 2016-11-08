@@ -6,7 +6,9 @@
 /* global document, window */
 /* bender-tags: ui, balloonPanel, browser-only */
 
+import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
 
 testUtils.createSinonSandbox();
@@ -17,15 +19,9 @@ describe( 'BalloonPanelView', () => {
 	beforeEach( () => {
 		view = new BalloonPanelView();
 
-		view.set( {
-			top: 0,
-			left: 0,
-			arrow: 'se',
-			isVisible: false,
-			maxWidth: 200
-		} );
+		view.set( 'maxWidth', 200 );
 
-		view.init();
+		return view.init();
 	} );
 
 	describe( 'constructor()', () => {
@@ -35,9 +31,15 @@ describe( 'BalloonPanelView', () => {
 			expect( view.element.getAttribute( 'tabindex' ) ).to.equal( '-1' );
 		} );
 
-		it( 'should register "content" region', () => {
-			expect( view.regions.get( 0 ).name ).to.equal( 'content' );
-			expect( view.regions.get( 0 ).element ).to.equal( view.element );
+		it( 'should set default values', () => {
+			expect( view.top ).to.equal( 0 );
+			expect( view.left ).to.equal( 0 );
+			expect( view.arrow ).to.equal( 'se' );
+			expect( view.isVisible ).to.equal( false );
+		} );
+
+		it( 'creates view#content collection', () => {
+			expect( view.content ).to.be.instanceOf( ViewCollection );
 		} );
 	} );
 
@@ -85,6 +87,17 @@ describe( 'BalloonPanelView', () => {
 				view.maxWidth = 10;
 
 				expect( view.element.style.maxWidth ).to.equal( '10px' );
+			} );
+		} );
+
+		describe( 'children', () => {
+			it( 'should react on view#content', () => {
+				expect( view.element.childNodes.length ).to.equal( 0 );
+
+				const button = new ButtonView( { t() {} } );
+				view.content.add( button );
+
+				expect( view.element.childNodes.length ).to.equal( 1 );
 			} );
 		} );
 	} );

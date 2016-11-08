@@ -6,25 +6,25 @@
 /* bender-tags: ui, iconmanager */
 
 import testUtils from 'tests/core/_utils/utils.js';
-import IconManager from 'ckeditor5/ui/iconmanager/iconmanager.js';
 import IconManagerView from 'ckeditor5/ui/iconmanager/iconmanagerview.js';
-import Model from 'ckeditor5/ui/model.js';
 
 testUtils.createSinonSandbox();
 
 describe( 'IconManagerView', () => {
-	let model, view;
+	let view;
 
 	beforeEach( () => {
 		view = new IconManagerView();
-		model = new Model( {
-			sprite: '<symbol><title>foo</title></symbol>'
-		} );
+		view.sprite = '<symbol><title>foo</title></symbol>';
 
-		return new IconManager( model, view ).init();
+		return view.init();
 	} );
 
 	describe( 'constructor()', () => {
+		it( 'sets initial view attribute values', () => {
+			expect( new IconManagerView().sprite ).to.be.null;
+		} );
+
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.equal( 'ck-icon-manager__sprite' );

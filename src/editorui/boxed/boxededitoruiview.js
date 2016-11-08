@@ -20,11 +20,50 @@ export default class BoxedEditorUIView extends EditorUIView {
 	/**
 	 * @inheritDoc
 	 */
-	constructor( locale ) {
-		super( locale );
+	constructor( editor, locale ) {
+		super( editor, locale );
 
 		const t = this.t;
 		const ariaLabelUid = uid();
+		const config = editor.config;
+
+		/**
+		 * The editor's width. Defaults to {@link core.editor.config.ui.width}.
+		 *
+		 * Note: a specific creator that was used must support this setting.
+		 *
+		 * @observable
+		 * @member {Number} width ui.editorUI.boxed.BoxedEditorUIView#width
+		 */
+		this.set( 'width', config.get( 'ui.width' ) );
+
+		/**
+		 * The editor's height. Defaults to {@link core.editor.config.ui.height}.
+		 *
+		 * Note: a specific creator that was used must support this setting.
+		 *
+		 * @observable
+		 * @member {Number} height ui.editorUI.boxed.BoxedEditorUIView#height
+		 */
+		this.set( 'height', config.get( 'ui.height' ) );
+
+		/**
+		 * Collection of the child views located in the top (`.ck-editor__top`)
+		 * area of the UI.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.editorUI.boxed.BoxedEditorUIView#top
+		 */
+		this.top = this.createCollection();
+
+		/**
+		 * Collection of the child views located in the main (`.ck-editor__main`)
+		 * area of the UI.
+		 *
+		 * @readonly
+		 * @member {ui.ViewCollection} ui.editorUI.boxed.BoxedEditorUIView#main
+		 */
+		this.main = this.createCollection();
 
 		this.template = new Template( {
 			tag: 'div',
@@ -58,19 +97,18 @@ export default class BoxedEditorUIView extends EditorUIView {
 					attributes: {
 						class: 'ck-editor__top ck-reset_all',
 						role: 'presentation'
-					}
+					},
+					children: this.top
 				},
 				{
 					tag: 'div',
 					attributes: {
 						class: 'ck-editor__main',
 						role: 'presentation'
-					}
+					},
+					children: this.main
 				}
 			]
 		} );
-
-		this.register( 'top', '.ck-editor__top' );
-		this.register( 'main', '.ck-editor__main' );
 	}
 }

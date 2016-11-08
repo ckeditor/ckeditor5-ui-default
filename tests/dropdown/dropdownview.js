@@ -6,29 +6,80 @@
 /* bender-tags: ui, dropdown */
 
 import DropdownView from 'ckeditor5/ui/dropdown/dropdownview.js';
+import ButtonView from 'ckeditor5/ui/button/buttonview.js';
+import DropdownPanelView from 'ckeditor5/ui/dropdown/dropdownpanelview.js';
 
 describe( 'DropdownView', () => {
-	let view;
+	let view, buttonView, panelView, locale;
 
 	beforeEach( () => {
-		view = new DropdownView();
+		locale = { t() {} };
+
+		buttonView = new ButtonView( locale );
+		panelView = new DropdownPanelView( locale );
+
+		return ( view = new DropdownView( locale, buttonView, panelView ) ).init();
 	} );
 
 	describe( 'constructor()', () => {
+		it( 'sets view#locale', () => {
+			expect( view.locale ).to.equal( locale );
+		} );
+
+		it( 'sets view#buttonView', () => {
+			expect( view.buttonView ).to.equal( buttonView );
+		} );
+
+		it( 'sets view#panelView', () => {
+			expect( view.panelView ).to.equal( panelView );
+		} );
+
 		it( 'sets view#isOpen false', () => {
 			expect( view.isOpen ).to.be.false;
 		} );
 
-		it( 'registers "dropdown" region', () => {
-			expect( view.regions.get( 0 ).name ).to.equal( 'main' );
-
-			view.init();
-
-			expect( view.regions.get( 0 ).element ).to.equal( view.element );
+		it( 'creates #element from template', () => {
+			expect( view.element.classList.contains( 'ck-dropdown' ) ).to.be.true;
+			expect( view.element.firstChild ).to.equal( buttonView.element );
+			expect( view.element.lastChild ).to.equal( panelView.element );
 		} );
 
-		it( 'creates element from template', () => {
-			expect( view.element.classList.contains( 'ck-dropdown' ) ).to.be.true;
+		it( 'sets view#buttonView class', () => {
+			expect( view.buttonView.element.classList.contains( 'ck-dropdown__button' ) ).to.be.true;
+		} );
+
+		describe( 'bindings', () => {
+			describe( 'view#isOpen to view.buttonView#execute', () => {
+				it( 'is activated', () => {
+					const values = [];
+
+					view.on( 'change:isOpen', () => {
+						values.push( view.isOpen );
+					} );
+
+					view.buttonView.fire( 'execute' );
+					view.buttonView.fire( 'execute' );
+					view.buttonView.fire( 'execute' );
+
+					expect( values ).to.have.members( [ true, false, true ] );
+				} );
+			} );
+
+			describe( 'view.panelView#isVisible to view#isOpen', () => {
+				it( 'is activated', () => {
+					const values = [];
+
+					view.listenTo( view.panelView, 'change:isVisible', () => {
+						values.push( view.isOpen );
+					} );
+
+					view.isOpen = true;
+					view.isOpen = false;
+					view.isOpen = true;
+
+					expect( values ).to.have.members( [ true, false, true ] );
+				} );
+			} );
 		} );
 	} );
 } );
