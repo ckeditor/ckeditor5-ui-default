@@ -2,7 +2,7 @@ CKEditor 5 Default UI Library
 ========================================
 
 [![npm version](https://badge.fury.io/js/%40ckeditor%2Fckeditor5-ui-default.svg)](https://www.npmjs.com/package/@ckeditor/ckeditor5-ui-default)
-[![Build Status](https://travis-ci.org/ckeditor/ckeditor5-ui-default.svg)](https://travis-ci.org/ckeditor/ckeditor5-ui-default)
+[![Build Status](https://travis-ci.org/ckeditor/ckeditor5-ui-default.svg?branch=master)](https://travis-ci.org/ckeditor/ckeditor5-ui-default)
 [![Test Coverage](https://codeclimate.com/github/ckeditor/ckeditor5-ui-default/badges/coverage.svg)](https://codeclimate.com/github/ckeditor/ckeditor5-ui-default/coverage)
 [![Code Climate](https://codeclimate.com/github/ckeditor/ckeditor5-ui-default/badges/gpa.svg)](https://codeclimate.com/github/ckeditor/ckeditor5-ui-default)
 [![Dependency Status](https://david-dm.org/ckeditor/ckeditor5-ui-default/status.svg)](https://david-dm.org/ckeditor/ckeditor5-ui-default#info=dependencies)
