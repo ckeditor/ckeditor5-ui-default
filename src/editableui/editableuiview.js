@@ -77,6 +77,8 @@ export default class EditableUIView extends View {
 	/**
 	 * Initializes the View by either applying the {@link template} to the existing
 	 * {@link editableElement} or assigns {@link element} as {@link editableElement}.
+	 *
+	 * @returns {Promise}
 	 */
 	init() {
 		if ( this.editableElement ) {
