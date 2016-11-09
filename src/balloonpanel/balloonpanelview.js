@@ -38,6 +38,7 @@ export default class BalloonPanelView extends View {
 		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
 		 */
 		this.set( 'top', 0 );
+
 		/**
 		 * The absolute left position of the balloon panel in pixels.
 		 *

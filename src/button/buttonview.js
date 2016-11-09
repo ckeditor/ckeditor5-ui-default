@@ -159,18 +159,19 @@ export default class ButtonView extends View {
 		 *
 		 * @event ui.button.ButtonView#execute
 		 */
+
+		/**
+		 * Icon of the button view.
+		 *
+		 * @readonly
+		 * @member {ui.icon.IconView} ui.button.ButtonView#iconView
+		 */
 	}
 
 	init() {
 		let promise = Promise.resolve();
 
 		if ( this.icon && !this.iconView ) {
-			/**
-			 * Icon of the button view.
-			 *
-			 * @readonly
-			 * @member {ui.icon.IconView} ui.button.ButtonView#iconView
-			 */
 			const iconView = this.iconView = new IconView();
 
 			iconView.bind( 'name' ).to( this, 'icon' );
@@ -188,10 +189,10 @@ export default class ButtonView extends View {
 	 * Gets value for DOM title attribute from title, label and keystroke properties.
 	 *
 	 * @private
-	 * @param {String} title Button title
-	 * @param {String} label Button label
-	 * @param {String} keystroke Button keystroke
-	 * @returns {string}
+	 * @param {String} title Button title.
+	 * @param {String} label Button label.
+	 * @param {String} keystroke Button keystroke.
+	 * @returns {String}
 	 */
 	_getTitle( title, label, keystroke ) {
 		if ( title ) {

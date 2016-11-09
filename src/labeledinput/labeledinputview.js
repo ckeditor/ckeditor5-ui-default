@@ -46,14 +46,14 @@ export default class LabeledInputView extends View {
 		/**
 		 * The label view.
 		 *
-		 * @member {ui.label.LabelView} ui.labeledInput.LabeledInput#labelView
+		 * @member {ui.label.LabelView} ui.labeledInput.LabeledInputView#labelView
 		 */
 		this.addChild( this.labelView = this._createLabelView( id ) );
 
 		/**
 		 * The input view.
 		 *
-		 * @member {ui.View} ui.labeledInput.LabeledInput#inputView
+		 * @member {ui.View} ui.labeledInput.LabeledInputView#inputView
 		 */
 		this.addChild( this.inputView = this._createInputView( InputView, id ) );
 

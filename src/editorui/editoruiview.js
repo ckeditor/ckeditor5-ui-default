@@ -21,6 +21,7 @@ export default class EditorUIView extends View {
 	/**
 	 * Creates an instance of the editor UI view class.
 	 *
+	 * @param {core.editor.Editor} editor The editor instance.
 	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
 	 */
 	constructor( editor, locale ) {
@@ -29,17 +30,17 @@ export default class EditorUIView extends View {
 		/**
 		 * Editor that the UI belongs to.
 		 *
-		 * @type {core.editor.Editor}
+		 * @member {core.editor.Editor} ui.editorUI.EditorUIView#editor
 		 */
 		this.editor = editor;
 
 		/**
+		 * Instance of the {@link ui.ComponentFactory}.
+		 *
 		 * @readonly
 		 * @member {ui.ComponentFactory} ui.editorUI.EditorUIView#featureComponents
 		 */
 		this.featureComponents = new ComponentFactory( editor );
-
-		this._createBodyRegion();
 
 		/**
 		 * Collection of the child views, detached from the DOM
@@ -48,13 +49,16 @@ export default class EditorUIView extends View {
 		 * @readonly
 		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
 		 */
+		this.body = this.createCollection();
+
+		this._renderBodyCollection();
 
 		/**
 		 * Icons available in the UI.
 		 *
-		 * @observable
 		 * @readonly
-		 * @member {Array} ui.editorUI.EditorUIView#icons
+		 * @observable
+		 * @member {Array.<String>} ui.editorUI.EditorUIView#icons
 		 */
 
 		/**
@@ -66,9 +70,7 @@ export default class EditorUIView extends View {
 	}
 
 	/**
-	 * Initializes EditorUIView instance.
-	 *
-	 * @returns {Promise}
+	 * @inheritDoc
 	 */
 	init() {
 		return this._setupIconManager()
@@ -76,36 +78,12 @@ export default class EditorUIView extends View {
 	}
 
 	/**
-	 * TODO
+	 * @inheritDoc
 	 */
 	destroy() {
 		this._bodyCollectionContainer.remove();
-		this._bodyCollectionContainer = null;
 
 		return super.destroy();
-	}
-
-	/**
-	 * Creates and appends to `<body>` the 'body' region container.
-	 *
-	 * @private
-	 */
-	_createBodyRegion() {
-		this.body = this.createCollection();
-
-		const bodyElement = this._bodyCollectionContainer = new Template( {
-			tag: 'div',
-			attributes: {
-				class: [
-					'ck-body',
-					'ck-rounded-corners',
-					'ck-reset_all'
-				]
-			},
-			children: this.body
-		} ).render();
-
-		document.body.appendChild( bodyElement );
 	}
 
 	/**
@@ -119,5 +97,26 @@ export default class EditorUIView extends View {
 		this.iconManagerView.bind( 'sprite' ).to( iconManagerModel );
 
 		return this.body.add( this.iconManagerView );
+	}
+
+	/**
+	 * Creates and appends to `<body>` the {@link #body} collection container.
+	 *
+	 * @private
+	 */
+	_renderBodyCollection() {
+		const bodyElement = this._bodyCollectionContainer = new Template( {
+			tag: 'div',
+			attributes: {
+				class: [
+					'ck-body',
+					'ck-rounded-corners',
+					'ck-reset_all'
+				]
+			},
+			children: this.body
+		} ).render();
+
+		document.body.appendChild( bodyElement );
 	}
 }

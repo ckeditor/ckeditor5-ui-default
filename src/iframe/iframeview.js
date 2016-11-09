@@ -53,7 +53,7 @@ export default class IframeView extends View {
 			 * asynchronous loading of `contentDocument`. See {@link _iframePromise}.
 			 *
 			 * @private
-			 * @member {Object} ui.iframe.IframeView#_iframeDefrred
+			 * @member {Object} ui.iframe.IframeView#_iframeDeferred
 			 */
 			this._iframeDeferred = { resolve, reject };
 		} );

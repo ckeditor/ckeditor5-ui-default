@@ -32,7 +32,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isActive
+		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#isActive
 		 */
 		this.set( 'isActive', false );
 
@@ -41,7 +41,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#isSticky
+		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#isSticky
 		 */
 		this.set( 'isSticky', false );
 
@@ -54,19 +54,19 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {HTMLElement} ui.stickyToobar.StickyToolbarView#limiterElement
+		 * @member {HTMLElement} ui.toolbar.sticky.StickyToolbarView#limiterElement
 		 */
 		this.set( 'limiterElement', null );
 
 		/**
-		 * The offset from the bottom edge of {@link ui.stickyToobar.StickyToolbarView#limiterElement}
+		 * The offset from the bottom edge of {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}
 		 * which stops the toolbar from stickying any further to prevent limiter's content
 		 * from being completely covered.
 		 *
 		 * @readonly
 		 * @observable
 		 * @default 50
-		 * @member {Number} ui.stickyToobar.StickyToolbarView#limiterOffset
+		 * @member {Number} ui.toolbar.sticky.StickyToolbarView#limiterOffset
 		 */
 		this.set( 'limiterOffset', 50 );
 
@@ -76,7 +76,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 * @protected
 		 * @readonly
 		 * @observable
-		 * @member {String} ui.stickyToobar.StickyToolbarView#_left
+		 * @member {String} ui.toolbar.sticky.StickyToolbarView#_left
 		 */
 		this.set( '_left', null );
 
@@ -86,18 +86,18 @@ export default class StickyToolbarView extends ToolbarView {
 		 * @protected
 		 * @readonly
 		 * @observable
-		 * @member {String} ui.stickyToobar.StickyToolbarView#_marginLeft
+		 * @member {String} ui.toolbar.sticky.StickyToolbarView#_marginLeft
 		 */
 		this.set( '_marginLeft', null );
 
 		/**
 		 * Set `true` if the sticky toolbar reached the bottom edge of the
-		 * {@link ui.stickyToobar.StickyToolbarView#limiterElement}.
+		 * {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}.
 		 *
 		 * @protected
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.stickyToobar.StickyToolbarView#_isStickyToTheLimiter
+		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#_isStickyToTheLimiter
 		 */
 		this.set( '_isStickyToTheLimiter', false );
 
@@ -105,15 +105,15 @@ export default class StickyToolbarView extends ToolbarView {
 		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
 		 *
 		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_toolbarRect
+		 * @member {Object} ui.toolbar.sticky.StickyToolbarView#_toolbarRect
 		 */
 
 		/**
-		 * The DOM bounding client rect of the {@link ui.stickyToobar.StickyToolbarView#limiterElement}
+		 * The DOM bounding client rect of the {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}
 		 * of the toolbar.
 		 *
 		 * @protected
-		 * @member {Object} ui.stickyToobar.StickyToolbarView#_limiterRect
+		 * @member {Object} ui.toolbar.sticky.StickyToolbarView#_limiterRect
 		 */
 
 		Template.extend( this.template, {
@@ -160,7 +160,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 * actual toolbar is sticky. It prevents flickering of the UI.
 		 *
 		 * @private
-		 * @property {HTMLElement} ui.stickyToobar.StickyToolbarView#_elementPlaceholder
+		 * @property {HTMLElement} ui.toolbar.sticky.StickyToolbarView#_elementPlaceholder
 		 */
 		this._elementPlaceholder = new Template( {
 			tag: 'div',
