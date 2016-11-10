@@ -8,7 +8,7 @@
 import clickOutsideHandler from 'ckeditor5/ui/bindings/clickoutsidehandler.js';
 
 import Model from 'ckeditor5/ui/model.js';
-import DOMEmitterMixin from 'ckeditor5/ui/domemittermixin.js';
+import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
 
 import testUtils from 'tests/core/_utils/utils.js';
 
@@ -28,7 +28,7 @@ describe( 'clickOutsideHandler', () => {
 		actionSpy = testUtils.sinon.spy();
 
 		clickOutsideHandler( {
-			emitter: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DomEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
@@ -78,7 +78,7 @@ describe( 'clickOutsideHandler', () => {
 		model.observableProperty = true;
 
 		clickOutsideHandler( {
-			emitter: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DomEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,
@@ -96,7 +96,7 @@ describe( 'clickOutsideHandler', () => {
 		model.observableProperty = false;
 
 		clickOutsideHandler( {
-			emitter: Object.create( DOMEmitterMixin ),
+			emitter: Object.create( DomEmitterMixin ),
 			model: model,
 			activeIf: 'observableProperty',
 			contextElement: contextElement,

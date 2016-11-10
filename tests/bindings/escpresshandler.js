@@ -8,7 +8,7 @@
 import escPressHandler from 'ckeditor5/ui/bindings/escpresshandler.js';
 
 import Model from 'ckeditor5/ui/model.js';
-import DOMEmitterMixin from 'ckeditor5/ui/domemittermixin.js';
+import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
 import { keyCodes } from 'ckeditor5/utils/keyboard.js';
 
 import testUtils from 'tests/core/_utils/utils.js';
@@ -25,7 +25,7 @@ describe( 'escPressHandler', () => {
 
 		actionSpy = testUtils.sinon.spy();
 
-		emitter = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
@@ -76,7 +76,7 @@ describe( 'escPressHandler', () => {
 
 		model.observableProperty = true;
 
-		emitter = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
@@ -95,7 +95,7 @@ describe( 'escPressHandler', () => {
 
 		model.observableProperty = false;
 
-		emitter = Object.create( DOMEmitterMixin );
+		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
