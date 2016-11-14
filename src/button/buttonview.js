@@ -179,7 +179,7 @@ export default class ButtonView extends View {
 			this.element.insertBefore( iconView.element, this.element.firstChild );
 
 			// Make sure the icon view will be destroyed along with button.
-			promise = promise.then( () => this.addChild( iconView ) );
+			promise = promise.then( () => this.addChildren( iconView ) );
 		}
 
 		return promise.then( () => super.init() );
