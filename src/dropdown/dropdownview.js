@@ -27,7 +27,7 @@ export default class DropdownView extends View {
 		 * @readonly
 		 * @member {ui.button.ButtonView} ui.dropdown.DropdownView#buttonView
 		 */
-		this.addChild( this.buttonView = buttonView );
+		this.addChildren( this.buttonView = buttonView );
 
 		/**
 		 * Panel of this dropdown view.
@@ -35,7 +35,7 @@ export default class DropdownView extends View {
 		 * @readonly
 		 * @member {ui.dropdown.DropdownPanelView} ui.dropdown.DropdownView#panelView
 		 */
-		this.addChild( this.panelView = panelView );
+		this.addChildren( this.panelView = panelView );
 
 		/**
 		 * Controls whether the dropdown view is open, which also means its
