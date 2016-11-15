@@ -106,4 +106,13 @@ export default class LabeledInputView extends View {
 	select() {
 		this.inputView.select();
 	}
+
+	/**
+	 * Returns the value of {@link ui.labeledInput.LabeledInputView#inputView}.
+	 *
+	 * @returns {*}
+	 */
+	getValue() {
+		return this.inputView.getValue();
+	}
 }
