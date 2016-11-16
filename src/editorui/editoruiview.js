@@ -93,7 +93,7 @@ export default class EditorUIView extends View {
 	_setupIconManager() {
 		this.icons = iconManagerModel.icons;
 		this.iconManagerView = new IconManagerView();
-		this.iconManagerView.bind( 'sprite' ).to( iconManagerModel );
+		this.iconManagerView.sprite = iconManagerModel.sprite;
 
 		return this.body.add( this.iconManagerView );
 	}
