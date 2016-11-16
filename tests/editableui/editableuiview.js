@@ -23,7 +23,6 @@ describe( 'EditableUIView', () => {
 		it( 'sets initial values of attributes', () => {
 			expect( view.isReadOnly ).to.be.false;
 			expect( view.isFocused ).to.be.false;
-			expect( view.name ).to.be.null;
 		} );
 
 		it( 'renders element from template when no editableElement', () => {

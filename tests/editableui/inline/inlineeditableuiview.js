@@ -24,6 +24,10 @@ describe( 'InlineEditableUIView', () => {
 			expect( view.locale ).to.equal( locale );
 		} );
 
+		it( 'sets initial values of attributes', () => {
+			expect( view.name ).to.be.null;
+		} );
+
 		it( 'accepts editableElement', () => {
 			view = new InlineEditableUIView( locale, editableElement );
 
