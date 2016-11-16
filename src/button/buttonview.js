@@ -147,9 +147,9 @@ export default class ButtonView extends View {
 					// Though, shouldn't this condition be moved to the button controller?
 					if ( this.isEnabled ) {
 						this.fire( 'execute' );
-					} else {
-						evt.preventDefault();
 					}
+
+					evt.preventDefault();
 				} )
 			}
 		} );
