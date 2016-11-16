@@ -62,7 +62,7 @@ describe( 'EditorUIView', () => {
 			} );
 		} );
 
-		it( 'sets view#icon attribute', () => {
+		it( 'sets view#icon property', () => {
 			view._setupIconManager().then( () => {
 				expect( view.icons ).to.be.an( 'array' );
 				expect( view.icons ).to.not.be.empty;
