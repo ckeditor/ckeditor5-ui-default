@@ -201,9 +201,9 @@ export default class StickyToolbarView extends ToolbarView {
 	 * Destroys the toolbar and removes the {@link _elementPlaceholder}.
 	 */
 	destroy() {
-		super.destroy();
-
-		this._elementPlaceholder.remove();
+		return super.destroy().then( () => {
+			this._elementPlaceholder.remove();
+		} );
 	}
 
 	/**

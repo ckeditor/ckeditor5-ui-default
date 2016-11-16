@@ -133,7 +133,7 @@ describe( 'StickyToolbarView', () => {
 		} );
 	} );
 
-	describe( 'init', () => {
+	describe( 'init()', () => {
 		beforeEach( () => {
 			view.limiterElement = limiterElement;
 		} );
@@ -172,17 +172,23 @@ describe( 'StickyToolbarView', () => {
 		} );
 	} );
 
-	describe( 'destroy', () => {
+	describe( 'destroy()', () => {
+		it( 'should return a promise', () => {
+			expect( view.destroy() ).to.be.instanceof( Promise );
+		} );
+
 		it( 'calls destroy on parent class', () => {
 			const spy = testUtils.sinon.spy( ToolbarView.prototype, 'destroy' );
 
-			view.destroy();
-			expect( spy.calledOnce ).to.be.true;
+			return view.destroy().then( () => {
+				expect( spy.calledOnce ).to.be.true;
+			} );
 		} );
 
 		it( 'removes view._elementPlaceholder from DOM', () => {
-			view.destroy();
-			expect( view._elementPlaceholder.parentNode ).to.be.null;
+			return view.destroy().then( () => {
+				expect( view._elementPlaceholder.parentNode ).to.be.null;
+			} );
 		} );
 	} );
 
