@@ -8,39 +8,17 @@
 import { keyCodes } from '../../utils/keyboard.js';
 
 /**
- * Handles <kbd>Esc</kbd> keydown and fires action.
+ * Detects <kbd>Esc</kbd> `keydown` DOM event and fires an action.
  *
- * @param {Object} [options] Configuration options.
- * @param {ui.DOMEmitter} [options.emitter] The emitter to which this behavior should be added.
- * @param {utils.Observable} [options.model] Used together with `options.activeIf` to know when to listen for keydown.
- * @param {String} [options.activeIf] Used together with `options.model` to know when to listen for keydown.
- * @param {Function} [options.callback] Function fired after <kbd>Esc</kbd> is pressed.
- * @returns {Function} Click handler
+ * @param {Object} options Configuration options.
+ * @param {ui.DOMEmitter} options.emitter The emitter to which this behavior should be added.
+ * @param {Function} options.activator Function returning a `Boolean`, to determine whether handler is active.
+ * @param {Function} options.callback Function fired after <kbd>Esc</kbd> is pressed.
  */
-export default function escPressHandler( { emitter, model, activeIf, callback } ) {
-	const keypressHandler = ( evt, domEvt ) => handleEscPress( domEvt.keyCode, callback );
-
-	emitter.listenTo( model, `change:${ activeIf }`, ( evt, name, value ) => {
-		if ( value ) {
-			emitter.listenTo( document, 'keydown', keypressHandler );
-		} else {
-			emitter.stopListening( document, 'keydown', keypressHandler );
+export default function escPressHandler( { emitter, activator, callback } ) {
+	emitter.listenTo( document, 'keydown', ( evt, { keyCode } ) => {
+		if ( keyCode == keyCodes.esc && activator() ) {
+			callback();
 		}
 	} );
-
-	// When `activeIf` property is `true` on init.
-	if ( model[ activeIf ] ) {
-		emitter.listenTo( document, 'keydown', keypressHandler );
-	}
-}
-
-// Fires callback when ESC key was pressed.
-//
-// @private
-// @param {HTMLElement} keyCode Code of pressed key.
-// @param {Function} callback Action fired after ESC press.
-function handleEscPress( keyCode, callback ) {
-	if ( keyCode == keyCodes.esc ) {
-		callback();
-	}
 }
