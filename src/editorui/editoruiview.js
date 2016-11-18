@@ -7,7 +7,6 @@
 
 import View from '../view.js';
 import Template from '../template.js';
-import ComponentFactory from '../componentfactory.js';
 import IconManagerView from '../iconmanager/iconmanagerview.js';
 import iconManagerModel from '../../../theme/iconmanagermodel.js';
 
@@ -21,26 +20,10 @@ export default class EditorUIView extends View {
 	/**
 	 * Creates an instance of the editor UI view class.
 	 *
-	 * @param {core.editor.Editor} editor The editor instance.
 	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
 	 */
-	constructor( editor, locale ) {
+	constructor( locale ) {
 		super( locale );
-
-		/**
-		 * Editor that the UI belongs to.
-		 *
-		 * @member {core.editor.Editor} ui.editorUI.EditorUIView#editor
-		 */
-		this.editor = editor;
-
-		/**
-		 * Instance of the {@link ui.ComponentFactory}.
-		 *
-		 * @readonly
-		 * @member {ui.ComponentFactory} ui.editorUI.EditorUIView#featureComponents
-		 */
-		this.featureComponents = new ComponentFactory( editor );
 
 		/**
 		 * Collection of the child views, detached from the DOM
@@ -50,15 +33,6 @@ export default class EditorUIView extends View {
 		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
 		 */
 		this.body = this.createCollection();
-
-		this._renderBodyCollection();
-
-		/**
-		 * Icons available in the UI.
-		 *
-		 * @readonly
-		 * @member {Array.<String>} ui.editorUI.EditorUIView#icons
-		 */
 
 		/**
 		 * The element holding elements of the 'body' region.
@@ -72,7 +46,9 @@ export default class EditorUIView extends View {
 	 * @inheritDoc
 	 */
 	init() {
-		return this._setupIconManager()
+		return Promise.resolve()
+			.then( () => this._renderBodyCollection() )
+			.then( () => this._setupIconManager() )
 			.then( () => super.init() );
 	}
 
@@ -91,9 +67,7 @@ export default class EditorUIView extends View {
 	 * @protected
 	 */
 	_setupIconManager() {
-		this.icons = iconManagerModel.icons;
-		this.iconManagerView = new IconManagerView();
-		this.iconManagerView.sprite = iconManagerModel.sprite;
+		this.iconManagerView = new IconManagerView( iconManagerModel.sprite, iconManagerModel.icons );
 
 		return this.body.add( this.iconManagerView );
 	}

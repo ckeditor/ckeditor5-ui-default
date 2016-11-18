@@ -17,7 +17,13 @@ import Template from '../template.js';
  * @extends ui.View
  */
 export default class IconManagerView extends View {
-	constructor() {
+	/**
+	 * Creates an instance of the icon manager view.
+	 *
+	 * @param {String} sprite The SVG (HTML) string of the icons to be injected into DOM.
+	 * @param {Array.<String>} icons List of icon names available in the manager.
+	 */
+	constructor( sprite, icons ) {
 		super();
 
 		this.template = new Template( {
@@ -33,7 +39,15 @@ export default class IconManagerView extends View {
 		 *
 		 * @member {String} ui.iconManager.IconManagerView#sprite
 		 */
-		this.sprite = null;
+		this.sprite = sprite;
+
+		/**
+		 * List of icon names available in the manager.
+		 *
+		 * @readonly
+		 * @member {Array.<String>} ui.iconManager.IconManagerView#icons
+		 */
+		this.icons = icons;
 	}
 
 	init() {

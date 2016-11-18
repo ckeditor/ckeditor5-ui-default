@@ -4,20 +4,18 @@
  */
 
 import testUtils from 'tests/core/_utils/utils.js';
-import Editor from 'ckeditor5/core/editor/editor.js';
 import EditorUIView from 'ckeditor5/ui/editorui/editoruiview.js';
-import ComponentFactory from 'ckeditor5/ui/componentfactory.js';
 import ViewCollection from 'ckeditor5/ui/viewcollection.js';
+import Locale from 'ckeditor5/utils/locale.js';
 
 testUtils.createSinonSandbox();
 
 describe( 'EditorUIView', () => {
-	let view, editor, locale;
+	let view, locale;
 
 	beforeEach( () => {
-		editor = new Editor();
-		locale = { t() {} };
-		view = new EditorUIView( editor, locale );
+		locale = new Locale( 'en' );
+		view = new EditorUIView( locale );
 
 		return view.init();
 	} );
@@ -28,8 +26,6 @@ describe( 'EditorUIView', () => {
 		} );
 
 		it( 'sets all the properties', () => {
-			expect( view ).to.have.property( 'editor', editor );
-			expect( view.featureComponents ).to.be.instanceof( ComponentFactory );
 			expect( view.body ).to.be.instanceof( ViewCollection );
 		} );
 
@@ -44,7 +40,7 @@ describe( 'EditorUIView', () => {
 
 	describe( 'init', () => {
 		it( 'calls view#_setupIconManager', () => {
-			view = new EditorUIView( editor, locale );
+			view = new EditorUIView( locale );
 			const spy = testUtils.sinon.spy( view, '_setupIconManager' );
 
 			return view.init().then( () => {

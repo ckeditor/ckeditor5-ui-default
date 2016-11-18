@@ -138,6 +138,10 @@ describe( 'StickyToolbarView', () => {
 			view.limiterElement = limiterElement;
 		} );
 
+		afterEach( () => {
+			return view.destroy();
+		} );
+
 		it( 'calls init on parent class', () => {
 			const spy = testUtils.sinon.spy( ToolbarView.prototype, 'init' );
 
