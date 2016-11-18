@@ -7,7 +7,6 @@
 
 import clickOutsideHandler from 'ckeditor5/ui/bindings/clickoutsidehandler.js';
 
-import Model from 'ckeditor5/ui/model.js';
 import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
 
 import testUtils from 'tests/core/_utils/utils.js';
@@ -15,22 +14,18 @@ import testUtils from 'tests/core/_utils/utils.js';
 testUtils.createSinonSandbox();
 
 describe( 'clickOutsideHandler', () => {
-	let model, actionSpy, contextElement;
+	let activator, actionSpy, contextElement;
 
 	beforeEach( () => {
+		activator = testUtils.sinon.stub().returns( false );
 		contextElement = document.createElement( 'div' );
-		document.body.appendChild( contextElement );
-
-		model = new Model( {
-			observableProperty: false
-		} );
-
 		actionSpy = testUtils.sinon.spy();
+
+		document.body.appendChild( contextElement );
 
 		clickOutsideHandler( {
 			emitter: Object.create( DomEmitterMixin ),
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			contextElement: contextElement,
 			callback: actionSpy
 		} );
@@ -41,7 +36,7 @@ describe( 'clickOutsideHandler', () => {
 	} );
 
 	it( 'should fired callback after clicking out of context element when listener is active', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
@@ -49,7 +44,7 @@ describe( 'clickOutsideHandler', () => {
 	} );
 
 	it( 'should not fired callback after clicking out of context element when listener is not active', () => {
-		model.observableProperty = false;
+		activator.returns( false );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
@@ -57,7 +52,7 @@ describe( 'clickOutsideHandler', () => {
 	} );
 
 	it( 'should not fired callback after clicking on context element when listener is active', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		contextElement.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
@@ -65,7 +60,7 @@ describe( 'clickOutsideHandler', () => {
 	} );
 
 	it( 'should not fired callback after clicking on context element when listener is not active', () => {
-		model.observableProperty = false;
+		activator.returns( false );
 
 		contextElement.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
@@ -75,12 +70,11 @@ describe( 'clickOutsideHandler', () => {
 	it( 'should listen when model initial `ifActive` value was `true`', () => {
 		const spy = testUtils.sinon.spy();
 
-		model.observableProperty = true;
+		activator.returns( true );
 
 		clickOutsideHandler( {
 			emitter: Object.create( DomEmitterMixin ),
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			contextElement: contextElement,
 			callback: spy
 		} );
@@ -93,12 +87,11 @@ describe( 'clickOutsideHandler', () => {
 	it( 'should not listen when model initial `ifActive` value was `false`', () => {
 		const spy = testUtils.sinon.spy();
 
-		model.observableProperty = false;
+		activator.returns( false );
 
 		clickOutsideHandler( {
 			emitter: Object.create( DomEmitterMixin ),
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			contextElement: contextElement,
 			callback: spy
 		} );
@@ -109,20 +102,20 @@ describe( 'clickOutsideHandler', () => {
 	} );
 
 	it( 'should react on model `ifActive` property change', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
 		sinon.assert.calledOnce( actionSpy );
 
-		model.observableProperty = false;
+		activator.returns( false );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 
 		// Still called once, was not called second time.
 		sinon.assert.calledOnce( actionSpy );
 
-		model.observableProperty = true;
+		activator.returns( true );
 
 		document.body.dispatchEvent( new Event( 'mouseup', { bubbles: true } ) );
 

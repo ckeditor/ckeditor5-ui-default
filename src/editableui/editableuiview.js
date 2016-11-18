@@ -59,14 +59,6 @@ export default class EditableUIView extends View {
 		this.set( 'isFocused', false );
 
 		/**
-		 * The name of the editable UI view.
-		 *
-		 * @observable
-		 * @member {String} ui.editableUI.EditableUIView#name
-		 */
-		this.set( 'name', null );
-
-		/**
 		 * The element which is the main editable element (usually the one with `contentEditable="true"`).
 		 *
 		 * @readonly

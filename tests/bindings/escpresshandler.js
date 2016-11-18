@@ -7,7 +7,6 @@
 
 import escPressHandler from 'ckeditor5/ui/bindings/escpresshandler.js';
 
-import Model from 'ckeditor5/ui/model.js';
 import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
 import { keyCodes } from 'ckeditor5/utils/keyboard.js';
 
@@ -16,21 +15,16 @@ import testUtils from 'tests/core/_utils/utils.js';
 testUtils.createSinonSandbox();
 
 describe( 'escPressHandler', () => {
-	let model, emitter, actionSpy;
+	let emitter, actionSpy, activator;
 
 	beforeEach( () => {
-		model = new Model( {
-			observableProperty: false
-		} );
-
+		activator = testUtils.sinon.stub().returns( false );
 		actionSpy = testUtils.sinon.spy();
-
 		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			callback: actionSpy
 		} );
 	} );
@@ -40,7 +34,7 @@ describe( 'escPressHandler', () => {
 	} );
 
 	it( 'should fired callback after pressing `Esc` when listener is active', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
 
@@ -48,7 +42,7 @@ describe( 'escPressHandler', () => {
 	} );
 
 	it( 'should not fired callback after pressing a key different than `Esc`', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.ctrlKey );
 
@@ -56,7 +50,7 @@ describe( 'escPressHandler', () => {
 	} );
 
 	it( 'should not fired callback after pressing Esc when listener is not active', () => {
-		model.observableProperty = false;
+		activator.returns( false );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.enter );
 
@@ -64,7 +58,7 @@ describe( 'escPressHandler', () => {
 	} );
 
 	it( 'should not fired callback after pressing other than Esc key when listener is active', () => {
-		model.observableProperty = false;
+		activator.returns( false );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
 
@@ -74,14 +68,13 @@ describe( 'escPressHandler', () => {
 	it( 'should listen when model initial `ifActive` value was `true`', () => {
 		const spy = testUtils.sinon.spy();
 
-		model.observableProperty = true;
+		activator.returns( true );
 
 		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			callback: spy
 		} );
 
@@ -93,14 +86,13 @@ describe( 'escPressHandler', () => {
 	it( 'should not listen when model initial `ifActive` value was `false`', () => {
 		const spy = testUtils.sinon.spy();
 
-		model.observableProperty = false;
+		activator.returns( false );
 
 		emitter = Object.create( DomEmitterMixin );
 
 		escPressHandler( {
 			emitter: emitter,
-			model: model,
-			activeIf: 'observableProperty',
+			activator: activator,
 			callback: spy
 		} );
 
@@ -110,20 +102,20 @@ describe( 'escPressHandler', () => {
 	} );
 
 	it( 'should react on model `ifActive` property change', () => {
-		model.observableProperty = true;
+		activator.returns( true );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
 
 		sinon.assert.calledOnce( actionSpy );
 
-		model.observableProperty = false;
+		activator.returns( false );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
 
 		// Still called once, was not called second time.
 		sinon.assert.calledOnce( actionSpy );
 
-		model.observableProperty = true;
+		activator.returns( true );
 
 		dispatchKeyboardEvent( document, 'keydown', keyCodes.esc );
 

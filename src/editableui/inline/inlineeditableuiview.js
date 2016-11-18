@@ -28,6 +28,14 @@ export default class InlineEditableUIView extends EditableUIView {
 		const bind = this.bindTemplate;
 		const t = this.t;
 
+		/**
+		 * The name of the editable UI view.
+		 *
+		 * @observable
+		 * @member {String} ui.editableUI.inline.InlineEditableUIView#name
+		 */
+		this.set( 'name', null );
+
 		const getLabel = ( value ) => {
 			return t( 'Rich Text Editor, %0', [ value ] );
 		};

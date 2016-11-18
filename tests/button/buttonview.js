@@ -113,6 +113,16 @@ describe( 'ButtonView', () => {
 			} );
 		} );
 
+		describe( 'click event', () => {
+			it( 'should be prevented', () => {
+				view.isEnabled = true;
+				expect( view.element.dispatchEvent( new Event( 'click', { cancelable: true } ) ) ).to.be.false;
+
+				view.isEnabled = false;
+				expect( view.element.dispatchEvent( new Event( 'click', { cancelable: true } ) ) ).to.be.false;
+			} );
+		} );
+
 		describe( 'execute event', () => {
 			it( 'triggers view#execute event if button is not disabled', () => {
 				const spy = sinon.spy();

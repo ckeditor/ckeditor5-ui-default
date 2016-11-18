@@ -57,7 +57,6 @@ export default class EditorUIView extends View {
 		 * Icons available in the UI.
 		 *
 		 * @readonly
-		 * @observable
 		 * @member {Array.<String>} ui.editorUI.EditorUIView#icons
 		 */
 
@@ -92,9 +91,9 @@ export default class EditorUIView extends View {
 	 * @protected
 	 */
 	_setupIconManager() {
-		this.set( 'icons', iconManagerModel.icons );
+		this.icons = iconManagerModel.icons;
 		this.iconManagerView = new IconManagerView();
-		this.iconManagerView.bind( 'sprite' ).to( iconManagerModel );
+		this.iconManagerView.sprite = iconManagerModel.sprite;
 
 		return this.body.add( this.iconManagerView );
 	}
