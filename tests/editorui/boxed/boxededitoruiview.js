@@ -13,21 +13,21 @@ describe( 'BoxedEditorUIView', () => {
 
 	beforeEach( () => {
 		editor = new Editor();
-		view = new BoxedEditorUIView( editor, new Locale( 'en' ) );
-		view.init();
-
+		view = new BoxedEditorUIView( new Locale( 'en' ) );
 		element = view.element;
+
+		return view.init();
 	} );
 
 	describe( 'constructor()', () => {
-		it( 'adds controller collections', () => {
+		it( 'adds view collections', () => {
 			expect( view.top ).to.be.instanceof( ViewCollection );
 			expect( view.main ).to.be.instanceof( ViewCollection );
 		} );
 
 		it( 'sets "width" and "height" attributes', () => {
-			expect( view.width ).to.equal( editor.config.get( 'ui.width' ) );
-			expect( view.height ).to.equal( editor.config.get( 'ui.height' ) );
+			expect( view.width ).to.equal( null );
+			expect( view.height ).to.equal( null );
 		} );
 
 		it( 'bootstraps the view element from template', () => {

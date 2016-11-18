@@ -18,34 +18,31 @@ import Template from '../../template.js';
  */
 export default class BoxedEditorUIView extends EditorUIView {
 	/**
-	 * @inheritDoc
+	 * Creates an instance of the boxed editor UI view class.
+	 *
+	 * @param {utils.Locale} locale The {@link core.editor.Editor#locale} instance.
 	 */
-	constructor( editor, locale ) {
-		super( editor, locale );
+	constructor( locale ) {
+		super( locale );
 
 		const t = this.t;
 		const ariaLabelUid = uid();
-		const config = editor.config;
 
 		/**
-		 * The editor's width. Defaults to {@link core.editor.config.ui.width}.
-		 *
-		 * Note: a specific creator that was used must support this setting.
+		 * The UI's width.
 		 *
 		 * @observable
 		 * @member {Number} width ui.editorUI.boxed.BoxedEditorUIView#width
 		 */
-		this.set( 'width', config.get( 'ui.width' ) );
+		this.set( 'width', null );
 
 		/**
-		 * The editor's height. Defaults to {@link core.editor.config.ui.height}.
-		 *
-		 * Note: a specific creator that was used must support this setting.
+		 * The UI's height.
 		 *
 		 * @observable
 		 * @member {Number} height ui.editorUI.boxed.BoxedEditorUIView#height
 		 */
-		this.set( 'height', config.get( 'ui.height' ) );
+		this.set( 'height', null );
 
 		/**
 		 * Collection of the child views located in the top (`.ck-editor__top`)

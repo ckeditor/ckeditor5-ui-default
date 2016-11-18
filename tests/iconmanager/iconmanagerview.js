@@ -11,18 +11,20 @@ import IconManagerView from 'ckeditor5/ui/iconmanager/iconmanagerview.js';
 testUtils.createSinonSandbox();
 
 describe( 'IconManagerView', () => {
-	let view;
+	let view, sprite, icons;
 
 	beforeEach( () => {
-		view = new IconManagerView();
-		view.sprite = '<symbol><title>foo</title></symbol>';
+		sprite = '<symbol><title>foo</title></symbol>';
+		icons = [ 'foo' ];
+		view = new IconManagerView( sprite, icons );
 
 		return view.init();
 	} );
 
 	describe( 'constructor()', () => {
 		it( 'sets initial view attribute values', () => {
-			expect( new IconManagerView().sprite ).to.be.null;
+			expect( view.sprite ).to.equal( sprite );
+			expect( view.icons ).to.equal( icons );
 		} );
 
 		it( 'creates element from template', () => {
