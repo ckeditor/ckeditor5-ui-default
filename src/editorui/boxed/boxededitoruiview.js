@@ -72,20 +72,20 @@ export default class BoxedEditorUIView extends EditorUIView {
 				role: 'application',
 				dir: 'ltr',
 				lang: locale.lang,
-				'aria-labelledby': `cke-editor__aria-label_${ ariaLabelUid }`
+				'aria-labelledby': `ck-editor__aria-label_${ ariaLabelUid }`
 			},
 
 			children: [
 				{
 					tag: 'span',
 					attributes: {
-						id: `cke-editor__aria-label_${ ariaLabelUid }`,
-						class: 'cke-voice-label',
-						children: [
-							// TODO: Editor name?
-							t( 'Rich Text Editor' )
-						]
-					}
+						id: `ck-editor__aria-label_${ ariaLabelUid }`,
+						class: 'ck-voice-label',
+					},
+					children: [
+						// TODO: Editor name?
+						t( 'Rich Text Editor' )
+					]
 				},
 				{
 					tag: 'div',

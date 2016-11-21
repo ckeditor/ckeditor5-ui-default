@@ -37,18 +37,26 @@ describe( 'BoxedEditorUIView', () => {
 		} );
 
 		it( 'setups accessibility of the view element', () => {
-			expect( element.attributes.getNamedItem( 'aria-labelledby' ).value ).to.equal(
-				view.element.firstChild.id );
+			expect( element.attributes.getNamedItem( 'aria-labelledby' ).value )
+				.to.equal( view.element.firstChild.id )
+				.to.match( /^ck-editor__aria-label_\w+$/ );
 			expect( element.attributes.getNamedItem( 'role' ).value ).to.equal( 'application' );
 			expect( element.attributes.getNamedItem( 'lang' ).value ).to.equal( 'en' );
 		} );
 
-		it( 'bootstraps the view region elements from template', () => {
+		it( 'setups the voice label', () => {
+			const firstChild = element.firstChild;
+
+			expect( firstChild.className ).to.equal( 'ck-voice-label' );
+			expect( firstChild.textContent ).to.equal( 'Rich Text Editor' );
+		} );
+
+		it( 'bootstraps the view collection elements from template', () => {
 			expect( element.childNodes[ 1 ].classList.contains( 'ck-editor__top' ) ).to.be.true;
 			expect( element.childNodes[ 2 ].classList.contains( 'ck-editor__main' ) ).to.be.true;
 		} );
 
-		it( 'setups accessibility of the view region elements', () => {
+		it( 'setups accessibility of the view collection elements', () => {
 			expect( element.childNodes[ 1 ].attributes.getNamedItem( 'role' ).value ).to.equal( 'presentation' );
 			expect( element.childNodes[ 2 ].attributes.getNamedItem( 'role' ).value ).to.equal( 'presentation' );
 		} );
