@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
-/* globals document, window */
+/* globals window */
 
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
@@ -71,16 +71,6 @@ export default class StickyToolbarView extends ToolbarView {
 		this.set( 'limiterOffset', 50 );
 
 		/**
-		 * Controls the `left` CSS style of the toolbar.
-		 *
-		 * @protected
-		 * @readonly
-		 * @observable
-		 * @member {String} ui.toolbar.sticky.StickyToolbarView#_left
-		 */
-		this.set( '_left', null );
-
-		/**
 		 * Controls the `margin-left` CSS style of the toolbar.
 		 *
 		 * @protected
@@ -125,31 +115,13 @@ export default class StickyToolbarView extends ToolbarView {
 				],
 				style: {
 					width: bind.to( 'isSticky', ( isSticky ) => {
-						if ( isSticky ) {
-							const toolbarComputedStyle = window.getComputedStyle( this.element );
-
-							return toPx(
-								this._elementPlaceholder.getBoundingClientRect().width +
-
-								// getBoundingClientRect returns dimensions including the border width.
-								// When going sticky, the toolbar gets the border. If the border is not
-								// considered, the sticky toolbar becomes narrower than the placeholder.
-								parseFloat( toolbarComputedStyle.borderLeftWidth ) +
-								parseFloat( toolbarComputedStyle.borderRightWidth )
-							);
-						}
-
-						return null;
+						return isSticky ? toPx( this._elementPlaceholder.getBoundingClientRect().width ) : null;
 					} ),
 
-					top: bind.to( '_isStickyToTheLimiter', ( _isStickyToTheLimiter ) => {
-						return _isStickyToTheLimiter ?
-								toPx( window.scrollY + this._limiterRect.bottom - this._toolbarRect.height - this.limiterOffset )
-							:
-								null;
+					bottom: bind.to( '_isStickyToTheLimiter', ( _isStickyToTheLimiter ) => {
+						return _isStickyToTheLimiter ? toPx( this.limiterOffset ) : null;
 					} ),
 
-					left: bind.to( '_left' ),
 					marginLeft: bind.to( '_marginLeft' )
 				}
 			}
@@ -231,19 +203,12 @@ export default class StickyToolbarView extends ToolbarView {
 		// TODO: Possibly replaced by CSS in the future http://caniuse.com/#feat=css-sticky
 		if ( this.isSticky ) {
 			this._isStickyToTheLimiter = limiterRect.bottom < toolbarRect.height + this.limiterOffset;
-
-			if ( this._isStickyToTheLimiter ) {
-				this._left = toPx( limiterRect.left - document.body.getBoundingClientRect().left );
-				this._marginLeft = null;
-			} else {
-				this._left = null;
-				this._marginLeft = toPx( -window.scrollX - 1 );
-			}
+			this._marginLeft = this._isStickyToTheLimiter ? null : toPx( -window.scrollX );
 		}
 		// Detach the toolbar from the top edge of the viewport.
 		else {
 			this._isStickyToTheLimiter = false;
-			this._marginLeft = this._left = null;
+			this._marginLeft = null;
 		}
 	}
 }
