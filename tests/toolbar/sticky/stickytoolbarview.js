@@ -40,7 +40,6 @@ describe( 'StickyToolbarView', () => {
 			expect( view.limiterOffset ).to.equal( 50 );
 
 			expect( view._isStickyToTheLimiter ).to.be.false;
-			expect( view._left ).to.be.null;
 			expect( view._marginLeft ).to.be.null;
 		} );
 
@@ -84,24 +83,12 @@ describe( 'StickyToolbarView', () => {
 			expect( element.style.width ).to.equal( '100px' );
 		} );
 
-		it( 'update the styles.top on view#isSticky change', () => {
-			view._limiterRect = { bottom: 100 };
-			view._toolbarRect = { height: 20 };
-			window.scrollY = 10;
-
+		it( 'update the styles.bottom on view#_isStickyToTheLimiter change', () => {
 			view._isStickyToTheLimiter = false;
-			expect( element.style.top ).to.equal( '' );
+			expect( element.style.bottom ).to.equal( '' );
 
 			view._isStickyToTheLimiter = true;
-			expect( element.style.top ).to.equal( '40px' );
-		} );
-
-		it( 'update the styles.left on view#left change', () => {
-			view._left = '30px';
-			expect( element.style.left ).to.equal( '30px' );
-
-			view._left = '10px';
-			expect( element.style.left ).to.equal( '10px' );
+			expect( element.style.bottom ).to.equal( '50px' );
 		} );
 
 		it( 'update the styles.marginLeft on view#marginLeft change', () => {
@@ -309,76 +296,6 @@ describe( 'StickyToolbarView', () => {
 			} );
 		} );
 
-		describe( 'view._left', () => {
-			it( 'is set if view.isSticky and view._isStickyToTheLimiter are true', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
-					top: -10,
-					bottom: 10,
-					left: 60,
-					height: 100
-				} );
-
-				testUtils.sinon.stub( view.element, 'getBoundingClientRect' ).returns( {
-					height: 20
-				} );
-
-				testUtils.sinon.stub( document.body, 'getBoundingClientRect' ).returns( {
-					left: 40
-				} );
-
-				view.isActive = true;
-
-				expect( view.isSticky ).to.be.false;
-				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._left ).to.equal( null );
-
-				view._checkIfShouldBeSticky();
-				expect( view.isSticky ).to.be.true;
-				expect( view._isStickyToTheLimiter ).to.be.true;
-				expect( view._left ).to.equal( '20px' );
-			} );
-
-			it( 'is not set if view._isStickyToTheLimiter is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
-					top: -10,
-					bottom: 80,
-					height: 100
-				} );
-
-				testUtils.sinon.stub( view.element, 'getBoundingClientRect' ).returns( {
-					height: 20
-				} );
-
-				view.isActive = true;
-
-				expect( view.isSticky ).to.be.false;
-				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._left ).to.equal( null );
-
-				view._checkIfShouldBeSticky();
-				expect( view.isSticky ).to.be.true;
-				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._left ).to.equal( null );
-			} );
-
-			it( 'is not set if view.isSticky is false', () => {
-				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
-					top: 10,
-				} );
-
-				view.isActive = true;
-
-				expect( view.isSticky ).to.be.false;
-				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._left ).to.equal( null );
-
-				view._checkIfShouldBeSticky();
-				expect( view.isSticky ).to.be.false;
-				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._left ).to.equal( null );
-			} );
-		} );
-
 		describe( 'view._marginLeft', () => {
 			it( 'is set if view.isSticky is true view._isStickyToTheLimiter is false', () => {
 				testUtils.sinon.stub( view.limiterElement, 'getBoundingClientRect' ).returns( {
@@ -402,7 +319,7 @@ describe( 'StickyToolbarView', () => {
 				view._checkIfShouldBeSticky();
 				expect( view.isSticky ).to.be.true;
 				expect( view._isStickyToTheLimiter ).to.be.false;
-				expect( view._marginLeft ).to.equal( '-11px' );
+				expect( view._marginLeft ).to.equal( '-10px' );
 			} );
 
 			it( 'is not set if view._isStickyToTheLimiter is true', () => {
