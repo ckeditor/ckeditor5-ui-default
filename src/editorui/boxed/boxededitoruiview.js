@@ -80,12 +80,12 @@ export default class BoxedEditorUIView extends EditorUIView {
 					tag: 'span',
 					attributes: {
 						id: `cke-editor__aria-label_${ ariaLabelUid }`,
-						class: 'cke-voice-label',
-						children: [
-							// TODO: Editor name?
-							t( 'Rich Text Editor' )
-						]
-					}
+						class: 'cke-voice-label'
+					},
+					children: [
+						// TODO: Editor name?
+						t( 'Rich Text Editor' )
+					]
 				},
 				{
 					tag: 'div',
