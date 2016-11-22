@@ -34,6 +34,16 @@ describe( 'BoxedEditorUIView', () => {
 			expect( view.element.classList.contains( 'ck-editor' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-reset' ) ).to.be.true;
 			expect( view.element.classList.contains( 'ck-rounded-corners' ) ).to.be.true;
+			expect( element.attributes[ 'aria-labelledby' ].value )
+				.to.equal( view.element.firstChild.id )
+				.to.match( /^cke-editor__aria-label_\w+$/ );
+		} );
+
+		it( 'bootstraps the voice label from template', () => {
+			const voiceLabel = view.element.firstChild;
+
+			expect( voiceLabel.classList.contains( 'cke-voice-label' ) ).to.be.true;
+			expect( voiceLabel.textContent ).to.equal( 'Rich Text Editor' );
 		} );
 
 		it( 'setups accessibility of the view element', () => {
