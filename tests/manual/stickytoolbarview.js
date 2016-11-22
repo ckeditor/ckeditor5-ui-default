@@ -3,13 +3,19 @@
  * For licensing, see LICENSE.md.
  */
 
+/* globals console:false */
+
 import testUtils from '/tests/ui/_utils/utils.js';
 import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 
 testUtils.createTestUIView( {
 	top: '.ck-editor__top'
-} ).then( ui => {
+} )
+.then( ui => {
 	createToolbar( ui.top );
+} )
+.catch( err => {
+	console.error( err.stack );
 } );
 
 function createToolbar( collection ) {
