@@ -12,7 +12,7 @@ import Heading from 'ckeditor5/heading/heading.js';
 import Link from 'ckeditor5/link/link.js';
 
 ClassicEditor.create( document.querySelector( '#editor' ), {
-	features: [ Enter, Typing, Heading, Link ],
+	plugins: [ Enter, Typing, Heading, Link ],
 	toolbar: [ 'link' ]
 } )
 .then( editor => {
