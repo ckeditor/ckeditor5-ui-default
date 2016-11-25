@@ -5,8 +5,8 @@
 
 /* globals console:false */
 
-import testUtils from '/tests/ui/_utils/utils.js';
-import StickyToolbarView from '/ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
+import testUtils from 'tests/ui/_utils/utils.js';
+import StickyToolbarView from 'ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 
 testUtils.createTestUIView( {
 	top: '.ck-editor__top'
