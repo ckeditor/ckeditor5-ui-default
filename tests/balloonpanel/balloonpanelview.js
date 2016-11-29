@@ -12,6 +12,8 @@ import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
 
 testUtils.createSinonSandbox();
+const positionedAncestor = document.createElement( 'div' );
+positionedAncestor.style.position = 'relative';
 
 describe( 'BalloonPanelView', () => {
 	let view;
@@ -112,7 +114,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'show', () => {
+	describe( 'show()', () => {
 		it( 'should set view#isVisible as true', () => {
 			view.isVisible = false;
 
@@ -122,7 +124,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'hide', () => {
+	describe( 'hide()', () => {
 		it( 'should set view#isVisible as false', () => {
 			view.isVisible = true;
 
@@ -132,7 +134,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'attachTo', () => {
+	describe( 'attachTo()', () => {
 		let targetEl, limiterEl;
 
 		beforeEach( () => {
@@ -161,6 +163,8 @@ describe( 'BalloonPanelView', () => {
 					width: 500,
 					height: 500
 				} );
+
+				positionedAncestor.appendChild( view.element );
 			} );
 
 			it( 'should put balloon on the `south east` side of the target element at default', () => {
@@ -232,6 +236,10 @@ describe( 'BalloonPanelView', () => {
 		} );
 
 		describe( 'limited by viewport', () => {
+			beforeEach( () => {
+				document.body.appendChild( view.element );
+			} );
+
 			it( 'should put balloon on the `south west` position when `south east` is limited', () => {
 				mockBoundingBox( limiterEl, {
 					left: 0,
