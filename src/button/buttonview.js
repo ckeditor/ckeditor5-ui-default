@@ -148,6 +148,8 @@ export default class ButtonView extends View {
 					if ( this.isEnabled ) {
 						this.fire( 'execute' );
 					} else {
+						// Prevent the default when button is disabled, to block e.g.
+						// automatic form submitting. See ckeditor/ckeditor5-link#74.
 						evt.preventDefault();
 					}
 				} )
