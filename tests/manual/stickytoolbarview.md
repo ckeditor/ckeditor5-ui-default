@@ -1,6 +1,3 @@
-@bender-ui: collapsed
-@bender-tags: ui toolbar
-
 ## Vertical scrolling
 
 1. When the page is scrolled vertically, the toolbar should
