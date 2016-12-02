@@ -24,6 +24,11 @@ describe( 'BalloonPanelView', () => {
 		return view.init();
 	} );
 
+	afterEach( () => {
+		// Tests require stable viewport environment.
+		window.scrollY = window.scrollX = 0;
+	} );
+
 	describe( 'constructor()', () => {
 		it( 'should create element from template', () => {
 			expect( view.element.tagName ).to.equal( 'DIV' );
@@ -34,7 +39,7 @@ describe( 'BalloonPanelView', () => {
 		it( 'should set default values', () => {
 			expect( view.top ).to.equal( 0 );
 			expect( view.left ).to.equal( 0 );
-			expect( view.arrow ).to.equal( 'se' );
+			expect( view.position ).to.equal( 'se' );
 			expect( view.isVisible ).to.equal( false );
 		} );
 
@@ -45,10 +50,10 @@ describe( 'BalloonPanelView', () => {
 
 	describe( 'DOM bindings', () => {
 		describe( 'arrow', () => {
-			it( 'should react on view#arrow', () => {
+			it( 'should react on view#position', () => {
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_se' ) ).to.true;
 
-				view.set( 'arrow', 'sw' );
+				view.position = 'sw';
 
 				expect( view.element.classList.contains( 'ck-balloon-panel_arrow_sw' ) ).to.true;
 			} );
@@ -147,6 +152,8 @@ describe( 'BalloonPanelView', () => {
 				height: 100
 			} );
 
+			view.limiter = limiterEl;
+
 			// Make sure that limiterEl is fully visible in viewport.
 			testUtils.sinon.stub( window, 'innerWidth', 500 );
 			testUtils.sinon.stub( window, 'innerHeight', 500 );
@@ -172,13 +179,12 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'se' );
+				expect( view.position ).to.equal( 'se' );
 			} );
 
 			it( 'should put balloon on the `south east` side of the target element when target is on the top left side of the limiterEl', () => {
-				// Place target element at the center of the limiterEl.
 				mockBoundingBox( targetEl, {
 					top: 0,
 					left: 0,
@@ -186,9 +192,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'se' );
+				expect( view.position ).to.equal( 'se' );
 			} );
 
 			it( 'should put balloon on the `south west` side of the target element when target is on the right side of the limiterEl', () => {
@@ -199,9 +205,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'sw' );
+				expect( view.position ).to.equal( 'sw' );
 			} );
 
 			it( 'should put balloon on the `north east` side of the target element when target is on the bottom of the limiterEl ', () => {
@@ -212,9 +218,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'ne' );
+				expect( view.position ).to.equal( 'ne' );
 			} );
 
 			it( 'should put balloon on the `north west` side of the target element when target is on the bottom right of the limiterEl', () => {
@@ -225,9 +231,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'nw' );
+				expect( view.position ).to.equal( 'nw' );
 			} );
 
 			// #126
@@ -249,7 +255,7 @@ describe( 'BalloonPanelView', () => {
 					height: 100
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
 				expect( view.top ).to.equal( 15 );
 				expect( view.left ).to.equal( -80 );
@@ -272,7 +278,7 @@ describe( 'BalloonPanelView', () => {
 					height: 100
 				} );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
 				expect( view.top ).to.equal( 115 );
 				expect( view.left ).to.equal( 20 );
@@ -297,15 +303,15 @@ describe( 'BalloonPanelView', () => {
 
 				testUtils.sinon.stub( window, 'innerWidth', 275 );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'sw' );
+				expect( view.position ).to.equal( 'sw' );
 			} );
 
 			it( 'should put balloon on the `south east` position when `south west` is limited', () => {
 				mockBoundingBox( limiterEl, {
-					left: -400,
 					top: 0,
+					left: -400,
 					width: 500,
 					height: 500
 				} );
@@ -317,11 +323,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				testUtils.sinon.stub( window, 'scrollX', 400 );
+				view.attachTo( targetEl );
 
-				view.attachTo( targetEl, limiterEl );
-
-				expect( view.arrow ).to.equal( 'se' );
+				expect( view.position ).to.equal( 'se' );
 			} );
 
 			it( 'should put balloon on the `north east` position when `south east` is limited', () => {
@@ -341,9 +345,9 @@ describe( 'BalloonPanelView', () => {
 
 				testUtils.sinon.stub( window, 'innerHeight', 275 );
 
-				view.attachTo( targetEl, limiterEl );
+				view.attachTo( targetEl );
 
-				expect( view.arrow ).to.equal( 'ne' );
+				expect( view.position ).to.equal( 'ne' );
 			} );
 
 			it( 'should put balloon on the `south east` position when `north east` is limited', () => {
@@ -361,11 +365,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				testUtils.sinon.stub( window, 'scrollY', 400 );
+				view.attachTo( targetEl );
 
-				view.attachTo( targetEl, limiterEl );
-
-				expect( view.arrow ).to.equal( 'se' );
+				expect( view.position ).to.equal( 'se' );
 			} );
 		} );
 	} );

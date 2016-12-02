@@ -3,15 +3,16 @@
  * For licensing, see LICENSE.md.
  */
 
-/* globals window, Range, HTMLElement */
+/* global document */
 
 import View from '../view.js';
 import Template from '../template.js';
+import { getOptimalPosition } from '../../utils/dom/position.js';
 import toUnit from '../../utils/dom/tounit.js';
 
 const toPx = toUnit( 'px' );
-const arrowLeftOffset = 30;
-const arrowTopOffset = 15;
+const arrowHOffset = 30;
+const arrowVOffset = 15;
 
 /**
  * The balloon panel view class.
@@ -49,13 +50,16 @@ export default class BalloonPanelView extends View {
 		this.set( 'left', 0 );
 
 		/**
-		 * Balloon panel arrow direction.
+		 * Balloon panel's current position. Must correspond with
+		 * {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
+		 *
+		 * See {@link ui.balloonPanel.BalloonPanelView#positions}.
 		 *
 		 * @observable
 		 * @default 'se'
-		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#arrow
+		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#position
 		 */
-		this.set( 'arrow', 'se' );
+		this.set( 'position', 'se' );
 
 		/**
 		 * Controls whether the balloon panel is visible or not.
@@ -65,6 +69,40 @@ export default class BalloonPanelView extends View {
 		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
 		 */
 		this.set( 'isVisible', false );
+
+		/**
+		 * Positions taken intro consideration when attaching the panel
+		 * using {@link ui.balloonPanel.BalloonPanelView#attachTo} method.
+		 * Corresponding with {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
+		 *
+		 * See {@link ui.balloonPanel.BalloonPanelView#defaultPositions} to learn
+		 * about default available positions.
+		 *
+		 * Also see {@link ui.balloonPanel.BalloonPanelView#position}.
+		 *
+		 * @type {Array.<String>}
+		 */
+		this.positions = [
+			'se', 'sw', 'ne', 'nw'
+		];
+
+		/**
+		 * The DOM element or Range beyond which area the balloon panel should not be
+	 	 * positioned when using {@link ui.balloonPanel.BalloonPanelView#attachTo} method,
+	 	 * if possible.
+		 *
+		 * @type {HTMLElement|Range}
+		 */
+		this.limiter = document.body;
+
+		/**
+		 * Indicates that, if possible, the balloons should be positioned using
+		 * {@link ui.balloonPanel.BalloonPanelView#attachTo} so that if visually fits
+		 * into the visible browser viewport.
+		 *
+		 * @type {Boolean}
+		 */
+		this.fitInViewport = true;
 
 		/**
 		 * Max width of the balloon panel, as in CSS.
@@ -86,7 +124,7 @@ export default class BalloonPanelView extends View {
 			attributes: {
 				class: [
 					'ck-balloon-panel',
-					bind.to( 'arrow', ( value ) => `ck-balloon-panel_arrow_${ value }` ),
+					bind.to( 'position', ( value ) => `ck-balloon-panel_arrow_${ value }` ),
 					bind.if( 'isVisible', 'ck-balloon-panel_visible' )
 				],
 
@@ -123,282 +161,96 @@ export default class BalloonPanelView extends View {
 	}
 
 	/**
-	 * Attaches the balloon panel to a specified DOM element or range with a smart heuristics.
+	 * Attaches the balloon panel to a specified DOM element or range with a smart heuristics,
+	 * taking {@link ui.balloonPanel.BalloonPanelView#positions}, {@link ui.balloonPanel.BalloonPanelView#limiter}
+	 * and {@link ui.balloonPanel.BalloonPanelView#fitInViewport} into consideration.
 	 *
-	 * **Notes**:
-	 *
-	 * * The algorithm takes the geometry of the "limiter element" into consideration so,
-	 * if possible, the balloon is positioned within the rect of that element.
-	 * * If possible, the balloon is positioned within the area of the "limiter element"
-	 * fitting into the browser viewport visible to the user. It prevents the panel from
-	 * appearing off screen.
-	 *
-	 * The heuristics chooses from among 4 available positions relative to the target DOM element or range:
-	 *
-	 * * South east:
-	 *
-	 *		[ Target ]
-	 *		    ^
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *
-	 *
-	 * * South west:
-	 *
-	 *		         [ Target ]
-	 *		              ^
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *
-	 *
-	 * * North east:
-	 *
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *		    V
-	 *		[ Target ]
-	 *
-	 *
-	 * * North west:
-	 *
-	 *		+-----------------+
-	 *		|                 |
-	 *		+-----------------+
-	 *		              V
-	 *		         [ Target ]
-	 *
-	 * See {@ link ui.balloonPanel.BalloonPanelView#arrow}.
-	 *
-	 * @param {HTMLElement|Range} elementOrRange Target DOM element or range to which the balloon will be attached.
-	 * @param {HTMLElement|Object} limiterElementOrRect The DOM element or element rect beyond which area the balloon panel should not be
-	 * positioned, if possible.
+	 * @param {[type]} target [description]
+	 * @returns {[type]} [description]
 	 */
-	attachTo( elementOrRange, limiterElementOrRect ) {
+	attachTo( target ) {
 		this.show();
 
-		const elementOrRangeRect = new AbsoluteDomRect( elementOrRange );
-		const panelRect = new AbsoluteDomRect( this.element );
-		const limiterVisibleRect = getAbsoluteRectVisibleInTheViewport( limiterElementOrRect );
-
-		// Create a rect for each of the possible balloon positions and feed them to _smartAttachTo,
-		// which will use whichever is the optimal. Position are ordered from most to less desired.
-		const possiblePanelRects = {
-			// The absolute rect for "South east" position.
-			se: panelRect.clone().moveTo( {
-				top: elementOrRangeRect.bottom + arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
-			} ),
-
-			// The absolute rect for "South west" position.
-			sw: panelRect.clone().moveTo( {
-				top: elementOrRangeRect.bottom + arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
-			} ),
-
-			// The absolute rect for "North east" position.
-			ne: panelRect.clone().moveTo( {
-				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - arrowLeftOffset
-			} ),
-
-			// The absolute rect for "North west" position.
-			nw: panelRect.clone().moveTo( {
-				top: elementOrRangeRect.top - panelRect.height - arrowTopOffset,
-				left: elementOrRangeRect.left + elementOrRangeRect.width / 2 - panelRect.width + arrowLeftOffset
-			} )
-		};
-
-		this._smartAttachTo( possiblePanelRects, limiterVisibleRect, panelRect.width * panelRect.height );
-	}
-
-	/**
-	 * For the given set of possible rects, chooses the one which fits the best into both - browser viewport and
-	 * `visibleContainerRect`, which is when their intersection has the biggest area. Note that priority is a possible
-	 * highest intersection area with browser viewport.
-	 *
-	 * @private
-	 * @param {Object} rects Set of positions where balloon can be placed.
-	 * @param {AbsoluteDomRect} visibleContainerRect The absolute rect of the visible part of container element.
-	 * @param {Number} panelSurfaceArea Panel surface area.
-	 */
-	_smartAttachTo( rects, visibleContainerRect, panelSurfaceArea ) {
-		const viewportRect = new AbsoluteDomRect( getAbsoluteViewportRect() );
-		const positionedAncestor = getPositionedAncestor( this.element.parentElement );
-
-		let maxIntersectRectPos;
-		let maxContainerIntersectArea = -1;
-		let maxViewportIntersectArea = -1;
-
-		// Find the best place. Stop searching when the position with fully visible panel has been found.
-		Object.keys( rects ).some( ( rectPos ) => {
-			const containerIntersectArea = rects[ rectPos ].getIntersectArea( visibleContainerRect );
-			const viewportIntersectArea = rects[ rectPos ].getIntersectArea( viewportRect );
-
-			if ( viewportIntersectArea >= maxViewportIntersectArea && containerIntersectArea > maxContainerIntersectArea ) {
-				maxIntersectRectPos = rectPos;
-				maxContainerIntersectArea = containerIntersectArea;
-				maxViewportIntersectArea = viewportIntersectArea;
-			}
-
-			return maxContainerIntersectArea === panelSurfaceArea;
+		const { top, left, name: position } = getOptimalPosition( {
+			element: this.element,
+			target: target,
+			positions: this.positions.map( p => BalloonPanelView.defaultPositions[ p ] ),
+			limiter: this.limiter,
+			fitInViewport: this.fitInViewport
 		} );
 
-		// Move the balloon panel.
-		this.arrow = maxIntersectRectPos;
-
-		let { top, left } = rects[ maxIntersectRectPos ];
-
-		// (#126) If there's some positioned ancestor of the panel, then its positioned rect must be taken into
-		// consideration because `AbsoluteDomRect` is always relative to the viewport.
-		if ( positionedAncestor ) {
-			const positionedAncestorRect = positionedAncestor.getBoundingClientRect();
-
-			top -= positionedAncestorRect.top;
-			left -= positionedAncestorRect.left;
-		}
-
-		this.top = top;
-		this.left = left;
+		Object.assign( this, { top, left, position } );
 	}
 }
 
-// An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
-//
-// @private
-class AbsoluteDomRect {
-	// Create instance of AbsoluteDomRect class.
-	//
-	// @param {HTMLElement|Range|Object} elementOrRangeOrRect Source object to create the rect.
-	constructor( elementOrRangeOrRect ) {
-		Object.assign( this, getAbsoluteRect( elementOrRangeOrRect ) );
-	}
+/**
+ * A default set of positioning functions used by the balloon panel view
+ * when attaching using {@link ui.balloonPanel.BalloonPanelView#attachTo} method.
+ *
+ * The available positioning functions are as follows:
+ *
+ * * South east:
+ *
+ *		[ Target ]
+ *		    ^
+ *		+-----------------+
+ *		|     Balloon     |
+ *		+-----------------+
+ *
+ *
+ * * South west:
+ *
+ *		         [ Target ]
+ *		              ^
+ *		+-----------------+
+ *		|     Balloon     |
+ *		+-----------------+
+ *
+ *
+ * * North east:
+ *
+ *		+-----------------+
+ *		|     Balloon     |
+ *		+-----------------+
+ *		    V
+ *		[ Target ]
+ *
+ *
+ * * North west:
+ *
+ *		+-----------------+
+ *		|     Balloon     |
+ *		+-----------------+
+ *		              V
+ *		         [ Target ]
+ *
+ * See {@link ui.balloonPanel.BalloonPanelView#positions},
+ * {@link ui.balloonPanel.BalloonPanelView#position}.
+ *
+ * @member {Object} ui.balloonPanel.BalloonPanelView#defaultPositions
+ */
+BalloonPanelView.defaultPositions = {
+	se: ( targetRect ) => ( {
+		top: targetRect.bottom + arrowVOffset,
+		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		name: 'se'
+	} ),
 
-	// Clone instance of this class.
-	//
-	// @returns {AbsoluteDomRect}
-	clone() {
-		return new AbsoluteDomRect( this );
-	}
+	sw: ( targetRect, balloonRect ) => ( {
+		top: targetRect.bottom + arrowVOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		name: 'sw'
+	} ),
 
-	// Move current box to specified position.
-	//
-	// @param {Number} top New to position.
-	// @param {Number} left New left position.
-	// @returns {AbsoluteDomRect}
-	moveTo( { top, left } ) {
-		this.top = top;
-		this.right = left + this.width;
-		this.bottom = top + this.height;
-		this.left = left;
+	ne: ( targetRect, balloonRect ) => ( {
+		top: targetRect.top - balloonRect.height - arrowVOffset,
+		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		name: 'ne'
+	} ),
 
-		return this;
-	}
-
-	// Get intersect surface area of this AbsoluteDomRect and other AbsoluteDomRect.
-	//
-	// @param {AbsoluteDomRect} rect
-	// @returns {Number} Overlap surface area.
-	getIntersectArea( rect ) {
-		const hOverlap = Math.max( 0, Math.min( this.right, rect.right ) - Math.max( this.left, rect.left ) );
-		const vOverlap = Math.max( 0, Math.min( this.bottom, rect.bottom ) - Math.max( this.top, rect.top ) );
-
-		return hOverlap * vOverlap;
-	}
-}
-
-// Returns the client rect of an HTMLElement, Range, or rect. The obtained geometry of the rect
-// corresponds with `position: absolute` relative to the `<body>` (`document.body`).
-//
-// @private
-// @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch rect is to be determined.
-// @returns {Object} Client rect object.
-function getAbsoluteRect( elementOrRangeOrRect ) {
-	if ( elementOrRangeOrRect instanceof HTMLElement || elementOrRangeOrRect instanceof Range ) {
-		let { top, right, bottom, left, width, height } = elementOrRangeOrRect.getBoundingClientRect();
-
-		return { top, right, bottom, left, width, height };
-	}
-	// A rect has been passed.
-	else {
-		const absoluteRect = Object.assign( {}, elementOrRangeOrRect );
-
-		if ( absoluteRect.width === undefined ) {
-			absoluteRect.width = absoluteRect.right - absoluteRect.left;
-		}
-
-		if ( absoluteRect.height === undefined ) {
-			absoluteRect.height = absoluteRect.bottom - absoluteRect.top;
-		}
-
-		return absoluteRect;
-	}
-}
-
-// For a given element, returns the nearest ancestor element which position is not "static".
-//
-// @private
-// @param {HTMLElement} element Element which ancestors are checked.
-// @returns {HTMLElement|null}
-function getPositionedAncestor( element ) {
-	while ( element && element.tagName.toLowerCase() != 'html' ) {
-		if ( window.getComputedStyle( element ).position != 'static' ) {
-			return element;
-		}
-
-		element = element.parentNode;
-	}
-
-	return null;
-}
-
-// Returns the client rect of the element limited by the visible (to the user)
-// viewport of the browser window.
-//
-//		[Browser viewport]
-//		+---------------------------------------+
-//		|                        [Element]      |
-//		|                        +----------------------+
-//		|                        |##############|       |
-//		|                        |##############|       |
-//		|                        |#######^######|       |
-//		|                        +-------|--------------+
-//		|                                |      |
-//		+--------------------------------|------+
-//		                                 |
-//		                                  \- [Element rect visible in the viewport]
-//
-// @private
-// @param {HTMLElement|Object} element Object which visible area rect is to be determined.
-// @returns {AbsoluteDomRect} An absolute rect of the area visible in the viewport.
-function getAbsoluteRectVisibleInTheViewport( element ) {
-	const elementRect = getAbsoluteRect( element );
-	const viewportRect = getAbsoluteViewportRect();
-
-	return new AbsoluteDomRect( {
-		top: Math.max( elementRect.top, viewportRect.top ),
-		left: Math.max( elementRect.left, viewportRect.left ),
-		right: Math.min( elementRect.right, viewportRect.right ),
-		bottom: Math.min( elementRect.bottom, viewportRect.bottom )
-	} );
-}
-
-// Get browser viewport rect.
-//
-// @private
-// @returns {Object} Viewport rect.
-function getAbsoluteViewportRect() {
-	const windowScrollX = window.scrollX;
-	const windowScrollY = window.scrollY;
-	const windowWidth = window.innerWidth;
-	const windowHeight = window.innerHeight;
-
-	return {
-		top: windowScrollY,
-		right: windowWidth + windowScrollX,
-		bottom: windowHeight + windowScrollY,
-		left: windowScrollX
-	};
-}
+	nw: ( targetRect, balloonRect ) => ( {
+		top: targetRect.top - balloonRect.height - arrowVOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		name: 'nw'
+	} )
+};
