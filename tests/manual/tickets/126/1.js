@@ -19,7 +19,7 @@ function createPanel( selector ) {
 	view.init().then( () => {
 		document.querySelector( `#${ selector }-container` ).appendChild( view.element );
 
-		view.attachTo( document.querySelector( `#anchor-${ selector }` ), document.body );
+		view.attachTo( document.querySelector( `#anchor-${ selector }` ) );
 		view.isVisible = true;
 	} );
 }
