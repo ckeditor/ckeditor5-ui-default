@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/editorui/editoruiview
+ */
+
 /* globals document */
 
 import View from '../view.js';
@@ -13,14 +17,13 @@ import iconManagerModel from '../../../theme/iconmanagermodel.js';
 /**
  * The editor UI view class. Base class for the editor main views.
  *
- * @memberOf ui.editorUI
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class EditorUIView extends View {
 	/**
 	 * Creates an instance of the editor UI view class.
 	 *
-	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
+	 * @param {module:utils/locale~Locale} [locale] The locale instance.
 	 */
 	constructor( locale ) {
 		super( locale );
@@ -30,7 +33,7 @@ export default class EditorUIView extends View {
 		 * structure of the editor, like panels, icons etc.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.editorUI.EditorUIView#body
+		 * @member {module:ui/viewcollection~ViewCollection} #body
 		 */
 		this.body = this.createCollection();
 
@@ -38,7 +41,7 @@ export default class EditorUIView extends View {
 		 * The element holding elements of the 'body' region.
 		 *
 		 * @private
-		 * @member {HTMLElement} ui.editorUI.EditorUIView#_bodyCollectionContainer
+		 * @member {HTMLElement} #_bodyCollectionContainer
 		 */
 	}
 
@@ -62,7 +65,7 @@ export default class EditorUIView extends View {
 	}
 
 	/**
-	 * Injects the {@link ui.iconManager.IconManager} into DOM.
+	 * Injects the {@link module:ui/iconmanager/iconmanagerview~IconManagerView} into DOM.
 	 *
 	 * @protected
 	 */

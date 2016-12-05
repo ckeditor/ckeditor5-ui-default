@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/balloonpanel/balloonpanelview
+ */
+
 /* globals window, document, Range, HTMLElement */
 
 import View from '../view.js';
@@ -16,10 +20,7 @@ const arrowTopOffset = 15;
 /**
  * The balloon panel view class.
  *
- * See {@link ui.balloonPanel.BalloonPanel}.
- *
- * @memberOf ui.balloonPanel
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class BalloonPanelView extends View {
 	/**
@@ -35,7 +36,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 0
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
+		 * @member {Number} #top
 		 */
 		this.set( 'top', 0 );
 
@@ -44,7 +45,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 0
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#left
+		 * @member {Number} #left
 		 */
 		this.set( 'left', 0 );
 
@@ -53,7 +54,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 'se'
-		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#arrow
+		 * @member {'se'|'sw'|'ne'|'nw'} #arrow
 		 */
 		this.set( 'arrow', 'se' );
 
@@ -62,7 +63,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default false
-		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
+		 * @member {Boolean} #isVisible
 		 */
 		this.set( 'isVisible', false );
 
@@ -70,14 +71,14 @@ export default class BalloonPanelView extends View {
 		 * Max width of the balloon panel, as in CSS.
 		 *
 		 * @observable
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#maxWidth
+		 * @member {Number} #maxWidth
 		 */
 
 		/**
 		 * Collection of the child views which creates balloon panel contents.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.list.ListView#content
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.content = this.createCollection();
 
@@ -107,7 +108,7 @@ export default class BalloonPanelView extends View {
 	/**
 	 * Shows the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
+	 * See {@link #isVisible}.
 	 */
 	show() {
 		this.isVisible = true;
@@ -116,7 +117,7 @@ export default class BalloonPanelView extends View {
 	/**
 	 * Hides the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
+	 * See {@link #isVisible}.
 	 */
 	hide() {
 		this.isVisible = false;
@@ -170,11 +171,11 @@ export default class BalloonPanelView extends View {
 	 *		              V
 	 *		         [ Target ]
 	 *
-	 * See {@ link ui.balloonPanel.BalloonPanelView#arrow}.
+	 * See {@link #arrow}.
 	 *
 	 * @param {HTMLElement|Range} elementOrRange Target DOM element or range to which the balloon will be attached.
-	 * @param {HTMLElement|Object} limiterElementOrRect The DOM element or element rect beyond which area the balloon panel should not be
-	 * positioned, if possible.
+	 * @param {HTMLElement|Object} limiterElementOrRect The DOM element or element rect
+	 * beyond which area the balloon panel should not be positioned, if possible.
 	 */
 	attachTo( elementOrRange, limiterElementOrRect ) {
 		this.show();
@@ -221,7 +222,8 @@ export default class BalloonPanelView extends View {
 	 *
 	 * @private
 	 * @param {Object} rects Set of positions where balloon can be placed.
-	 * @param {AbsoluteDomRect} visibleContainerRect The absolute rect of the visible part of container element.
+	 * @param {module:ui/balloonpanel/balloonpanelview~AbsoluteDomRect} visibleContainerRect The absolute rect of the
+	 * visible part of container element.
 	 * @param {Number} panelSurfaceArea Panel surface area.
 	 */
 	_smartAttachTo( rects, visibleContainerRect, panelSurfaceArea ) {
@@ -251,13 +253,15 @@ export default class BalloonPanelView extends View {
 	}
 }
 
-// An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
-//
-// Note: The geometry used by each instance corresponds with coordinates of an object
-// with `position: absolute` relative to the `<body>` (`document.body`), and hence
-// it is useful to manage such objects.
-//
-// @private
+/**
+ * An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
+ *
+ * Note: The geometry used by each instance corresponds with coordinates of an object
+ * with `position: absolute` relative to the `<body>` (`document.body`), and hence
+ * it is useful to manage such objects.
+ *
+ * @private
+ */
 class AbsoluteDomRect {
 	// Create instance of AbsoluteDomRect class.
 	//

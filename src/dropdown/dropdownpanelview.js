@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/dropdown/dropdownpanelview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The dropdown panel view class.
  *
- * See {@link ui.dropdown.DropdownPanel}.
- *
- * @memberOf ui.dropdown
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class DropdownPanelView extends View {
 	/**
@@ -27,7 +28,7 @@ export default class DropdownPanelView extends View {
 		 * Controls whether the panel is visible.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownPanelView#isVisible
+		 * @member {Boolean} #isVisible
 		 */
 		this.set( 'isVisible', false );
 
@@ -35,7 +36,7 @@ export default class DropdownPanelView extends View {
 		 * Collection of the child views.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.dropdown.DropdownPanelView#children
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.children = this.createCollection();
 

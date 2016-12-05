@@ -3,20 +3,23 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/iframe/iframeview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The iframe view class.
  *
- * @memberOf ui.iframe
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class IframeView extends View {
 	/**
 	 * Creates a new instance of the iframe view.
 	 *
-	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
+	 * @param {module:utils/locale~Locale} [locale] The locale instance.
 	 */
 	constructor( locale ) {
 		super( locale );
@@ -37,23 +40,23 @@ export default class IframeView extends View {
 		} );
 
 		/**
-		 * A promise returned by {@link init} since iframe loading may be asynchronous.
+		 * A promise returned by {@link #init} since iframe loading may be asynchronous.
 		 *
-		 * **Note**: Listening to `load` in {@link init} makes no sense because at this point
+		 * **Note**: Listening to `load` in {@link #init} makes no sense because at this point
 		 * the element is already in the DOM and the `load` event might already be fired.
 		 *
-		 * See {@link _iframeDeferred}.
+		 * See {@link #_iframeDeferred}.
 		 *
 		 * @private
-		 * @member {Object} ui.iframe.IframeView#_iframePromise
+		 * @member {Promise}
 		 */
 		this._iframePromise = new Promise( ( resolve, reject ) => {
 			/**
 			 * A deferred object used to resolve the iframe promise associated with
-			 * asynchronous loading of `contentDocument`. See {@link _iframePromise}.
+			 * asynchronous loading of `contentDocument`. See {@link #_iframePromise}.
 			 *
 			 * @private
-			 * @member {Object} ui.iframe.IframeView#_iframeDeferred
+			 * @member {Object}
 			 */
 			this._iframeDeferred = { resolve, reject };
 		} );
@@ -64,11 +67,11 @@ export default class IframeView extends View {
 	}
 
 	/**
-	 * Initializes iframe {@link element} and returns a `Promise` for asynchronous
-	 * child `contentDocument` loading process. See {@link _iframePromise}.
+	 * Initializes iframe {@link #element} and returns a `Promise` for asynchronous
+	 * child `contentDocument` loading process. See {@link #_iframePromise}.
 	 *
 	 * @returns {Promise} A promise which resolves once the iframe `contentDocument` has
-	 * been {@link ui.iframe.IframeView#loaded loaded}.
+	 * been {@link #event:loaded}.
 	 */
 	init() {
 		super.init();
@@ -80,5 +83,5 @@ export default class IframeView extends View {
 /**
  * Fired when the DOM iframe's `contentDocument` finished loading.
  *
- * @event ui.iframe.IframeView#loaded
+ * @event #loaded
  */

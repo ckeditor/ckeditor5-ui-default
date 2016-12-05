@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/labeledinput/labeledinputview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 import uid from '../../utils/uid.js';
@@ -12,14 +16,13 @@ import LabelView from '../label/labelview.js';
 /**
  * The labeled input view class.
  *
- * @memberOf ui.labeledInput
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class LabeledInputView extends View {
 	/**
 	 * Creates an instance of the labeled input view class.
 	 *
-	 * @param {utils.Locale} locale The {@link core.editor.Editor#locale editor's locale} instance.
+	 * @param {module:utils/locale~Locale} locale The locale instance.
 	 * @param {Function} InputView Constructor of the input view.
 	 */
 	constructor( locale, InputView ) {
@@ -31,7 +34,7 @@ export default class LabeledInputView extends View {
 		 * The text of the label.
 		 *
 		 * @observable
-		 * @member {String} ui.labeledInput.LabeledInputView#label
+		 * @member {String} #label
 		 */
 		this.set( 'label' );
 
@@ -39,21 +42,21 @@ export default class LabeledInputView extends View {
 		 * The value of the input.
 		 *
 		 * @observable
-		 * @member {String} ui.labeledInput.LabeledInputView#value
+		 * @member {String} #value
 		 */
 		this.set( 'value' );
 
 		/**
 		 * The label view.
 		 *
-		 * @member {ui.label.LabelView} ui.labeledInput.LabeledInputView#labelView
+		 * @member {module:ui/label/labelview~LabelView} #labelView
 		 */
 		this.addChildren( this.labelView = this._createLabelView( id ) );
 
 		/**
 		 * The input view.
 		 *
-		 * @member {ui.View} ui.labeledInput.LabeledInputView#inputView
+		 * @member {module:ui/view~View} #inputView
 		 */
 		this.addChildren( this.inputView = this._createInputView( InputView, id ) );
 
@@ -72,7 +75,7 @@ export default class LabeledInputView extends View {
 	 *
 	 * @private
 	 * @param {String} id Unique id to set as labelView#for attribute.
-	 * @returns {ui.label.LabelView}
+	 * @returns {module:ui/label/labelview~LabelView}
 	 */
 	_createLabelView( id ) {
 		const labelView = new LabelView( this.locale );
@@ -87,9 +90,9 @@ export default class LabeledInputView extends View {
 	 * Creates input view class instance and bind with view.
 	 *
 	 * @private
-	 * @param {ui.input} InputView Input view constructor.
+	 * @param {Function} InputView Input view constructor.
 	 * @param {String} id Unique id to set as inputView#id attribute.
-	 * @returns {ui.input}
+	 * @returns {module:ui/inputtext/inputtextview~InputTextView}
 	 */
 	_createInputView( InputView, id ) {
 		const inputView = new InputView( this.locale );

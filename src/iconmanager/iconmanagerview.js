@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/iconmanager/iconmanagerview
+ */
+
 /* globals document */
 
 import View from '../view.js';
@@ -11,10 +15,7 @@ import Template from '../template.js';
 /**
  * The icon manager view class.
  *
- * See {@link ui.iconManager.IconManager}.
- *
- * @memberOf ui.iconManager
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class IconManagerView extends View {
 	/**
@@ -37,7 +38,7 @@ export default class IconManagerView extends View {
 		/**
 		 * The actual SVG (HTML) of the icons to be injected in DOM.
 		 *
-		 * @member {String} ui.iconManager.IconManagerView#sprite
+		 * @member {String}
 		 */
 		this.sprite = sprite;
 
@@ -45,11 +46,14 @@ export default class IconManagerView extends View {
 		 * List of icon names available in the manager.
 		 *
 		 * @readonly
-		 * @member {Array.<String>} ui.iconManager.IconManagerView#icons
+		 * @member {Array.<String>}
 		 */
 		this.icons = icons;
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	init() {
 		// Note: In MS Edge it's not enough to set:
 		//
