@@ -83,5 +83,5 @@ export default class IframeView extends View {
 /**
  * Fired when the DOM iframe's `contentDocument` finished loading.
  *
- * @event #loaded
+ * @event loaded
  */
