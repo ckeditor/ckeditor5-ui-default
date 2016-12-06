@@ -112,7 +112,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'show', () => {
+	describe( 'show()', () => {
 		it( 'should set view#isVisible as true', () => {
 			view.isVisible = false;
 
@@ -122,7 +122,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'hide', () => {
+	describe( 'hide()', () => {
 		it( 'should set view#isVisible as false', () => {
 			view.isVisible = true;
 
@@ -132,7 +132,7 @@ describe( 'BalloonPanelView', () => {
 		} );
 	} );
 
-	describe( 'attachTo', () => {
+	describe( 'attachTo()', () => {
 		let targetEl, limiterEl;
 
 		beforeEach( () => {
@@ -228,6 +228,54 @@ describe( 'BalloonPanelView', () => {
 				view.attachTo( targetEl, limiterEl );
 
 				expect( view.arrow ).to.equal( 'nw' );
+			} );
+
+			// #126
+			it( 'works in a positioned ancestor (position: absolute)', () => {
+				const positionedAncestor = document.createElement( 'div' );
+
+				positionedAncestor.style.position = 'absolute';
+				positionedAncestor.style.top = '100px';
+				positionedAncestor.style.left = '100px';
+				positionedAncestor.appendChild( view.element );
+
+				document.body.appendChild( positionedAncestor );
+				positionedAncestor.appendChild( view.element );
+
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 0,
+					width: 100,
+					height: 100
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.top ).to.equal( 15 );
+				expect( view.left ).to.equal( -80 );
+			} );
+
+			// #126
+			it( 'works in a positioned ancestor (position: static)', () => {
+				const positionedAncestor = document.createElement( 'div' );
+
+				positionedAncestor.style.position = 'static';
+				positionedAncestor.appendChild( view.element );
+
+				document.body.appendChild( positionedAncestor );
+				positionedAncestor.appendChild( view.element );
+
+				mockBoundingBox( targetEl, {
+					top: 0,
+					left: 0,
+					width: 100,
+					height: 100
+				} );
+
+				view.attachTo( targetEl, limiterEl );
+
+				expect( view.top ).to.equal( 115 );
+				expect( view.left ).to.equal( 20 );
 			} );
 		} );
 

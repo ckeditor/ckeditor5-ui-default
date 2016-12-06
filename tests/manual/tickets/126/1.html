@@ -1,0 +1,52 @@
+<head>
+	<link rel="stylesheet" href="/theme/ckeditor.css">
+</head>
+
+<div id="anchor-static" class="anchor"></div>
+<div id="anchor-relative" class="anchor"></div>
+<div id="anchor-absolute" class="anchor"></div>
+<div id="anchor-fixed" class="anchor"></div>
+
+<div class="ck-reset_all" id="static-container"></div>
+<div class="ck-reset_all" id="relative-container"></div>
+<div class="ck-reset_all" id="absolute-container"></div>
+<div class="ck-reset_all" id="fixed-container"></div>
+
+<style>
+	.anchor {
+		width: 10px;
+		height: 10px;
+		background: red;
+		margin: 5em;
+	}
+
+	#static-container {
+		margin: 5em;
+		padding: 5em;
+		position: static;
+	}
+
+	#relative-container {
+		margin: 5em;
+		padding: 5em;
+		position: relative;
+		top: 10em;
+		left: 10em;
+	}
+
+	#absolute-container {
+		margin: 5em;
+		padding: 5em;
+		position: absolute;
+		top: 4em;
+		right: 4em;
+	}
+
+	#fixed-container {
+		margin: 5em;
+		padding: 5em;
+		position: fixed;
+		right: 14em;
+		top: 6em;
+	}
+</style>

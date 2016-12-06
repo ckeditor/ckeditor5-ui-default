@@ -7,7 +7,7 @@
  * @module ui/balloonpanel/balloonpanelview
  */
 
-/* globals window, document, Range, HTMLElement */
+/* globals window, Range, HTMLElement */
 
 import View from '../view.js';
 import Template from '../template.js';
@@ -228,6 +228,8 @@ export default class BalloonPanelView extends View {
 	 */
 	_smartAttachTo( rects, visibleContainerRect, panelSurfaceArea ) {
 		const viewportRect = new AbsoluteDomRect( getAbsoluteViewportRect() );
+		const positionedAncestor = getPositionedAncestor( this.element.parentElement );
+
 		let maxIntersectRectPos;
 		let maxContainerIntersectArea = -1;
 		let maxViewportIntersectArea = -1;
@@ -248,17 +250,25 @@ export default class BalloonPanelView extends View {
 
 		// Move the balloon panel.
 		this.arrow = maxIntersectRectPos;
-		this.top = rects[ maxIntersectRectPos ].top;
-		this.left = rects[ maxIntersectRectPos ].left;
+
+		let { top, left } = rects[ maxIntersectRectPos ];
+
+		// (#126) If there's some positioned ancestor of the panel, then its positioned rect must be taken into
+		// consideration because `AbsoluteDomRect` is always relative to the viewport.
+		if ( positionedAncestor ) {
+			const positionedAncestorRect = positionedAncestor.getBoundingClientRect();
+
+			top -= positionedAncestorRect.top;
+			left -= positionedAncestorRect.left;
+		}
+
+		this.top = top;
+		this.left = left;
 	}
 }
 
 /**
- * An abstract class which represents a client rect of an HTMLElement or a Range in DOM.
- *
- * Note: The geometry used by each instance corresponds with coordinates of an object
- * with `position: absolute` relative to the `<body>` (`document.body`), and hence
- * it is useful to manage such objects.
+ * A class which represents a client rect of an HTMLElement or a Range in DOM.
  *
  * @private
  */
@@ -310,33 +320,42 @@ class AbsoluteDomRect {
 // @param {HTMLElement|Range|Object} elementOrRangeOrRect Target object witch rect is to be determined.
 // @returns {Object} Client rect object.
 function getAbsoluteRect( elementOrRangeOrRect ) {
-	const bodyRect = document.body.getBoundingClientRect();
-
 	if ( elementOrRangeOrRect instanceof HTMLElement || elementOrRangeOrRect instanceof Range ) {
-		const elementRect = elementOrRangeOrRect.getBoundingClientRect();
+		let { top, right, bottom, left, width, height } = elementOrRangeOrRect.getBoundingClientRect();
 
-		return {
-			top: elementRect.top - bodyRect.top,
-			right: elementRect.right - bodyRect.left,
-			bottom: elementRect.bottom - bodyRect.top,
-			left: elementRect.left - bodyRect.left,
-			width: elementRect.width,
-			height: elementRect.height
-		};
+		return { top, right, bottom, left, width, height };
+	}
+	// A rect has been passed.
+	else {
+		const absoluteRect = Object.assign( {}, elementOrRangeOrRect );
+
+		if ( absoluteRect.width === undefined ) {
+			absoluteRect.width = absoluteRect.right - absoluteRect.left;
+		}
+
+		if ( absoluteRect.height === undefined ) {
+			absoluteRect.height = absoluteRect.bottom - absoluteRect.top;
+		}
+
+		return absoluteRect;
+	}
+}
+
+// For a given element, returns the nearest ancestor element which position is not "static".
+//
+// @private
+// @param {HTMLElement} element Element which ancestors are checked.
+// @returns {HTMLElement|null}
+function getPositionedAncestor( element ) {
+	while ( element && element.tagName.toLowerCase() != 'html' ) {
+		if ( window.getComputedStyle( element ).position != 'static' ) {
+			return element;
+		}
+
+		element = element.parentNode;
 	}
 
-	// The rect has been passed.
-	const absoluteRect = Object.assign( {}, elementOrRangeOrRect );
-
-	if ( absoluteRect.width === undefined ) {
-		absoluteRect.width = absoluteRect.right - absoluteRect.left;
-	}
-
-	if ( absoluteRect.height === undefined ) {
-		absoluteRect.height = absoluteRect.bottom - absoluteRect.top;
-	}
-
-	return absoluteRect;
+	return null;
 }
 
 // Returns the client rect of the element limited by the visible (to the user)
