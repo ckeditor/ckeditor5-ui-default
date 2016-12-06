@@ -3,14 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/inputtext/inputtextview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The text input view class.
  *
- * @memberOf ui.input
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class InputTextView extends View {
 	/**
@@ -23,7 +26,7 @@ export default class InputTextView extends View {
 		 * The value of the input.
 		 *
 		 * @observable
-		 * @member {String} ui.input.InputTextView#value
+		 * @member {String} #value
 		 */
 		this.set( 'value' );
 
@@ -31,7 +34,7 @@ export default class InputTextView extends View {
 		 * The `id` attribute of the input (i.e. to pair with a `<label>` element).
 		 *
 		 * @observable
-		 * @member {String} ui.input.InputTextView#id
+		 * @member {String} #id
 		 */
 		this.set( 'id' );
 

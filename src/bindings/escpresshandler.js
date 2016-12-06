@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/bindings/escpresshandler
+ */
+
 /* global document */
 
 import { keyCodes } from '../../utils/keyboard.js';
@@ -11,7 +15,7 @@ import { keyCodes } from '../../utils/keyboard.js';
  * Detects <kbd>Esc</kbd> `keydown` DOM event and fires an action.
  *
  * @param {Object} options Configuration options.
- * @param {ui.DOMEmitter} options.emitter The emitter to which this behavior should be added.
+ * @param {module:utils/dom/emittermixin~Emitter} options.emitter The emitter to which this behavior should be added.
  * @param {Function} options.activator Function returning a `Boolean`, to determine whether handler is active.
  * @param {Function} options.callback Function fired after <kbd>Esc</kbd> is pressed.
  */

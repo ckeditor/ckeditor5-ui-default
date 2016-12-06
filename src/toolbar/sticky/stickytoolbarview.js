@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/toolbar/sticky/stickytoolbarview
+ */
+
 /* globals window */
 
 import Template from '../../template.js';
@@ -14,8 +18,7 @@ const toPx = toUnit( 'px' );
 /**
  * The sticky toolbar view class.
  *
- * @memberOf ui.stickyToolbar
- * @extends ui.toolbar.ToolbarView
+ * @extends module:ui/toolbar/toolbarview~ToolbarView
  */
 export default class StickyToolbarView extends ToolbarView {
 	/**
@@ -32,7 +35,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#isActive
+		 * @member {Boolean} #isActive
 		 */
 		this.set( 'isActive', false );
 
@@ -41,7 +44,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#isSticky
+		 * @member {Boolean} #isSticky
 		 */
 		this.set( 'isSticky', false );
 
@@ -54,19 +57,19 @@ export default class StickyToolbarView extends ToolbarView {
 		 *
 		 * @readonly
 		 * @observable
-		 * @member {HTMLElement} ui.toolbar.sticky.StickyToolbarView#limiterElement
+		 * @member {HTMLElement} #limiterElement
 		 */
 		this.set( 'limiterElement', null );
 
 		/**
-		 * The offset from the bottom edge of {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}
+		 * The offset from the bottom edge of {@link #limiterElement}
 		 * which stops the toolbar from stickying any further to prevent limiter's content
 		 * from being completely covered.
 		 *
 		 * @readonly
 		 * @observable
 		 * @default 50
-		 * @member {Number} ui.toolbar.sticky.StickyToolbarView#limiterOffset
+		 * @member {Number} #limiterOffset
 		 */
 		this.set( 'limiterOffset', 50 );
 
@@ -76,34 +79,34 @@ export default class StickyToolbarView extends ToolbarView {
 		 * @protected
 		 * @readonly
 		 * @observable
-		 * @member {String} ui.toolbar.sticky.StickyToolbarView#_marginLeft
+		 * @member {String} #_marginLeft
 		 */
 		this.set( '_marginLeft', null );
 
 		/**
 		 * Set `true` if the sticky toolbar reached the bottom edge of the
-		 * {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}.
+		 * {@link #limiterElement}.
 		 *
 		 * @protected
 		 * @readonly
 		 * @observable
-		 * @member {Boolean} ui.toolbar.sticky.StickyToolbarView#_isStickyToTheLimiter
+		 * @member {Boolean} #_isStickyToTheLimiter
 		 */
 		this.set( '_isStickyToTheLimiter', false );
 
 		/**
-		 * The DOM bounding client rect of the {@link ui.View#element} of the toolbar.
+		 * The DOM bounding client rect of the {@link module:ui/view~View#element} of the toolbar.
 		 *
 		 * @protected
-		 * @member {Object} ui.toolbar.sticky.StickyToolbarView#_toolbarRect
+		 * @member {Object} #_toolbarRect
 		 */
 
 		/**
-		 * The DOM bounding client rect of the {@link ui.toolbar.sticky.StickyToolbarView#limiterElement}
+		 * The DOM bounding client rect of the {@link #limiterElement}
 		 * of the toolbar.
 		 *
 		 * @protected
-		 * @member {Object} ui.toolbar.sticky.StickyToolbarView#_limiterRect
+		 * @member {Object} #_limiterRect
 		 */
 
 		Template.extend( this.template, {
@@ -132,7 +135,7 @@ export default class StickyToolbarView extends ToolbarView {
 		 * actual toolbar is sticky. It prevents flickering of the UI.
 		 *
 		 * @private
-		 * @property {HTMLElement} ui.toolbar.sticky.StickyToolbarView#_elementPlaceholder
+		 * @property {HTMLElement}
 		 */
 		this._elementPlaceholder = new Template( {
 			tag: 'div',
@@ -170,7 +173,7 @@ export default class StickyToolbarView extends ToolbarView {
 	}
 
 	/**
-	 * Destroys the toolbar and removes the {@link _elementPlaceholder}.
+	 * Destroys the toolbar and removes the {@link #_elementPlaceholder}.
 	 */
 	destroy() {
 		return super.destroy().then( () => {
@@ -180,8 +183,7 @@ export default class StickyToolbarView extends ToolbarView {
 
 	/**
 	 * Analyzes the environment to decide whether the toolbar should
-	 * be sticky or not. Then, it uses {@link _stick} and {@link _detach}
-	 * methods to manage the state of the toolbar.
+	 * be sticky or not.
 	 *
 	 * @protected
 	 */

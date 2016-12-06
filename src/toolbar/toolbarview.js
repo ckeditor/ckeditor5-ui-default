@@ -3,14 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/toolbar/toolbarview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The toolbar view class.
  *
- * @memberOf ui.toolbar
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class ToolbarView extends View {
 	/**

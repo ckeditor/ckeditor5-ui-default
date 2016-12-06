@@ -3,7 +3,11 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
+/**
+ * @module ui/balloonpanel/balloonpanelview
+ */
+
+/* globals document */
 
 import View from '../view.js';
 import Template from '../template.js';
@@ -17,10 +21,7 @@ const arrowVOffset = 15;
 /**
  * The balloon panel view class.
  *
- * See {@link ui.balloonPanel.BalloonPanel}.
- *
- * @memberOf ui.balloonPanel
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class BalloonPanelView extends View {
 	/**
@@ -36,7 +37,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 0
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#top
+		 * @member {Number} #top
 		 */
 		this.set( 'top', 0 );
 
@@ -45,7 +46,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 0
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#left
+		 * @member {Number} #left
 		 */
 		this.set( 'left', 0 );
 
@@ -57,7 +58,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default 'se'
-		 * @member {'se'|'sw'|'ne'|'nw'} ui.balloonPanel.BalloonPanelView#position
+		 * @member {'se'|'sw'|'ne'|'nw'} #position
 		 */
 		this.set( 'position', 'se' );
 
@@ -66,7 +67,7 @@ export default class BalloonPanelView extends View {
 		 *
 		 * @observable
 		 * @default false
-		 * @member {Boolean} ui.balloonPanel.BalloonPanelView#isVisible
+		 * @member {Boolean} #isVisible
 		 */
 		this.set( 'isVisible', false );
 
@@ -74,14 +75,14 @@ export default class BalloonPanelView extends View {
 		 * Max width of the balloon panel, as in CSS.
 		 *
 		 * @observable
-		 * @member {Number} ui.balloonPanel.BalloonPanelView#maxWidth
+		 * @member {Number} #maxWidth
 		 */
 
 		/**
 		 * Collection of the child views which creates balloon panel contents.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.list.ListView#content
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.content = this.createCollection();
 
@@ -111,7 +112,7 @@ export default class BalloonPanelView extends View {
 	/**
 	 * Shows the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
+	 * See {@link #isVisible}.
 	 */
 	show() {
 		this.isVisible = true;
@@ -120,16 +121,18 @@ export default class BalloonPanelView extends View {
 	/**
 	 * Hides the balloon panel.
 	 *
-	 * See {@link ui.balloonPanel.BalloonPanelView#isVisible}.
+	 * See {@link #isVisible}.
 	 */
 	hide() {
 		this.isVisible = false;
 	}
 
 	/**
-	 * Attaches the balloon panel to a specified DOM element or range with a smart heuristics,
-	 * taking {@link ui.balloonPanel.BalloonPanelView#positions}, {@link ui.balloonPanel.BalloonPanelView#limiter}
-	 * and {@link ui.balloonPanel.BalloonPanelView#fitInViewport} into consideration.
+	 * Attaches the balloon panel to a specified DOM element or range with a smart heuristics.
+	 *
+	 * See {@link @link module:utils/dom/position~getOptimalPosition}.
+	 *
+	 * TODO: More docs and examples.
 	 *
 	 * @param {module:utils/dom/position~Options} options Positioning options compatible with
 	 * {@link module:utils/dom/position~getOptimalPosition}. Default `positions` array is

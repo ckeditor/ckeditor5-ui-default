@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/editorui/boxed/boxededitoruiview
+ */
+
 import EditorUIView from '../../editorui/editoruiview.js';
 import uid from '../../../utils/uid.js';
 import Template from '../../template.js';
@@ -11,14 +15,13 @@ import Template from '../../template.js';
  * The boxed editor UI view class. This class represents an editor interface
  * consisting of a toolbar and an editable area, enclosed within a box.
  *
- * @member ui.editorUI.boxed
- * @extends ui.editorUI.EditorUIView
+ * @extends module:ui/editorui/editoruiview~EditorUIView
  */
 export default class BoxedEditorUIView extends EditorUIView {
 	/**
 	 * Creates an instance of the boxed editor UI view class.
 	 *
-	 * @param {utils.Locale} locale The {@link core.editor.Editor#locale} instance.
+	 * @param {module:utils/locale~Locale} locale The locale instance..
 	 */
 	constructor( locale ) {
 		super( locale );
@@ -30,7 +33,7 @@ export default class BoxedEditorUIView extends EditorUIView {
 		 * The UI's width.
 		 *
 		 * @observable
-		 * @member {Number} width ui.editorUI.boxed.BoxedEditorUIView#width
+		 * @member {Number} #width
 		 */
 		this.set( 'width', null );
 
@@ -38,7 +41,7 @@ export default class BoxedEditorUIView extends EditorUIView {
 		 * The UI's height.
 		 *
 		 * @observable
-		 * @member {Number} height ui.editorUI.boxed.BoxedEditorUIView#height
+		 * @member {Number} #height
 		 */
 		this.set( 'height', null );
 
@@ -47,7 +50,7 @@ export default class BoxedEditorUIView extends EditorUIView {
 		 * area of the UI.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.editorUI.boxed.BoxedEditorUIView#top
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.top = this.createCollection();
 
@@ -56,7 +59,7 @@ export default class BoxedEditorUIView extends EditorUIView {
 		 * area of the UI.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.editorUI.boxed.BoxedEditorUIView#main
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.main = this.createCollection();
 

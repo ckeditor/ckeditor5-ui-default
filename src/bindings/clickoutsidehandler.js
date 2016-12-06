@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/bindings/clickoutsidehandler
+ */
+
 /* global document */
 
 /**
@@ -12,7 +16,7 @@
  * opens and closes element at the same time.
  *
  * @param {Object} options Configuration options.
- * @param {ui.DOMEmitter} options.emitter The emitter to which this behavior should be added.
+ * @param {module:utils/dom/emittermixin~Emitter} options.emitter The emitter to which this behavior should be added.
  * @param {Function} options.activator Function returning a `Boolean`, to determine whether handler is active.
  * @param {HTMLElement} options.contextElement `HTMLElement` that clicking inside of which will not fire the callback.
  * @param {Function} options.callback Function fired after clicking outside of a specified element.
