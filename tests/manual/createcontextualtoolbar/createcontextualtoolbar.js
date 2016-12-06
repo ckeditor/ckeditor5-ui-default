@@ -18,8 +18,7 @@ import Template from 'ckeditor5/ui/template.js';
 import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
 
-// This will become a standard feature of BalloonPanelView.
-Object.assign( BalloonPanelView.defaultPositions, {
+const positions = {
 	//	     [ Target ]
 	//	         ^
 	//	+-----------------+
@@ -62,8 +61,8 @@ Object.assign( BalloonPanelView.defaultPositions, {
 		top: targetRect.top - balloonRect.height - 15,
 		left: targetRect.left - balloonRect.width / 2,
 		name: 'n'
-	} ),
-} );
+	} )
+};
 
 ClassicEditor.create( document.querySelector( '#editor' ), {
 	plugins: [ Enter, Typing, Paragraph, Undo, Bold, Italic ],
@@ -73,8 +72,6 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 	const viewDocument = editor.editing.view;
 	const toolbarView = new ToolbarView();
 	const balloonPanelView = new BalloonPanelView( editor.locale );
-
-	balloonPanelView.positions = [ 'se', 'sw' ];
 
 	Template.extend( balloonPanelView.template, {
 		attributes: {
@@ -95,15 +92,18 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 		balloonPanelView.bind( 'isVisible' ).to( editor.ui.focusTracker, 'isFocused' );
 
 		editor.listenTo( viewDocument, 'click', () => {
+			let preferredPositions;
+
 			if ( viewDocument.selection.isCollapsed ) {
-				balloonPanelView.positions = [ 's' ];
+				preferredPositions = [ positions.s ];
 			} else {
-				balloonPanelView.positions =  [
-					viewDocument.selection.isBackward ? 'backwardSelection' : 'forwardSelection'
-				];
+				preferredPositions = [ positions[ viewDocument.selection.isBackward ? 'backwardSelection' : 'forwardSelection' ] ];
 			}
 
-			balloonPanelView.attachTo( viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ) );
+			balloonPanelView.attachTo( {
+				target: viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
+				positions: preferredPositions
+			} );
 		} );
 	} );
 
