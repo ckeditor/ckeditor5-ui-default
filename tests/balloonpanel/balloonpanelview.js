@@ -10,6 +10,7 @@ import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
 import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
+import * as positionUtils from 'ckeditor5/utils/dom/position.js';
 
 testUtils.createSinonSandbox();
 
@@ -138,11 +139,11 @@ describe( 'BalloonPanelView', () => {
 	} );
 
 	describe( 'attachTo()', () => {
-		let targetEl, limiterEl;
+		let target, limiter;
 
 		beforeEach( () => {
-			limiterEl = document.createElement( 'div' );
-			targetEl = document.createElement( 'div' );
+			limiter = document.createElement( 'div' );
+			target = document.createElement( 'div' );
 
 			// Mock balloon panel element dimensions.
 			mockBoundingBox( view.element, {
@@ -152,17 +153,34 @@ describe( 'BalloonPanelView', () => {
 				height: 100
 			} );
 
-			view.limiter = limiterEl;
-
-			// Make sure that limiterEl is fully visible in viewport.
+			// Make sure that limiter is fully visible in viewport.
 			testUtils.sinon.stub( window, 'innerWidth', 500 );
 			testUtils.sinon.stub( window, 'innerHeight', 500 );
+		} );
+
+		it( 'should use default options', () => {
+			const spy = testUtils.sinon.spy( positionUtils, 'getOptimalPosition' );
+
+			view.attachTo( { target } );
+
+			sinon.assert.calledWithExactly( spy, sinon.match( {
+				element: view.element,
+				target: target,
+				positions: [
+					BalloonPanelView.defaultPositions.se,
+					BalloonPanelView.defaultPositions.sw,
+					BalloonPanelView.defaultPositions.ne,
+					BalloonPanelView.defaultPositions.nw
+				],
+				limiter: document.body,
+				fitInViewport: true
+			} ) );
 		} );
 
 		describe( 'limited by limiter element', () => {
 			beforeEach( () => {
 				// Mock limiter element dimensions.
-				mockBoundingBox( limiterEl, {
+				mockBoundingBox( limiter, {
 					left: 0,
 					top: 0,
 					width: 500,
@@ -171,67 +189,67 @@ describe( 'BalloonPanelView', () => {
 			} );
 
 			it( 'should put balloon on the `south east` side of the target element at default', () => {
-				// Place target element at the center of the limiterEl.
-				mockBoundingBox( targetEl, {
+				// Place target element at the center of the limiter.
+				mockBoundingBox( target, {
 					top: 225,
 					left: 225,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'se' );
 			} );
 
-			it( 'should put balloon on the `south east` side of the target element when target is on the top left side of the limiterEl', () => {
-				mockBoundingBox( targetEl, {
+			it( 'should put balloon on the `south east` side of the target element when target is on the top left side of the limiter', () => {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'se' );
 			} );
 
-			it( 'should put balloon on the `south west` side of the target element when target is on the right side of the limiterEl', () => {
-				mockBoundingBox( targetEl, {
+			it( 'should put balloon on the `south west` side of the target element when target is on the right side of the limiter', () => {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 450,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'sw' );
 			} );
 
-			it( 'should put balloon on the `north east` side of the target element when target is on the bottom of the limiterEl ', () => {
-				mockBoundingBox( targetEl, {
+			it( 'should put balloon on the `north east` side of the target element when target is on the bottom of the limiter ', () => {
+				mockBoundingBox( target, {
 					top: 450,
 					left: 0,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'ne' );
 			} );
 
-			it( 'should put balloon on the `north west` side of the target element when target is on the bottom right of the limiterEl', () => {
-				mockBoundingBox( targetEl, {
+			it( 'should put balloon on the `north west` side of the target element when target is on the bottom right of the limiter', () => {
+				mockBoundingBox( target, {
 					top: 450,
 					left: 450,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'nw' );
 			} );
@@ -248,14 +266,14 @@ describe( 'BalloonPanelView', () => {
 				document.body.appendChild( positionedAncestor );
 				positionedAncestor.appendChild( view.element );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
 					width: 100,
 					height: 100
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.top ).to.equal( 15 );
 				expect( view.left ).to.equal( -80 );
@@ -271,14 +289,14 @@ describe( 'BalloonPanelView', () => {
 				document.body.appendChild( positionedAncestor );
 				positionedAncestor.appendChild( view.element );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
 					width: 100,
 					height: 100
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.top ).to.equal( 115 );
 				expect( view.left ).to.equal( 20 );
@@ -287,14 +305,14 @@ describe( 'BalloonPanelView', () => {
 
 		describe( 'limited by viewport', () => {
 			it( 'should put balloon on the `south west` position when `south east` is limited', () => {
-				mockBoundingBox( limiterEl, {
+				mockBoundingBox( limiter, {
 					left: 0,
 					top: 0,
 					width: 500,
 					height: 500
 				} );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 225,
 					width: 50,
@@ -303,40 +321,40 @@ describe( 'BalloonPanelView', () => {
 
 				testUtils.sinon.stub( window, 'innerWidth', 275 );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'sw' );
 			} );
 
 			it( 'should put balloon on the `south east` position when `south west` is limited', () => {
-				mockBoundingBox( limiterEl, {
+				mockBoundingBox( limiter, {
 					top: 0,
 					left: -400,
 					width: 500,
 					height: 500
 				} );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'se' );
 			} );
 
 			it( 'should put balloon on the `north east` position when `south east` is limited', () => {
-				mockBoundingBox( limiterEl, {
+				mockBoundingBox( limiter, {
 					left: 0,
 					top: 0,
 					width: 500,
 					height: 500
 				} );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 225,
 					left: 0,
 					width: 50,
@@ -345,27 +363,27 @@ describe( 'BalloonPanelView', () => {
 
 				testUtils.sinon.stub( window, 'innerHeight', 275 );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'ne' );
 			} );
 
 			it( 'should put balloon on the `south east` position when `north east` is limited', () => {
-				mockBoundingBox( limiterEl, {
+				mockBoundingBox( limiter, {
 					left: 0,
 					top: -400,
 					width: 500,
 					height: 500
 				} );
 
-				mockBoundingBox( targetEl, {
+				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
 					width: 50,
 					height: 50
 				} );
 
-				view.attachTo( targetEl );
+				view.attachTo( { target, limiter } );
 
 				expect( view.position ).to.equal( 'se' );
 			} );

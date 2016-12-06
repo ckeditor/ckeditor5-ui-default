@@ -71,40 +71,6 @@ export default class BalloonPanelView extends View {
 		this.set( 'isVisible', false );
 
 		/**
-		 * Positions taken intro consideration when attaching the panel
-		 * using {@link ui.balloonPanel.BalloonPanelView#attachTo} method.
-		 * Corresponding with {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
-		 *
-		 * See {@link ui.balloonPanel.BalloonPanelView#defaultPositions} to learn
-		 * about default available positions.
-		 *
-		 * Also see {@link ui.balloonPanel.BalloonPanelView#position}.
-		 *
-		 * @type {Array.<String>}
-		 */
-		this.positions = [
-			'se', 'sw', 'ne', 'nw'
-		];
-
-		/**
-		 * The DOM element or Range beyond which area the balloon panel should not be
-	 	 * positioned when using {@link ui.balloonPanel.BalloonPanelView#attachTo} method,
-	 	 * if possible.
-		 *
-		 * @type {HTMLElement|Range}
-		 */
-		this.limiter = document.body;
-
-		/**
-		 * Indicates that, if possible, the balloons should be positioned using
-		 * {@link ui.balloonPanel.BalloonPanelView#attachTo} so that if visually fits
-		 * into the visible browser viewport.
-		 *
-		 * @type {Boolean}
-		 */
-		this.fitInViewport = true;
-
-		/**
 		 * Max width of the balloon panel, as in CSS.
 		 *
 		 * @observable
@@ -165,19 +131,27 @@ export default class BalloonPanelView extends View {
 	 * taking {@link ui.balloonPanel.BalloonPanelView#positions}, {@link ui.balloonPanel.BalloonPanelView#limiter}
 	 * and {@link ui.balloonPanel.BalloonPanelView#fitInViewport} into consideration.
 	 *
-	 * @param {[type]} target [description]
-	 * @returns {[type]} [description]
+	 * @param {module:utils/dom/position~Options} options Positioning options compatible with
+	 * {@link module:utils/dom/position~getOptimalPosition}. Default `positions` array is
+	 * {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
 	 */
-	attachTo( target ) {
+	attachTo( options ) {
 		this.show();
 
-		const { top, left, name: position } = getOptimalPosition( {
+		const defaultPositions = BalloonPanelView.defaultPositions;
+		const positionOptions = Object.assign( {}, {
 			element: this.element,
-			target: target,
-			positions: this.positions.map( p => BalloonPanelView.defaultPositions[ p ] ),
-			limiter: this.limiter,
-			fitInViewport: this.fitInViewport
-		} );
+			positions: [
+				defaultPositions.se,
+				defaultPositions.sw,
+				defaultPositions.ne,
+				defaultPositions.nw
+			],
+			limiter: document.body,
+			fitInViewport: true
+		}, options );
+
+		const { top, left, name: position } = getOptimalPosition( positionOptions );
 
 		Object.assign( this, { top, left, position } );
 	}
@@ -224,8 +198,7 @@ export default class BalloonPanelView extends View {
  *		              V
  *		         [ Target ]
  *
- * See {@link ui.balloonPanel.BalloonPanelView#positions},
- * {@link ui.balloonPanel.BalloonPanelView#position}.
+ * See {@link ui.balloonPanel.BalloonPanelView#attachTo}.
  *
  * @member {Object} ui.balloonPanel.BalloonPanelView#defaultPositions
  */
