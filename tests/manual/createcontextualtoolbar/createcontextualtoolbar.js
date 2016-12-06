@@ -89,21 +89,15 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 			toolbarView.items.add( editor.ui.componentFactory.create( name ) );
 		}
 
-		balloonPanelView.bind( 'isVisible' ).to( editor.ui.focusTracker, 'isFocused' );
-
 		editor.listenTo( viewDocument, 'click', () => {
-			let preferredPositions;
-
-			if ( viewDocument.selection.isCollapsed ) {
-				preferredPositions = [ positions.s ];
+			if ( !viewDocument.selection.isCollapsed ) {
+				balloonPanelView.attachTo( {
+					target: viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
+					positions: [ positions[ viewDocument.selection.isBackward ? 'backwardSelection' : 'forwardSelection' ] ]
+				} );
 			} else {
-				preferredPositions = [ positions[ viewDocument.selection.isBackward ? 'backwardSelection' : 'forwardSelection' ] ];
+				balloonPanelView.hide();
 			}
-
-			balloonPanelView.attachTo( {
-				target: viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
-				positions: preferredPositions
-			} );
 		} );
 	} );
 
