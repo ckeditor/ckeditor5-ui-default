@@ -52,9 +52,7 @@ export default class BalloonPanelView extends View {
 
 		/**
 		 * Balloon panel's current position. Must correspond with
-		 * {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
-		 *
-		 * See {@link ui.balloonPanel.BalloonPanelView#positions}.
+		 * {@link module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions}.
 		 *
 		 * @observable
 		 * @default 'se'
@@ -136,7 +134,7 @@ export default class BalloonPanelView extends View {
 	 *
 	 * @param {module:utils/dom/position~Options} options Positioning options compatible with
 	 * {@link module:utils/dom/position~getOptimalPosition}. Default `positions` array is
-	 * {@link ui.balloonPanel.BalloonPanelView#defaultPositions}.
+	 * {@link module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions}.
 	 */
 	attachTo( options ) {
 		this.show();
@@ -162,7 +160,7 @@ export default class BalloonPanelView extends View {
 
 /**
  * A default set of positioning functions used by the balloon panel view
- * when attaching using {@link ui.balloonPanel.BalloonPanelView#attachTo} method.
+ * when attaching using {@link #attachTo} method.
  *
  * The available positioning functions are as follows:
  *
@@ -201,9 +199,9 @@ export default class BalloonPanelView extends View {
  *		              V
  *		         [ Target ]
  *
- * See {@link ui.balloonPanel.BalloonPanelView#attachTo}.
+ * See {@link #attachTo}.
  *
- * @member {Object} ui.balloonPanel.BalloonPanelView#defaultPositions
+ * @member {Object} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions
  */
 BalloonPanelView.defaultPositions = {
 	se: ( targetRect ) => ( {
