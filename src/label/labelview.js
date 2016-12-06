@@ -3,14 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/label/labelview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The label view class.
  *
- * @memberOf ui.label
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class LabelView extends View {
 	/**
@@ -23,7 +26,7 @@ export default class LabelView extends View {
 		 * The text of the label.
 		 *
 		 * @observable
-		 * @member {String} ui.label.LabelView#text
+		 * @member {String} #text
 		 */
 		this.set( 'text' );
 
@@ -31,7 +34,7 @@ export default class LabelView extends View {
 		 * The `for` attribute of the label (i.e. to pair with an `<input>` element).
 		 *
 		 * @observable
-		 * @member {String} ui.label.LabelView#for
+		 * @member {String} #for
 		 */
 		this.set( 'for' );
 

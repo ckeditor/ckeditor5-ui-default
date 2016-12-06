@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/dropdown/dropdownview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The dropdown view class.
  *
- * See {@link ui.dropdown.Dropdown}.
- *
- * @memberOf ui.dropdown
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class DropdownView extends View {
 	/**
@@ -25,7 +26,7 @@ export default class DropdownView extends View {
 		 * Button of this dropdown view.
 		 *
 		 * @readonly
-		 * @member {ui.button.ButtonView} ui.dropdown.DropdownView#buttonView
+		 * @member {ui.button.ButtonView} #buttonView
 		 */
 		this.addChildren( this.buttonView = buttonView );
 
@@ -33,16 +34,16 @@ export default class DropdownView extends View {
 		 * Panel of this dropdown view.
 		 *
 		 * @readonly
-		 * @member {ui.dropdown.DropdownPanelView} ui.dropdown.DropdownView#panelView
+		 * @member {module:ui/dropdown/dropdownpanelview~DropdownPanelView} #panelView
 		 */
 		this.addChildren( this.panelView = panelView );
 
 		/**
 		 * Controls whether the dropdown view is open, which also means its
-		 * {@link ui.dropdown.DropdownView#panel} is visible.
+		 * {@link #panelView panel} is visible.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownView#isOpen
+		 * @member {Boolean} #isOpen
 		 */
 		this.set( 'isOpen', false );
 
@@ -79,28 +80,28 @@ export default class DropdownView extends View {
 		 * The label of the dropdown.
 		 *
 		 * @observable
-		 * @member {String} ui.dropdown.DropdownView#label
+		 * @member {String} #label
 		 */
 
 		/**
 		 * Controls whether the dropdown is enabled (can be clicked).
 		 *
 		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownView#isEnabled
+		 * @member {Boolean} #isEnabled
 		 */
 
 		/**
-		 * Controls whether the {@link ui.dropdown.DropdownView#buttonView} is "pushed".
+		 * Controls whether the {@link #buttonView} is "pushed".
 		 *
 		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownView#isOn
+		 * @member {Boolean} #isOn
 		 */
 
 		/**
-		 * (Optional) Whether the label of the dropdown is visible. See {@link ui.button.ButtonModel#withText}.
+		 * (Optional) Whether the label of the dropdown is visible. See {@link module:ui/button/buttonview~ButtonView#withText}.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.dropdown.DropdownView#withText
+		 * @member {Boolean} #withText
 		 */
 	}
 }

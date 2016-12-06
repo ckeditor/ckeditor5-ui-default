@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/list/listitemview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The list item view class.
  *
- * See {@link ui.list.ListItem}.
- *
- * @memberOf ui.list
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class ListItemView extends View {
 	/**
@@ -48,20 +49,20 @@ export default class ListItemView extends View {
 		 * The label of the list item.
 		 *
 		 * @observable
-		 * @member {String} ui.list.ListItemView#label
+		 * @member {String} #label
 		 */
 
 		/**
 		 * (Optional) The DOM style attribute of the list item.
 		 *
 		 * @observable
-		 * @member {String} ui.list.ListItemView#style
+		 * @member {String} #style
 		 */
 
 		/**
 		 * Fired when the list item has been clicked.
 		 *
-		 * @event ui.list.ListItemView#execute
+		 * @event #execute
 		 */
 	}
 }

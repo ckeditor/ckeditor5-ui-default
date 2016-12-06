@@ -3,22 +3,23 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/editableui/editableuiview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The editable UI view class.
  *
- * See {@link ui.editableUI.EditableUI}.
- *
- * @memberOf ui.editableUI
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class EditableUIView extends View {
 	/**
-	 * Creates an instance of {@link ui.editableUI.EditableUIView} class.
+	 * Creates an instance of EditableUIView class.
 	 *
-	 * @param {utils.Locale} [locale] The {@link core.editor.Editor#locale editor's locale} instance.
+	 * @param {module:utils/locale~Locale} [locale] The locale instance.
 	 * @param {HTMLElement} [editableElement] The editable element. If not specified, this view
 	 * should create it. Otherwise, the existing element should be used.
 	 */
@@ -46,7 +47,7 @@ export default class EditableUIView extends View {
 		 * Controls whether the editable is writable or not.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.editableUI.EditableUIView#isReadOnly
+		 * @member {Boolean} #isReadOnly
 		 */
 		this.set( 'isReadOnly', false );
 
@@ -54,7 +55,7 @@ export default class EditableUIView extends View {
 		 * Controls whether the editable is focused, i.e. the user is typing in it.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.editableUI.EditableUIView#isFocused
+		 * @member {Boolean} #isFocused
 		 */
 		this.set( 'isFocused', false );
 
@@ -62,13 +63,13 @@ export default class EditableUIView extends View {
 		 * The element which is the main editable element (usually the one with `contentEditable="true"`).
 		 *
 		 * @readonly
-		 * @member {HTMLElement} ui.editableUI.EditableUIView#editableElement
+		 * @member {HTMLElement} #editableElement
 		 */
 	}
 
 	/**
-	 * Initializes the View by either applying the {@link #template} to the existing
-	 * {@link #editableElement} or assigns {@link #element} as {@link #editableElement}.
+	 * Initializes the view by either applying the {@link #template} to the existing
+	 * {@link #editableElement} or assigning {@link #element} as {@link #editableElement}.
 	 *
 	 * @returns {Promise}
 	 */

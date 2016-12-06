@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/icon/iconview
+ */
+
 import View from '../../ui/view.js';
 import Template from '../template.js';
 
 /**
  * The icon view class.
  *
- * See {@link ui.icon.Icon}.
- *
- * @memberOf ui.icon
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class IconView extends View {
 	/**
@@ -47,10 +48,10 @@ export default class IconView extends View {
 
 		/**
 		 * The name of the icon. It corresponds with the name of the
-		 * file in the {@link ui.iconManager.IconManager}.
+		 * file in the {@link module:theme/iconmanagermodel~IconManagerModel}.
 		 *
 		 * @observable
-		 * @member {String} ui.icon.IconView#name
+		 * @member {String} #name
 		 */
 	}
 }

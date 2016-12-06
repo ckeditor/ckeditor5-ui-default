@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/dropdown/list/createlistdropdown
+ */
+
 /* global document */
 
 import ListView from '../../list/listview.js';
@@ -10,22 +14,16 @@ import ListItemView from '../../list/listitemview.js';
 import createDropdown from '../createdropdown.js';
 
 /**
- * Creates an instance of {@link ui.dropdown.list.ListDropdownView} class using
+ * Creates an instance of {@link module:ui/dropdown/list/listdropdownview~ListDropdownView} class using
  * defined model.
  *
- * @param {ui.dropdown.ListDropdownModel} model Model of this list dropdown.
- * @param {utils.Locale} locale The {@link core.editor.Editor#locale editor's locale} instance.
- * @returns {ui.dropdown.list.ListDropdownView} The list dropdown view instance.
+ * @param {module:ui/dropdown/list/listdropdownmodel~ListDropdownModel} model Model of this list dropdown.
+ * @param {module:utils/locale~Locale} locale The locale instance.
+ * @returns {module:ui/dropdown/list/listdropdownview~ListDropdownView} The list dropdown view instance.
  */
 export default function createListDropdown( model, locale ) {
 	const dropdownView = createDropdown( model, locale );
 
-	/**
-	 * List of the list dropdown view.
-	 *
-	 * @readonly
-	 * @member {ui.dropdown.ListDropdownView} ui.dropdown.ListDropdownView#listView
-	 */
 	const listView = dropdownView.listView = new ListView( locale );
 
 	listView.items.bindTo( model.items ).as( itemModel => {
@@ -62,7 +60,7 @@ export default function createListDropdown( model, locale ) {
 // the dropdown has been clicked.
 //
 // @private
-// @param {ui.dropdown.ListDropdownView} dropdownView
+// @param {module:ui/dropdown/listdropdownview~ListDropdownView} dropdownView
 function attachDocumentClickListener( dropdownView ) {
 	// TODO: It will probably be focus/blur-based rather than click. It should be bound
 	// to focusmanager of some sort.
@@ -73,27 +71,3 @@ function attachDocumentClickListener( dropdownView ) {
 		}
 	} );
 }
-
-/**
- * The list dropdown model interface.
- *
- * @extends ui.dropdown.DropdownModel
- * @interface ui.dropdown.list.ListDropdownModel
- */
-
-/**
- * A {@link utils.Collection} of {@link utils.Observable} used to populate
- * the inner {@link ui.list.List} instance.
- *
- * Usually {@link ui.list.ListModel}.
- *
- * @observable
- * @member {Boolean} ui.dropdown.list.ListDropdownModel#items
- */
-
-/**
- * Fired when the list dropdown should be executed, usually when
- * one of the list items in {@link ui.dropdown.list.ListDropdown#list} has been executed.
- *
- * @event ui.dropdown.list.ListDropdownModel#execute
- */

@@ -3,16 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/list/listview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 
 /**
  * The list view class.
  *
- * See {@link ui.list.List}.
- *
- * @memberOf ui.list
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class ListView extends View {
 	/**
@@ -25,7 +26,7 @@ export default class ListView extends View {
 		 * Collection of the child list views.
 		 *
 		 * @readonly
-		 * @member {ui.ViewCollection} ui.list.ListView#items
+		 * @member {module:ui/viewcollection~ViewCollection}
 		 */
 		this.items = this.createCollection();
 

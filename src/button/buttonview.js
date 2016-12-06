@@ -3,6 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
+/**
+ * @module ui/button/buttonview
+ */
+
 import View from '../view.js';
 import Template from '../template.js';
 import IconView from '../icon/iconview.js';
@@ -12,10 +16,7 @@ import { getEnvKeystrokeText } from '../../utils/keyboard.js';
 /**
  * The button view class.
  *
- * See {@link ui.button.Button}.
- *
- * @memberOf ui.button
- * @extends ui.View
+ * @extends module:ui/view~View
  */
 export default class ButtonView extends View {
 	/**
@@ -28,16 +29,16 @@ export default class ButtonView extends View {
 		 * The label of the button view visible to the user.
 		 *
 		 * @observable
-		 * @member {String} ui.button.ButtonView#label
+		 * @member {String} #label
 		 */
 		this.set( 'label' );
 
 		/**
 		 * (Optional) The keystroke associated with the button, i.e. <kbd>CTRL+B</kbd>,
-		 * in the string format compatible with {@link utils.keyboard}.
+		 * in the string format compatible with {@link module:utils/keyboard}.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#keystroke.
+		 * @member {Boolean} #keystroke.
 		 */
 		this.set( 'keystroke' );
 
@@ -47,7 +48,7 @@ export default class ButtonView extends View {
 		 * then combination of `label` and `keystroke` will be set as title.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#title
+		 * @member {Boolean} #title
 		 */
 		this.set( 'title' );
 
@@ -55,7 +56,7 @@ export default class ButtonView extends View {
 		 * The HTML type of the button. Default `button`.
 		 *
 		 * @observable
-		 * @member {'button'|'submit'|'reset'|'menu'} ui.button.ButtonView#type
+		 * @member {'button'|'submit'|'reset'|'menu'} #type
 		 */
 		this.set( 'type', 'button' );
 
@@ -64,7 +65,7 @@ export default class ButtonView extends View {
 		 * is currently enabled.
 		 *
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#isOn
+		 * @member {Boolean} #isOn
 		 */
 		this.set( 'isOn', false );
 
@@ -72,7 +73,7 @@ export default class ButtonView extends View {
 		 * Controls whether the button view is enabled (can be clicked).
 		 *
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#isEnabled
+		 * @member {Boolean} #isEnabled
 		 */
 		this.set( 'isEnabled', true );
 
@@ -80,28 +81,36 @@ export default class ButtonView extends View {
 		 * (Optional) Whether the label of the button is hidden (e.g. button with icon only).
 		 *
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#withText
+		 * @member {Boolean} #withText
 		 */
 		this.set( 'withText', false );
 
 		/**
 		 * (Optional) The name of the icon of the button view.
-		 * See {@link ui.icon.Icon} and {@link ui.iconManager.IconManager}.
+		 * See {@link module:ui/icon/iconview~IconView} and
+		 * {@link module:theme/iconmanagermodel~IconManagerModel}.
 		 *
 		 * @observable
-		 * @member {String} ui.button.ButtonView#icon
+		 * @member {String} #icon
 		 */
 		this.set( 'icon' );
 
 		/**
 		 * Title of the button bound to the template.
-		 * @see ui.button.ButtonView#title
 		 *
+		 * @see #title
 		 * @private
 		 * @observable
-		 * @member {Boolean} ui.button.ButtonView#_title
+		 * @member {Boolean} #_title
 		 */
 		this.bind( '_title' ).to( this, 'title', this, 'label', this, 'keystroke', this._getTitle.bind( this ) );
+
+		/**
+		 * Icon of the button view.
+		 *
+		 * @readonly
+		 * @member {module:ui/icon/iconview~IconView} #iconView
+		 */
 
 		const bind = this.bindTemplate;
 
@@ -159,17 +168,13 @@ export default class ButtonView extends View {
 		/**
 		 * Fired when the button view is clicked. It won't be fired when the button is disabled.
 		 *
-		 * @event ui.button.ButtonView#execute
-		 */
-
-		/**
-		 * Icon of the button view.
-		 *
-		 * @readonly
-		 * @member {ui.icon.IconView} ui.button.ButtonView#iconView
+		 * @event #execute
 		 */
 	}
 
+	/**
+	 * @inheritDoc
+	 */
 	init() {
 		let promise = Promise.resolve();
 
