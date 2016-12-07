@@ -20,28 +20,6 @@ import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
 
 const positions = {
 	//	     [ Target ]
-	//	         ^
-	//	+-----------------+
-	//	|     Balloon     |
-	//	+-----------------+
-	s: ( targetRect, balloonRect ) => ( {
-		top: targetRect.bottom + 15,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width / 2,
-		name: 's'
-	} ),
-
-	//	+-----------------+
-	//	|     Balloon     |
-	//	+-----------------+
-	//	        V
-	//	    [ Target ]
-	n: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - 15,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width / 2,
-		name: 'n'
-	} ),
-
-	//	     [ Target ]
 	//	              ^
 	//	     +-----------------+
 	//	     |     Balloon     |
@@ -70,10 +48,10 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 } )
 .then( editor => {
 	const viewDocument = editor.editing.view;
-	const toolbarView = new ToolbarView();
-	const balloonPanelView = new BalloonPanelView( editor.locale );
+	const toolbar = new ToolbarView();
+	const panel = new BalloonPanelView( editor.locale );
 
-	Template.extend( balloonPanelView.template, {
+	Template.extend( panel.template, {
 		attributes: {
 			class: [
 				'ck-toolbar_contextual',
@@ -81,34 +59,45 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 		}
 	} );
 
-	balloonPanelView.content.add( toolbarView );
+	panel.content.add( toolbar );
 	viewDocument.addObserver( ClickObserver );
 
-	editor.ui.view.body.add( balloonPanelView ).then( () => {
+	editor.ui.view.body.add( panel ).then( () => {
+		// Fill the toolbar with some buttons. In this case – copy default editor toolbar.
 		for ( let name of editor.config.get( 'toolbar' ) ) {
-			toolbarView.items.add( editor.ui.componentFactory.create( name ) );
+			toolbar.items.add( editor.ui.componentFactory.create( name ) );
 		}
 
-		editor.ui.focusTracker.add( balloonPanelView.element );
+		// Let the focusTracker know about new focusable UI element.
+		editor.ui.focusTracker.add( panel.element );
 
-		balloonPanelView.listenTo( editor.ui.focusTracker, 'change:isFocused', ( evt, name, is, was ) => {
+		// Hide the panel when editor loses focus but no the other way around.
+		panel.listenTo( editor.ui.focusTracker, 'change:isFocused', ( evt, name, is, was ) => {
 			if ( was && !is ) {
-				balloonPanelView.hide();
+				panel.hide();
 			}
 		} );
 
+		// Position the panel each time the user clicked in editable.
 		editor.listenTo( viewDocument, 'click', () => {
-			const isBackward = viewDocument.selection.isBackward;
-			const rangeRects = viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ).getClientRects();
-			const rangeRect = isBackward ? rangeRects.item( 0 ) : rangeRects.item( rangeRects.length - 1 );
-
+			// This implementation assumes that only non–collapsed selections gets the contextual toolbar.
 			if ( !viewDocument.selection.isCollapsed ) {
-				balloonPanelView.attachTo( {
+				const isBackward = viewDocument.selection.isBackward;
+
+				// getBoundingClientRect() makes no sense when the selection spans across number
+				// of lines of text. Using getClientRects() allows us to browse micro–ranges
+				// that would normally make up the bounding client rect.
+				const rangeRects = viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ).getClientRects();
+
+				// Select the proper range rect depending on the direction of the selection.
+				const rangeRect = isBackward ? rangeRects.item( 0 ) : rangeRects.item( rangeRects.length - 1 );
+
+				panel.attachTo( {
 					target: rangeRect,
 					positions: [ positions[ isBackward ? 'backwardSelection' : 'forwardSelection' ] ]
 				} );
 			} else {
-				balloonPanelView.hide();
+				panel.hide();
 			}
 		} );
 	} );
