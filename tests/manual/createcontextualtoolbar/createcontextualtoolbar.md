@@ -1,6 +1,4 @@
-@bender-ui: collapsed
-@bender-tags: ui toolbar
+## Contextual toolbar demo
 
-## Foo
-
-1. Bar
+1. Create a non–collapsed selection.
+2. Create another non–collapsed selection but in another direction.
