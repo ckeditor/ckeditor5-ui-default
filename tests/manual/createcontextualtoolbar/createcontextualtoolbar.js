@@ -89,6 +89,14 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 			toolbarView.items.add( editor.ui.componentFactory.create( name ) );
 		}
 
+		editor.ui.focusTracker.add( balloonPanelView.element );
+
+		balloonPanelView.listenTo( editor.ui.focusTracker, 'change:isFocused', ( evt, name, is, was ) => {
+			if ( was && !is ) {
+				balloonPanelView.hide();
+			}
+		} );
+
 		editor.listenTo( viewDocument, 'click', () => {
 			if ( !viewDocument.selection.isCollapsed ) {
 				balloonPanelView.attachTo( {
