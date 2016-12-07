@@ -98,10 +98,14 @@ ClassicEditor.create( document.querySelector( '#editor' ), {
 		} );
 
 		editor.listenTo( viewDocument, 'click', () => {
+			const isBackward = viewDocument.selection.isBackward;
+			const rangeRects = viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ).getClientRects();
+			const rangeRect = isBackward ? rangeRects.item( 0 ) : rangeRects.item( rangeRects.length - 1 );
+
 			if ( !viewDocument.selection.isCollapsed ) {
 				balloonPanelView.attachTo( {
-					target: viewDocument.domConverter.viewRangeToDom( viewDocument.selection.getFirstRange() ),
-					positions: [ positions[ viewDocument.selection.isBackward ? 'backwardSelection' : 'forwardSelection' ] ]
+					target: rangeRect,
+					positions: [ positions[ isBackward ? 'backwardSelection' : 'forwardSelection' ] ]
 				} );
 			} else {
 				balloonPanelView.hide();
