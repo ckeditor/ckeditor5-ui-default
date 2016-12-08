@@ -15,8 +15,8 @@ import { getOptimalPosition } from '../../utils/dom/position.js';
 import toUnit from '../../utils/dom/tounit.js';
 
 const toPx = toUnit( 'px' );
-const arrowHOffset = 30;
-const arrowVOffset = 15;
+const arrowHorizontalOffset = 30;
+const arrowVerticalOffset = 15;
 
 /**
  * The balloon panel view class.
@@ -159,6 +159,43 @@ export default class BalloonPanelView extends View {
 }
 
 /**
+ * A horizontal offset of the arrow tip from the edge of the balloon. Controlled by CSS.
+ *
+ *		 +-----|---------...
+ *		 |     |
+ *		 |     |
+ *		 |     |
+ *		 |     |
+ *		 +--+  |  +------...
+ *		     \ | /
+ *		      \|/
+ *	    >|-----|<---------------- horizontal offset
+ *
+ * @default 30
+ * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowHorizontalOffset
+ */
+BalloonPanelView.arrowHorizontalOffset = arrowHorizontalOffset;
+
+/**
+ * A vertical offset of the arrow from the edge of the balloon. Controlled by CSS.
+ *
+ *		 +-------------...
+ *		 |
+ *		 |
+ *		 |                      /-- vertical offset
+ *		 |                     V
+ *		 +--+    +-----...    ---------
+ *		     \  /              |
+ *		      \/               |
+ *		-------------------------------
+ *		                       ^
+ *
+ * @default 15
+ * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowVerticalOffset
+ */
+BalloonPanelView.arrowVerticalOffset = arrowVerticalOffset;
+
+/**
  * A default set of positioning functions used by the balloon panel view
  * when attaching using {@link #attachTo} method.
  *
@@ -207,26 +244,26 @@ export default class BalloonPanelView extends View {
  */
 BalloonPanelView.defaultPositions = {
 	se: ( targetRect ) => ( {
-		top: targetRect.bottom + arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		top: targetRect.bottom + arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - arrowHorizontalOffset,
 		name: 'se'
 	} ),
 
 	sw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.bottom + arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		top: targetRect.bottom + arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHorizontalOffset,
 		name: 'sw'
 	} ),
 
 	ne: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		top: targetRect.top - balloonRect.height - arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - arrowHorizontalOffset,
 		name: 'ne'
 	} ),
 
 	nw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		top: targetRect.top - balloonRect.height - arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHorizontalOffset,
 		name: 'nw'
 	} )
 };
