@@ -65,7 +65,7 @@ function createContextualToolbar( editor ) {
 	Template.extend( panel.template, {
 		attributes: {
 			class: [
-				'ck-toolbar_contextual',
+				'ck-toolbar__container',
 			]
 		}
 	} );
