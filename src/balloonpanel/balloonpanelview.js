@@ -201,6 +201,8 @@ export default class BalloonPanelView extends View {
  *
  * See {@link #attachTo}.
  *
+ * Positioning functions must be compatible with {@link module:utils/dom/position~Position}.
+ *
  * @member {Object} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions
  */
 BalloonPanelView.defaultPositions = {
