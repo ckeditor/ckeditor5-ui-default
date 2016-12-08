@@ -29,6 +29,10 @@ describe( 'StickyToolbarView', () => {
 		document.body.appendChild( element );
 	} );
 
+	afterEach( () => {
+		window.scrollX = window.scrollY = 0;
+	} );
+
 	describe( 'constructor()', () => {
 		it( 'inherits from ToolbarView', () => {
 			expect( view ).to.be.instanceof( ToolbarView );

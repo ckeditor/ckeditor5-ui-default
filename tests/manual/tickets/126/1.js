@@ -3,23 +3,19 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
+/* global document, window */
 
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
 
-createPanel( 'static' );
-createPanel( 'relative' );
-createPanel( 'absolute' );
-createPanel( 'fixed' );
-
-function createPanel( selector ) {
+window.createPanel = ( selector ) => {
 	const view = new BalloonPanelView();
 
 	view.element.innerHTML = `Parent of this panel has position:${ selector }.`;
 	view.init().then( () => {
 		document.querySelector( `#${ selector }-container` ).appendChild( view.element );
 
-		view.attachTo( document.querySelector( `#anchor-${ selector }` ), document.body );
-		view.isVisible = true;
+		view.attachTo( {
+			target: document.querySelector( `#anchor-${ selector }` )
+		} );
 	} );
-}
+};
