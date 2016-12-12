@@ -95,16 +95,28 @@ function createImageToolbar( editor ) {
 
 		editingView.addObserver( ClickObserver );
 
-		// Position the panel each time the user clicked in editable.
+		// Check if the toolbar should be displayed each time the user clicked in editable.
 		editor.listenTo( editingView, 'click', () => {
 			if ( editingView.selection.isFake ) {
-				panel.attachTo( {
-					target: editingView.domConverter.viewRangeToDom( editingView.selection.getFirstRange() ),
-					positions: [ positions.north, positions.south ]
-				} );
+				attachToolbar();
+
+				// TODO: These 2 need interval–based event debouncing for performance
+				// reasons. I guess even lodash offers such a helper.
+				editor.ui.view.listenTo( window, 'scroll', attachToolbar );
+				editor.ui.view.listenTo( window, 'resize', attachToolbar );
 			} else {
 				panel.hide();
+
+				editor.ui.view.stopListening( window, 'scroll', attachToolbar );
+				editor.ui.view.stopListening( window, 'resize', attachToolbar );
 			}
 		} );
+
+		function attachToolbar() {
+			panel.attachTo( {
+				target: editingView.domConverter.viewRangeToDom( editingView.selection.getFirstRange() ),
+				positions: [ positions.north, positions.south ]
+			} );
+		}
 	} );
 }
