@@ -266,6 +266,13 @@ describe( 'BalloonPanelView', () => {
 				document.body.appendChild( positionedAncestor );
 				positionedAncestor.appendChild( view.element );
 
+				mockBoundingBox( positionedAncestor, {
+					top: 100,
+					left: 100,
+					width: 10,
+					height: 10
+				} );
+
 				mockBoundingBox( target, {
 					top: 0,
 					left: 0,
