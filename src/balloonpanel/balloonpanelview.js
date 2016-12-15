@@ -15,8 +15,6 @@ import { getOptimalPosition } from '../../utils/dom/position.js';
 import toUnit from '../../utils/dom/tounit.js';
 
 const toPx = toUnit( 'px' );
-const arrowHorizontalOffset = 30;
-const arrowVerticalOffset = 15;
 
 /**
  * The balloon panel view class.
@@ -174,7 +172,7 @@ export default class BalloonPanelView extends View {
  * @default 30
  * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowHorizontalOffset
  */
-BalloonPanelView.arrowHorizontalOffset = arrowHorizontalOffset;
+BalloonPanelView.arrowHorizontalOffset = 30;
 
 /**
  * A vertical offset of the arrow from the edge of the balloon. Controlled by CSS.
@@ -193,7 +191,7 @@ BalloonPanelView.arrowHorizontalOffset = arrowHorizontalOffset;
  * @default 15
  * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowVerticalOffset
  */
-BalloonPanelView.arrowVerticalOffset = arrowVerticalOffset;
+BalloonPanelView.arrowVerticalOffset = 15;
 
 /**
  * A default set of positioning functions used by the balloon panel view
@@ -244,26 +242,26 @@ BalloonPanelView.arrowVerticalOffset = arrowVerticalOffset;
  */
 BalloonPanelView.defaultPositions = {
 	se: ( targetRect ) => ( {
-		top: targetRect.bottom + arrowVerticalOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHorizontalOffset,
+		top: targetRect.bottom + BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - BalloonPanelView.arrowHorizontalOffset,
 		name: 'se'
 	} ),
 
 	sw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.bottom + arrowVerticalOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHorizontalOffset,
+		top: targetRect.bottom + BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + BalloonPanelView.arrowHorizontalOffset,
 		name: 'sw'
 	} ),
 
 	ne: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVerticalOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHorizontalOffset,
+		top: targetRect.top - balloonRect.height - BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - BalloonPanelView.arrowHorizontalOffset,
 		name: 'ne'
 	} ),
 
 	nw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVerticalOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHorizontalOffset,
+		top: targetRect.top - balloonRect.height - BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + BalloonPanelView.arrowHorizontalOffset,
 		name: 'nw'
 	} )
 };
