@@ -24,9 +24,10 @@ describe( 'ButtonView', () => {
 	describe( '<button> bindings', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {
-				expect( view.element.classList ).to.have.length( 3 );
+				expect( view.element.classList ).to.have.length( 4 );
 				expect( view.element.classList.contains( 'ck-button' ) ).to.true;
 				expect( view.element.classList.contains( 'ck-off' ) ).to.true;
+				expect( view.element.classList.contains( 'ck-tooltip_s' ) ).to.true;
 			} );
 
 			it( 'reacts on view#isEnabled', () => {
@@ -66,9 +67,9 @@ describe( 'ButtonView', () => {
 			} );
 		} );
 
-		describe( 'title', () => {
+		describe( 'tooltip', () => {
 			it( 'is not initially set ', () => {
-				expect( view.element.attributes.title ).to.undefined;
+				expect( view.element.attributes[ 'data-ck-tooltip' ] ).to.undefined;
 			} );
 
 			it( 'is always equal to view#title if is defined', () => {
@@ -76,20 +77,20 @@ describe( 'ButtonView', () => {
 				view.label = 'foo';
 				view.keystroke = 'A';
 
-				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+				expect( view.element.attributes[ 'data-ck-tooltip' ].value ).to.equal( 'bar' );
 			} );
 
 			it( 'is equal to view#label when view#title is not defined', () => {
 				view.label = 'bar';
 
-				expect( view.element.attributes.title.value ).to.equal( 'bar' );
+				expect( view.element.attributes[ 'data-ck-tooltip' ].value ).to.equal( 'bar' );
 			} );
 
 			it( 'contains keystroke when view#label and view#keystroke is defined', () => {
 				view.label = 'bar';
 				view.keystroke = 'A';
 
-				expect( view.element.attributes.title.value ).to.equal( 'bar (A)' );
+				expect( view.element.attributes[ 'data-ck-tooltip' ].value ).to.equal( 'bar (A)' );
 			} );
 		} );
 
