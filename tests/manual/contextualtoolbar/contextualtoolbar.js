@@ -6,7 +6,7 @@
 /* globals window, document, console:false */
 
 import ClassicEditor from 'ckeditor5/editor-classic/classic.js';
-import ClickObserver from 'ckeditor5/engine/view/observer/clickobserver.js';
+import DomEventObserver from 'ckeditor5/engine/view/observer/domeventobserver.js';
 import Enter from 'ckeditor5/enter/enter.js';
 import Typing from 'ckeditor5/typing/typing.js';
 import Paragraph from 'ckeditor5/paragraph/paragraph.js';
@@ -91,10 +91,20 @@ function createContextualToolbar( editor ) {
 			}
 		} );
 
-		editingView.addObserver( ClickObserver );
+		// Add "mouseup" event observer. It's enought to use ClickObserver in Chrome
+		// but Firefox requires "mouseup" to work properly.
+		editingView.addObserver( class extends DomEventObserver {
+			get domEventType() {
+				return [ 'mouseup' ];
+			}
+
+			onDomEvent( domEvent ) {
+				this.fire( domEvent.type, domEvent );
+			}
+		} );
 
 		// Position the panel each time the user clicked in editable.
-		editor.listenTo( editingView, 'click', () => {
+		editor.listenTo( editingView, 'mouseup', () => {
 			// This implementation assumes that only non–collapsed selections gets the contextual toolbar.
 			if ( !editingView.selection.isCollapsed ) {
 				const isBackward = editingView.selection.isBackward;
