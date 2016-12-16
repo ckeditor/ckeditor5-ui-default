@@ -15,8 +15,6 @@ import { getOptimalPosition } from '../../utils/dom/position.js';
 import toUnit from '../../utils/dom/tounit.js';
 
 const toPx = toUnit( 'px' );
-const arrowHOffset = 30;
-const arrowVOffset = 15;
 
 /**
  * The balloon panel view class.
@@ -51,8 +49,12 @@ export default class BalloonPanelView extends View {
 		this.set( 'left', 0 );
 
 		/**
-		 * Balloon panel's current position. Must correspond with
-		 * {@link module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions}.
+		 * Balloon panel's current position. The position name is reflected in the CSS class set
+		 * to the balloon, i.e. `.ck-balloon-panel_arrow_se` for "se" position. The class
+		 * controls the minor aspects of the balloon's visual appearance like placement
+		 * of the "arrow". To support a new position, an additional CSS must be created.
+		 *
+		 * Default position names correspond with {@link #defaultPositions}.
 		 *
 		 * @observable
 		 * @default 'se'
@@ -159,6 +161,43 @@ export default class BalloonPanelView extends View {
 }
 
 /**
+ * A horizontal offset of the arrow tip from the edge of the balloon. Controlled by CSS.
+ *
+ *		 +-----|---------...
+ *		 |     |
+ *		 |     |
+ *		 |     |
+ *		 |     |
+ *		 +--+  |  +------...
+ *		     \ | /
+ *		      \|/
+ *	    >|-----|<---------------- horizontal offset
+ *
+ * @default 30
+ * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowHorizontalOffset
+ */
+BalloonPanelView.arrowHorizontalOffset = 30;
+
+/**
+ * A vertical offset of the arrow from the edge of the balloon. Controlled by CSS.
+ *
+ *		 +-------------...
+ *		 |
+ *		 |
+ *		 |                      /-- vertical offset
+ *		 |                     V
+ *		 +--+    +-----...    ---------
+ *		     \  /              |
+ *		      \/               |
+ *		-------------------------------
+ *		                       ^
+ *
+ * @default 15
+ * @member {Number} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.arrowVerticalOffset
+ */
+BalloonPanelView.arrowVerticalOffset = 15;
+
+/**
  * A default set of positioning functions used by the balloon panel view
  * when attaching using {@link #attachTo} method.
  *
@@ -203,30 +242,33 @@ export default class BalloonPanelView extends View {
  *
  * Positioning functions must be compatible with {@link module:utils/dom/position~Position}.
  *
+ * The name that position function returns will be reflected in balloon panel's class that
+ * controls the placement of the "arrow". See {@link #position} to learn more.
+ *
  * @member {Object} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions
  */
 BalloonPanelView.defaultPositions = {
 	se: ( targetRect ) => ( {
-		top: targetRect.bottom + arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		top: targetRect.bottom + BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - BalloonPanelView.arrowHorizontalOffset,
 		name: 'se'
 	} ),
 
 	sw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.bottom + arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		top: targetRect.bottom + BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + BalloonPanelView.arrowHorizontalOffset,
 		name: 'sw'
 	} ),
 
 	ne: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - arrowHOffset,
+		top: targetRect.top - balloonRect.height - BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - BalloonPanelView.arrowHorizontalOffset,
 		name: 'ne'
 	} ),
 
 	nw: ( targetRect, balloonRect ) => ( {
-		top: targetRect.top - balloonRect.height - arrowVOffset,
-		left: targetRect.left + targetRect.width / 2 - balloonRect.width + arrowHOffset,
+		top: targetRect.top - balloonRect.height - BalloonPanelView.arrowVerticalOffset,
+		left: targetRect.left + targetRect.width / 2 - balloonRect.width + BalloonPanelView.arrowHorizontalOffset,
 		name: 'nw'
 	} )
 };
