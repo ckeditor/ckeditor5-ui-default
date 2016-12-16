@@ -49,8 +49,12 @@ export default class BalloonPanelView extends View {
 		this.set( 'left', 0 );
 
 		/**
-		 * Balloon panel's current position. Must correspond with
-		 * {@link module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions}.
+		 * Balloon panel's current position. The position name is reflected in the CSS class set
+		 * to the balloon, i.e. `.ck-balloon-panel_arrow_se` for "se" position. The class
+		 * controls the minor aspects of the balloon's visual appearance like placement
+		 * of the "arrow". To support a new position, an additional CSS must be created.
+		 *
+		 * Default position names correspond with {@link #defaultPositions}.
 		 *
 		 * @observable
 		 * @default 'se'
@@ -237,6 +241,9 @@ BalloonPanelView.arrowVerticalOffset = 15;
  * See {@link #attachTo}.
  *
  * Positioning functions must be compatible with {@link module:utils/dom/position~Position}.
+ *
+ * The name that position function returns will be reflected in balloon panel's class that
+ * controls the placement of the "arrow". See {@link #position} to learn more.
  *
  * @member {Object} module:ui/balloonpanel/balloonpanelview~BalloonPanelView.defaultPositions
  */
