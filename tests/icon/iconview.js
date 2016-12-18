@@ -22,15 +22,25 @@ describe( 'IconView', () => {
 	} );
 
 	describe( '<svg> bindings', () => {
-		describe( 'xlink:href', () => {
-			it( 'reacts to changes in model#name', () => {
-				const svgUseElement = view.element.firstChild;
-				const svgHrefNs = 'http://www.w3.org/1999/xlink';
+		describe( 'inline svg', () => {
+			it( 'should react to changes in view#content', () => {
+				view.content = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg"><g id="test"></g></svg>';
 
-				view.set( 'name', 'foo' );
+				expect( view.element.innerHTML = '<g id="test"></g>' );
+			} );
+		} );
+
+		describe( 'legacy xlink:href', () => {
+			it( 'reacts to changes in view#content', () => {
+				const svgHrefNs = 'http://www.w3.org/1999/xlink';
+				let svgUseElement;
+
+				view.content = 'foo';
+				svgUseElement = view.element.firstChild;
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-foo' );
 
-				view.name = 'abc';
+				view.content = 'abc';
+				svgUseElement = view.element.firstChild;
 				expect( svgUseElement.getAttributeNS( svgHrefNs, 'href' ) ).to.equal( '#ck-icon-abc' );
 			} );
 		} );
