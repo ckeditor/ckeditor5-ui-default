@@ -3,20 +3,19 @@
  * For licensing, see LICENSE.md.
  */
 
-/* globals document, Event */
+/* globals document */
 /* bender-tags: ui, toolbar */
 
 import global from 'ckeditor5/utils/dom/global.js';
 import testUtils from 'tests/core/_utils/utils.js';
 import StickyToolbarView from 'ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
-
-const window = global.window;
+import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
 
 testUtils.createSinonSandbox();
 
 describe( 'StickyToolbarView', () => {
-	let view, element, limiterElement, locale;
+	let view, element, limiterElement, locale, windowStub;
 
 	beforeEach( () => {
 		locale = {};
@@ -29,8 +28,14 @@ describe( 'StickyToolbarView', () => {
 		view._toolbarRect = { top: 10, right: 20, bottom: 30, left: 40, width: 50, height: 60 };
 		view._limiterRect = { top: 5, right: 10, bottom: 15, left: 20, width: 25, height: 30 };
 
-		testUtils.sinon.stub( window, 'scrollX', 0 );
-		testUtils.sinon.stub( window, 'scrollY', 0 );
+		windowStub = Object.create( DomEmitterMixin );
+
+		Object.assign( windowStub, {
+			scrollX: 0,
+			scrollY: 0
+		} );
+
+		testUtils.sinon.stub( global, 'window', windowStub );
 
 		document.body.appendChild( element );
 	} );
@@ -151,7 +156,7 @@ describe( 'StickyToolbarView', () => {
 			const spy = testUtils.sinon.spy( view, '_checkIfShouldBeSticky' );
 
 			view.init();
-			window.dispatchEvent( new Event( 'scroll' ) );
+			global.window.fire( 'scroll' );
 
 			expect( spy.calledOnce ).to.be.true;
 		} );
@@ -314,7 +319,10 @@ describe( 'StickyToolbarView', () => {
 					height: 20
 				} );
 
-				testUtils.sinon.stub( window, 'scrollX', 10 );
+				Object.assign( windowStub, {
+					scrollX: 10,
+					scrollY: 0
+				} );
 
 				view.isActive = true;
 

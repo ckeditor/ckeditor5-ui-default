@@ -12,7 +12,6 @@ import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
 import toUnit from '../../../utils/dom/tounit.js';
 
-const window = global.window;
 const toPx = toUnit( 'px' );
 
 /**
@@ -162,7 +161,7 @@ export default class StickyToolbarView extends ToolbarView {
 		this.element.parentNode.insertBefore( this._elementPlaceholder, this.element );
 
 		// Update sticky state of the toolbar as the window is being scrolled.
-		this.listenTo( window, 'scroll', () => {
+		this.listenTo( global.window, 'scroll', () => {
 			this._checkIfShouldBeSticky();
 		} );
 
@@ -205,7 +204,7 @@ export default class StickyToolbarView extends ToolbarView {
 		// TODO: Possibly replaced by CSS in the future http://caniuse.com/#feat=css-sticky
 		if ( this.isSticky ) {
 			this._isStickyToTheLimiter = limiterRect.bottom < toolbarRect.height + this.limiterOffset;
-			this._marginLeft = this._isStickyToTheLimiter ? null : toPx( -window.scrollX );
+			this._marginLeft = this._isStickyToTheLimiter ? null : toPx( -global.window.scrollX );
 		}
 		// Detach the toolbar from the top edge of the viewport.
 		else {

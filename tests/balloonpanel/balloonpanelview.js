@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document */
+/* global window, document */
 /* bender-tags: ui, balloonPanel, browser-only */
 
 import global from 'ckeditor5/utils/dom/global.js';
@@ -13,20 +13,27 @@ import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
 import * as positionUtils from 'ckeditor5/utils/dom/position.js';
 
-const window = global.window;
-
 testUtils.createSinonSandbox();
 
 describe( 'BalloonPanelView', () => {
-	let view;
+	let view, windowStub;
 
 	beforeEach( () => {
 		view = new BalloonPanelView();
 
 		view.set( 'maxWidth', 200 );
 
-		testUtils.sinon.stub( window, 'scrollX', 0 );
-		testUtils.sinon.stub( window, 'scrollY', 0 );
+		windowStub = {
+			innerWidth: 1000,
+			innerHeight: 1000,
+			scrollX: 0,
+			scrollY: 0,
+			getComputedStyle: ( el ) => {
+				return window.getComputedStyle( el );
+			}
+		};
+
+		testUtils.sinon.stub( global, 'window', windowStub );
 
 		return view.init();
 	} );
@@ -155,8 +162,10 @@ describe( 'BalloonPanelView', () => {
 			} );
 
 			// Make sure that limiter is fully visible in viewport.
-			testUtils.sinon.stub( window, 'innerWidth', 500 );
-			testUtils.sinon.stub( window, 'innerHeight', 500 );
+			Object.assign( windowStub, {
+				innerWidth: 500,
+				innerHeight: 500
+			} );
 		} );
 
 		it( 'should use default options', () => {
@@ -327,7 +336,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				testUtils.sinon.stub( window, 'innerWidth', 275 );
+				Object.assign( windowStub, {
+					innerWidth: 275
+				} );
 
 				view.attachTo( { target, limiter } );
 
@@ -369,7 +380,9 @@ describe( 'BalloonPanelView', () => {
 					height: 50
 				} );
 
-				testUtils.sinon.stub( window, 'innerHeight', 275 );
+				Object.assign( windowStub, {
+					innerHeight: 275
+				} );
 
 				view.attachTo( { target, limiter } );
 
