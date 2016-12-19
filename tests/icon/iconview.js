@@ -18,6 +18,7 @@ describe( 'IconView', () => {
 		it( 'creates element from template', () => {
 			expect( view.element.tagName ).to.equal( 'svg' );
 			expect( view.element.getAttribute( 'class' ) ).to.equal( 'ck-icon' );
+			expect( view.element.getAttribute( 'viewBox' ) ).to.equal( '0 0 20 20' );
 		} );
 	} );
 
