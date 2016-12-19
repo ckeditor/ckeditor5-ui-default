@@ -3,14 +3,17 @@
  * For licensing, see LICENSE.md.
  */
 
-/* global document, window */
+/* global document */
 /* bender-tags: ui, balloonPanel, browser-only */
 
+import global from 'ckeditor5/utils/dom/global.js';
 import ViewCollection from 'ckeditor5/ui/viewcollection.js';
 import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
 import ButtonView from 'ckeditor5/ui/button/buttonview.js';
 import testUtils from 'tests/core/_utils/utils.js';
 import * as positionUtils from 'ckeditor5/utils/dom/position.js';
+
+const window = global.window;
 
 testUtils.createSinonSandbox();
 
@@ -22,12 +25,10 @@ describe( 'BalloonPanelView', () => {
 
 		view.set( 'maxWidth', 200 );
 
-		return view.init();
-	} );
+		testUtils.sinon.stub( window, 'scrollX', 0 );
+		testUtils.sinon.stub( window, 'scrollY', 0 );
 
-	afterEach( () => {
-		// Tests require stable viewport environment.
-		window.scrollY = window.scrollX = 0;
+		return view.init();
 	} );
 
 	describe( 'constructor()', () => {

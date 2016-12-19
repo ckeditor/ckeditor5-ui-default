@@ -3,12 +3,15 @@
  * For licensing, see LICENSE.md.
  */
 
-/* globals document, window, Event */
+/* globals document, Event */
 /* bender-tags: ui, toolbar */
 
+import global from 'ckeditor5/utils/dom/global.js';
 import testUtils from 'tests/core/_utils/utils.js';
 import StickyToolbarView from 'ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
 import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
+
+const window = global.window;
 
 testUtils.createSinonSandbox();
 
@@ -26,11 +29,10 @@ describe( 'StickyToolbarView', () => {
 		view._toolbarRect = { top: 10, right: 20, bottom: 30, left: 40, width: 50, height: 60 };
 		view._limiterRect = { top: 5, right: 10, bottom: 15, left: 20, width: 25, height: 30 };
 
-		document.body.appendChild( element );
-	} );
+		testUtils.sinon.stub( window, 'scrollX', 0 );
+		testUtils.sinon.stub( window, 'scrollY', 0 );
 
-	afterEach( () => {
-		window.scrollX = window.scrollY = 0;
+		document.body.appendChild( element );
 	} );
 
 	describe( 'constructor()', () => {
@@ -312,7 +314,7 @@ describe( 'StickyToolbarView', () => {
 					height: 20
 				} );
 
-				window.scrollX = 10;
+				testUtils.sinon.stub( window, 'scrollX', 10 );
 
 				view.isActive = true;
 

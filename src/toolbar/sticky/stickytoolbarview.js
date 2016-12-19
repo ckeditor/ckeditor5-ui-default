@@ -7,12 +7,12 @@
  * @module ui/toolbar/sticky/stickytoolbarview
  */
 
-/* globals window */
-
+import global from '../../../utils/dom/global.js';
 import Template from '../../template.js';
 import ToolbarView from '../toolbarview.js';
 import toUnit from '../../../utils/dom/tounit.js';
 
+const window = global.window;
 const toPx = toUnit( 'px' );
 
 /**
