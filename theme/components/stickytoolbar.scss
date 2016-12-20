@@ -3,7 +3,7 @@
 
 @include ck-editor {
 	.ck-toolbar.ck-toolbar_sticky {
-		@include ck-dropshadow();
+		@include ck-drop-shadow();
 
 		position: fixed;
 		top: 0;
