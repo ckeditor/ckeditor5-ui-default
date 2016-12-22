@@ -182,7 +182,7 @@ export default class ButtonView extends View {
 		if ( this.icon && !this.iconView ) {
 			const iconView = this.iconView = new IconView();
 
-			iconView.bind( 'name' ).to( this, 'icon' );
+			iconView.bind( 'content' ).to( this, 'icon' );
 
 			this.element.insertBefore( iconView.element, this.element.firstChild );
 

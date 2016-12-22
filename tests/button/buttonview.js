@@ -147,10 +147,10 @@ describe( 'ButtonView', () => {
 				expect( view.element.childNodes[ 0 ] ).to.equal( view.iconView.element );
 
 				expect( view.iconView ).to.instanceOf( IconView );
-				expect( view.iconView.name ).to.equal( 'foo' );
+				expect( view.iconView.content ).to.equal( 'foo' );
 
 				view.icon = 'bar';
-				expect( view.iconView.name ).to.equal( 'bar' );
+				expect( view.iconView.content ).to.equal( 'bar' );
 			} );
 		} );
 
