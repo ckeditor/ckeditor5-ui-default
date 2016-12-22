@@ -40,20 +40,16 @@ export default class IconView extends View {
 				viewBox: '0 0 20 20'
 			}
 		} );
-	}
 
-	init() {
 		/**
 		 * This is a hack for lack of innerHTML binding.
 		 * See: https://github.com/ckeditor/ckeditor5-ui/issues/99.
 		 */
-		return super.init().then( () => {
-			this.on( 'change:content', ( evt, name, value ) => {
-				this.element.innerHTML = getIconContent( value );
-			} );
-
-			this.element.innerHTML = getIconContent( this.content );
+		this.on( 'change:content', ( evt, name, value ) => {
+			this.element.innerHTML = getIconContent( value );
 		} );
+
+		this.element.innerHTML = getIconContent( this.content );
 	}
 }
 
