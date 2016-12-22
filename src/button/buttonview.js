@@ -101,9 +101,9 @@ export default class ButtonView extends View {
 		 * @see #title
 		 * @private
 		 * @observable
-		 * @member {Boolean} #_title
+		 * @member {Boolean} #_tooltip
 		 */
-		this.bind( '_title' ).to( this, 'title', this, 'label', this, 'keystroke', this._getTitle.bind( this ) );
+		this.bind( '_tooltip' ).to( this, 'title', this, 'label', this, 'keystroke', this._getTooltip.bind( this ) );
 
 		/**
 		 * Icon of the button view.
@@ -120,14 +120,15 @@ export default class ButtonView extends View {
 			attributes: {
 				class: [
 					'ck-button',
+					'ck-tooltip_s',
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
 					bind.if( 'withText', 'ck-button_with-text' )
 				],
-				title: [
-					bind.to( '_title' )
-				],
-				type: bind.to( 'type', value => value ? value : 'button' )
+				type: bind.to( 'type', value => value ? value : 'button' ),
+				'data-ck-tooltip': [
+					bind.to( '_tooltip' )
+				]
 			},
 
 			children: [
@@ -193,7 +194,7 @@ export default class ButtonView extends View {
 	}
 
 	/**
-	 * Gets value for DOM title attribute from title, label and keystroke properties.
+	 * Gets value for the `data-ck-tooltip` attribute from title, label and keystroke properties.
 	 *
 	 * @private
 	 * @param {String} title Button title.
@@ -201,7 +202,7 @@ export default class ButtonView extends View {
 	 * @param {String} keystroke Button keystroke.
 	 * @returns {String}
 	 */
-	_getTitle( title, label, keystroke ) {
+	_getTooltip( title, label, keystroke ) {
 		if ( title ) {
 			return title;
 		}
