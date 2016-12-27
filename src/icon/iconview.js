@@ -9,8 +9,8 @@
  * @module ui/icon/iconview
  */
 
-import View from '../../ui/view.js';
-import Template from '../template.js';
+import View from 'ckeditor5-ui/src/view';
+import Template from '../template';
 
 /**
  * The icon view class.

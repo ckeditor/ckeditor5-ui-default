@@ -6,12 +6,12 @@
 /* global window, document */
 /* bender-tags: ui, balloonPanel, browser-only */
 
-import global from 'ckeditor5/utils/dom/global.js';
-import ViewCollection from 'ckeditor5/ui/viewcollection.js';
-import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
-import ButtonView from 'ckeditor5/ui/button/buttonview.js';
-import testUtils from 'tests/core/_utils/utils.js';
-import * as positionUtils from 'ckeditor5/utils/dom/position.js';
+import global from 'ckeditor5-utils/src/dom/global';
+import ViewCollection from 'ckeditor5-ui/src/viewcollection';
+import BalloonPanelView from 'ckeditor5-ui/src/balloonpanel/balloonpanelview';
+import ButtonView from 'ckeditor5-ui/src/button/buttonview';
+import testUtils from 'ckeditor5-core/tests/_utils/utils';
+import * as positionUtils from 'ckeditor5-utils/src/dom/position';
 
 testUtils.createSinonSandbox();
 

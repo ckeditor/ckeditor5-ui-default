@@ -5,11 +5,11 @@
 
 /* globals document, window */
 
-import Model from 'ckeditor5/ui/model.js';
-import Collection from 'ckeditor5/utils/collection.js';
+import Model from 'ckeditor5-ui/src/model';
+import Collection from 'ckeditor5-utils/src/collection';
 
-import createDropdown from 'ckeditor5/ui/dropdown/createDropdown.js';
-import createListDropdown from 'ckeditor5/ui/dropdown/list/createListDropdown.js';
+import createDropdown from 'ckeditor5-ui/src/dropdown/createDropdown';
+import createListDropdown from 'ckeditor5-ui/src/dropdown/list/createListDropdown';
 
 function renderInto( selector, view ) {
 	view.init().then( () => {

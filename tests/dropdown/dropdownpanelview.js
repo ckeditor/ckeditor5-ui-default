@@ -5,8 +5,8 @@
 
 /* bender-tags: ui, dropdown */
 
-import ViewCollection from 'ckeditor5/ui/viewcollection.js';
-import DropdownPanelView from 'ckeditor5/ui/dropdown/dropdownpanelview.js';
+import ViewCollection from 'ckeditor5-ui/src/viewcollection';
+import DropdownPanelView from 'ckeditor5-ui/src/dropdown/dropdownpanelview';
 
 describe( 'DropdownPanelView', () => {
 	let view, locale;

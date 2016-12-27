@@ -7,9 +7,9 @@
  * @module ui/dropdown/createdropdown
  */
 
-import ButtonView from '../button/buttonview.js';
-import DropdownView from './dropdownview.js';
-import DropdownPanelView from './dropdownpanelview.js';
+import ButtonView from '../button/buttonview';
+import DropdownView from './dropdownview';
+import DropdownPanelView from './dropdownpanelview';
 
 /**
  * Creates an instance of {@link module:ui/dropdown/dropdownview~DropdownView} class using

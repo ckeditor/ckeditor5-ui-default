@@ -5,8 +5,8 @@
 
 /* bender-tags: ui, iconmanager */
 
-import testUtils from 'tests/core/_utils/utils.js';
-import IconManagerView from 'ckeditor5/ui/iconmanager/iconmanagerview.js';
+import testUtils from 'ckeditor5-core/tests/_utils/utils';
+import IconManagerView from 'ckeditor5-ui/src/iconmanager/iconmanagerview';
 
 testUtils.createSinonSandbox();
 

@@ -6,9 +6,9 @@
 /* globals Event */
 /* bender-tags: ui, button */
 
-import testUtils from 'tests/core/_utils/utils.js';
-import ButtonView from 'ckeditor5/ui/button/buttonview.js';
-import IconView from 'ckeditor5/ui/icon/iconview.js';
+import testUtils from 'ckeditor5-core/tests/_utils/utils';
+import ButtonView from 'ckeditor5-ui/src/button/buttonview';
+import IconView from 'ckeditor5-ui/src/icon/iconview';
 
 testUtils.createSinonSandbox();
 

@@ -7,9 +7,9 @@
  * @module ui/editorui/boxed/boxededitoruiview
  */
 
-import EditorUIView from '../../editorui/editoruiview.js';
-import uid from '../../../utils/uid.js';
-import Template from '../../template.js';
+import EditorUIView from '../../editorui/editoruiview';
+import uid from 'ckeditor5-utils/src/uid';
+import Template from '../../template';
 
 /**
  * The boxed editor UI view class. This class represents an editor interface

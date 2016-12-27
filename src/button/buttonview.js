@@ -7,11 +7,11 @@
  * @module ui/button/buttonview
  */
 
-import View from '../view.js';
-import Template from '../template.js';
-import IconView from '../icon/iconview.js';
+import View from '../view';
+import Template from '../template';
+import IconView from '../icon/iconview';
 
-import { getEnvKeystrokeText } from '../../utils/keyboard.js';
+import { getEnvKeystrokeText } from 'ckeditor5-utils/src/keyboard';
 
 /**
  * The button view class.

@@ -9,9 +9,9 @@
 
 /* global document */
 
-import ListView from '../../list/listview.js';
-import ListItemView from '../../list/listitemview.js';
-import createDropdown from '../createdropdown.js';
+import ListView from '../../list/listview';
+import ListItemView from '../../list/listitemview';
+import createDropdown from '../createdropdown';
 
 /**
  * Creates an instance of {@link module:ui/dropdown/list/listdropdownview~ListDropdownView} class using

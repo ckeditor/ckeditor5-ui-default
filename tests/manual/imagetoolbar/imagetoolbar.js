@@ -5,19 +5,19 @@
 
 /* globals window, document, console:false */
 
-import ClassicEditor from 'ckeditor5/editor-classic/classic.js';
-import ClickObserver from 'ckeditor5/engine/view/observer/clickobserver.js';
-import Enter from 'ckeditor5/enter/enter.js';
-import Typing from 'ckeditor5/typing/typing.js';
-import Paragraph from 'ckeditor5/paragraph/paragraph.js';
-import Undo from 'ckeditor5/undo/undo.js';
-import Image from 'ckeditor5/image/image.js';
-import Bold from 'ckeditor5/basic-styles/bold.js';
-import Italic from 'ckeditor5/basic-styles/italic.js';
+import ClassicEditor from 'ckeditor5-editor-classic/src/classic';
+import ClickObserver from 'ckeditor5-engine/src/view/observer/clickobserver';
+import Enter from 'ckeditor5-enter/src/enter';
+import Typing from 'ckeditor5-typing/src/typing';
+import Paragraph from 'ckeditor5-paragraph/src/paragraph';
+import Undo from 'ckeditor5-undo/src/undo';
+import Image from 'ckeditor5-image/src/image';
+import Bold from 'ckeditor5-basic-styles/src/bold';
+import Italic from 'ckeditor5-basic-styles/src/italic';
 
-import Template from 'ckeditor5/ui/template.js';
-import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
-import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import Template from 'ckeditor5-ui/src/template';
+import ToolbarView from 'ckeditor5-ui/src/toolbar/toolbarview';
+import BalloonPanelView from 'ckeditor5-ui/src/balloonpanel/balloonpanelview';
 
 const arrowVOffset = BalloonPanelView.arrowVerticalOffset;
 const positions = {

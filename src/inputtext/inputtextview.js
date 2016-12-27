@@ -7,8 +7,8 @@
  * @module ui/inputtext/inputtextview
  */
 
-import View from '../view.js';
-import Template from '../template.js';
+import View from '../view';
+import Template from '../template';
 
 /**
  * The text input view class.

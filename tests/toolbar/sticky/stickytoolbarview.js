@@ -6,11 +6,11 @@
 /* globals document */
 /* bender-tags: ui, toolbar */
 
-import global from 'ckeditor5/utils/dom/global.js';
-import testUtils from 'tests/core/_utils/utils.js';
-import StickyToolbarView from 'ckeditor5/ui/toolbar/sticky/stickytoolbarview.js';
-import ToolbarView from 'ckeditor5/ui/toolbar/toolbarview.js';
-import DomEmitterMixin from 'ckeditor5/utils/dom/emittermixin.js';
+import global from 'ckeditor5-utils/src/dom/global';
+import testUtils from 'ckeditor5-core/tests/_utils/utils';
+import StickyToolbarView from 'ckeditor5-ui/src/toolbar/sticky/stickytoolbarview';
+import ToolbarView from 'ckeditor5-ui/src/toolbar/toolbarview';
+import DomEmitterMixin from 'ckeditor5-utils/src/dom/emittermixin';
 
 testUtils.createSinonSandbox();
 

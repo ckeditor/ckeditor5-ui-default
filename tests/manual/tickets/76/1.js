@@ -5,11 +5,11 @@
 
 /* globals console:false, document, window */
 
-import ClassicEditor from 'ckeditor5/editor-classic/classic.js';
-import Enter from 'ckeditor5/enter/enter.js';
-import Typing from 'ckeditor5/typing/typing.js';
-import Heading from 'ckeditor5/heading/heading.js';
-import Link from 'ckeditor5/link/link.js';
+import ClassicEditor from 'ckeditor5-editor-classic/src/classic';
+import Enter from 'ckeditor5-enter/src/enter';
+import Typing from 'ckeditor5-typing/src/typing';
+import Heading from 'ckeditor5-heading/src/heading';
+import Link from 'ckeditor5-link/src/link';
 
 ClassicEditor.create( document.querySelector( '#editor' ), {
 	plugins: [ Enter, Typing, Heading, Link ],

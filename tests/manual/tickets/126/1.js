@@ -5,7 +5,7 @@
 
 /* global document, window */
 
-import BalloonPanelView from 'ckeditor5/ui/balloonpanel/balloonpanelview.js';
+import BalloonPanelView from 'ckeditor5-ui/src/balloonpanel/balloonpanelview';
 
 window.createPanel = ( selector ) => {
 	const view = new BalloonPanelView();

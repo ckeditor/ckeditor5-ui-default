@@ -9,10 +9,10 @@
 
 /* globals document */
 
-import View from '../view.js';
-import Template from '../template.js';
-import IconManagerView from '../iconmanager/iconmanagerview.js';
-import iconManagerModel from '../../../theme/iconmanagermodel.js';
+import View from '../view';
+import Template from '../template';
+import IconManagerView from '../iconmanager/iconmanagerview';
+import iconManagerModel from 'ckeditor5-theme/src/iconmanagermodel';
 
 /**
  * The editor UI view class. Base class for the editor main views.

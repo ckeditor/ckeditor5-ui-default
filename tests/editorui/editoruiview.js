@@ -3,10 +3,10 @@
  * For licensing, see LICENSE.md.
  */
 
-import testUtils from 'tests/core/_utils/utils.js';
-import EditorUIView from 'ckeditor5/ui/editorui/editoruiview.js';
-import ViewCollection from 'ckeditor5/ui/viewcollection.js';
-import Locale from 'ckeditor5/utils/locale.js';
+import testUtils from 'ckeditor5-core/tests/_utils/utils';
+import EditorUIView from 'ckeditor5-ui/src/editorui/editoruiview';
+import ViewCollection from 'ckeditor5-ui/src/viewcollection';
+import Locale from 'ckeditor5-utils/src/locale';
 
 testUtils.createSinonSandbox();
 

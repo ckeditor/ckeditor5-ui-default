@@ -5,7 +5,7 @@
 
 /* globals document */
 
-import IconView from 'ckeditor5/ui/icon/iconview.js';
+import IconView from 'ckeditor5-ui/src/icon/iconview';
 
 const wrapper = document.querySelector( '#inline-svg' );
 

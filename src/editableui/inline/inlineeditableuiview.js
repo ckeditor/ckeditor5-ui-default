@@ -7,8 +7,8 @@
  * @module ui/editableui/inline/inlineeditableuiview
  */
 
-import EditableUIView from '../../editableui/editableuiview.js';
-import Template from '../../template.js';
+import EditableUIView from '../../editableui/editableuiview';
+import Template from '../../template';
 
 /**
  * The inline editable UI class implementing an inline {@link module:ui/editableui/editableuiview~EditableUIView}.

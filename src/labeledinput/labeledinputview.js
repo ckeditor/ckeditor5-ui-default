@@ -7,11 +7,11 @@
  * @module ui/labeledinput/labeledinputview
  */
 
-import View from '../view.js';
-import Template from '../template.js';
-import uid from '../../utils/uid.js';
+import View from '../view';
+import Template from '../template';
+import uid from 'ckeditor5-utils/src/uid';
 
-import LabelView from '../label/labelview.js';
+import LabelView from '../label/labelview';
 
 /**
  * The labeled input view class.

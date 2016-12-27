@@ -5,9 +5,9 @@
 
 /* bender-tags: ui, input */
 
-import LabeledInputView from 'ckeditor5/ui/labeledinput/labeledinputview.js';
-import InputView from 'ckeditor5/ui/inputtext/inputtextview.js';
-import LabelView from 'ckeditor5/ui/label/labelview.js';
+import LabeledInputView from 'ckeditor5-ui/src/labeledinput/labeledinputview';
+import InputView from 'ckeditor5-ui/src/inputtext/inputtextview';
+import LabelView from 'ckeditor5-ui/src/label/labelview';
 
 describe( 'LabeledInputView', () => {
 	const locale = {};

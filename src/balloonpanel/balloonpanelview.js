@@ -9,10 +9,10 @@
 
 /* globals document */
 
-import View from '../view.js';
-import Template from '../template.js';
-import { getOptimalPosition } from '../../utils/dom/position.js';
-import toUnit from '../../utils/dom/tounit.js';
+import View from '../view';
+import Template from '../template';
+import { getOptimalPosition } from 'ckeditor5-utils/src/dom/position';
+import toUnit from 'ckeditor5-utils/src/dom/tounit';
 
 const toPx = toUnit( 'px' );
 
