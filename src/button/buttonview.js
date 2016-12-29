@@ -128,7 +128,7 @@ export default class ButtonView extends View {
 			attributes: {
 				class: [
 					'ck-button',
-					'ck-tooltip_s',
+					bind.if( '_tooltipString', 'ck-tooltip_s' ),
 					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
 					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
 					bind.if( 'withText', 'ck-button_with-text' )

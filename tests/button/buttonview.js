@@ -24,10 +24,9 @@ describe( 'ButtonView', () => {
 	describe( '<button> bindings', () => {
 		describe( 'class', () => {
 			it( 'is set initially', () => {
-				expect( view.element.classList ).to.have.length( 4 );
+				expect( view.element.classList ).to.have.length( 3 );
 				expect( view.element.classList.contains( 'ck-button' ) ).to.true;
 				expect( view.element.classList.contains( 'ck-off' ) ).to.true;
-				expect( view.element.classList.contains( 'ck-tooltip_s' ) ).to.true;
 			} );
 
 			it( 'reacts on view#isEnabled', () => {
