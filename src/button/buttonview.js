@@ -8,6 +8,7 @@
  */
 
 import View from '../view.js';
+import Model from '../model.js';
 import Template from '../template.js';
 import IconView from '../icon/iconview.js';
 
@@ -112,23 +113,29 @@ export default class ButtonView extends View {
 		 * @member {module:ui/icon/iconview~IconView} #iconView
 		 */
 
-		const bind = this.bindTemplate;
+		// const bind = this.bindTemplate;
+
+		const observable = new Model( {
+			label: 'bar'
+		} );
+
+		const bind = Template.bind( this, this );
 
 		this.template = new Template( {
 			tag: 'button',
 
 			attributes: {
-				class: [
-					'ck-button',
-					'ck-tooltip_s',
-					bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
-					bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
-					bind.if( 'withText', 'ck-button_with-text' )
-				],
-				type: bind.to( 'type', value => value ? value : 'button' ),
-				'data-ck-tooltip': [
-					bind.to( '_tooltip' )
-				]
+				// class: [
+				// 	'ck-button',
+				// 	'ck-tooltip_s',
+				// 	bind.to( 'isEnabled', value => value ? 'ck-enabled' : 'ck-disabled' ),
+				// 	bind.to( 'isOn', value => value ? 'ck-on' : 'ck-off' ),
+				// 	bind.if( 'withText', 'ck-button_with-text' )
+				// ],
+				// type: bind.to( 'type', value => value ? value : 'button' ),
+				// 'data-ck-tooltip': [
+				// 	bind.to( '_tooltip' )
+				// ]
 			},
 
 			children: [
@@ -145,25 +152,25 @@ export default class ButtonView extends View {
 						}
 					]
 				}
-			],
+			]
 
-			on: {
-				mousedown: bind.to( evt => {
-					evt.preventDefault();
-				} ),
+			// on: {
+			// 	mousedown: bind.to( evt => {
+			// 		evt.preventDefault();
+			// 	} ),
 
-				click: bind.to( evt => {
-					// We can't make the button disabled using the disabled attribute, because it won't be focusable.
-					// Though, shouldn't this condition be moved to the button controller?
-					if ( this.isEnabled ) {
-						this.fire( 'execute' );
-					} else {
-						// Prevent the default when button is disabled, to block e.g.
-						// automatic form submitting. See ckeditor/ckeditor5-link#74.
-						evt.preventDefault();
-					}
-				} )
-			}
+			// 	click: bind.to( evt => {
+			// 		// We can't make the button disabled using the disabled attribute, because it won't be focusable.
+			// 		// Though, shouldn't this condition be moved to the button controller?
+			// 		if ( this.isEnabled ) {
+			// 			this.fire( 'execute' );
+			// 		} else {
+			// 			// Prevent the default when button is disabled, to block e.g.
+			// 			// automatic form submitting. See ckeditor/ckeditor5-link#74.
+			// 			evt.preventDefault();
+			// 		}
+			// 	} )
+			// }
 		} );
 
 		/**
