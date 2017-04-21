@@ -62,4 +62,13 @@ export default class InputTextView extends View {
 	select() {
 		this.element.select();
 	}
+
+	/**
+	 * Returns the value of {@link ui.input.InputTextView#element}.
+	 *
+	 * @returns {*}
+	 */
+	getValue() {
+		return this.element.value;
+	}
 }

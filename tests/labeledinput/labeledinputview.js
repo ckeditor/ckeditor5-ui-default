@@ -62,13 +62,21 @@ describe( 'LabeledInputView', () => {
 		} );
 	} );
 
-	describe( 'select', () => {
+	describe( 'select()', () => {
 		it( 'should select input value', () => {
 			const spy = sinon.spy( view.inputView, 'select' );
 
 			view.select();
 
 			sinon.assert.calledOnce( spy );
+		} );
+	} );
+
+	describe( 'getValue()', () => {
+		it( 'should retrieve the value of the input', () => {
+			view.inputView.element.value = 'foo';
+
+			expect( view.getValue() ).to.equal( 'foo' );
 		} );
 	} );
 } );

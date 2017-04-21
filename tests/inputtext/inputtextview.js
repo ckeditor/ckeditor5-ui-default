@@ -60,7 +60,7 @@ describe( 'InputTextView', () => {
 		} );
 	} );
 
-	describe( 'select', () => {
+	describe( 'select()', () => {
 		it( 'should select input value', () => {
 			const selectSpy = sinon.spy( view.element, 'select' );
 
@@ -69,6 +69,14 @@ describe( 'InputTextView', () => {
 			expect( selectSpy.calledOnce ).to.true;
 
 			selectSpy.restore();
+		} );
+	} );
+
+	describe( 'getValue()', () => {
+		it( 'should retrieve the value of the input', () => {
+			view.element.value = 'foo';
+
+			expect( view.getValue() ).to.equal( 'foo' );
 		} );
 	} );
 } );
